@@ -12,9 +12,13 @@ function NewsImagePlaceholder() {
     >
       <div className="field-grid absolute inset-0 opacity-50" />
       <div className="absolute inset-0 bg-gradient-to-tr from-gold/15 via-transparent to-transparent" />
-      <span className="absolute bottom-3 left-3 text-xs font-semibold uppercase tracking-[0.16em] text-gold/80">
-        1D
-      </span>
+      <Image
+        src="/logo.png"
+        alt=""
+        width={28}
+        height={28}
+        className="absolute bottom-3 left-3 h-7 w-7 rounded-md opacity-80"
+      />
     </div>
   );
 }

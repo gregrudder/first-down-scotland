@@ -93,7 +93,7 @@ export const generalPodcasts: Podcast[] = [
     kind: "independent",
     links: [
       { label: "Website", href: "https://lockedonpodcasts.com/podcasts/locked-on-nfl/" },
-      { label: "Apple", href: "https://podcasts.apple.com/us/podcast/id1139967050" },
+      { label: "Apple", href: "https://podcasts.apple.com/gb/podcast/locked-on-nfl-daily-podcast-on-the-national-football-league/id1139967050" },
     ],
   },
 ];
