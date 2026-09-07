@@ -9,6 +9,10 @@ const IMAGE_HOST_SUFFIXES = [
   ".wp.com",
   ".rotowire.com",
   ".thefantasyfootballers.com",
+  ".mzstatic.com",
+  ".ggpht.com",
+  ".googleusercontent.com",
+  "rookieplaybook.co.uk",
 ];
 
 const IMAGE_HOSTS = new Set([
@@ -18,6 +22,9 @@ const IMAGE_HOSTS = new Set([
   "thefantasyfootballers.com",
   "www.thefantasyfootballers.com",
   "www.rotowire.com",
+  "yt3.googleusercontent.com",
+  "rookieplaybook.co.uk",
+  "www.rookieplaybook.co.uk",
 ]);
 
 export function sanitizeImageUrl(raw: string | undefined | null): string | null {

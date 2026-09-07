@@ -4,6 +4,7 @@ import { PageIntro } from "@/components/PageIntro";
 import { PodcastCard } from "@/components/PodcastCard";
 import { allTeamPodcasts, generalPodcasts } from "@/data/podcasts";
 import { divisions, teamsInDivision } from "@/data/team-profiles";
+import { espnTeamLogo } from "@/lib/team-logo";
 
 export const metadata: Metadata = {
   title: "NFL podcasts",
@@ -72,7 +73,11 @@ export default function PodcastsPage() {
                     {shows.length > 0 ? (
                       <div className="mt-3 grid gap-3">
                         {shows.map((show) => (
-                          <PodcastCard key={show.id} show={show} />
+                          <PodcastCard
+                            key={show.id}
+                            show={show}
+                            fallbackSrc={espnTeamLogo(team.abbreviation)}
+                          />
                         ))}
                       </div>
                     ) : (

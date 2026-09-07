@@ -24,6 +24,11 @@ const nextConfig: NextConfig = {
         hostname: "thefantasyfootballers.com",
         pathname: "/**",
       },
+      { protocol: "https", hostname: "**.mzstatic.com", pathname: "/**" },
+      { protocol: "https", hostname: "yt3.googleusercontent.com", pathname: "/**" },
+      { protocol: "https", hostname: "**.ggpht.com", pathname: "/**" },
+      { protocol: "https", hostname: "rookieplaybook.co.uk", pathname: "/**" },
+      { protocol: "https", hostname: "www.rookieplaybook.co.uk", pathname: "/**" },
     ],
   },
 };
