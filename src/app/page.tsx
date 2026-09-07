@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { GamesTeaser } from "@/components/GamesTeaser";
+import { HomeTeamCard } from "@/components/TeamMark";
 import { LessonCard } from "@/components/LessonCard";
 import { lessons } from "@/data/lessons";
 import { getNflFixtures } from "@/lib/espn";
@@ -64,6 +65,7 @@ export default async function HomePage() {
           </div>
         </div>
         <div className="space-y-4 lg:pt-16">
+          <HomeTeamCard />
           <GamesTeaser fixtures={fixtures} />
           <div className="rounded-2xl border border-line bg-navy-2 p-5">
             <p className="text-xs font-semibold uppercase tracking-[0.16em] text-gold">
@@ -88,6 +90,11 @@ export default async function HomePage() {
               <li>
                 <Link href="/watch" className="text-cream hover:text-gold">
                   Where to watch in the UK →
+                </Link>
+              </li>
+              <li>
+                <Link href="/pick-your-team" className="text-cream hover:text-gold">
+                  Pick your team →
                 </Link>
               </li>
               <li>

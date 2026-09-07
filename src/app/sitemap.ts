@@ -13,6 +13,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/news/fantasy",
     "/watch",
     "/community",
+    "/pick-your-team",
     "/about",
   ];
   const lessonRoutes = getLessonSlugs().map((slug) => `/learn/${slug}`);
