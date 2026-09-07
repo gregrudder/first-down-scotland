@@ -13,6 +13,7 @@ Learning is the hero. This is not a TV listings product.
 - **`/glossary`** — searchable jargon decoder
 - **`/this-week`** — this week’s NFL games from ESPN’s public scoreboard, times in `Europe/London`
 - **`/watch`** — high-level UK viewing map (Sky / Channel 5 / 5Action / My5 / DAZN Game Pass / Netflix)
+- **`/watch-near-you`** — Scottish pubs that show the NFL (free listings; demo featured card; more cities coming)
 - **`/about`** — what the site is for
 - **`/community`** — Discord for Scottish / UK fans (invite via env; no in-app chat)
 - **`/history`** — short NFL history for UK beginners (timeline, not a thesis)
@@ -55,6 +56,7 @@ Copy `.env.example` if you want a local file. Nothing is required for day-to-day
 | `CRON_SECRET` | Recommended in production | Protects `GET`/`POST` `/api/revalidate`. Vercel Cron sends `Authorization: Bearer <CRON_SECRET>`. You can also pass `?secret=...`. |
 | `NEXT_PUBLIC_SITE_URL` | Optional | Canonical / Open Graph base URL, e.g. `https://your-domain.vercel.app` |
 | `NEXT_PUBLIC_DISCORD_INVITE` | Optional | If set to a valid discord.gg / discord.com invite, `/community` shows Join the Discord. If unset or invalid, the page shows Discord coming soon (no hardcoded invite). |
+| `NEXT_PUBLIC_CONTACT_EMAIL` | Optional | Overrides the Watch near you “get in touch” mailto (defaults to `info@g4-marketing.net`). |
 
 If `CRON_SECRET` is unset, `/api/revalidate` is allowed only when `NODE_ENV` is not `production`.
 
@@ -87,7 +89,7 @@ curl -H "Authorization: Bearer $CRON_SECRET" https://your-domain.vercel.app/api/
 
 1. Import the GitHub repo into [Vercel](https://vercel.com/new).
 2. Framework preset: Next.js. Build command: `npm run build`.
-3. Add `CRON_SECRET` (and optionally `NEXT_PUBLIC_SITE_URL` and `NEXT_PUBLIC_DISCORD_INVITE`) under Project Settings → Environment Variables.
+3. Add `CRON_SECRET` (and optionally `NEXT_PUBLIC_SITE_URL`, `NEXT_PUBLIC_DISCORD_INVITE`, and `NEXT_PUBLIC_CONTACT_EMAIL`) under Project Settings → Environment Variables.
 4. Deploy. Cron jobs from `vercel.json` are registered on Hobby / Pro according to your Vercel plan.
 
 ## Information architecture
@@ -101,6 +103,7 @@ curl -H "Authorization: Bearer $CRON_SECRET" https://your-domain.vercel.app/api/
 | `/glossary` | Jargon decoder |
 | `/this-week` | Auto fixtures |
 | `/watch` | UK viewing explainer |
+| `/watch-near-you` | Scottish NFL pubs (free listings + demo featured card) |
 | `/community` | Discord community (invite CTA) |
 | `/history` | Short NFL history timeline |
 | `/teams` | All 32 teams by conference / division |
@@ -113,3 +116,5 @@ curl -H "Authorization: Bearer $CRON_SECRET" https://your-domain.vercel.app/api/
 Independent fan project. Not affiliated with the NFL, Sky, Channel 5, DAZN, Netflix or ESPN. Scoreboard data is read from ESPN’s public site API and may change without notice.
 
 Team profiles use ESPN’s public logo CDN (`https://a.espncdn.com/i/teamlogos/nfl/500/{abbr}.png`) with an abbreviation-circle fallback. Stadium names and listed capacities follow Wikipedia’s current NFL stadiums list for the **2026 season** (cited there to club media guides and reporting). Super Bowl counts are after Super Bowl LX (Seattle 29–13 New England, 8 February 2026; AP / NFL.com). Franchise origins follow the league’s published history and standard reference summaries. Stadium names, capacities and trophy counts can change.
+
+`/watch-near-you` listings live in `src/data/pubs.ts`. Live rows were checked against the pubs’ own sites (Duke’s Leith, Malones Edinburgh / Glasgow, Ark Glasgow). Hours and what is on the screen change — the page says to call ahead. The Gridiron Arms card is a fictional demo.

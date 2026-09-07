@@ -93,6 +93,11 @@ export default async function HomePage() {
                 </Link>
               </li>
               <li>
+                <Link href="/watch-near-you" className="text-cream hover:text-gold">
+                  Watch near you — Scottish pubs →
+                </Link>
+              </li>
+              <li>
                 <Link href="/pick-your-team" className="text-cream hover:text-gold">
                   Pick your team →
                 </Link>
