@@ -51,7 +51,7 @@ Copy `.env.example` if you want a local file. Nothing is required for day-to-day
 | --- | --- | --- |
 | `CRON_SECRET` | Recommended in production | Protects `GET`/`POST` `/api/revalidate`. Vercel Cron sends `Authorization: Bearer <CRON_SECRET>`. You can also pass `?secret=...`. |
 | `NEXT_PUBLIC_SITE_URL` | Optional | Canonical / Open Graph base URL, e.g. `https://your-domain.vercel.app` |
-| `NEXT_PUBLIC_DISCORD_INVITE` | Optional | Public Discord invite URL (e.g. `https://discord.gg/…`). Powers the Join the Discord button on `/community`. If unset or not a discord.gg / discord.com link, the page shows “Invite link coming soon” instead of a dead link. |
+| `NEXT_PUBLIC_DISCORD_INVITE` | Optional | Override the Community “Join the Discord” URL. When unset, the app uses `https://discord.gg/KcQTNFHjM`. Invalid or non-Discord values are ignored so they never become dead links. |
 
 If `CRON_SECRET` is unset, `/api/revalidate` is allowed only when `NODE_ENV` is not `production`.
 
