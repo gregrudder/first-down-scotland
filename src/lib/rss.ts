@@ -1,16 +1,7 @@
-function decodeEntities(value: string): string {
-  return value
-    .replace(/<!\[CDATA\[([\s\S]*?)\]\]>/g, "$1")
-    .replace(/&amp;/g, "&")
-    .replace(/&lt;/g, "<")
-    .replace(/&gt;/g, ">")
-    .replace(/&quot;/g, '"')
-    .replace(/&apos;/g, "'")
-    .replace(/&#(\d+);/g, (_, code) => String.fromCharCode(Number(code)))
-    .replace(/&#x([0-9a-f]+);/gi, (_, code) =>
-      String.fromCharCode(parseInt(code, 16)),
-    );
-}
+import { decodeEntities } from "@/lib/html-entities";
+import { extractFeedImage } from "@/lib/news-image";
+
+export { decodeEntities };
 
 export function stripMarkup(value: string): string {
   return decodeEntities(value)
@@ -53,6 +44,7 @@ export type ParsedRssItem = {
   title: string;
   url: string;
   snippet: string;
+  imageUrl: string | null;
   publishedAt: string | null;
 };
 
@@ -93,6 +85,7 @@ export function parseFeedItems(xml: string): ParsedRssItem[] {
         title,
         url: normalizeArticleUrl(url),
         snippet: snippet.slice(0, 280),
+        imageUrl: extractFeedImage(block),
         publishedAt,
       };
     })

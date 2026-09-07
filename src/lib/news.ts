@@ -7,15 +7,18 @@ import {
   nflNewsFeeds,
   type NewsFeed,
 } from "@/data/news-feeds";
+import { extractOgImage } from "@/lib/news-image";
 import { parseFeedItems, type ParsedRssItem } from "@/lib/rss";
 
 const FETCH_TIMEOUT_MS = 8_000;
+const OG_IMAGE_TIMEOUT_MS = 3_000;
 
 export type NewsArticle = {
   id: string;
   title: string;
   url: string;
   snippet: string;
+  imageUrl: string | null;
   source: string;
   sourceId: string;
   publishedAt: string | null;
@@ -111,6 +114,7 @@ async function getNewsFromFeeds(
         title: item.title,
         url: item.url,
         snippet: item.snippet,
+        imageUrl: item.imageUrl,
         source: feed.label,
         sourceId: feed.id,
         publishedAt: item.publishedAt,
@@ -132,7 +136,9 @@ async function getNewsFromFeeds(
     })
     .slice(0, NEWS_ITEM_LIMIT);
 
-  if (articles.length === 0) {
+  const withImages = await attachOgImages(articles, cacheTag);
+
+  if (withImages.length === 0) {
     return {
       ok: false,
       fetchedAt,
@@ -145,9 +151,47 @@ async function getNewsFromFeeds(
   return {
     ok: true,
     fetchedAt,
-    articles,
+    articles: withImages,
     failedSources,
   };
+}
+
+async function fetchOgImage(articleUrl: string, cacheTag: string): Promise<string | null> {
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), OG_IMAGE_TIMEOUT_MS);
+
+  try {
+    const response = await fetch(articleUrl, {
+      signal: controller.signal,
+      next: {
+        revalidate: NEWS_REVALIDATE_SECONDS,
+        tags: [cacheTag],
+      },
+      headers: {
+        Accept: "text/html",
+        "User-Agent": "FirstDownScotland/1.0 (https://first-down-scotland.vercel.app)",
+      },
+    });
+    if (!response.ok) return null;
+    return extractOgImage(await response.text());
+  } catch {
+    return null;
+  } finally {
+    clearTimeout(timer);
+  }
+}
+
+async function attachOgImages(
+  articles: NewsArticle[],
+  cacheTag: string,
+): Promise<NewsArticle[]> {
+  return Promise.all(
+    articles.map(async (article) => {
+      if (article.imageUrl) return article;
+      const imageUrl = await fetchOgImage(article.url, cacheTag);
+      return imageUrl ? { ...article, imageUrl } : article;
+    }),
+  );
 }
 
 export function getNflNews(): Promise<NewsResult> {
