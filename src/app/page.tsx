@@ -82,7 +82,7 @@ export default async function HomePage() {
               </li>
               <li>
                 <Link href="/community" className="text-cream hover:text-gold">
-                  Community on Discord →
+                  Community — Discord coming soon →
                 </Link>
                 <p className="mt-1 text-xs leading-5 text-cream-dim">
                   Meet other UK beginners. Learning stays here; chat is next door.
