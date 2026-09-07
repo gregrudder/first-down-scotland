@@ -1,5 +1,3 @@
-export const DEFAULT_DISCORD_INVITE = "https://discord.gg/KcQTNFHjM";
-
 function firstNonEmpty(...values: Array<string | undefined>): string | undefined {
   for (const value of values) {
     if (typeof value === "string" && value.trim()) return value.trim();
@@ -21,10 +19,6 @@ function parseDiscordInvite(raw: string): string | null {
 
 export function discordInviteUrl(): string | null {
   const configured = firstNonEmpty(process.env.NEXT_PUBLIC_DISCORD_INVITE);
-  if (configured) {
-    const parsed = parseDiscordInvite(configured);
-    if (parsed) return parsed;
-  }
-
-  return parseDiscordInvite(DEFAULT_DISCORD_INVITE);
+  if (!configured) return null;
+  return parseDiscordInvite(configured);
 }

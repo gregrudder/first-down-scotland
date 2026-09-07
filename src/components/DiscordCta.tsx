@@ -5,11 +5,14 @@ export function DiscordCta() {
 
   if (!invite) {
     return (
-      <div className="rounded-2xl border border-line bg-navy-2 p-5">
-        <p className="text-sm font-semibold text-cream">Invite link coming soon</p>
+      <div className="rounded-2xl border border-gold/30 bg-navy-2 p-5">
+        <p className="text-xs font-semibold uppercase tracking-[0.16em] text-gold">
+          Discord
+        </p>
+        <p className="mt-2 font-display text-2xl text-cream">Coming soon</p>
         <p className="mt-2 text-sm leading-6 text-cream-dim">
-          The Discord is being set up. This button will light up once Greg posts the
-          invite — no dead links in the meantime.
+          Greg is setting the server up properly. There is no invite to click
+          tonight — we would rather wait than send you to a dead link.
         </p>
       </div>
     );
