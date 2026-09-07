@@ -10,15 +10,15 @@ export const site = {
 
 export const navItems = [
   { href: "/learn", label: "Learn" },
+  { href: "/pick-your-team", label: "Pick my team" },
+  { href: "/this-week", label: "This week" },
+  { href: "/watch", label: "Watch" },
+  { href: "/watch-near-you", label: "Pubs" },
+  { href: "/news", label: "News" },
   { href: "/history", label: "History" },
   { href: "/teams", label: "Teams" },
   { href: "/glossary", label: "Glossary" },
-  { href: "/this-week", label: "This week" },
-  { href: "/news", label: "News" },
-  { href: "/watch", label: "Watch" },
-  { href: "/watch-near-you", label: "Pubs" },
   { href: "/community", label: "Community" },
-  { href: "/pick-your-team", label: "Pick my team" },
   { href: "/about", label: "About" },
 ] as const;
 
