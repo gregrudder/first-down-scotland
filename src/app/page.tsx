@@ -81,6 +81,11 @@ export default async function HomePage() {
                 </Link>
               </li>
               <li>
+                <Link href="/news/fantasy" className="text-cream hover:text-gold">
+                  NFL fantasy news (not Scottish football) →
+                </Link>
+              </li>
+              <li>
                 <Link href="/watch" className="text-cream hover:text-gold">
                   Where to watch in the UK →
                 </Link>

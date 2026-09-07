@@ -1,11 +1,13 @@
 import {
+  FANTASY_NEWS_CACHE_TAG,
   NEWS_CACHE_TAG,
   NEWS_ITEM_LIMIT,
   NEWS_REVALIDATE_SECONDS,
+  fantasyNewsFeeds,
   nflNewsFeeds,
   type NewsFeed,
 } from "@/data/news-feeds";
-import { parseFeedItems } from "@/lib/rss";
+import { parseFeedItems, type ParsedRssItem } from "@/lib/rss";
 
 const FETCH_TIMEOUT_MS = 8_000;
 
@@ -35,7 +37,7 @@ export type NewsFailure = {
 
 export type NewsResult = NewsSuccess | NewsFailure;
 
-async function fetchFeedXml(feed: NewsFeed): Promise<string> {
+async function fetchFeedXml(feed: NewsFeed, cacheTag: string): Promise<string> {
   const controller = new AbortController();
   const timer = setTimeout(() => controller.abort(), FETCH_TIMEOUT_MS);
 
@@ -44,7 +46,7 @@ async function fetchFeedXml(feed: NewsFeed): Promise<string> {
       signal: controller.signal,
       next: {
         revalidate: NEWS_REVALIDATE_SECONDS,
-        tags: [NEWS_CACHE_TAG],
+        tags: [cacheTag],
       },
       headers: {
         Accept: "application/rss+xml, application/atom+xml, application/xml, text/xml",
@@ -66,17 +68,33 @@ function titleKey(title: string): string {
   return title.toLowerCase().replace(/[^a-z0-9]+/g, " ").trim();
 }
 
-export async function getNflNews(): Promise<NewsResult> {
+const OTHER_SPORT =
+  /baseball|mlb|nba|nhl|soccer|premier league|nascar|wnba|\bf1\b|formula 1|college fantasy football|\bcfb\b/i;
+const NFL_FANTASY =
+  /nfl|fantasy football|american football|quarterback|running back|wide receiver|tight end|waiver|start.?sit|touchdown|draft/i;
+
+export function isNflFantasyItem(item: Pick<ParsedRssItem, "title" | "snippet">): boolean {
+  const text = `${item.title} ${item.snippet}`;
+  if (OTHER_SPORT.test(text)) return false;
+  return NFL_FANTASY.test(text);
+}
+
+async function getNewsFromFeeds(
+  feeds: NewsFeed[],
+  cacheTag: string,
+  keep?: (item: ParsedRssItem, feed: NewsFeed) => boolean,
+): Promise<NewsResult> {
   const fetchedAt = new Date().toISOString();
   const failedSources: string[] = [];
   const collected: NewsArticle[] = [];
 
   const results = await Promise.all(
-    nflNewsFeeds.map(async (feed) => {
+    feeds.map(async (feed) => {
       try {
-        return { feed, items: parseFeedItems(await fetchFeedXml(feed)) };
+        const items = parseFeedItems(await fetchFeedXml(feed, cacheTag));
+        return { feed, items: keep ? items.filter((item) => keep(item, feed)) : items };
       } catch {
-        return { feed, items: [] as ReturnType<typeof parseFeedItems> };
+        return { feed, items: [] as ParsedRssItem[] };
       }
     }),
   );
@@ -118,7 +136,7 @@ export async function getNflNews(): Promise<NewsResult> {
     return {
       ok: false,
       fetchedAt,
-      failedSources: nflNewsFeeds.map((feed) => feed.label),
+      failedSources: feeds.map((feed) => feed.label),
       error:
         "None of the public news feeds answered just now. Headlines are not typed in by hand — try again in a few minutes.",
     };
@@ -130,4 +148,15 @@ export async function getNflNews(): Promise<NewsResult> {
     articles,
     failedSources,
   };
+}
+
+export function getNflNews(): Promise<NewsResult> {
+  return getNewsFromFeeds(nflNewsFeeds, NEWS_CACHE_TAG);
+}
+
+export function getFantasyNews(): Promise<NewsResult> {
+  return getNewsFromFeeds(fantasyNewsFeeds, FANTASY_NEWS_CACHE_TAG, (item, feed) => {
+    if (feed.id !== "espn-fantasy") return true;
+    return isNflFantasyItem(item);
+  });
 }

@@ -22,6 +22,25 @@ export const nflNewsFeeds: NewsFeed[] = [
   },
 ];
 
+export const fantasyNewsFeeds: NewsFeed[] = [
+  {
+    id: "espn-fantasy",
+    label: "ESPN Fantasy",
+    url: "https://www.espn.com/espn/rss/fantasy/news",
+  },
+  {
+    id: "fantasy-footballers",
+    label: "Fantasy Footballers",
+    url: "https://www.thefantasyfootballers.com/feed/",
+  },
+  {
+    id: "rotowire-nfl",
+    label: "RotoWire",
+    url: "https://www.rotowire.com/rss/news.php?sport=NFL",
+  },
+];
+
 export const NEWS_REVALIDATE_SECONDS = 600;
 export const NEWS_CACHE_TAG = "news";
+export const FANTASY_NEWS_CACHE_TAG = "news-fantasy";
 export const NEWS_ITEM_LIMIT = 36;

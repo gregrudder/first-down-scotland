@@ -52,6 +52,11 @@ export default function AboutPage() {
           </Link>
         </li>
         <li>
+          <Link href="/news/fantasy" className="text-gold">
+            NFL fantasy news →
+          </Link>
+        </li>
+        <li>
           <Link href="/watch" className="text-gold">
             Where to watch →
           </Link>
