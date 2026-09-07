@@ -10,6 +10,8 @@ export const site = {
 
 export const navItems = [
   { href: "/learn", label: "Learn" },
+  { href: "/history", label: "History" },
+  { href: "/teams", label: "Teams" },
   { href: "/glossary", label: "Glossary" },
   { href: "/this-week", label: "This week" },
   { href: "/news", label: "News" },
