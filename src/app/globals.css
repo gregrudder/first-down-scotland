@@ -66,3 +66,26 @@ body {
   height: 3px;
   background: linear-gradient(90deg, transparent, var(--gold) 15%, var(--gold-soft) 50%, var(--gold) 85%, transparent);
 }
+
+@keyframes fds-football-spin {
+  0% {
+    transform: rotate(0deg) scaleX(1);
+  }
+  25% {
+    transform: rotate(90deg) scaleX(0.28);
+  }
+  50% {
+    transform: rotate(180deg) scaleX(1);
+  }
+  75% {
+    transform: rotate(270deg) scaleX(0.28);
+  }
+  100% {
+    transform: rotate(360deg) scaleX(1);
+  }
+}
+
+.fds-football-spin {
+  animation: fds-football-spin var(--fds-spin-ms, 280ms) linear infinite;
+  transform-origin: center;
+}

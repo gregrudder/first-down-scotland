@@ -15,6 +15,7 @@ Learning is the hero. This is not a TV listings product.
 - **`/watch`** — high-level UK viewing map (Sky / Channel 5 / 5Action / My5 / DAZN Game Pass / Netflix)
 - **`/about`** — what the site is for
 - **`/community`** — Discord for Scottish / UK fans (invite via env; no in-app chat)
+- **`/pick-your-team`** — quiz or spinning-ball surprise to pick a team; saved in the browser as `fds-team`
 - PWA basics: web manifest, icons, mobile-first layout, `theme-color`
 
 Out of scope: fantasy, live play-by-play UI, betting, accounts, push notifications, App Store builds, perfect per-game UK rights.
@@ -98,6 +99,7 @@ curl -H "Authorization: Bearer $CRON_SECRET" https://your-domain.vercel.app/api/
 | `/this-week` | Auto fixtures |
 | `/watch` | UK viewing explainer |
 | `/community` | Discord community (invite CTA) |
+| `/pick-your-team` | Quiz or spin to pick a team (saved as `fds-team`) |
 | `/about` | Project purpose |
 
 ## Licence and attribution

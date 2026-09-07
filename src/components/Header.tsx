@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { NavTeamMark } from "@/components/TeamMark";
 import { navItems } from "@/lib/site";
 
 export function Header() {
@@ -29,27 +30,31 @@ export function Header() {
               {item.label}
             </Link>
           ))}
+          <NavTeamMark />
         </nav>
 
-        <details className="relative lg:hidden">
-          <summary className="list-none rounded-full border border-line px-3 py-2 text-sm text-cream [&::-webkit-details-marker]:hidden">
-            Menu
-          </summary>
-          <nav
-            className="absolute right-0 mt-2 w-48 rounded-xl border border-line bg-navy-2 p-2 shadow-xl"
-            aria-label="Mobile"
-          >
-            {navItems.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                className="block rounded-lg px-3 py-2 text-sm text-cream hover:bg-navy-3"
-              >
-                {item.label}
-              </Link>
-            ))}
-          </nav>
-        </details>
+        <div className="flex items-center gap-2 lg:hidden">
+          <NavTeamMark className="inline-flex" />
+          <details className="relative">
+            <summary className="list-none rounded-full border border-line px-3 py-2 text-sm text-cream [&::-webkit-details-marker]:hidden">
+              Menu
+            </summary>
+            <nav
+              className="absolute right-0 mt-2 w-48 rounded-xl border border-line bg-navy-2 p-2 shadow-xl"
+              aria-label="Mobile"
+            >
+              {navItems.map((item) => (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  className="block rounded-lg px-3 py-2 text-sm text-cream hover:bg-navy-3"
+                >
+                  {item.label}
+                </Link>
+              ))}
+            </nav>
+          </details>
+        </div>
       </div>
     </header>
   );
