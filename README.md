@@ -15,6 +15,8 @@ Learning is the hero. This is not a TV listings product.
 - **`/watch`** — high-level UK viewing map (Sky / Channel 5 / 5Action / My5 / DAZN Game Pass / Netflix)
 - **`/about`** — what the site is for
 - **`/community`** — Discord for Scottish / UK fans (invite via env; no in-app chat)
+- **`/history`** — short NFL history for UK beginners (timeline, not a thesis)
+- **`/teams`** and **`/teams/[slug]`** — all 32 club profiles (2026-season snapshot)
 - **`/pick-your-team`** — quiz or spinning-ball surprise to pick a team; saved in the browser as `fds-team`
 - PWA basics: web manifest, icons, mobile-first layout, `theme-color`
 
@@ -100,9 +102,14 @@ curl -H "Authorization: Bearer $CRON_SECRET" https://your-domain.vercel.app/api/
 | `/this-week` | Auto fixtures |
 | `/watch` | UK viewing explainer |
 | `/community` | Discord community (invite CTA) |
+| `/history` | Short NFL history timeline |
+| `/teams` | All 32 teams by conference / division |
+| `/teams/[slug]` | Club profile (stadium, colours, Super Bowls) |
 | `/pick-your-team` | Quiz or spin to pick a team (saved as `fds-team`) |
 | `/about` | Project purpose |
 
 ## Licence and attribution
 
 Independent fan project. Not affiliated with the NFL, Sky, Channel 5, DAZN, Netflix or ESPN. Scoreboard data is read from ESPN’s public site API and may change without notice.
+
+Team profiles use ESPN’s public logo CDN (`https://a.espncdn.com/i/teamlogos/nfl/500/{abbr}.png`) with an abbreviation-circle fallback. Stadium names and listed capacities follow Wikipedia’s current NFL stadiums list for the **2026 season** (cited there to club media guides and reporting). Super Bowl counts are after Super Bowl LX (Seattle 29–13 New England, 8 February 2026; AP / NFL.com). Franchise origins follow the league’s published history and standard reference summaries. Stadium names, capacities and trophy counts can change.
