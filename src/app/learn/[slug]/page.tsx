@@ -15,7 +15,9 @@ type LessonPageProps = {
 };
 
 export function generateStaticParams() {
-  return getLessonSlugs().map((slug) => ({ slug }));
+  return getLessonSlugs()
+    .filter((slug) => slug !== "plays")
+    .map((slug) => ({ slug }));
 }
 
 export async function generateMetadata({ params }: LessonPageProps): Promise<Metadata> {

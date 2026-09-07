@@ -311,8 +311,22 @@ export const lessons: Lesson[] = [
     ],
   },
   {
-    slug: "turnovers",
+    slug: "plays",
     number: 5,
+    title: "Common plays",
+    summary:
+      "Coach-board X’s and O’s for the shapes you see every Sunday: runs, screens, slants, a deep ball, and a basic blitz.",
+    minutes: 8,
+    blocks: [
+      {
+        type: "p",
+        text: "This lesson lives with the diagrams. Open the common plays board to see each shape drawn out.",
+      },
+    ],
+  },
+  {
+    slug: "turnovers",
+    number: 6,
     title: "Turnovers",
     summary:
       "The ball changes hands without a kick. Interceptions, fumbles, and why the crowd loses its mind.",
@@ -367,7 +381,7 @@ export const lessons: Lesson[] = [
   },
   {
     slug: "the-clock",
-    number: 6,
+    number: 7,
     title: "The clock and game length",
     summary:
       "Four quarters of 15 minutes that somehow last three hours. Timeouts, stoppages, and the two-minute warning.",
@@ -424,7 +438,7 @@ export const lessons: Lesson[] = [
   },
   {
     slug: "special-teams",
-    number: 7,
+    number: 8,
     title: "Special teams",
     summary:
       "Kick-offs, punts and field goals: the third team on the pitch, in one sitting.",
@@ -484,7 +498,7 @@ export const lessons: Lesson[] = [
   },
   {
     slug: "penalties",
-    number: 8,
+    number: 9,
     title: "Penalties",
     summary:
       "The yellow flag, who the yards hurt, and the handful of calls you will hear every Sunday.",
@@ -593,7 +607,7 @@ export const lessons: Lesson[] = [
   },
   {
     slug: "what-to-look-for",
-    number: 9,
+    number: 10,
     title: "What to look for when you put a game on",
     summary:
       "A simple watching guide: the score bug, the yellow line, and when to ignore the noise.",

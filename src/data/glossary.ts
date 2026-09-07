@@ -13,7 +13,7 @@ export const glossary: GlossaryEntry[] = [
   {
     term: "Blitz",
     short: "Extra defenders rush the quarterback instead of dropping into coverage.",
-    lessonSlug: "offence-and-defence",
+    lessonSlug: "plays",
   },
   {
     term: "Block",
@@ -106,6 +106,11 @@ export const glossary: GlossaryEntry[] = [
     lessonSlug: "turnovers",
   },
   {
+    term: "Go route",
+    short: "A straight sprint down the field — the deep ball. Also called a fade or streak.",
+    lessonSlug: "plays",
+  },
+  {
     term: "Hail Mary",
     short: "A very long, hopeful pass into the end zone as time expires.",
   },
@@ -193,7 +198,7 @@ export const glossary: GlossaryEntry[] = [
   {
     term: "Play-action",
     short: "A fake hand-off followed by a pass, designed to freeze linebackers.",
-    lessonSlug: "offence-and-defence",
+    lessonSlug: "plays",
   },
   {
     term: "Play-offs",
@@ -251,6 +256,12 @@ export const glossary: GlossaryEntry[] = [
   {
     term: "Screen pass",
     short: "A short throw to a receiver or back with blockers in front, usually after luring rushers upfield.",
+    lessonSlug: "plays",
+  },
+  {
+    term: "Slant",
+    short: "A quick route: the receiver takes a step upfield, then cuts diagonally in.",
+    lessonSlug: "plays",
   },
   {
     term: "Snap",
@@ -270,6 +281,11 @@ export const glossary: GlossaryEntry[] = [
   {
     term: "Super Bowl",
     short: "The NFL championship game, played in February.",
+  },
+  {
+    term: "Sweep",
+    short: "An outside run: the back takes the ball and races around the edge rather than through the middle.",
+    lessonSlug: "plays",
   },
   {
     term: "Tight end",
