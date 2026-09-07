@@ -1,0 +1,68 @@
+@import "tailwindcss";
+
+:root {
+  --navy: #0b1220;
+  --navy-2: #121b2e;
+  --navy-3: #1a2640;
+  --cream: #f4efe4;
+  --cream-dim: #c9c2b3;
+  --gold: #e8b84a;
+  --gold-soft: #f3d27a;
+  --line: rgba(244, 239, 228, 0.12);
+  --line-strong: rgba(232, 184, 74, 0.45);
+  --good: #3dba7a;
+  --live: #ff6b4a;
+  --focus: #8cb4ff;
+}
+
+@theme inline {
+  --color-navy: var(--navy);
+  --color-navy-2: var(--navy-2);
+  --color-navy-3: var(--navy-3);
+  --color-cream: var(--cream);
+  --color-cream-dim: var(--cream-dim);
+  --color-gold: var(--gold);
+  --color-gold-soft: var(--gold-soft);
+  --color-line: var(--line);
+  --color-good: var(--good);
+  --color-live: var(--live);
+  --font-sans: var(--font-figtree), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-fraunces), ui-serif, Georgia, serif;
+}
+
+html {
+  background: var(--navy);
+  color: var(--cream);
+}
+
+body {
+  min-height: 100%;
+  background:
+    radial-gradient(1200px 500px at 10% -10%, rgba(232, 184, 74, 0.08), transparent 50%),
+    radial-gradient(900px 400px at 100% 0%, rgba(77, 142, 245, 0.08), transparent 45%),
+    var(--navy);
+  color: var(--cream);
+  font-family: var(--font-sans);
+}
+
+::selection {
+  background: var(--gold);
+  color: var(--navy);
+}
+
+:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 3px;
+}
+
+.field-grid {
+  background-image:
+    linear-gradient(to right, rgba(244, 239, 228, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(244, 239, 228, 0.04) 1px, transparent 1px);
+  background-size: 12.5% 100%, 100% 28px;
+}
+
+.gold-rule {
+  height: 3px;
+  background: linear-gradient(90deg, transparent, var(--gold) 15%, var(--gold-soft) 50%, var(--gold) 85%, transparent);
+}
