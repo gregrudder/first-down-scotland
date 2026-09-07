@@ -38,16 +38,38 @@ function withProtocol(hostOrUrl: string): string {
   return /^https?:\/\//i.test(hostOrUrl) ? hostOrUrl : `https://${hostOrUrl}`;
 }
 
+/** Unique Vercel preview hosts are SSO-gated — never use them for canonical URLs. */
+function isVercelPreviewHost(hostOrUrl: string): boolean {
+  try {
+    const host = new URL(withProtocol(hostOrUrl)).hostname.toLowerCase();
+    if (!host.endsWith(".vercel.app")) return false;
+    return host.includes("-git-") || /-[a-z0-9]{7,}-/.test(host);
+  } catch {
+    return false;
+  }
+}
+
+/**
+ * Public origin for robots, sitemap, and Open Graph.
+ * Prefer an explicit canonical, then the project production domain — never a preview deployment URL.
+ */
 export function siteOrigin(): string {
+  const onVercel = Boolean(process.env.VERCEL);
+  const productionDeployment =
+    process.env.VERCEL_ENV === "production"
+      ? firstNonEmpty(process.env.VERCEL_URL)
+      : undefined;
+
   const candidates = [
     firstNonEmpty(process.env.NEXT_PUBLIC_SITE_URL),
-    firstNonEmpty(process.env.VERCEL_URL),
-    process.env.VERCEL ? FALLBACK_PRODUCTION : FALLBACK_LOCAL,
+    firstNonEmpty(process.env.VERCEL_PROJECT_PRODUCTION_URL),
+    productionDeployment,
+    onVercel ? FALLBACK_PRODUCTION : FALLBACK_LOCAL,
     FALLBACK_PRODUCTION,
   ];
 
   for (const candidate of candidates) {
-    if (!candidate) continue;
+    if (!candidate || isVercelPreviewHost(candidate)) continue;
     try {
       return new URL(withProtocol(candidate)).origin;
     } catch {
