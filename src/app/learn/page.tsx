@@ -6,13 +6,13 @@ import { lessons } from "@/data/lessons";
 export const metadata: Metadata = {
   title: "Learn the NFL",
   description:
-    "A short, ordered path for UK beginners: the field, downs, scoring, turnovers, the clock, and what to look for on telly.",
+    "A short, ordered path for UK beginners: the field, downs, scoring, turnovers, the clock, penalties, and what to look for on telly.",
 };
 
 export default function LearnIndexPage() {
   return (
     <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6 sm:py-16">
-      <PageIntro eyebrow="Learning path" title="Eight short lessons. Start at one.">
+      <PageIntro eyebrow="Learning path" title="Nine short lessons. Start at one.">
         <p>
           Read them in order if you are brand new. Skip ahead if a word on the broadcast
           sent you here. Each one is written in UK English, for people who did not grow

@@ -48,6 +48,7 @@ export const glossary: GlossaryEntry[] = [
   {
     term: "Delay of game",
     short: "A penalty when the offence does not snap the ball before the play clock hits zero.",
+    lessonSlug: "penalties",
   },
   {
     term: "Down",
@@ -77,6 +78,12 @@ export const glossary: GlossaryEntry[] = [
   {
     term: "False start",
     short: "An offensive player moves too early, before the snap. Five-yard penalty.",
+    lessonSlug: "penalties",
+  },
+  {
+    term: "Flag",
+    short: "The yellow cloth an official throws to mark a penalty.",
+    lessonSlug: "penalties",
   },
   {
     term: "Field goal",
@@ -105,6 +112,7 @@ export const glossary: GlossaryEntry[] = [
   {
     term: "Holding",
     short: "Illegally grabbing a player. Offensive holding is 10 yards; defensive holding is 5 and a first down.",
+    lessonSlug: "penalties",
   },
   {
     term: "Huddle",
@@ -142,6 +150,7 @@ export const glossary: GlossaryEntry[] = [
   {
     term: "Neutral zone",
     short: "The slim strip the width of the ball between the two lines. Crossing it early is offside.",
+    lessonSlug: "penalties",
   },
   {
     term: "NFL",
@@ -155,6 +164,7 @@ export const glossary: GlossaryEntry[] = [
   {
     term: "Offside",
     short: "A defender is across the line of scrimmage when the ball is snapped.",
+    lessonSlug: "penalties",
   },
   {
     term: "Option",
@@ -163,6 +173,17 @@ export const glossary: GlossaryEntry[] = [
   {
     term: "Pass interference",
     short: "Illegally preventing a catch. Defensive PI can be a large chunk of yards and a first down.",
+    lessonSlug: "penalties",
+  },
+  {
+    term: "Penalty",
+    short: "A rule break. Officials throw a flag, stop the play, and walk off yards against the guilty team.",
+    lessonSlug: "penalties",
+  },
+  {
+    term: "Personal foul",
+    short: "A 15-yard penalty for a dangerous or unsportsmanlike hit, including roughing the passer.",
+    lessonSlug: "penalties",
   },
   {
     term: "Pick-six",
