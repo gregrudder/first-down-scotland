@@ -14,12 +14,13 @@ Learning is the hero. This is not a TV listings product.
 - **`/this-week`** — this week’s NFL games from ESPN’s public scoreboard, times in `Europe/London`
 - **`/news`** — NFL headlines pulled automatically from public RSS (ESPN, BBC Sport, the Guardian)
 - **`/news/fantasy`** — NFL fantasy football tips & news (not Scottish football)
+- **`/podcasts`** — recommended NFL and per-team shows to follow (external links; official vs independent labelled)
 - **`/watch`** — high-level UK viewing map (Sky / Channel 5 / 5Action / My5 / DAZN Game Pass / Netflix)
 - **`/watch-near-you`** — Scottish pubs that show the NFL (free listings; demo featured card; more cities coming)
 - **`/about`** — what the site is for
 - **`/community`** — Discord for Scottish / UK fans (invite via env; no in-app chat)
 - **`/history`** — short NFL history for UK beginners (timeline, not a thesis)
-- **`/teams`** and **`/teams/[slug]`** — all 32 club profiles (2026-season snapshot)
+- **`/teams`** and **`/teams/[slug]`** — all 32 club profiles (2026-season snapshot), official YouTube, and the relevant pods
 - **`/pick-your-team`** — quiz or spinning-ball surprise to pick a team; saved in the browser as `fds-team`
 - PWA basics: web manifest, icons, mobile-first layout, `theme-color`
 

@@ -83,6 +83,11 @@ export default async function HomePage() {
                 </Link>
               </li>
               <li>
+                <Link href="/podcasts" className="text-cream hover:text-gold">
+                  Podcasts to lock onto →
+                </Link>
+              </li>
+              <li>
                 <Link href="/news/fantasy" className="text-cream hover:text-gold">
                   NFL fantasy news (not Scottish football) →
                 </Link>

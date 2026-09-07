@@ -22,6 +22,7 @@ export default function TeamsIndexPage() {
             short history
           </Link>{" "}
           first. Profiles are snapshots for the 2026 season — stadiums get renamed.
+          Each club page also has the official YouTube and a pod or two to follow.
         </p>
       </PageIntro>
 

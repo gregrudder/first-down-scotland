@@ -52,6 +52,11 @@ export default function AboutPage() {
           </Link>
         </li>
         <li>
+          <Link href="/podcasts" className="text-gold">
+            Podcasts to lock onto →
+          </Link>
+        </li>
+        <li>
           <Link href="/news/fantasy" className="text-gold">
             NFL fantasy news →
           </Link>

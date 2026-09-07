@@ -15,6 +15,7 @@ export const navItems = [
   { href: "/watch", label: "Watch" },
   { href: "/watch-near-you", label: "Pubs" },
   { href: "/news", label: "News" },
+  { href: "/podcasts", label: "Podcasts" },
   { href: "/history", label: "History" },
   { href: "/teams", label: "Teams" },
   { href: "/glossary", label: "Glossary" },

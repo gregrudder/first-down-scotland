@@ -1,8 +1,11 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { PodcastCard } from "@/components/PodcastCard";
 import { TeamLogo } from "@/components/TeamLogo";
 import { TrademarkNote } from "@/components/TrademarkNote";
+import { podcastsForTeam } from "@/data/podcasts";
+import { getTeamYoutube } from "@/data/team-youtube";
 import {
   getTeamProfile,
   getTeamSlugs,
@@ -44,6 +47,8 @@ export default async function TeamProfilePage({
   const siblings = teamsInDivision(team.conference, team.division).filter(
     (entry) => entry.slug !== team.slug,
   );
+  const youtube = getTeamYoutube(team.slug);
+  const shows = podcastsForTeam(team.slug);
 
   return (
     <div className="mx-auto max-w-3xl px-4 py-12 sm:px-6 sm:py-16">
@@ -81,6 +86,55 @@ export default async function TeamProfilePage({
       </div>
 
       <p className="mt-6 text-base leading-7 text-cream">{team.scotlandHook}</p>
+
+      <section className="mt-8 rounded-2xl border border-line bg-navy-2 p-5">
+        <h2 className="text-xs font-semibold uppercase tracking-[0.16em] text-gold">
+          Watch and listen
+        </h2>
+        {youtube ? (
+          <p className="mt-3">
+            <a
+              href={youtube.url}
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex rounded-full bg-gold px-4 py-2 text-sm font-semibold text-navy hover:bg-gold-soft"
+            >
+              Official YouTube {youtube.handle} →
+            </a>
+          </p>
+        ) : (
+          <p className="mt-3 text-sm text-cream-dim">
+            Official YouTube not listed — we would rather leave it blank than guess.
+          </p>
+        )}
+        <p className="mt-3 text-sm leading-6 text-cream-dim">
+          Highlights and club-made shows live on that channel. For a daily chat show,
+          use the pods below — or the{" "}
+          <Link href="/podcasts" className="text-gold">
+            league list
+          </Link>
+          .
+        </p>
+      </section>
+
+      <section className="mt-4">
+        <h2 className="font-display text-2xl text-cream">Podcasts</h2>
+        {shows.length > 0 ? (
+          <div className="mt-4 grid gap-4">
+            {shows.map((show) => (
+              <PodcastCard key={show.id} show={show} />
+            ))}
+          </div>
+        ) : (
+          <p className="mt-3 text-sm leading-6 text-cream-dim">
+            No dedicated team pod listed. Try the{" "}
+            <Link href="/podcasts" className="text-gold">
+              general NFL shows
+            </Link>
+            {youtube ? " and the official YouTube above." : "."}
+          </p>
+        )}
+      </section>
 
       <div className="mt-8 grid gap-4 sm:grid-cols-2">
         <section className="rounded-2xl border border-line bg-navy-2 p-5">
