@@ -42,7 +42,7 @@ npm run build
 npm start
 ```
 
-`npm run build` should succeed without any environment variables. The home and this-week pages fetch ESPN at build or request time and show a clear empty/error state if the feed is down.
+`npm run build` should succeed without any environment variables. The home and this-week pages fetch ESPN at build or request time, and `/news` fetches public RSS feeds. Each shows a clear empty/error state if a feed is down.
 
 ## Environment variables
 
