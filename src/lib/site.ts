@@ -16,7 +16,42 @@ export const navItems = [
   { href: "/about", label: "About" },
 ] as const;
 
+const FALLBACK_PRODUCTION = "https://first-down-scotland.vercel.app";
+const FALLBACK_LOCAL = "http://localhost:3000";
+
+function firstNonEmpty(...values: Array<string | undefined>): string | undefined {
+  for (const value of values) {
+    if (typeof value === "string" && value.trim()) {
+      return value.trim();
+    }
+  }
+  return undefined;
+}
+
+function withProtocol(hostOrUrl: string): string {
+  return /^https?:\/\//i.test(hostOrUrl) ? hostOrUrl : `https://${hostOrUrl}`;
+}
+
+export function siteOrigin(): string {
+  const candidates = [
+    firstNonEmpty(process.env.NEXT_PUBLIC_SITE_URL),
+    firstNonEmpty(process.env.VERCEL_URL),
+    process.env.VERCEL ? FALLBACK_PRODUCTION : FALLBACK_LOCAL,
+    FALLBACK_PRODUCTION,
+  ];
+
+  for (const candidate of candidates) {
+    if (!candidate) continue;
+    try {
+      return new URL(withProtocol(candidate)).origin;
+    } catch {
+      // try the next candidate
+    }
+  }
+
+  return FALLBACK_PRODUCTION;
+}
+
 export function absoluteUrl(path = "/"): string {
-  const base = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
-  return new URL(path, base).toString();
+  return new URL(path || "/", `${siteOrigin()}/`).toString();
 }
