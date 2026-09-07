@@ -19,19 +19,19 @@ export function Header() {
           </span>
         </Link>
 
-        <nav className="hidden items-center gap-0.5 lg:flex" aria-label="Primary">
+        <nav className="hidden items-center gap-0.5 xl:flex" aria-label="Primary">
           {navItems.map((item) => (
             <Link
               key={item.href}
               href={item.href}
-              className="rounded-full px-3 py-2 text-sm text-cream-dim transition hover:bg-navy-3 hover:text-cream"
+              className="rounded-full px-2.5 py-2 text-sm text-cream-dim transition hover:bg-navy-3 hover:text-cream"
             >
               {item.label}
             </Link>
           ))}
         </nav>
 
-        <details className="relative lg:hidden">
+        <details className="relative xl:hidden">
           <summary className="list-none rounded-full border border-line px-3 py-2 text-sm text-cream [&::-webkit-details-marker]:hidden">
             Menu
           </summary>

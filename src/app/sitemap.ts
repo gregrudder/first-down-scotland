@@ -9,6 +9,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/learn",
     "/glossary",
     "/this-week",
+    "/news",
     "/watch",
     "/community",
     "/about",
@@ -18,7 +19,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   return [...staticRoutes, ...lessonRoutes, ...playRoutes].map((path) => ({
     url: absoluteUrl(path),
-    changeFrequency: path === "/this-week" ? "hourly" : "weekly",
+    changeFrequency: path === "/this-week" || path === "/news" ? "hourly" : "weekly",
     priority: path === "/" ? 1 : 0.7,
   }));
 }

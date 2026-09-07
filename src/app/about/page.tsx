@@ -47,6 +47,11 @@ export default function AboutPage() {
           </Link>
         </li>
         <li>
+          <Link href="/news" className="text-gold">
+            NFL news →
+          </Link>
+        </li>
+        <li>
           <Link href="/watch" className="text-gold">
             Where to watch →
           </Link>

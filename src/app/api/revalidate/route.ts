@@ -1,5 +1,6 @@
 import { revalidatePath, revalidateTag } from "next/cache";
 import { NextRequest, NextResponse } from "next/server";
+import { NEWS_CACHE_TAG } from "@/data/news-feeds";
 import { FIXTURES_CACHE_TAG } from "@/lib/espn";
 
 function isAuthorised(request: NextRequest): boolean {
@@ -15,12 +16,14 @@ function isAuthorised(request: NextRequest): boolean {
 
 async function revalidateFixtures() {
   revalidateTag(FIXTURES_CACHE_TAG, "max");
+  revalidateTag(NEWS_CACHE_TAG, "max");
   revalidatePath("/");
   revalidatePath("/this-week");
+  revalidatePath("/news");
 
   return NextResponse.json({
     revalidated: true,
-    tag: FIXTURES_CACHE_TAG,
+    tags: [FIXTURES_CACHE_TAG, NEWS_CACHE_TAG],
     at: new Date().toISOString(),
   });
 }

@@ -76,6 +76,11 @@ export default async function HomePage() {
                 </Link>
               </li>
               <li>
+                <Link href="/news" className="text-cream hover:text-gold">
+                  What’s going on — NFL news →
+                </Link>
+              </li>
+              <li>
                 <Link href="/watch" className="text-cream hover:text-gold">
                   Where to watch in the UK →
                 </Link>

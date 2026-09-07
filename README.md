@@ -12,6 +12,7 @@ Learning is the hero. This is not a TV listings product.
 - **`/learn`** and **`/learn/[slug]`** — ten beginner lessons in UK English, including X-and-O play diagrams at `/learn/plays`
 - **`/glossary`** — searchable jargon decoder
 - **`/this-week`** — this week’s NFL games from ESPN’s public scoreboard, times in `Europe/London`
+- **`/news`** — NFL headlines pulled automatically from public RSS (ESPN, BBC Sport, the Guardian)
 - **`/watch`** — high-level UK viewing map (Sky / Channel 5 / 5Action / My5 / DAZN Game Pass / Netflix)
 - **`/about`** — what the site is for
 - **`/community`** — Discord for Scottish / UK fans (invite via env; no in-app chat)
@@ -69,10 +70,27 @@ Fixtures are **not** edited by hand.
 On Vercel, `vercel.json` schedules a **daily** Cron at `0 6 * * *` (06:00 UTC) to `GET /api/revalidate`. That route runs:
 
 - `revalidateTag('fixtures', 'max')`
+- `revalidateTag('news', 'max')`
 - `revalidatePath('/')`
 - `revalidatePath('/this-week')`
+- `revalidatePath('/news')`
 
 Hobby only allows **once-per-day** Cron. Pages still refresh without the Cron: the 300-second ISR / fetch revalidate keeps times and scores reasonably fresh between visits. On Pro you can change the expression to hourly (for example `15 * * * *`) if you want a background warm more often.
+
+## How NFL news refreshes
+
+Headlines are **not** pasted in by hand.
+
+1. `/news` fetches three public RSS feeds in parallel:
+   - ESPN NFL — `https://www.espn.com/espn/rss/nfl/news`
+   - BBC Sport American football — `https://feeds.bbci.co.uk/sport/american-football/rss.xml`
+   - The Guardian NFL — `https://www.theguardian.com/sport/nfl/rss`
+2. We show headline, source, Europe/London time, and a short snippet from the feed, then **link out**. Full articles stay on the publisher’s site.
+3. Items are deduped by normalised URL (tracking query params stripped) and by title.
+4. Next.js caches each feed fetch for **600 seconds** (10 minutes) and tags it `news`. `/news` also sets `export const revalidate = 600`.
+5. The daily Hobby Cron also busts the `news` tag. Do **not** add an hourly Cron on Hobby — ISR is the ongoing refresh.
+
+If a feed fails, the others still show. If all fail, the page says so instead of inventing headlines.
 
 Set `CRON_SECRET` in the Vercel project so the Cron request is accepted. You can also hit the route yourself:
 
@@ -97,10 +115,11 @@ curl -H "Authorization: Bearer $CRON_SECRET" https://your-domain.vercel.app/api/
 | `/learn/plays` and `/learn/plays/[slug]` | Common play diagrams |
 | `/glossary` | Jargon decoder |
 | `/this-week` | Auto fixtures |
+| `/news` | Auto NFL headlines (RSS, link out) |
 | `/watch` | UK viewing explainer |
 | `/community` | Discord community (invite CTA) |
 | `/about` | Project purpose |
 
 ## Licence and attribution
 
-Independent fan project. Not affiliated with the NFL, Sky, Channel 5, DAZN, Netflix or ESPN. Scoreboard data is read from ESPN’s public site API and may change without notice.
+Independent fan project. Not affiliated with the NFL, Sky, Channel 5, DAZN, Netflix, the BBC, the Guardian or ESPN. Scoreboard data is read from ESPN’s public site API and may change without notice. News headlines and snippets come from those publishers’ public RSS feeds and link back to the original articles.
