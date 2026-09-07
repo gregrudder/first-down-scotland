@@ -3,7 +3,15 @@ import { getLessonSlugs } from "@/data/lessons";
 import { absoluteUrl } from "@/lib/site";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const staticRoutes = ["/", "/learn", "/glossary", "/this-week", "/watch", "/about"];
+  const staticRoutes = [
+    "/",
+    "/learn",
+    "/glossary",
+    "/this-week",
+    "/watch",
+    "/community",
+    "/about",
+  ];
   const lessonRoutes = getLessonSlugs().map((slug) => `/learn/${slug}`);
 
   return [...staticRoutes, ...lessonRoutes].map((path) => ({

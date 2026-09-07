@@ -51,6 +51,11 @@ export default function AboutPage() {
             Where to watch →
           </Link>
         </li>
+        <li>
+          <Link href="/community" className="text-gold">
+            Community on Discord →
+          </Link>
+        </li>
       </ul>
     </div>
   );

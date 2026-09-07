@@ -13,6 +13,7 @@ export const navItems = [
   { href: "/glossary", label: "Glossary" },
   { href: "/this-week", label: "This week" },
   { href: "/watch", label: "Watch" },
+  { href: "/community", label: "Community" },
   { href: "/about", label: "About" },
 ] as const;
 

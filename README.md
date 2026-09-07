@@ -14,6 +14,7 @@ Learning is the hero. This is not a TV listings product.
 - **`/this-week`** — this week’s NFL games from ESPN’s public scoreboard, times in `Europe/London`
 - **`/watch`** — high-level UK viewing map (Sky / Channel 5 / 5Action / My5 / DAZN Game Pass / Netflix)
 - **`/about`** — what the site is for
+- **`/community`** — Discord for Scottish / UK fans (invite via env; no in-app chat)
 - PWA basics: web manifest, icons, mobile-first layout, `theme-color`
 
 Out of scope: fantasy, live play-by-play UI, betting, accounts, push notifications, App Store builds, perfect per-game UK rights.
@@ -50,6 +51,7 @@ Copy `.env.example` if you want a local file. Nothing is required for day-to-day
 | --- | --- | --- |
 | `CRON_SECRET` | Recommended in production | Protects `GET`/`POST` `/api/revalidate`. Vercel Cron sends `Authorization: Bearer <CRON_SECRET>`. You can also pass `?secret=...`. |
 | `NEXT_PUBLIC_SITE_URL` | Optional | Canonical / Open Graph base URL, e.g. `https://your-domain.vercel.app` |
+| `NEXT_PUBLIC_DISCORD_INVITE` | Optional | Override the Community “Join the Discord” URL. When unset, the app uses `https://discord.gg/KcQTNFHjM`. Invalid or non-Discord values are ignored so they never become dead links. |
 
 If `CRON_SECRET` is unset, `/api/revalidate` is allowed only when `NODE_ENV` is not `production`.
 
@@ -82,7 +84,7 @@ curl -H "Authorization: Bearer $CRON_SECRET" https://your-domain.vercel.app/api/
 
 1. Import the GitHub repo into [Vercel](https://vercel.com/new).
 2. Framework preset: Next.js. Build command: `npm run build`.
-3. Add `CRON_SECRET` (and optionally `NEXT_PUBLIC_SITE_URL`) under Project Settings → Environment Variables.
+3. Add `CRON_SECRET` (and optionally `NEXT_PUBLIC_SITE_URL` and `NEXT_PUBLIC_DISCORD_INVITE`) under Project Settings → Environment Variables.
 4. Deploy. Cron jobs from `vercel.json` are registered on Hobby / Pro according to your Vercel plan.
 
 ## Information architecture
@@ -95,6 +97,7 @@ curl -H "Authorization: Bearer $CRON_SECRET" https://your-domain.vercel.app/api/
 | `/glossary` | Jargon decoder |
 | `/this-week` | Auto fixtures |
 | `/watch` | UK viewing explainer |
+| `/community` | Discord community (invite CTA) |
 | `/about` | Project purpose |
 
 ## Licence and attribution
