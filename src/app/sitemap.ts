@@ -12,6 +12,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/this-week",
     "/news",
     "/news/fantasy",
+    "/podcasts",
     "/watch",
     "/watch-near-you",
     "/community",

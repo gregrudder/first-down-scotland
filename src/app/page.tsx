@@ -83,6 +83,11 @@ export default async function HomePage() {
                 </Link>
               </li>
               <li>
+                <Link href="/podcasts" className="text-cream hover:text-gold">
+                  Podcasts to lock onto →
+                </Link>
+              </li>
+              <li>
                 <Link href="/news/fantasy" className="text-cream hover:text-gold">
                   NFL fantasy news (not Scottish football) →
                 </Link>
@@ -114,7 +119,7 @@ export default async function HomePage() {
               </li>
               <li>
                 <Link href="/community" className="text-cream hover:text-gold">
-                  Community — Discord coming soon →
+                  Community →
                 </Link>
                 <p className="mt-1 text-xs leading-5 text-cream-dim">
                   Meet other UK beginners. Learning stays here; chat is next door.
