@@ -53,7 +53,7 @@ export default function AboutPage() {
         </li>
         <li>
           <Link href="/community" className="text-gold">
-            Community on Discord →
+            Community — Discord coming soon →
           </Link>
         </li>
       </ul>
