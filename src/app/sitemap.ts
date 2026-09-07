@@ -10,6 +10,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/glossary",
     "/this-week",
     "/watch",
+    "/watch-near-you",
     "/community",
     "/about",
   ];

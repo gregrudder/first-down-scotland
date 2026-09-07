@@ -81,6 +81,11 @@ export default async function HomePage() {
                 </Link>
               </li>
               <li>
+                <Link href="/watch-near-you" className="text-cream hover:text-gold">
+                  Watch near you — Scottish pubs →
+                </Link>
+              </li>
+              <li>
                 <Link href="/community" className="text-cream hover:text-gold">
                   Community — Discord coming soon →
                 </Link>

@@ -52,6 +52,11 @@ export default function AboutPage() {
           </Link>
         </li>
         <li>
+          <Link href="/watch-near-you" className="text-gold">
+            Watch near you — pubs →
+          </Link>
+        </li>
+        <li>
           <Link href="/community" className="text-gold">
             Community — Discord coming soon →
           </Link>

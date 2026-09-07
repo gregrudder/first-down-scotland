@@ -44,7 +44,11 @@ export default function WatchPage() {
           <Link href="/this-week" className="text-gold">
             This week’s games
           </Link>{" "}
-          are automatic. If you are still learning the sport, start with{" "}
+          are automatic. Looking for a pub in Scotland?{" "}
+          <Link href="/watch-near-you" className="text-gold">
+            Watch near you
+          </Link>
+          . If you are still learning the sport, start with{" "}
           <Link href="/learn" className="text-gold">
             the lessons
           </Link>
