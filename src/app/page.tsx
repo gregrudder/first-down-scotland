@@ -81,6 +81,16 @@ export default async function HomePage() {
                 </Link>
               </li>
               <li>
+                <Link href="/history" className="text-cream hover:text-gold">
+                  NFL history →
+                </Link>
+              </li>
+              <li>
+                <Link href="/teams" className="text-cream hover:text-gold">
+                  All 32 teams →
+                </Link>
+              </li>
+              <li>
                 <Link href="/community" className="text-cream hover:text-gold">
                   Community — Discord coming soon →
                 </Link>
