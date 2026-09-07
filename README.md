@@ -64,11 +64,13 @@ Fixtures are **not** edited by hand.
 4. Next.js caches the fetch for **300 seconds** and tags it `fixtures`.
 5. `/` and `/this-week` also set `export const revalidate = 300`.
 
-On Vercel, `vercel.json` schedules an hourly Cron (15 minutes past the hour) to `GET /api/revalidate`. That route runs:
+On Vercel, `vercel.json` schedules a **daily** Cron at `0 6 * * *` (06:00 UTC) to `GET /api/revalidate`. That route runs:
 
 - `revalidateTag('fixtures', 'max')`
 - `revalidatePath('/')`
 - `revalidatePath('/this-week')`
+
+Hobby only allows **once-per-day** Cron. Pages still refresh without the Cron: the 300-second ISR / fetch revalidate keeps times and scores reasonably fresh between visits. On Pro you can change the expression to hourly (for example `15 * * * *`) if you want a background warm more often.
 
 Set `CRON_SECRET` in the Vercel project so the Cron request is accepted. You can also hit the route yourself:
 
@@ -81,9 +83,7 @@ curl -H "Authorization: Bearer $CRON_SECRET" https://your-domain.vercel.app/api/
 1. Import the GitHub repo into [Vercel](https://vercel.com/new).
 2. Framework preset: Next.js. Build command: `npm run build`.
 3. Add `CRON_SECRET` (and optionally `NEXT_PUBLIC_SITE_URL`) under Project Settings → Environment Variables.
-4. Deploy. Cron jobs from `vercel.json` are registered on Hobby+ / Pro according to your Vercel plan.
-
-Hobby Cron is typically once per day; the 300-second ISR still keeps times and scores reasonably fresh between visits. On plans that honour hourly Cron, `/api/revalidate` warms the cache in the background.
+4. Deploy. Cron jobs from `vercel.json` are registered on Hobby / Pro according to your Vercel plan.
 
 ## Information architecture
 
