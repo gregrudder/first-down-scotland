@@ -80,6 +80,14 @@ export default async function HomePage() {
                   Where to watch in the UK →
                 </Link>
               </li>
+              <li>
+                <Link href="/community" className="text-cream hover:text-gold">
+                  Community on Discord →
+                </Link>
+                <p className="mt-1 text-xs leading-5 text-cream-dim">
+                  Meet other UK beginners. Learning stays here; chat is next door.
+                </p>
+              </li>
             </ul>
           </div>
         </div>
