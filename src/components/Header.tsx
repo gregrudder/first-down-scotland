@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { NavTeamMark } from "@/components/TeamMark";
 import { navItems } from "@/lib/site";
@@ -7,9 +8,14 @@ export function Header() {
     <header className="sticky top-0 z-40 border-b border-line bg-navy/85 backdrop-blur-md">
       <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3 sm:px-6">
         <Link href="/" className="flex items-center gap-3 no-underline">
-          <span className="flex h-10 w-10 items-center justify-center rounded-xl border border-gold/40 bg-navy-2 text-sm font-semibold tracking-wide text-gold">
-            1D
-          </span>
+          <Image
+            src="/logo.png"
+            alt=""
+            width={40}
+            height={40}
+            priority
+            className="h-10 w-10 rounded-[10px]"
+          />
           <span className="leading-tight">
             <span className="block font-display text-base font-semibold text-cream sm:text-lg">
               First Down Scotland
