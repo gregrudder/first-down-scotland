@@ -9,7 +9,7 @@ Learning is the hero. This is not a TV listings product.
 ## What v1 includes
 
 - **`/`** — value prop, Start learning CTA, full lesson list, and a small “games this week” teaser
-- **`/learn`** and **`/learn/[slug]`** — eight beginner lessons in UK English
+- **`/learn`** and **`/learn/[slug]`** — nine beginner lessons in UK English
 - **`/glossary`** — searchable jargon decoder
 - **`/this-week`** — this week’s NFL games from ESPN’s public scoreboard, times in `Europe/London`
 - **`/watch`** — high-level UK viewing map (Sky / Channel 5 / 5Action / My5 / DAZN Game Pass / Netflix)
@@ -91,7 +91,7 @@ curl -H "Authorization: Bearer $CRON_SECRET" https://your-domain.vercel.app/api/
 | --- | --- |
 | `/` | Learning home + fixtures teaser |
 | `/learn` | Lesson index |
-| `/learn/what-youre-watching` … `/learn/what-to-look-for` | The eight lessons |
+| `/learn/what-youre-watching` … `/learn/what-to-look-for` | The nine lessons |
 | `/glossary` | Jargon decoder |
 | `/this-week` | Auto fixtures |
 | `/watch` | UK viewing explainer |

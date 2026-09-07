@@ -483,8 +483,117 @@ export const lessons: Lesson[] = [
     ],
   },
   {
-    slug: "what-to-look-for",
+    slug: "penalties",
     number: 8,
+    title: "Penalties",
+    summary:
+      "The yellow flag, who the yards hurt, and the handful of calls you will hear every Sunday.",
+    minutes: 7,
+    blocks: [
+      {
+        type: "p",
+        text: "Sooner or later a yellow cloth flies, the play dies, and everyone stands around while a referee talks into a microphone. That is a penalty. It looks like a row. It is usually just a yardage tax — annoying, then over.",
+      },
+      {
+        type: "h2",
+        text: "What a penalty actually is",
+      },
+      {
+        type: "p",
+        text: "An official has spotted something illegal. They throw a yellow flag so the play can be marked, then they walk off yards against the team that broke the rule. Sometimes they also award an automatic first down, or replay the same down. The clock often stops while this is sorted.",
+      },
+      {
+        type: "list",
+        items: [
+          "The flag is the signal. One flag, or several, landing during a play.",
+          "The stoppage is the wait: whistle, huddle of officials, announcement.",
+          "The yards are the punishment. Five, ten or fifteen is typical. A few calls can be more.",
+        ],
+      },
+      {
+        type: "callout",
+        title: "Watch the flag, then the referee",
+        text: "On television the yellow flag is your cue that the result of the play might not stand. Ignore the crowd for a moment. The referee will say who did what, how many yards it costs, and whether the down is replayed. That sentence is the whole story.",
+      },
+      {
+        type: "h2",
+        text: "Who the yards hurt",
+      },
+      {
+        type: "p",
+        text: "Yards are walked off against the guilty team. If the offence is flagged, they usually get shoved backwards — further from the end zone they want. If the defence is flagged, the offence is moved forward, and many defensive penalties also give a first down. That is why a defensive flag late in a drive can feel like a gift.",
+      },
+      {
+        type: "p",
+        text: "A simple check: after the announcement, look at the ball and the yellow first-down line. If the offence just went backwards, it was probably on them. If they suddenly have a fresh 1st & 10, it was probably on the defence.",
+      },
+      {
+        type: "h2",
+        text: "The ones you will keep hearing",
+      },
+      {
+        type: "p",
+        text: "You do not need the whole book. These cover most of a beginner’s Sundays:",
+      },
+      {
+        type: "list",
+        items: [
+          "False start — an attacker twitches or moves before the snap. Almost always 5 yards. Dead ball: the play never really starts.",
+          "Offside / neutral zone — a defender is across the line when the ball is snapped, or lined up in that slim gap the width of the ball. Usually 5 yards.",
+          "Holding — grabbing a player you are not allowed to hold. Offensive holding is typically 10 yards. Defensive holding is usually 5 and a first down.",
+          "Pass interference — illegally stopping a catch, often by grabbing or bumping a receiver before the ball arrives. Defensive PI can be a long walk and a first down. Offensive PI is usually 10 yards.",
+          "Delay of game — the offence did not snap before the play clock hit zero. Five yards, and a wee bit of embarrassment.",
+          "Personal foul / roughing — a dangerous or late hit: helmet to helmet, hitting the kicker, or roughing the passer after they have thrown. Usually 15 yards, and often a first down if the defence did it.",
+        ],
+      },
+      {
+        type: "callout",
+        title: "Same name, different pain",
+        text: "Holding on the offence and holding on the defence are not the same bill. One shoves you back. The other can hand the other lot a first down. Listen for “on the offence” or “on the defence” in the announcement.",
+      },
+      {
+        type: "h2",
+        text: "Accepting or declining",
+      },
+      {
+        type: "p",
+        text: "The team that was fouled can take the penalty, or decline it and keep the play as it stood. They pick whichever helps more. If a defence is flagged but the offence just scored a touchdown anyway, they will often decline the yards and take the six points. You will hear “declined” now and then. You do not have to do the arithmetic; the overlay will show the result.",
+      },
+      {
+        type: "h2",
+        text: "What to look for when a flag flies",
+      },
+      {
+        type: "list",
+        items: [
+          "Did the play “count”? Wait for the announcement before celebrating or groaning.",
+          "Who was it on — offence or defence? That tells you which way the ball will move.",
+          "How many yards, and is it a first down? Those two facts reset the down-and-distance graphic.",
+          "If two flags fly, officials may offset them (both cancel) or pick the more serious one. Rare, and they will say so.",
+        ],
+      },
+      {
+        type: "terms",
+        items: [
+          {
+            term: "Flag",
+            def: "The yellow cloth an official throws to mark a penalty. US commentary just says “flag”.",
+          },
+          {
+            term: "Dead-ball foul",
+            def: "A penalty before or after the play (false start, delay of game). The down is usually replayed after the yards.",
+          },
+          {
+            term: "Personal foul",
+            def: "A 15-yard penalty for a dangerous or unsportsmanlike hit. Roughing the passer is the famous version.",
+          },
+        ],
+      },
+    ],
+  },
+  {
+    slug: "what-to-look-for",
+    number: 9,
     title: "What to look for when you put a game on",
     summary:
       "A simple watching guide: the score bug, the yellow line, and when to ignore the noise.",
@@ -535,7 +644,7 @@ export const lessons: Lesson[] = [
       },
       {
         type: "p",
-        text: "A yellow flag lands, everyone argues, and 40 seconds vanish. The referee will announce who did what and how many yards it costs. You do not need the whole rulebook. Holding, offside, pass interference and delay of game cover most of what you will see in month one. The glossary is there when a new phrase appears.",
+        text: "A yellow flag lands, everyone argues, and 40 seconds vanish. The last lesson covers the common calls. In the moment, just wait for the referee: who did what, how many yards, and whether it is a first down. The glossary is there when a new phrase appears.",
       },
       {
         type: "callout",
