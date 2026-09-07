@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { TeamLogo } from "@/components/TeamLogo";
-import type { NflTeam } from "@/data/teams";
+import { teamProfilePath, type NflTeam } from "@/data/teams";
 
 export function TeamResultCard({
   team,
@@ -58,6 +58,12 @@ export function TeamResultCard({
             className="inline-flex items-center justify-center rounded-full border border-line px-5 py-2.5 text-sm font-semibold text-cream hover:border-gold/50"
           >
             See this week’s games
+          </Link>
+          <Link
+            href={teamProfilePath(team.abbreviation)}
+            className="inline-flex items-center justify-center rounded-full border border-line px-5 py-2.5 text-sm font-semibold text-cream hover:border-gold/50"
+          >
+            Team profile
           </Link>
         </div>
       </div>

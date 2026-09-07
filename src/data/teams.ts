@@ -389,10 +389,50 @@ export const teams: NflTeam[] = [
   },
 ];
 
+const TEAM_PROFILE_SLUGS: Record<string, string> = {
+  ARI: "arizona-cardinals",
+  ATL: "atlanta-falcons",
+  BAL: "baltimore-ravens",
+  BUF: "buffalo-bills",
+  CAR: "carolina-panthers",
+  CHI: "chicago-bears",
+  CIN: "cincinnati-bengals",
+  CLE: "cleveland-browns",
+  DAL: "dallas-cowboys",
+  DEN: "denver-broncos",
+  DET: "detroit-lions",
+  GB: "green-bay-packers",
+  HOU: "houston-texans",
+  IND: "indianapolis-colts",
+  JAX: "jacksonville-jaguars",
+  KC: "kansas-city-chiefs",
+  LV: "las-vegas-raiders",
+  LAC: "los-angeles-chargers",
+  LAR: "los-angeles-rams",
+  MIA: "miami-dolphins",
+  MIN: "minnesota-vikings",
+  NE: "new-england-patriots",
+  NO: "new-orleans-saints",
+  NYG: "new-york-giants",
+  NYJ: "new-york-jets",
+  PHI: "philadelphia-eagles",
+  PIT: "pittsburgh-steelers",
+  SEA: "seattle-seahawks",
+  SF: "san-francisco-49ers",
+  TB: "tampa-bay-buccaneers",
+  TEN: "tennessee-titans",
+  WSH: "washington-commanders",
+};
+
 export function getTeam(abbreviation: string): NflTeam | undefined {
   return teams.find(
     (team) => team.abbreviation.toLowerCase() === abbreviation.toLowerCase(),
   );
+}
+
+export function teamProfilePath(abbreviation: string): string {
+  const slug = TEAM_PROFILE_SLUGS[abbreviation.toUpperCase()];
+  return slug ? `/teams/${slug}` : "/teams";
 }
 
 export function randomTeam(except?: string): NflTeam {
