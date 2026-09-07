@@ -17,6 +17,7 @@ Learning is the hero. This is not a TV listings product.
 - **`/community`** — Discord for Scottish / UK fans (invite via env; no in-app chat)
 - **`/history`** — short NFL history for UK beginners (timeline, not a thesis)
 - **`/teams`** and **`/teams/[slug]`** — all 32 club profiles (2026-season snapshot)
+- **`/pick-your-team`** — quiz or spinning-ball surprise to pick a team; saved in the browser as `fds-team`
 - PWA basics: web manifest, icons, mobile-first layout, `theme-color`
 
 Out of scope: fantasy, live play-by-play UI, betting, accounts, push notifications, App Store builds, perfect per-game UK rights.
@@ -104,6 +105,7 @@ curl -H "Authorization: Bearer $CRON_SECRET" https://your-domain.vercel.app/api/
 | `/history` | Short NFL history timeline |
 | `/teams` | All 32 teams by conference / division |
 | `/teams/[slug]` | Club profile (stadium, colours, Super Bowls) |
+| `/pick-your-team` | Quiz or spin to pick a team (saved as `fds-team`) |
 | `/about` | Project purpose |
 
 ## Licence and attribution
