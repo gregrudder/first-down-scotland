@@ -12,6 +12,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/watch",
     "/watch-near-you",
     "/community",
+    "/pick-your-team",
     "/about",
   ];
   const lessonRoutes = getLessonSlugs().map((slug) => `/learn/${slug}`);
