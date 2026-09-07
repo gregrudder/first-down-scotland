@@ -14,6 +14,7 @@ export const navItems = [
   { href: "/this-week", label: "This week" },
   { href: "/watch", label: "Watch" },
   { href: "/community", label: "Community" },
+  { href: "/pick-your-team", label: "Team" },
   { href: "/about", label: "About" },
 ] as const;
 

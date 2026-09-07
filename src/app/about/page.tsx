@@ -52,6 +52,11 @@ export default function AboutPage() {
           </Link>
         </li>
         <li>
+          <Link href="/pick-your-team" className="text-gold">
+            Pick your team →
+          </Link>
+        </li>
+        <li>
           <Link href="/community" className="text-gold">
             Community — Discord coming soon →
           </Link>
