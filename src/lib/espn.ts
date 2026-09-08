@@ -30,7 +30,9 @@ export type NflGame = {
   clock?: string;
   venue?: string;
   venueCity?: string;
-  broadcasts: string[]
+  broadcasts: string[];
+  recapUrl?: string;
+  gamecastUrl?: string;
   home: TeamSide;
   away: TeamSide;
 };
@@ -142,6 +144,26 @@ function parseBroadcasts(competition: UnknownRecord): string[] {
   return [...names];
 }
 
+function parseEspnLinks(raw: unknown): { recapUrl?: string; gamecastUrl?: string } {
+  if (!Array.isArray(raw)) return {};
+  let recapUrl: string | undefined;
+  let gamecastUrl: string | undefined;
+  for (const entry of raw) {
+    if (!isRecord(entry)) continue;
+    const href = asString(entry.href);
+    if (!href) continue;
+    const rel = Array.isArray(entry.rel)
+      ? entry.rel.filter((value): value is string => typeof value === "string")
+      : [];
+    const relSet = new Set(rel.map((value) => value.toLowerCase()));
+    if (relSet.has("recap")) recapUrl = href;
+    if (relSet.has("summary") || relSet.has("desktop")) {
+      if (!gamecastUrl) gamecastUrl = href;
+    }
+  }
+  return { recapUrl, gamecastUrl };
+}
+
 function parseVenue(competition: UnknownRecord): {
   venue?: string;
   venueCity?: string;
@@ -187,6 +209,7 @@ function parseGame(event: unknown): NflGame | null {
   const period = isRecord(statusSource) ? asNumber(statusSource.period) : undefined;
   const clock = isRecord(statusSource) ? asString(statusSource.displayClock) : undefined;
   const { venue, venueCity } = parseVenue(competition);
+  const { recapUrl, gamecastUrl } = parseEspnLinks(event.links);
 
   return {
     id: asString(event.id) ?? `${away.abbreviation}-${home.abbreviation}-${kickoffUtc}`,
@@ -200,6 +223,8 @@ function parseGame(event: unknown): NflGame | null {
     venue,
     venueCity,
     broadcasts: parseBroadcasts(competition),
+    recapUrl,
+    gamecastUrl,
     home,
     away,
   };

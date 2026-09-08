@@ -3,7 +3,9 @@
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 import { TeamLogo } from "@/components/TeamLogo";
+import { GameReportBlock } from "@/components/GameReportBlock";
 import type { FixturesResult, NflGame } from "@/lib/espn";
+import type { GameReport } from "@/lib/game-report";
 import { getTeamProfileByAbbr } from "@/data/team-profiles";
 import {
   SUNDAY_CARD_IS_FREE,
@@ -129,9 +131,11 @@ function ExplainerBlock({
 
 export function SundayCard({
   fixtures,
+  reports = {},
   compact = false,
 }: {
   fixtures: FixturesResult;
+  reports?: Record<string, GameReport>;
   compact?: boolean;
 }) {
   const { record, ready } = useSavedTeam();
@@ -194,6 +198,7 @@ export function SundayCard({
   const team = record.team;
   const profile = getTeamProfileByAbbr(team.abbreviation);
   const profileHref = profile ? `/teams/${profile.slug}` : "/teams";
+  const report = match ? reports[match.game.id] : undefined;
 
   return (
     <section
@@ -248,6 +253,8 @@ export function SundayCard({
           <ExplainerBlock explainer={explainer} compact={compact} />
         </div>
       ) : null}
+
+      {report ? <GameReportBlock report={report} compact={compact} /> : null}
 
       {!compact ? (
         <div className="mt-4 border-t border-line pt-4">

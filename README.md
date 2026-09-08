@@ -12,7 +12,7 @@ Three jobs: learn the game, meet fans of your team, keep that club in one place.
 - **`/learn`** and **`/learn/[slug]`** : beginner lessons in UK English, including X-and-O play diagrams at `/learn/plays` and a Draft explainer at `/learn/the-draft`. Stage progress bars and a 20-question quiz at `/learn/quiz` (saved in the browser as `fds-learn`). Badges: Practice Squad (0–7) → Rookie (8–12) → Starter (13–17) → Hall of Famer (18–20).
 - **`/learn/draft-prospects`** : top 2027 Draft names (ESPN when the official list fills; otherwise a cited early consensus board), cached 600s, Cron-busted
 - **`/glossary`** : searchable jargon decoder
-- **`/this-week`** : helper slate of this week’s NFL games from ESPN’s public scoreboard, times in `Europe/London`, plus a **Your Sunday** card for the team saved in the browser (`fds-team`): UK kick-off, what to watch for, a Learn tie-in, optional ESPN QB snapshot, and a Scottish pub meetup hint. The full slate stays free.
+- **`/this-week`** : this week’s NFL games from ESPN’s public scoreboard, times in `Europe/London`, plus a **Your Sunday** card for the team saved in the browser (`fds-team`). Each fixture has a short beginner preview or a post-match report (score + snippet + outbound link; “report coming” until a feed publishes one). Fair-use summaries only. Also UK kick-off, what to watch for, a Learn tie-in, optional ESPN QB snapshot, and a Scottish pub meetup hint. The full slate stays free.
 - **`/news`** : NFL headlines pulled automatically from public RSS (ESPN, BBC Sport, the Guardian). Helper, not the product.
 - **`/news/fantasy`** : NFL fantasy football tips & news (not Scottish football)
 - **`/podcasts`** : recommended NFL and per-team shows to follow (external links; official vs independent labelled)
