@@ -64,12 +64,30 @@ Copy `.env.example` if you want a local file. Nothing is required for day-to-day
 | `NEXT_PUBLIC_SITE_URL` | Optional | Canonical / Open Graph / sitemap base URL. If unset, we use `VERCEL_PROJECT_PRODUCTION_URL` or `https://first-down-scotland.vercel.app` — never a preview `*.vercel.app` host (those hit SSO). |
 | `NEXT_PUBLIC_DISCORD_INVITE` | Optional | If set to a valid discord.gg / discord.com invite, `/community` shows Join the Discord. If unset or invalid, the page shows Discord coming soon (no hardcoded invite). |
 | `NEXT_PUBLIC_CONTACT_EMAIL` | Optional | Overrides the Watch near you “get in touch” mailto (defaults to `info@g4-marketing.net`). |
-| `RESEND_API_KEY` | For `/feedback` (option A) | Server-only. Sends the tester form via [Resend](https://resend.com). |
+| `FORMSPREE_FORM_ID` | For `/feedback` on Hobby | Server-only Formspree form hash, or the full `https://formspree.io/f/…` URL. Inbox is set in the Formspree dashboard, not in this repo. |
+| `RESEND_API_KEY` | For `/feedback` (option B) | Server-only. Sends via [Resend](https://resend.com). Needs a verified sending domain to reach an arbitrary inbox. |
 | `FEEDBACK_TO_EMAIL` | With Resend | Server-only inbox. Never `NEXT_PUBLIC_*`. |
-| `FEEDBACK_FROM_EMAIL` | Optional with Resend | Verified from-address. Defaults to Resend’s onboarding sender (test-mode limits apply). |
-| `FORMSPREE_FORM_ID` | For `/feedback` (option B) | Server-only. Alternative to Resend; the API posts to Formspree. |
+| `FEEDBACK_FROM_EMAIL` | Optional with Resend | Must be on a domain you verified in Resend. If unset, Resend’s `onboarding@resend.dev` sender is used (test mode: only the Resend account email can receive). |
 
-Locally, if neither Resend nor Formspree is set, `/api/feedback` logs the note and returns success so the form can be tried. In production it returns an error until one option is configured.
+Locally, if neither Formspree nor Resend is set, `/api/feedback` logs the note and returns success so the form can be tried. In production it returns **503** (“feedback inbox is not wired up”) until one option is configured. Provider failures return **502**. If Resend is set and fails, Formspree is tried next when `FORMSPREE_FORM_ID` is also set.
+
+### Feedback on Vercel Hobby (Formspree)
+
+Use Formspree. Resend on the free / onboarding sender cannot deliver to an iCloud (or any) address unless that address is the Resend login, or you verify a custom domain.
+
+1. Create a free account at [formspree.io](https://formspree.io).
+2. New form. Set the notification email in the Formspree dashboard to the inbox that should receive tester notes (do not put that address in Vercel as `NEXT_PUBLIC_*`, and do not commit it to the repo).
+3. Copy the form endpoint. It looks like `https://formspree.io/f/xxxxxxxx`. The id is the last segment; pasting the whole URL also works.
+4. Confirm the Formspree account / form email if they send a confirmation (check spam).
+5. In Vercel: the project → **Settings** → **Environment Variables**.
+   - Name: `FORMSPREE_FORM_ID`
+   - Value: the id or the full URL
+   - Environment: **Production** (add Preview if you want PR deploys to send too)
+   - Leave **Sensitive** on. Do not tick “Automatically expose to the browser”.
+6. **Redeploy** Production. New env vars do not apply to the deployment that is already live: Deployments → the current Production deploy → Redeploy, or push a new commit.
+7. Open `/feedback`, submit once, and check the Formspree inbox. The first live submission may need you to activate the form in Formspree.
+
+Do not set `RESEND_API_KEY` unless you also have `FEEDBACK_FROM_EMAIL` on a verified domain. A Resend key plus the default onboarding sender is a common way to get a 502 with nothing in the inbox.
 
 If `CRON_SECRET` is unset, `/api/revalidate` is allowed only when `NODE_ENV` is not `production`.
 
