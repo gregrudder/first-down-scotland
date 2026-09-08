@@ -1,7 +1,77 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { useEffect, useId, useRef, useState } from "react";
 import { NavTeamMark } from "@/components/TeamMark";
 import { navItems } from "@/lib/site";
+
+function MobileNav() {
+  const [open, setOpen] = useState(false);
+  const pathname = usePathname();
+  const wrapRef = useRef<HTMLDivElement>(null);
+  const menuId = useId();
+
+  useEffect(() => {
+    setOpen(false);
+  }, [pathname]);
+
+  useEffect(() => {
+    if (!open) return;
+
+    function onKey(event: KeyboardEvent) {
+      if (event.key === "Escape") setOpen(false);
+    }
+
+    function onPointerDown(event: PointerEvent) {
+      const root = wrapRef.current;
+      if (!root) return;
+      if (event.target instanceof Node && !root.contains(event.target)) {
+        setOpen(false);
+      }
+    }
+
+    document.addEventListener("keydown", onKey);
+    document.addEventListener("pointerdown", onPointerDown);
+    return () => {
+      document.removeEventListener("keydown", onKey);
+      document.removeEventListener("pointerdown", onPointerDown);
+    };
+  }, [open]);
+
+  return (
+    <div className="relative" ref={wrapRef}>
+      <button
+        type="button"
+        className="rounded-full border border-line px-3 py-2 text-sm text-cream"
+        aria-expanded={open}
+        aria-controls={menuId}
+        onClick={() => setOpen((value) => !value)}
+      >
+        Menu
+      </button>
+      {open ? (
+        <nav
+          id={menuId}
+          className="absolute right-0 mt-2 w-48 rounded-xl border border-line bg-navy-2 p-2 shadow-xl"
+          aria-label="Mobile"
+        >
+          {navItems.map((item) => (
+            <Link
+              key={item.href}
+              href={item.href}
+              className="block rounded-lg px-3 py-2 text-sm text-cream hover:bg-navy-3"
+              onClick={() => setOpen(false)}
+            >
+              {item.label}
+            </Link>
+          ))}
+        </nav>
+      ) : null}
+    </div>
+  );
+}
 
 export function Header() {
   return (
@@ -41,25 +111,7 @@ export function Header() {
 
         <div className="flex items-center gap-2 xl:hidden">
           <NavTeamMark className="inline-flex" />
-          <details className="relative">
-            <summary className="list-none rounded-full border border-line px-3 py-2 text-sm text-cream [&::-webkit-details-marker]:hidden">
-              Menu
-            </summary>
-            <nav
-              className="absolute right-0 mt-2 w-48 rounded-xl border border-line bg-navy-2 p-2 shadow-xl"
-              aria-label="Mobile"
-            >
-              {navItems.map((item) => (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  className="block rounded-lg px-3 py-2 text-sm text-cream hover:bg-navy-3"
-                >
-                  {item.label}
-                </Link>
-              ))}
-            </nav>
-          </details>
+          <MobileNav />
         </div>
       </div>
     </header>
