@@ -32,10 +32,7 @@ export default function CommunityPage() {
     <div className="mx-auto max-w-3xl px-4 py-12 sm:px-6 sm:py-16">
       <PageIntro eyebrow="Meet your team" title="Community">
         <p>
-          This is the chat home. Discord is where Scottish and UK fans of the
-          same NFL team can actually talk, instead of hoping a Facebook group
-          still exists. Pair it with the pub list when you want to meet in
-          person. Lessons stay on the site.
+          This is the chat home. The First Down Scotland Discord is where Scottish and UK fans of the same NFL team can actually talk, instead of hoping a Facebook group still exists. Pair it with the pub list when you want to meet in person and watch the games together with like-minded fans.
         </p>
       </PageIntro>
 
