@@ -20,6 +20,7 @@ Learning is the hero. This is not a TV listings product.
 - **`/watch-near-you`** — Scottish pubs that show the NFL (free listings; demo featured card; more cities coming)
 - **`/about`** — what the site is for
 - **`/community`** — Discord for Scottish / UK fans (invite via env; no in-app chat)
+- **`/feedback`** — short tester form (posts to `/api/feedback`; Resend or Formspree). Inbox address is an env var, not in the repo.
 - **`/history`** — short NFL history for UK beginners (timeline, not a thesis)
 - **`/teams`** and **`/teams/[slug]`** — all 32 club profiles (2026-season snapshot), ESPN depth chart, official YouTube, and the relevant pods
 - **`/pick-your-team`** — quiz or spinning-ball surprise to pick a team; saved in the browser as `fds-team`
@@ -61,6 +62,12 @@ Copy `.env.example` if you want a local file. Nothing is required for day-to-day
 | `NEXT_PUBLIC_SITE_URL` | Optional | Canonical / Open Graph / sitemap base URL. If unset, we use `VERCEL_PROJECT_PRODUCTION_URL` or `https://first-down-scotland.vercel.app` — never a preview `*.vercel.app` host (those hit SSO). |
 | `NEXT_PUBLIC_DISCORD_INVITE` | Optional | If set to a valid discord.gg / discord.com invite, `/community` shows Join the Discord. If unset or invalid, the page shows Discord coming soon (no hardcoded invite). |
 | `NEXT_PUBLIC_CONTACT_EMAIL` | Optional | Overrides the Watch near you “get in touch” mailto (defaults to `info@g4-marketing.net`). |
+| `RESEND_API_KEY` | For `/feedback` (option A) | Server-only. Sends the tester form via [Resend](https://resend.com). |
+| `FEEDBACK_TO_EMAIL` | With Resend | Server-only inbox. Never `NEXT_PUBLIC_*`. |
+| `FEEDBACK_FROM_EMAIL` | Optional with Resend | Verified from-address. Defaults to Resend’s onboarding sender (test-mode limits apply). |
+| `FORMSPREE_FORM_ID` | For `/feedback` (option B) | Server-only. Alternative to Resend; the API posts to Formspree. |
+
+Locally, if neither Resend nor Formspree is set, `/api/feedback` logs the note and returns success so the form can be tried. In production it returns an error until one option is configured.
 
 If `CRON_SECRET` is unset, `/api/revalidate` is allowed only when `NODE_ENV` is not `production`.
 
@@ -142,6 +149,7 @@ curl -H "Authorization: Bearer $CRON_SECRET" https://your-domain.vercel.app/api/
 | `/film-room` | Watch-to-learn films and series |
 | `/watch-near-you` | Scottish NFL pubs (free listings + demo featured card) |
 | `/community` | Discord community (invite CTA) |
+| `/feedback` | TikTok-test feedback form |
 | `/history` | Short NFL history timeline |
 | `/teams` | All 32 teams by conference / division |
 | `/teams/[slug]` | Club profile (stadium, colours, Super Bowls, live depth chart) |

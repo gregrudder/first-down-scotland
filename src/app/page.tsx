@@ -130,6 +130,11 @@ export default async function HomePage() {
                   Meet other UK beginners. Learning stays here; chat is next door.
                 </p>
               </li>
+              <li>
+                <Link href="/feedback" className="text-cream hover:text-gold">
+                  Feedback — TikTok test notes →
+                </Link>
+              </li>
             </ul>
           </div>
         </div>

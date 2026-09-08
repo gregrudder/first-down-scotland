@@ -18,6 +18,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/film-room",
     "/watch-near-you",
     "/community",
+    "/feedback",
     "/history",
     "/teams",
     "/pick-your-team",
