@@ -26,7 +26,8 @@ export default async function LearnIndexPage() {
           sent you here. Each one is written in UK English, for people who did not grow
           up with Friday-night lights. Mark a lesson as read and the stage bars keep
           score. When you finish a stage (or the whole path) you can sit a 20-question
-          quiz.
+          quiz. After that, meet fans of the team you support: Discord for chat, pubs
+          for turning up.
         </p>
       </PageIntro>
       <div className="mt-10">
@@ -66,6 +67,17 @@ export default async function LearnIndexPage() {
           </p>
         </Link>
       </div>
+      <p className="mt-10 max-w-3xl text-sm leading-6 text-cream-dim">
+        When a lesson clicks, come find people who support the same team:{" "}
+        <Link href="/community" className="text-gold">
+          Community
+        </Link>{" "}
+        for Discord chat, and{" "}
+        <Link href="/watch-near-you" className="text-gold">
+          pubs near you
+        </Link>{" "}
+        for meeting in person.
+      </p>
     </div>
   );
 }

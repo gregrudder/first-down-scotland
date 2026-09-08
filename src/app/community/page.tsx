@@ -6,11 +6,12 @@ import { PageIntro } from "@/components/PageIntro";
 export const metadata: Metadata = {
   title: "Community",
   description:
-    "A First Down Scotland Discord is coming soon: general chat and a channel per NFL team for Scottish and UK beginners.",
+    "Discord is the chat home for First Down Scotland: meet Scottish and UK fans of the NFL team you support, then arrange pub meetups at the spots we list.",
 };
 
 const howItWorks = [
-  "When the invite is up, join the server, say hello in #general, and pick a team channel, or lurk until you have a side.",
+  "When the invite is up, join the server, say hello in #general, and pick the channel for the team you support. Lurk until you have a side if you need to.",
+  "Use that team room to find other UK fans of the same club, and to arrange who is going to a pub from Watch near you.",
   "Be decent. It is meant to be a small UK room for people still learning the sport, not a US sports-radio shout.",
   "If someone asks for no spoilers, don’t post the score. Easy.",
   "Beginners are the point. “What does 3rd & 12 mean?” will be a good question there.",
@@ -29,11 +30,12 @@ const exampleChannels = ["#general", "#nfl", "#chargers", "#seahawks", "#chiefs"
 export default function CommunityPage() {
   return (
     <div className="mx-auto max-w-3xl px-4 py-12 sm:px-6 sm:py-16">
-      <PageIntro eyebrow="People" title="Community">
+      <PageIntro eyebrow="Meet your team" title="Community">
         <p>
-          The site is for learning. Discord will be for people: other Scottish and
-          UK fans who are getting into the NFL and would rather ask a daft question
-          than sit through another American broadcast pretending they already knew.
+          This is the chat home. Discord is where Scottish and UK fans of the
+          same NFL team can actually talk, instead of hoping a Facebook group
+          still exists. Pair it with the pub list when you want to meet in
+          person. Lessons stay on the site.
         </p>
       </PageIntro>
 
@@ -44,16 +46,39 @@ export default function CommunityPage() {
       <div className="mt-12 space-y-6 text-base leading-7 text-cream-dim">
         <p>
           One First Down Scotland server is planned: general chat for beginners,
-          an NFL room for the week’s games, and a channel per team so you can hang
+          an NFL room for the week’s games, and a channel per team so you hang
           with fans of your side. That is the shape of it. The invite itself is
-          not live yet.
+          not live yet. We would rather say coming soon than send you to a dead
+          door.
         </p>
         <p>
-          Lessons, the glossary, fixtures and where to watch stay here. We are not
-          building in-app chat. Discord already does rooms; we would only make a
-          worse version.
+          We are not building in-app chat. Discord already does rooms; we would
+          only make a worse version. Fixtures, news and where to watch stay
+          here as helpers.
         </p>
       </div>
+
+      <section className="mt-12 rounded-2xl border border-line bg-navy-2 p-6">
+        <p className="text-xs font-semibold uppercase tracking-[0.16em] text-gold">
+          Same team, same pub
+        </p>
+        <h2 className="mt-2 font-display text-2xl text-cream">Meet in the real world</h2>
+        <p className="mt-3 text-base leading-7 text-cream-dim">
+          The Discord is for chat. The pub list is for turning up. Find a
+          Scottish spot that shows the NFL, then (when the invite is live) use
+          your team channel to see who else is going. You do not have to watch
+          on your own.
+        </p>
+        <p className="mt-4 text-sm">
+          <Link href="/watch-near-you" className="font-semibold text-gold">
+            Pubs near you →
+          </Link>
+          <span className="text-cream-dim"> · </span>
+          <Link href="/pick-your-team" className="text-gold">
+            Pick my team →
+          </Link>
+        </p>
+      </section>
 
       <section className="mt-12">
         <h2 className="font-display text-3xl text-cream">Team channels, when it opens</h2>
@@ -74,7 +99,11 @@ export default function CommunityPage() {
         </ul>
         <p className="mt-4 text-sm leading-6 text-cream-dim">
           Plus one for every other club. If you have not chosen a team yet,
-          #general will be the right place.
+          #general will be the right place, and{" "}
+          <Link href="/pick-your-team" className="text-gold">
+            Pick my team
+          </Link>{" "}
+          will give you a side to walk in with.
         </p>
       </section>
 
@@ -103,12 +132,12 @@ export default function CommunityPage() {
         New to the sport?{" "}
         <Link href="/learn" className="text-gold">
           Start the lessons
-        </Link>{" "}
-        in the meantime. If a game is on,{" "}
+        </Link>
+        . Kick-offs in UK time are a helper on{" "}
         <Link href="/this-week" className="text-gold">
-          this week’s kick-offs
-        </Link>{" "}
-        are in UK time.
+          this week’s games
+        </Link>
+        .
       </p>
     </div>
   );

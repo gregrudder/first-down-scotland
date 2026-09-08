@@ -12,7 +12,8 @@ export function DiscordCta() {
         <p className="mt-2 font-display text-2xl text-cream">Coming soon</p>
         <p className="mt-2 text-sm leading-6 text-cream-dim">
           The invite is not live yet. We would rather wait than send you to a
-          dead link: lessons and this week’s games stay on the site.
+          dead link. Until then, pick a team and use the pub list to find places
+          you could meet other fans of that side. Lessons stay on the site.
         </p>
       </div>
     );

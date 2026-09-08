@@ -8,7 +8,7 @@ import { divisions, teamProfileNote, teamsInDivision } from "@/data/team-profile
 export const metadata: Metadata = {
   title: "NFL teams",
   description:
-    "All 32 NFL teams by conference and division: stadium, colours, Super Bowls, and a short beginner brief.",
+    "All 32 NFL teams in one place: stadium, colours, Super Bowls, a live depth chart, and a short beginner brief for the club you support.",
 };
 
 export default function TeamsIndexPage() {
@@ -21,9 +21,13 @@ export default function TeamsIndexPage() {
           <Link href="/history" className="text-gold">
             short history
           </Link>{" "}
-          first. Profiles are snapshots for the 2026 season: stadiums get renamed.
-          Each club page also has a live depth chart, the official YouTube, and a
-          pod or two to follow.
+          first.{" "}
+          <Link href="/pick-your-team" className="text-gold">
+            Pick a side
+          </Link>{" "}
+          if you want to find other UK fans of that club. Each profile is the
+          roster-and-depth stop in one place: 2026 snapshot, live ESPN depth chart,
+          official YouTube, and a pod or two. Stadiums get renamed.
         </p>
       </PageIntro>
 

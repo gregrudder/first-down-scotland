@@ -71,7 +71,7 @@ function whyFor(name: string, position: string, college: string): string {
     (entry) => entry.name.toLowerCase() === name.toLowerCase(),
   );
   if (known) return known.why;
-  return `${labelForPosition(position)} at ${college}. A name on the early 2027 boards — rankings move every week of the college season.`;
+  return `${labelForPosition(position)} at ${college}. A name on the early 2027 boards. Rankings move every week of the college season.`;
 }
 
 async function fetchJson(url: string): Promise<unknown> {

@@ -5,7 +5,8 @@ import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "About",
-  description: "What First Down Scotland is for, and what it is not.",
+  description:
+    "First Down Scotland is a learning hub, a community to meet fans of your NFL team, and a one-stop shop for that club, for Scotland and the rest of the UK.",
 };
 
 export default function AboutPage() {
@@ -18,19 +19,27 @@ export default function AboutPage() {
       <div className="mt-10 space-y-6 text-base leading-7 text-cream-dim">
         <p>
           This site is for people in Scotland and the rest of the UK who keep meaning
-          to “get” American football and then bounce off the jargon. It is a learning
-          app first. A short path, a glossary, and only then the week’s fixtures and a
-          calm note on where those games might be on television.
+          to “get” American football, then bounce off the jargon, and then realise
+          there is nowhere obvious to talk about it. Three jobs: learn the game,
+          meet fans of the team you support, and keep that club in one place
+          (news, fantasy, podcasts, depth, watch notes) so you are not hopping six
+          American tabs.
         </p>
         <p>
-          It is not a TV guide, a fantasy assistant, a betting tip sheet, or a live
-          play-by-play machine. We will not pretend a rights list is perfect. Kick-off
-          times come from ESPN’s public scoreboard and are shown in Europe/London. If
-          that feed fails, we say so.
+          Discord is the chat home: general room, an NFL room, and a channel per
+          club so you are not shouting into the void. The invite goes live when
+          the server is ready, not before. The pub list is for the real-world
+          bit: places that put the NFL on, where you can sit with people who
+          picked the same side, or arrange a meetup once chat is open.
         </p>
         <p>
-          The tone is meant to be welcoming rather than matey-American. We use UK
-          spelling (defence, favourite, organised) and we explain US words when the
+          You can find bits of this elsewhere online. The sell is that this app
+          does it together, in UK English, aimed at Scottish and UK fans. It is
+          not a TV listings clone, a US magazine, a betting tip sheet, or a live
+          play-by-play machine. Kick-off times come from ESPN’s public scoreboard
+          and are shown in Europe/London. If that feed fails, we say so. The tone
+          is meant to be welcoming rather than matey-American. We use UK spelling
+          (defence, favourite, organised) and we explain US words when the
           broadcast will say them differently.
         </p>
       </div>
@@ -42,8 +51,33 @@ export default function AboutPage() {
           </Link>
         </li>
         <li>
+          <Link href="/pick-your-team" className="text-gold">
+            Pick my team →
+          </Link>
+        </li>
+        <li>
+          <Link href="/community" className="text-gold">
+            Community: Discord for your team →
+          </Link>
+        </li>
+        <li>
+          <Link href="/watch-near-you" className="text-gold">
+            Pubs: meet fans of your team →
+          </Link>
+        </li>
+        <li>
           <Link href="/this-week" className="text-gold">
             This week’s games →
+          </Link>
+        </li>
+        <li>
+          <Link href="/watch" className="text-gold">
+            Where to watch →
+          </Link>
+        </li>
+        <li>
+          <Link href="/film-room" className="text-gold">
+            Film room →
           </Link>
         </li>
         <li>
@@ -62,16 +96,6 @@ export default function AboutPage() {
           </Link>
         </li>
         <li>
-          <Link href="/watch" className="text-gold">
-            Where to watch →
-          </Link>
-        </li>
-        <li>
-          <Link href="/film-room" className="text-gold">
-            Film room →
-          </Link>
-        </li>
-        <li>
           <Link href="/history" className="text-gold">
             NFL history →
           </Link>
@@ -79,21 +103,6 @@ export default function AboutPage() {
         <li>
           <Link href="/teams" className="text-gold">
             Team profiles →
-          </Link>
-        </li>
-        <li>
-          <Link href="/watch-near-you" className="text-gold">
-            Watch near you: pubs →
-          </Link>
-        </li>
-        <li>
-          <Link href="/pick-your-team" className="text-gold">
-            Pick your team →
-          </Link>
-        </li>
-        <li>
-          <Link href="/community" className="text-gold">
-            Community →
           </Link>
         </li>
         <li>

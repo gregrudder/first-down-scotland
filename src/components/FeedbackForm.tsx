@@ -141,7 +141,7 @@ export function FeedbackForm() {
         <h2 className="mt-2 font-display text-2xl text-cream">That’s in the inbox.</h2>
         <p className="mt-3 text-base leading-7 text-cream-dim">
           Thanks. A short note from a real Sunday is worth more than a long survey.
-          Back to the lessons when you like.
+          Back to the lessons, or to Community, when you like.
         </p>
       </div>
     );
@@ -224,7 +224,7 @@ export function FeedbackForm() {
       </label>
 
       <ChoiceGroup
-        legend="Would you pay £2 a month for this plus a private Discord?"
+        legend="Would you pay £2 a month for the lessons plus a private Discord for fans of your team?"
         name="pay"
         value={pay}
         onChange={setPay}

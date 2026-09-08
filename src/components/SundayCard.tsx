@@ -102,12 +102,16 @@ function ExplainerBlock({
           <p className="text-sm leading-6 text-cream-dim">{explainer.watchHint}</p>
           <p className="text-sm leading-6 text-cream-dim">{explainer.pubHint}</p>
           <p className="text-sm leading-6">
-            <Link href="/watch" className="text-gold hover:text-gold-soft">
-              Where to watch
+            <Link href="/community" className="text-gold hover:text-gold-soft">
+              Meet your team
             </Link>
             <span className="text-cream-dim"> · </span>
             <Link href="/watch-near-you" className="text-gold hover:text-gold-soft">
               Pubs near you
+            </Link>
+            <span className="text-cream-dim"> · </span>
+            <Link href="/watch" className="text-gold hover:text-gold-soft">
+              Where to watch
             </Link>
           </p>
         </>
@@ -169,11 +173,13 @@ export function SundayCard({
           Your Sunday
         </p>
         <h2 className="mt-2 font-display text-2xl text-cream sm:text-3xl">
-          Pick a team, get a weekly card
+          Pick a team, find your lot
         </h2>
         <p className="mt-3 text-sm leading-6 text-cream-dim">
-          Kick-off in UK time, where to watch, and one plain-English thing to look for. The
-          full slate stays free below. This card is just the weekly reason to open the app.
+          A weekly card for the club you support: kick-off in UK time, one
+          plain-English thing to look for, depth, and pubs where fans of that
+          side might gather. News, pods and watch notes for that team live in
+          the same app. Discord is the chat home when the invite is ready.
         </p>
         <Link
           href="/pick-your-team"
@@ -261,17 +267,41 @@ export function SundayCard({
       ) : null}
 
       {compact ? (
-        <Link
-          href="/this-week#your-sunday"
-          className="mt-4 inline-block text-sm font-semibold text-gold"
-        >
-          Open the full card →
-        </Link>
-      ) : SUNDAY_CARD_IS_FREE ? (
-        <p className="mt-4 text-xs leading-5 text-cream-dim">
-          Free weekly card. The games list underneath is the same for everyone.
+        <p className="mt-4 text-sm leading-6">
+          <Link href="/this-week#your-sunday" className="font-semibold text-gold">
+            Open the full card →
+          </Link>
+          <span className="text-cream-dim"> · </span>
+          <Link href="/community" className="text-gold hover:text-gold-soft">
+            Meet your team
+          </Link>
         </p>
-      ) : null}
+      ) : (
+        <div className="mt-4 border-t border-line pt-4">
+          <p className="text-xs font-semibold uppercase tracking-[0.16em] text-gold">
+            Meet your lot
+          </p>
+          <p className="mt-1 text-sm leading-6 text-cream-dim">
+            Chat with other UK fans of {team.shortName} on Discord when it opens,
+            or find a pub that will put the game on. News, pods and the depth
+            chart for this club live in the same app.
+          </p>
+          <p className="mt-2 text-sm leading-6">
+            <Link href="/community" className="text-gold hover:text-gold-soft">
+              Community →
+            </Link>
+            <span className="text-cream-dim"> · </span>
+            <Link href="/watch-near-you" className="text-gold hover:text-gold-soft">
+              Pubs near you →
+            </Link>
+          </p>
+          {SUNDAY_CARD_IS_FREE ? (
+            <p className="mt-3 text-xs leading-5 text-cream-dim">
+              Free weekly card. The games list underneath is the same for everyone.
+            </p>
+          ) : null}
+        </div>
+      )}
     </section>
   );
 }

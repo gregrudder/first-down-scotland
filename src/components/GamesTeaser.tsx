@@ -9,7 +9,7 @@ export function GamesTeaser({ fixtures }: { fixtures: FixturesResult }) {
         <p className="text-xs font-semibold uppercase tracking-[0.16em] text-gold">This week</p>
         <p className="mt-3 text-sm leading-6 text-cream-dim">{fixtures.error}</p>
         <Link href="/this-week" className="mt-4 inline-block text-sm text-gold">
-          Open fixtures →
+          Open this week →
         </Link>
       </aside>
     );

@@ -174,7 +174,7 @@ export function pubHintForGame(game: NflGame | null): string {
   const where = names ? ` ${names} already advertise NFL Sundays.` : "";
 
   if (!game) {
-    return `A handful of Scottish pubs list the NFL.${where} Always call ahead: screens and packages change.`.trim();
+    return `A handful of Scottish pubs list the NFL.${where} Good places to meet fans of your team: always call ahead, and use Discord when it is live to see who else is going.`.trim();
   }
 
   const hour = ukHourNumber(game.kickoffUtc);
@@ -183,8 +183,8 @@ export function pubHintForGame(game: NflGame | null): string {
     day === "Sun" || (day === "Mon" && hour !== null && hour < 3);
 
   if (sundayWindow) {
-    return `This is the pub-friendly window.${where} Check Watch near you, then ring them: we do not know what is on their telly tonight.`;
+    return `This is the pub-friendly window for meeting fans of your team.${where} Check Watch near you, ring them, and use Discord when it is live to arrange who is going.`;
   }
 
-  return `Overnight and midweek games are harder in a pub. Game Pass or Sky at home is the usual UK move. For Sundays, Watch near you lists the Scottish spots we could confirm.`;
+  return `Overnight and midweek games are harder in a pub. Game Pass or Sky at home is the usual UK move. For Sundays, Watch near you lists Scottish spots where fans of the same team can meet. Discord is the chat home when the invite is live.`;
 }

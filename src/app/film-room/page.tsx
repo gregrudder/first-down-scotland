@@ -6,7 +6,7 @@ import { filmRoomDisclaimer, filmRoomLater, filmTitles } from "@/data/film-room"
 export const metadata: Metadata = {
   title: "Film room",
   description:
-    "Curated NFL films and series for UK beginners: America’s Game, Hard Knocks, All or Nothing, Quarterback and Wide Receiver: with honest notes on where they usually live.",
+    "Curated NFL films and series for UK beginners: America’s Game, Hard Knocks, All or Nothing, Quarterback and Wide Receiver, with honest notes on where they usually live. Talk it through with fans of your team later.",
 };
 
 export default function FilmRoomPage() {
@@ -16,7 +16,8 @@ export default function FilmRoomPage() {
         <p>
           Live games are chaotic if you are still on lesson two. These are the series
           that teach the sport while you sit on the sofa. Five to start with. More
-          will land here when they are worth a beginner’s Sunday.
+          will land here when they are worth a beginner’s Sunday. Talk it through in
+          your team channel later, once Discord is live.
         </p>
         <p>{filmRoomDisclaimer}</p>
       </PageIntro>
@@ -72,6 +73,10 @@ export default function FilmRoomPage() {
         Live kick-offs and channel maps stay on{" "}
         <Link href="/watch" className="text-gold">
           Where to watch
+        </Link>
+        . Meet fans of your team on{" "}
+        <Link href="/community" className="text-gold">
+          Community
         </Link>
         . If you have not done the path yet, start with{" "}
         <Link href="/learn" className="text-gold">

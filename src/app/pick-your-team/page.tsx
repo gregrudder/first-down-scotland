@@ -5,19 +5,20 @@ import { HubSavedTeam } from "@/components/TeamMark";
 import { TrademarkNote } from "@/components/TeamResultCard";
 
 export const metadata: Metadata = {
-  title: "Pick your team",
+  title: "Pick my team",
   description:
-    "Pick an NFL team for life: a short UK-English quiz, or spin an American football and let fate decide.",
+    "Pick an NFL team so you can find other Scottish and UK fans of that side: a short quiz, or spin the ball.",
 };
 
 export default function PickYourTeamPage() {
   return (
     <div className="mx-auto max-w-3xl px-4 py-12 sm:px-6 sm:py-16">
-      <PageIntro eyebrow="For life, apparently" title="Pick your team">
+      <PageIntro eyebrow="Find your lot" title="Pick my team">
         <p>
-          You do not need a childhood in Ohio. You need a side to shout at on a
-          Sunday. Take a short quiz, or spin the ball and accept whatever lands.
-          Saved on this device only: pick again whenever you like.
+          You do not need a childhood in Ohio. You need a side so you can find
+          other Scottish and UK fans of that club: on Discord when it opens, and
+          in the pubs we list. Take a short quiz, or spin the ball. Saved on this
+          device only. Pick again whenever you like.
         </p>
       </PageIntro>
 
@@ -57,11 +58,15 @@ export default function PickYourTeamPage() {
         <Link href="/learn" className="text-gold">
           Stay on the path
         </Link>
-        . Curious who’s on this week?{" "}
-        <Link href="/this-week" className="text-gold">
-          UK kick-offs
-        </Link>
-        .
+        . Once you have a side,{" "}
+        <Link href="/community" className="text-gold">
+          Community
+        </Link>{" "}
+        and{" "}
+        <Link href="/watch-near-you" className="text-gold">
+          pubs near you
+        </Link>{" "}
+        are how you meet people who picked the same club.
       </p>
       <div className="mt-8">
         <TrademarkNote />

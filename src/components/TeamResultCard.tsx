@@ -54,10 +54,10 @@ export function TeamResultCard({
             Start learning
           </Link>
           <Link
-            href="/this-week"
+            href="/community"
             className="inline-flex items-center justify-center rounded-full border border-line px-5 py-2.5 text-sm font-semibold text-cream hover:border-gold/50"
           >
-            See this week’s games
+            Meet your team
           </Link>
           <Link
             href={teamProfilePath(team.abbreviation)}

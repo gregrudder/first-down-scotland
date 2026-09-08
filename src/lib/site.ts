@@ -1,9 +1,9 @@
 export const site = {
   name: "First Down Scotland",
   shortName: "First Down",
-  tagline: "Built in Scotland, for anyone in the UK getting into the NFL.",
+  tagline: "Learn the NFL. Meet fans of your team. Follow that club in one place. Built in Scotland, for the UK.",
   description:
-    "A learn-the-NFL guide for Scottish and UK beginners: clear lessons, a jargon decoder, this week’s kick-offs in UK time, a Sunday card for your team, and honest notes on where to watch.",
+    "A learning hub for Scottish and UK NFL beginners, a community to meet fans of the team you picked, and a one-stop shop for that club: news, fantasy, podcasts, depth and where to watch. Discord for chat, pubs for real-world meetups.",
   locale: "en-GB",
   timeZone: "Europe/London",
 } as const;
@@ -11,16 +11,16 @@ export const site = {
 export const navItems = [
   { href: "/learn", label: "Learn" },
   { href: "/pick-your-team", label: "Pick my team" },
+  { href: "/community", label: "Community" },
+  { href: "/watch-near-you", label: "Pubs" },
   { href: "/this-week", label: "This week" },
   { href: "/watch", label: "Watch" },
   { href: "/film-room", label: "Film room" },
-  { href: "/watch-near-you", label: "Pubs" },
   { href: "/news", label: "News" },
   { href: "/podcasts", label: "Podcasts" },
   { href: "/history", label: "History" },
   { href: "/teams", label: "Teams" },
   { href: "/glossary", label: "Glossary" },
-  { href: "/community", label: "Community" },
   { href: "/feedback", label: "Feedback" },
   { href: "/about", label: "About" },
 ] as const;

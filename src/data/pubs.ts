@@ -110,7 +110,7 @@ export const comingSoonPlaces = [
 ];
 
 export const pubsDisclaimer =
-  "Listings are a starting point, not a guarantee. Pubs change Sky packages, opening hours and what they put on the big screen. Always call or check the pub before you travel. First Down Scotland is not affiliated with these venues.";
+  "Listings are a starting point for meeting fans of your team, not a guarantee they have your game. Pubs change Sky packages, opening hours and what they put on the big screen. Always call or check the pub before you travel. First Down Scotland is not affiliated with these venues.";
 
 export function demoPubs(): PubListing[] {
   return pubs.filter((pub) => pub.status === "demo");

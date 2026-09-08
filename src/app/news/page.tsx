@@ -10,7 +10,7 @@ export const revalidate = 600;
 export const metadata: Metadata = {
   title: "NFL news",
   description:
-    "What’s going on in the NFL: headlines pulled automatically from ESPN, BBC Sport and the Guardian. We link out; we do not republish the articles.",
+    "Latest NFL headlines in one place for Scottish and UK fans: ESPN, BBC Sport and the Guardian. We link out; we do not republish the articles.",
 };
 
 export default async function NewsPage() {
@@ -20,9 +20,12 @@ export default async function NewsPage() {
     <div className="mx-auto max-w-3xl px-4 py-12 sm:px-6 sm:py-16">
       <PageIntro eyebrow="Headlines" title="What’s going on in the NFL">
         <p>
-          A beginner-friendly pile of recent headlines. We pull public RSS feeds : 
-          you read the full piece on the original site. Nothing here is typed in by
-          hand, and we do not copy whole articles.
+          Latest NFL headlines in one place, for fans in Scotland and the rest of
+          the UK. You can find these stories on the original sites. The point is
+          you do not have to hunt. We pull public RSS feeds, show a short card,
+          and send you out. Nothing here is typed in by hand, and we do not copy
+          whole articles. Pick a team and the rest of the app (pods, depth, watch)
+          sits with it.
         </p>
       </PageIntro>
       <NewsTabs active="nfl" />

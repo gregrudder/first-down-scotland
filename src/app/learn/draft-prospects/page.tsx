@@ -9,7 +9,7 @@ export const revalidate = 600;
 export const metadata: Metadata = {
   title: "2027 draft prospects",
   description:
-    "A short, beginner-friendly look at the top names in the 2027 NFL Draft class — ranks move, this is not a betting slip.",
+    "A short, beginner-friendly look at the top names in the 2027 NFL Draft class. Ranks move. This is not a betting slip.",
 };
 
 function formatFetched(iso: string): string {
@@ -41,12 +41,12 @@ export default async function DraftProspectsPage() {
         {board.source === "espn" ? (
           <>
             Pulled from {board.sourceLabel}. We cache it for ten minutes and the daily
-            Cron refreshes the tag — the same pattern as fixtures and news.
+            Cron refreshes the tag, the same pattern as fixtures and news.
           </>
         ) : (
           <>
-            ESPN’s official 2027 athlete list is still empty — the Draft is months
-            away — so this is a rough top twelve from public boards: {board.sourceLabel}.
+            ESPN’s official 2027 athlete list is still empty. The Draft is months
+            away, so this is a rough top twelve from public boards: {board.sourceLabel}.
             When ESPN publishes names, this page will switch over on its own.
           </>
         )}

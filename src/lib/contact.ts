@@ -9,7 +9,7 @@ export function contactEmail(): string {
 export function listingMailto(): string {
   const subject = encodeURIComponent("NFL pub listing: First Down Scotland");
   const body = encodeURIComponent(
-    "Hi Greg: we’d like to be listed / featured as a pub that shows the NFL.\n\nPub name:\nTown / area:\nWhat you show (e.g. RedZone Sundays):\n",
+    "Hi Greg: we’d like to be listed / featured as a pub that shows the NFL, and is happy for fans of the same team to meet up.\n\nPub name:\nTown / area:\nWhat you show (e.g. RedZone Sundays):\n",
   );
   return `mailto:${contactEmail()}?subject=${subject}&body=${body}`;
 }

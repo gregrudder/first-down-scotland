@@ -13,7 +13,7 @@ import { contactEmail, listingMailto } from "@/lib/contact";
 export const metadata: Metadata = {
   title: "Watch near you",
   description:
-    "Scottish pubs that show the NFL. Free listings for fans; featured spots for bar owners later. Always call ahead.",
+    "Scottish pubs that show the NFL, so you can meet fans of the team you support. Call ahead, then arrange who is going in Discord when it is live.",
 };
 
 export default function WatchNearYouPage() {
@@ -22,12 +22,13 @@ export default function WatchNearYouPage() {
 
   return (
     <div className="mx-auto max-w-3xl px-4 py-12 sm:px-6 sm:py-16">
-      <PageIntro eyebrow="Scotland" title="Watch near you">
+      <PageIntro eyebrow="Meet your team" title="Watch near you">
         <p>
-          Television rights are one thing. Finding a pub that will actually put
-          RedZone on is another. This page is a free, growing list of Scottish
-          spots that show the NFL: plus a home later for featured listings if a
-          landlord wants to be easier to find.
+          These are pubs that put the NFL on, so you can sit with fans of the
+          same side you picked rather than shouting at the sofa on your own. Use
+          Discord (when the invite is live) to arrange who is going. Television
+          rights are one thing. Finding a room that will actually put RedZone on
+          is another.
         </p>
         <p>
           Always call ahead. Packages change, Sundays get busy, and a listing here
@@ -38,7 +39,7 @@ export default function WatchNearYouPage() {
       <section className="mt-10">
         <h2 className="font-display text-2xl text-cream">How this works</h2>
         <ul className="mt-3 list-disc space-y-2 pl-5 text-sm leading-6 text-cream-dim">
-          <li>Free listings for pubs we can confirm show the NFL.</li>
+          <li>Free listings for pubs we can confirm show the NFL, so fans of the same team can find each other.</li>
           <li>
             Featured spots (badge, extra detail) will be available for bar owners
             who want to stand out. Not a hard sell, just a clearer card.
@@ -99,11 +100,11 @@ export default function WatchNearYouPage() {
         </p>
         <h2 className="mt-2 font-display text-2xl text-cream">Get listed, or featured</h2>
         <p className="mt-3 text-sm leading-6 text-cream-dim">
-          If you already put the NFL on, a free listing helps fans find you
-          without another Facebook hunt. Featured cards (like the sample above)
-          are for pubs that want a bit more room: screens, booking notes, a
-          Sunday pitch. No hard sell, just a clearer page for people who will
-          actually turn up and order wings.
+          If you already put the NFL on, a free listing helps fans of the same
+          team find a table together, instead of another Facebook hunt. Featured
+          cards (like the sample above) are for pubs that want a bit more room:
+          screens, booking notes, a Sunday pitch. No hard sell, just a clearer
+          page for people who will actually turn up and order wings.
         </p>
         <a
           href={listingMailto()}
@@ -118,6 +119,10 @@ export default function WatchNearYouPage() {
         Looking for Sky, Channel 5 or Game Pass rather than a pint?{" "}
         <Link href="/watch" className="text-gold">
           Where to watch in the UK
+        </Link>
+        . Chat with fans of your team:{" "}
+        <Link href="/community" className="text-gold">
+          Community
         </Link>
         . Films that teach the sport:{" "}
         <Link href="/film-room" className="text-gold">

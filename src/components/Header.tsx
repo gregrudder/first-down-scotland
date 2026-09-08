@@ -91,7 +91,7 @@ export function Header() {
               First Down Scotland
             </span>
             <span className="hidden text-xs text-cream-dim sm:block">
-              Learn the NFL, then see what’s on
+              Learn. Meet. Follow your team.
             </span>
           </span>
         </Link>
