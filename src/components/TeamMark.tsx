@@ -26,9 +26,9 @@ export function NavTeamMark({ className }: { className?: string }) {
 
   return (
     <Link
-      href="/pick-your-team"
+      href="/this-week#your-sunday"
       className={`rounded-full border border-gold/40 px-2.5 py-1 text-xs font-semibold text-gold hover:bg-navy-3 ${className ?? "hidden lg:inline-flex"}`}
-      title="Your team"
+      title="Your Sunday"
     >
       Your team · {label}
     </Link>

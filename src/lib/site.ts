@@ -3,7 +3,7 @@ export const site = {
   shortName: "First Down",
   tagline: "Built in Scotland, for anyone in the UK getting into the NFL.",
   description:
-    "A learn-the-NFL guide for Scottish and UK beginners: clear lessons, a jargon decoder, this week’s kick-offs in UK time, and honest notes on where to watch.",
+    "A learn-the-NFL guide for Scottish and UK beginners: clear lessons, a jargon decoder, this week’s kick-offs in UK time, a Sunday card for your team, and honest notes on where to watch.",
   locale: "en-GB",
   timeZone: "Europe/London",
 } as const;

@@ -73,7 +73,10 @@ function ResultBody() {
         </section>
       ) : null}
 
-      <p className="mt-8 text-sm">
+      <p className="mt-8 flex flex-wrap gap-x-5 gap-y-2 text-sm">
+        <Link href="/this-week#your-sunday" className="font-semibold text-gold">
+          Your Sunday this week →
+        </Link>
         <Link href="/pick-your-team" className="text-gold">
           Pick again →
         </Link>

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { SundayCard } from "@/components/SundayCard";
 import { GameCard } from "@/components/GameCard";
 import { PageIntro } from "@/components/PageIntro";
 import { getNflFixtures, groupGamesByUkDate, weekHeading } from "@/lib/espn";
@@ -10,7 +11,7 @@ export const revalidate = 300;
 export const metadata: Metadata = {
   title: "This week’s games",
   description:
-    "This week’s NFL kick-offs in Europe/London time, pulled automatically from ESPN.",
+    "This week’s NFL kick-offs in Europe/London time, plus a personalised Sunday card if you have picked a team.",
 };
 
 export default async function ThisWeekPage() {
@@ -18,13 +19,19 @@ export default async function ThisWeekPage() {
 
   return (
     <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6 sm:py-16">
-      <PageIntro eyebrow="Fixtures" title="This week’s games">
+      <PageIntro eyebrow="This week for you" title="This week’s games">
         <p>
           Kick-offs are converted to the UK. Scores appear if the feed has them. We
           do not type these in by hand: if ESPN’s public scoreboard hiccups, you
-          will see that here instead of a stale spreadsheet.
+          will see that here instead of a stale spreadsheet. If you have picked a
+          team, your Sunday card sits at the top. The full slate stays open for
+          everyone.
         </p>
       </PageIntro>
+
+      <div className="mt-8">
+        <SundayCard fixtures={fixtures} />
+      </div>
 
       {!fixtures.ok ? (
         <div className="mt-10 rounded-2xl border border-live/40 bg-navy-2 p-6">
