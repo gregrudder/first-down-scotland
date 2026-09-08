@@ -48,6 +48,10 @@ export default function WatchPage() {
           <Link href="/watch-near-you" className="text-gold">
             Watch near you
           </Link>
+          . For films and series that teach the sport, open the{" "}
+          <Link href="/film-room" className="text-gold">
+            Film room
+          </Link>
           . If you are still learning the sport, start with{" "}
           <Link href="/learn" className="text-gold">
             the lessons

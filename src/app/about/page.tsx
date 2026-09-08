@@ -67,6 +67,11 @@ export default function AboutPage() {
           </Link>
         </li>
         <li>
+          <Link href="/film-room" className="text-gold">
+            Film room →
+          </Link>
+        </li>
+        <li>
           <Link href="/history" className="text-gold">
             NFL history →
           </Link>
