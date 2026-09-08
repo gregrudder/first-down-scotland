@@ -50,7 +50,9 @@ export default async function HomePage() {
           <p className="mt-5 max-w-2xl text-lg leading-8 text-cream-dim">
             This is the front door. If you are new to American football, or already
             a fan looking for people who actually follow the same side, start here.
-            Three jobs, one site, written in UK English.
+            Everything you normally get from six different sites, all in one place,
+            explained so it is easy to understand. No American jargon, and nobody
+            using the word fanny with a different meaning.
           </p>
           <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
             <Link
