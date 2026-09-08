@@ -15,18 +15,33 @@ export function rateLimitKey(request: Request): string {
   return `${ip}::${agent}`;
 }
 
-export function takeFeedbackSlot(key: string): { ok: true } | { ok: false; retryAfterSec: number } {
+function takeSlot(
+  store: Map<string, Bucket>,
+  key: string,
+  maxHits: number,
+): { ok: true } | { ok: false; retryAfterSec: number } {
   const now = Date.now();
-  const current = windows.get(key) ?? { hits: [] };
+  const current = store.get(key) ?? { hits: [] };
   current.hits = prune(now, current.hits);
 
-  if (current.hits.length >= MAX_HITS) {
+  if (current.hits.length >= maxHits) {
     const oldest = current.hits[0] ?? now;
-    windows.set(key, current);
+    store.set(key, current);
     return { ok: false, retryAfterSec: Math.max(1, Math.ceil((WINDOW_MS - (now - oldest)) / 1000)) };
   }
 
   current.hits.push(now);
-  windows.set(key, current);
+  store.set(key, current);
   return { ok: true };
+}
+
+export function takeFeedbackSlot(key: string): { ok: true } | { ok: false; retryAfterSec: number } {
+  return takeSlot(windows, key, MAX_HITS);
+}
+
+const launchWindows = new Map<string, Bucket>();
+const LAUNCH_MAX_HITS = 8;
+
+export function takeLaunchSlot(key: string): { ok: true } | { ok: false; retryAfterSec: number } {
+  return takeSlot(launchWindows, `launch::${key}`, LAUNCH_MAX_HITS);
 }

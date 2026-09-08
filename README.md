@@ -8,7 +8,7 @@ Three jobs: learn the game, meet fans of your team, keep that club in one place.
 
 ## What v1 includes
 
-- **`/`** : value prop (learn, meet your team, follow that club in one place), Start learning + Meet your team CTAs, beginner lessons, Sunday card, and a small games teaser
+- **`/`** : value prop (learn, meet your team, follow that club in one place), Start learning + Meet your team CTAs, optional **Join the launch list** email capture (does not lock the app), beginner lessons, Sunday card, and a small games teaser
 - **`/learn`** and **`/learn/[slug]`** : beginner lessons in UK English, including X-and-O play diagrams at `/learn/plays`, a Draft explainer at `/learn/the-draft`, **NFL rivalries** at `/learn/rivalries`, and **famous players** at `/learn/famous-players`. Stage progress bars and a 20-question quiz at `/learn/quiz` (saved in the browser as `fds-learn`). Badges: Practice Squad (0–7) → Rookie (8–12) → Starter (13–17) → Hall of Famer (18–20).
 - **`/mini-games`** : separate browser games (rules quiz, Who am I?, down-and-distance decisions, rivalry match-up). Not part of the lesson path.
 - **`/learn/draft-prospects`** : top 2027 Draft names (ESPN when the official list fills; otherwise a cited early consensus board), cached 600s, Cron-busted
@@ -26,7 +26,7 @@ Three jobs: learn the game, meet fans of your team, keep that club in one place.
 - **`/film-room`** : curated watch-to-learn films (America’s Game, Hard Knocks, All or Nothing, Quarterback, Wide Receiver). Official where-to-look hints only; no streams.
 - **`/watch-near-you`** : Partner search for one Glasgow and one Edinburgh home bar for Scottish NFL meetups. No venue directory until those partners are confirmed. Discord in the meantime.
 - **`/about`** : what the site is for (learn + meet your team)
-- **`/community`** : Discord as the chat home for Scottish / UK fans of the team you picked (Join the Discord CTA; default invite in the repo; override with `NEXT_PUBLIC_DISCORD_INVITE`; no in-app chat)
+- **`/community`** : Discord as the chat home for Scottish / UK fans of the team you picked (Join the Discord CTA; default invite in the repo; override with `NEXT_PUBLIC_DISCORD_INVITE`; no in-app chat), plus a compact launch-list signup
 - **`/feedback`** : short tester form (posts to `/api/feedback`; Resend or Formspree). Inbox address is an env var, not in the repo.
 - **`/history`** : short NFL history for UK beginners (timeline, not a thesis)
 - **`/teams`** and **`/teams/[slug]`** : all 32 club profiles (2026-season snapshot), ESPN depth chart, official YouTube, and the relevant pods
@@ -72,6 +72,7 @@ Copy `.env.example` if you want a local file. Nothing is required for day-to-day
 | `NEXT_PUBLIC_DISCORD_INVITE` | Optional | Override the Community join link. If unset or invalid, the app uses the public First Down Scotland invite (`https://discord.gg/dVuNUT4Cgf`). |
 | `NEXT_PUBLIC_CONTACT_EMAIL` | Optional | Overrides the Watch near you “get in touch” mailto (defaults to `info@g4-marketing.net`). |
 | `FORMSPREE_FORM_ID` | For `/feedback` on Hobby | Server-only Formspree form hash, or the full `https://formspree.io/f/…` URL. Inbox is set in the Formspree dashboard, not in this repo. |
+| `LAUNCH_FORMSPREE_FORM_ID` | For the launch list | Server-only. **A second Formspree form**, not the Feedback id. Signups POST to `/api/launch`. Do not reuse `FORMSPREE_FORM_ID`. |
 | `RESEND_API_KEY` | For `/feedback` (option B) | Server-only. Sends via [Resend](https://resend.com). Needs a verified sending domain to reach an arbitrary inbox. |
 | `FEEDBACK_TO_EMAIL` | With Resend | Server-only inbox. Never `NEXT_PUBLIC_*`. |
 | `FEEDBACK_FROM_EMAIL` | Optional with Resend | Must be on a domain you verified in Resend. If unset, Resend’s `onboarding@resend.dev` sender is used (test mode: only the Resend account email can receive). |
@@ -103,6 +104,23 @@ Use Formspree. Resend on the free / onboarding sender cannot deliver to an iClou
 7. Open `/feedback`, submit once, and check the Formspree inbox. The first live submission may need you to activate the form in Formspree.
 
 Do not set `RESEND_API_KEY` unless you also have `FEEDBACK_FROM_EMAIL` on a verified domain. A Resend key plus the default onboarding sender is a common way to get a 502 with nothing in the inbox.
+
+### Launch list on Vercel Hobby (Formspree)
+
+The home and Community pages have an optional **Join the launch list** form (`POST /api/launch`). Browsing stays free. It uses **`LAUNCH_FORMSPREE_FORM_ID`**, a **separate** Formspree form from Feedback, so tester notes and launch emails do not mix.
+
+1. In [formspree.io](https://formspree.io), **New form** (do not reuse the Feedback form).
+2. Set the notification email in the Formspree dashboard (not in Git, not as `NEXT_PUBLIC_*`).
+3. Copy the endpoint (`https://formspree.io/f/xxxxxxxx` or just the hash).
+4. Vercel → the project that owns `first-down-scotland.vercel.app` (check **Settings → Domains**; not a duplicate named “2”) → **Environment Variables**.
+   - Name: `LAUNCH_FORMSPREE_FORM_ID`
+   - Value: that hash or URL
+   - Environment: **Production**
+   - Do not expose to the browser.
+5. **Redeploy** Production after saving. Env changes do not apply to the live deployment until you do.
+6. Submit the form on `/#launch-list` once and confirm the form in Formspree if they ask.
+
+Locally, if `LAUNCH_FORMSPREE_FORM_ID` is unset, `/api/launch` logs the signup and returns success. In production it returns **503** until this var is set. `FORMSPREE_FORM_ID` is ignored for this path.
 
 If `CRON_SECRET` is unset, `/api/revalidate` is allowed only when `NODE_ENV` is not `production`.
 

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { FanMapHomeSection } from "@/components/fan-map/FanMapHomeSection";
+import { LaunchListForm } from "@/components/LaunchListForm";
 import { GamesTeaser } from "@/components/GamesTeaser";
 import { JsonLd } from "@/components/JsonLd";
 import { LeagueFollow } from "@/components/LeagueFollow";
@@ -216,6 +217,14 @@ export default async function HomePage() {
             </ul>
           </div>
         </div>
+      </section>
+
+      <section
+        id="launch-list"
+        aria-label="Join the launch list"
+        className="mx-auto max-w-6xl px-4 pb-12 sm:px-6 sm:pb-14"
+      >
+        <LaunchListForm source="home" />
       </section>
 
       <section className="mx-auto grid max-w-6xl gap-10 px-4 pb-14 sm:px-6 lg:grid-cols-[minmax(0,1fr)_20rem]">
