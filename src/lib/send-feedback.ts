@@ -18,8 +18,9 @@ export function feedbackBody(payload: FeedbackPayload): string {
     `Favourite: ${labelOf(favouriteOptions, payload.favourite)}${payload.favouriteOther ? ` (${payload.favouriteOther})` : ""}`,
     `Most confusing: ${payload.confusing || "-"}`,
     `Broken: ${payload.broken || "-"}`,
-    `Pay £2/mo + private Discord: ${labelOf(payOptions, payload.pay)}`,
+    `Pay £2/mo for the full product: ${labelOf(payOptions, payload.pay)}`,
     `What would make £2 worth it: ${payload.worthIt || "-"}`,
+    `Suggested features: ${payload.suggest || "-"}`,
     `Anything else: ${payload.else || "-"}`,
     `Name: ${payload.name || "-"}`,
     `Team: ${payload.team || "-"}`,
@@ -74,6 +75,7 @@ async function sendWithFormspree(subject: string, text: string, payload: Feedbac
       found: payload.found,
       favourite: payload.favourite,
       pay: payload.pay,
+      suggest: payload.suggest,
     }),
   });
 

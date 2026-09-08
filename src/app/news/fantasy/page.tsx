@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { NewsFeedList } from "@/components/NewsFeedList";
 import { NewsTabs } from "@/components/NewsTabs";
 import { PageIntro } from "@/components/PageIntro";
@@ -23,7 +24,13 @@ export default async function FantasyNewsPage() {
           This is <strong className="font-semibold text-cream">NFL fantasy</strong>:
           the American-football kind where you pick players, not Saturday 3pm in the
           SPFL. Part of following your team in one place: we pull public feeds,
-          show a short card, and send you to the original site.
+          show a short card, and send you to the original site. New to it? There is
+          a beginner lesson that explains formats, scoring, and the apps people use.
+        </p>
+        <p className="mt-3">
+          <Link href="/learn/fantasy-football" className="text-gold">
+            Fantasy football lesson →
+          </Link>
         </p>
       </PageIntro>
       <NewsTabs active="fantasy" />

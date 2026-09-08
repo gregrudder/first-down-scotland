@@ -11,6 +11,11 @@ export const glossary: GlossaryEntry[] = [
     short: "The quarterback changes the play at the line after seeing the defence.",
   },
   {
+    term: "Best ball",
+    short: "A fantasy format where you draft a big squad and never set a weekly lineup: the app counts your best combination each week.",
+    lessonSlug: "fantasy-football",
+  },
+  {
     term: "Blitz",
     short: "Extra defenders rush the quarterback instead of dropping into coverage.",
     lessonSlug: "plays",
@@ -89,6 +94,11 @@ export const glossary: GlossaryEntry[] = [
     term: "False start",
     short: "An offensive player moves too early, before the snap. Five-yard penalty.",
     lessonSlug: "penalties",
+  },
+  {
+    term: "Fantasy football",
+    short: "NFL fantasy: you draft real NFL players onto a roster and score points from their stats. Not Fantasy Premier League.",
+    lessonSlug: "fantasy-football",
   },
   {
     term: "Flag",
@@ -225,6 +235,11 @@ export const glossary: GlossaryEntry[] = [
     lessonSlug: "offence-and-defence",
   },
   {
+    term: "PPR",
+    short: "Points Per Reception: a fantasy scoring setting where each catch is worth a point (or a fraction).",
+    lessonSlug: "fantasy-football",
+  },
+  {
     term: "Punt",
     short: "Kicking the ball away on fourth down to flip field position.",
     lessonSlug: "special-teams",
@@ -243,6 +258,11 @@ export const glossary: GlossaryEntry[] = [
     term: "Red zone",
     short: "Inside the opponent’s 20-yard line, where scoring becomes likely.",
     lessonSlug: "how-you-score",
+  },
+  {
+    term: "Redraft",
+    short: "A fantasy league that starts from scratch each season. The usual first format.",
+    lessonSlug: "fantasy-football",
   },
   {
     term: "Return",
@@ -341,6 +361,11 @@ export const glossary: GlossaryEntry[] = [
     term: "UDFA",
     short: "Undrafted free agent: a player who was not picked in the Draft, then signed anyway.",
     lessonSlug: "the-draft",
+  },
+  {
+    term: "Waiver wire",
+    short: "Unowned fantasy players, and the process for claiming them during the week.",
+    lessonSlug: "fantasy-football",
   },
   {
     term: "Wide receiver",

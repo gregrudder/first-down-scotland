@@ -1,4 +1,5 @@
 import { DraftBoard } from "@/components/DraftBoard";
+import { FantasyLineup, SnakeDraft } from "@/components/FantasyDiagrams";
 import { FieldDiagram, FieldLegend } from "@/components/FieldDiagram";
 import type { Lesson, LessonBlock } from "@/data/lessons";
 import { getLessonDiagram } from "@/data/lesson-diagrams";
@@ -44,6 +45,10 @@ function Block({ block }: { block: LessonBlock }) {
     }
     case "draft-board":
       return <DraftBoard />;
+    case "fantasy-lineup":
+      return <FantasyLineup />;
+    case "snake-draft":
+      return <SnakeDraft />;
   }
 }
 

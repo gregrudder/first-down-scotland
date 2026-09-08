@@ -4,7 +4,7 @@ export const TEAM_STORAGE_KEY = "fds-team";
 
 export type SavedTeam = {
   abbreviation: string;
-  via: "quiz" | "spin";
+  via: "quiz" | "spin" | "choose";
   at: string;
 };
 

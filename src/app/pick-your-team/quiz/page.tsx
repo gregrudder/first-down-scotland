@@ -16,7 +16,7 @@ export default function TeamQuizPage() {
       </p>
       <p className="mt-3">
         <Link href="/pick-your-team" className="text-sm text-cream-dim hover:text-gold">
-          ← Both options
+          ← Pick my team
         </Link>
       </p>
       <div className="mt-6">

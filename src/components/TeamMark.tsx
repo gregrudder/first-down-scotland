@@ -64,8 +64,8 @@ export function HomeTeamCard() {
         </p>
         <p className="mt-2 font-display text-xl text-cream">Pick your team</p>
         <p className="mt-2 text-sm leading-6 text-cream-dim">
-          A short quiz, or spin an American football and let fate decide. You can
-          change your mind. We won’t tell the pub.
+          A short quiz, a spin of the ball, or pick from the 32 if you already
+          have a side. You can change your mind. We won’t tell the pub.
         </p>
         <Link
           href="/pick-your-team"

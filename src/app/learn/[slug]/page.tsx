@@ -68,6 +68,21 @@ export default async function LessonPage({ params }: LessonPageProps) {
         </div>
       ) : null}
 
+      {slug === "fantasy-football" ? (
+        <div className="mt-12 rounded-2xl border border-line bg-navy-2 p-5">
+          <p className="text-xs font-semibold uppercase tracking-[0.16em] text-gold">
+            Headlines
+          </p>
+          <p className="mt-2 text-sm leading-6 text-cream-dim">
+            Once you know the shape of a league, the fantasy news tab is for start/sit
+            noise and injury chatter. It is NFL fantasy, not Scottish football.
+          </p>
+          <Link href="/news/fantasy" className="mt-3 inline-block text-sm font-semibold text-gold">
+            Fantasy news →
+          </Link>
+        </div>
+      ) : null}
+
       <MarkLessonDone
         slug={lesson.slug}
         nextHref={next ? `/learn/${next.slug}` : "/learn/quiz"}

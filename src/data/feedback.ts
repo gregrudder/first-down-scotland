@@ -12,6 +12,7 @@ export const favouriteOptions = [
   { id: "watch-near-you", label: "Pubs / meetups" },
   { id: "fixtures", label: "This week’s fixtures" },
   { id: "podcasts", label: "Podcasts" },
+  { id: "fantasy", label: "Fantasy" },
   { id: "other", label: "Something else" },
 ] as const;
 
@@ -36,6 +37,7 @@ export type FeedbackPayload = {
   broken?: string;
   pay: (typeof payOptions)[number]["id"];
   worthIt?: string;
+  suggest?: string;
   else?: string;
   name?: string;
   team?: string;

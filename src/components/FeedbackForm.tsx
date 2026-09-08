@@ -19,12 +19,14 @@ const hintClass = "mt-1 text-sm leading-6 text-cream-dim";
 
 function ChoiceGroup({
   legend,
+  hint,
   name,
   value,
   onChange,
   options,
 }: {
   legend: string;
+  hint?: string;
   name: string;
   value: string;
   onChange: (id: string) => void;
@@ -33,6 +35,7 @@ function ChoiceGroup({
   return (
     <fieldset>
       <legend className={labelClass}>{legend}</legend>
+      {hint ? <p className={hintClass}>{hint}</p> : null}
       <div className="mt-3 grid gap-2 sm:grid-cols-2">
         {options.map((option) => {
           const selected = value === option.id;
@@ -70,6 +73,7 @@ export function FeedbackForm() {
   const [broken, setBroken] = useState("");
   const [pay, setPay] = useState("");
   const [worthIt, setWorthIt] = useState("");
+  const [suggest, setSuggest] = useState("");
   const [elseText, setElseText] = useState("");
   const [name, setName] = useState("");
   const [team, setTeam] = useState("");
@@ -106,6 +110,7 @@ export function FeedbackForm() {
       broken,
       pay: pay as FeedbackPayload["pay"],
       worthIt: showWorthIt ? worthIt : undefined,
+      suggest,
       else: elseText,
       name,
       team: team || undefined,
@@ -224,7 +229,8 @@ export function FeedbackForm() {
       </label>
 
       <ChoiceGroup
-        legend="Would you pay £2 a month for the lessons plus a private Discord for fans of your team?"
+        legend="Would you pay £2 a month for First Down Scotland?"
+        hint="Not just lessons and a chat room. The full thing: learn the game; meet fans of your team (Discord and pub meetups); and a one-stop shop for that club (news, fantasy, podcasts, roster and depth, where to watch, the Sunday card, plus previews and reports)."
         name="pay"
         value={pay}
         onChange={setPay}
@@ -241,6 +247,22 @@ export function FeedbackForm() {
           />
         </label>
       ) : null}
+
+      <label className="block">
+        <span className={labelClass}>
+          Suggest a feature <span className="font-normal text-cream-dim">(optional)</span>
+        </span>
+        <p className={hintClass}>
+          A page, a tool, a pub town we have missed, a lesson you wish existed. Wish-list is
+          welcome.
+        </p>
+        <textarea
+          className={`mt-2 min-h-28 ${fieldClass}`}
+          value={suggest}
+          onChange={(event) => setSuggest(event.target.value)}
+          maxLength={FEEDBACK_LIMITS.text}
+        />
+      </label>
 
       <label className="block">
         <span className={labelClass}>Anything else? <span className="font-normal text-cream-dim">(optional)</span></span>

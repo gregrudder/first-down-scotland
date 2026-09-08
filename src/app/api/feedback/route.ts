@@ -76,6 +76,7 @@ function parsePayload(input: unknown): FeedbackPayload | { error: string } {
     broken: clip(raw.broken, FEEDBACK_LIMITS.text),
     pay: pay as FeedbackPayload["pay"],
     worthIt: clip(raw.worthIt, FEEDBACK_LIMITS.text),
+    suggest: clip(raw.suggest, FEEDBACK_LIMITS.text),
     else: clip(raw.else, FEEDBACK_LIMITS.text),
     name: clip(raw.name, FEEDBACK_LIMITS.name),
     team,
