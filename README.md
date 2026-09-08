@@ -9,7 +9,8 @@ Three jobs: learn the game, meet fans of your team, keep that club in one place.
 ## What v1 includes
 
 - **`/`** : value prop (learn, meet your team, follow that club in one place), Start learning + Meet your team CTAs, beginner lessons, Sunday card, and a small games teaser
-- **`/learn`** and **`/learn/[slug]`** : beginner lessons in UK English, including X-and-O play diagrams at `/learn/plays` and a Draft explainer at `/learn/the-draft`. Stage progress bars and a 20-question quiz at `/learn/quiz` (saved in the browser as `fds-learn`). Badges: Practice Squad (0–7) → Rookie (8–12) → Starter (13–17) → Hall of Famer (18–20).
+- **`/learn`** and **`/learn/[slug]`** : beginner lessons in UK English, including X-and-O play diagrams at `/learn/plays`, a Draft explainer at `/learn/the-draft`, **NFL rivalries** at `/learn/rivalries`, and **famous players** at `/learn/famous-players`. Stage progress bars and a 20-question quiz at `/learn/quiz` (saved in the browser as `fds-learn`). Badges: Practice Squad (0–7) → Rookie (8–12) → Starter (13–17) → Hall of Famer (18–20).
+- **`/mini-games`** : separate browser games (rules quiz, Who am I?, down-and-distance decisions, rivalry match-up). Not part of the lesson path.
 - **`/learn/draft-prospects`** : top 2027 Draft names (ESPN when the official list fills; otherwise a cited early consensus board), cached 600s, Cron-busted
 - **`/glossary`** : searchable jargon decoder
 - **`/this-week`** : this week’s NFL games from ESPN’s public scoreboard, times in `Europe/London`, plus a **Your Sunday** card for the team saved in the browser (`fds-team`). Each fixture has a short beginner preview or a post-match report (score + snippet + outbound link; “report coming” until a feed publishes one). Fair-use summaries only. Also UK kick-off, what to watch for, a Learn tie-in, optional ESPN QB snapshot, and a Scottish pub meetup hint. The full slate stays free. Tabs also lead to live scores, standings, and Rookie Watch.
