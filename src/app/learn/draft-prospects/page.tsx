@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { DraftProspectCard } from "@/components/DraftProspectCard";
 import { PageIntro } from "@/components/PageIntro";
 import { getDraftProspects } from "@/lib/draft-prospects";
 
@@ -40,38 +41,42 @@ export default async function DraftProspectsPage() {
         {board.source === "espn" ? (
           <>
             Pulled from {board.sourceLabel}. We cache it for ten minutes and the daily
-            Cron refreshes the tag.
+            Cron refreshes the tag — the same pattern as fixtures and news.
           </>
         ) : (
           <>
             ESPN’s official 2027 athlete list is still empty — the Draft is months
-            away — so this is an early consensus from {board.sourceLabel}. When ESPN
-            publishes names, this page will switch over on its own.
+            away — so this is a rough top twelve from public boards: {board.sourceLabel}.
+            When ESPN publishes names, this page will switch over on its own.
           </>
-        )}{" "}
-        {board.sourceHref ? (
-          <a href={board.sourceHref} target="_blank" rel="noreferrer" className="text-gold">
+        )}
+        <span className="mt-3 block text-cream-dim">
+          Rankings move. This is not advice, a mock draft, or a betting slip.
+        </span>
+        {board.sources.length > 0 ? (
+          <ul className="mt-3 space-y-1 text-cream-dim">
+            {board.sources.map((entry) => (
+              <li key={entry.href}>
+                <a href={entry.href} target="_blank" rel="noreferrer" className="text-gold">
+                  {entry.label} →
+                </a>
+              </li>
+            ))}
+          </ul>
+        ) : board.sourceHref ? (
+          <a href={board.sourceHref} target="_blank" rel="noreferrer" className="mt-3 inline-block text-gold">
             Source →
           </a>
         ) : null}
-        <span className="mt-2 block text-cream-dim">
+        <span className="mt-3 block text-cream-dim">
           Checked {formatFetched(board.fetchedAt)} UK time.
         </span>
       </aside>
 
       <ol className="mt-8 space-y-4">
         {board.prospects.map((prospect) => (
-          <li
-            key={prospect.id}
-            className="rounded-2xl border border-line bg-navy-2 p-5"
-          >
-            <div className="flex items-start justify-between gap-3">
-              <p className="text-xs font-semibold uppercase tracking-[0.16em] text-gold">
-                #{prospect.rank} · {prospect.position} · {prospect.college}
-              </p>
-            </div>
-            <h2 className="mt-2 font-display text-2xl text-cream">{prospect.name}</h2>
-            <p className="mt-2 text-sm leading-6 text-cream-dim">{prospect.why}</p>
+          <li key={prospect.id}>
+            <DraftProspectCard prospect={prospect} />
           </li>
         ))}
       </ol>

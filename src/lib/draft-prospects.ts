@@ -1,4 +1,9 @@
-import { fallbackProspects, fallbackSource, type DraftProspect } from "@/data/draft-prospects-fallback";
+import {
+  fallbackProspects,
+  fallbackSource,
+  fallbackSources,
+  type DraftProspect,
+} from "@/data/draft-prospects-fallback";
 
 export const DRAFT_PROSPECTS_CACHE_TAG = "draft-prospects";
 export const DRAFT_PROSPECTS_REVALIDATE_SECONDS = 600;
@@ -7,10 +12,46 @@ const FETCH_TIMEOUT_MS = 8_000;
 const ESPN_LIST =
   "https://sports.core.api.espn.com/v2/sports/football/leagues/nfl/seasons/2027/draft/athletes?limit=12";
 
+const POSITION_LABELS: Record<string, string> = {
+  WR: "Wide receiver",
+  QB: "Quarterback",
+  CB: "Cornerback",
+  EDGE: "Edge rusher",
+  DE: "Defensive end",
+  DT: "Defensive tackle",
+  DL: "Defensive line",
+  OT: "Offensive tackle",
+  OG: "Guard",
+  G: "Guard",
+  C: "Centre",
+  OL: "Offensive line",
+  "OT/OG": "Offensive line",
+  LB: "Linebacker",
+  ILB: "Linebacker",
+  OLB: "Linebacker",
+  S: "Safety",
+  FS: "Safety",
+  SS: "Safety",
+  RB: "Running back",
+  TE: "Tight end",
+  ATH: "Athlete",
+};
+
+export function labelForPosition(abbreviation: string): string {
+  const key = abbreviation.trim().toUpperCase();
+  return POSITION_LABELS[key] ?? abbreviation;
+}
+
+export type DraftSourceLink = {
+  label: string;
+  href: string;
+};
+
 export type DraftProspectsResult = {
   source: "espn" | "fallback";
   sourceLabel: string;
   sourceHref?: string;
+  sources: DraftSourceLink[];
   fetchedAt: string;
   prospects: DraftProspect[];
 };
@@ -30,7 +71,7 @@ function whyFor(name: string, position: string, college: string): string {
     (entry) => entry.name.toLowerCase() === name.toLowerCase(),
   );
   if (known) return known.why;
-  return `${position} at ${college}. A name on the early 2027 boards — rankings move every week of the college season.`;
+  return `${labelForPosition(position)} at ${college}. A name on the early 2027 boards — rankings move every week of the college season.`;
 }
 
 async function fetchJson(url: string): Promise<unknown> {
@@ -43,7 +84,10 @@ async function fetchJson(url: string): Promise<unknown> {
         revalidate: DRAFT_PROSPECTS_REVALIDATE_SECONDS,
         tags: [DRAFT_PROSPECTS_CACHE_TAG],
       },
-      headers: { Accept: "application/json" },
+      headers: {
+        Accept: "application/json",
+        "User-Agent": "FirstDownScotland/1.0 (https://first-down-scotland.vercel.app)",
+      },
     });
     if (!response.ok) throw new Error(`ESPN returned ${response.status}`);
     return await response.json();
@@ -118,18 +162,20 @@ export async function getDraftProspects(): Promise<DraftProspectsResult> {
         source: "espn",
         sourceLabel: "ESPN’s public 2027 draft athlete list",
         sourceHref: "https://www.espn.com/nfl/draft/",
+        sources: [{ label: "ESPN NFL Draft", href: "https://www.espn.com/nfl/draft/" }],
         fetchedAt,
         prospects: live,
       };
     }
   } catch {
-    // fall through to the cited board
+    // fall through to the cited boards
   }
 
   return {
     source: "fallback",
     sourceLabel: fallbackSource.label,
     sourceHref: fallbackSource.href,
+    sources: fallbackSources.map((entry) => ({ label: entry.label, href: entry.href })),
     fetchedAt,
     prospects: fallbackProspects,
   };

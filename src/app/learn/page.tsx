@@ -1,9 +1,13 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { DraftProspectsTeaser } from "@/components/DraftProspectsTeaser";
 import { LearnPathProgress } from "@/components/LearnProgress";
 import { LessonCard } from "@/components/LessonCard";
 import { PageIntro } from "@/components/PageIntro";
 import { lessons } from "@/data/lessons";
+import { getDraftProspects } from "@/lib/draft-prospects";
+
+export const revalidate = 600;
 
 export const metadata: Metadata = {
   title: "Learn the NFL",
@@ -11,7 +15,9 @@ export const metadata: Metadata = {
     "A short, ordered path for UK beginners: the field, downs, scoring, common plays with diagrams, turnovers, the clock, penalties, what to look for on telly, and the NFL Draft.",
 };
 
-export default function LearnIndexPage() {
+export default async function LearnIndexPage() {
+  const board = await getDraftProspects();
+
   return (
     <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6 sm:py-16">
       <PageIntro eyebrow="Learning path" title="Short lessons. Start at one.">
@@ -30,6 +36,9 @@ export default function LearnIndexPage() {
         {lessons.map((lesson) => (
           <LessonCard key={lesson.slug} lesson={lesson} />
         ))}
+      </div>
+      <div className="mt-10">
+        <DraftProspectsTeaser board={board} />
       </div>
       <div className="mt-10 grid gap-4 sm:grid-cols-2">
         <Link
@@ -54,19 +63,6 @@ export default function LearnIndexPage() {
           <h2 className="mt-2 font-display text-xl text-cream">Team profiles</h2>
           <p className="mt-2 text-sm leading-6 text-cream-dim">
             Stadium, colours, a few iconic names, Super Bowls at a glance.
-          </p>
-        </Link>
-        <Link
-          href="/learn/draft-prospects"
-          className="rounded-2xl border border-line bg-navy-2 p-5 transition hover:border-gold/50 hover:bg-navy-3 sm:col-span-2"
-        >
-          <p className="text-xs font-semibold uppercase tracking-[0.16em] text-gold">
-            2027 class
-          </p>
-          <h2 className="mt-2 font-display text-xl text-cream">Top draft prospects</h2>
-          <p className="mt-2 text-sm leading-6 text-cream-dim">
-            Twelve names on the early boards. Rankings move. Read the{" "}
-            <span className="text-gold">Draft lesson</span> if “pick 1” still sounds like bingo.
           </p>
         </Link>
       </div>

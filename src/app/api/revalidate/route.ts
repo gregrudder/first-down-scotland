@@ -27,6 +27,7 @@ async function revalidateFixtures() {
   revalidatePath("/news");
   revalidatePath("/news/fantasy");
   revalidatePath("/teams");
+  revalidatePath("/learn");
   revalidatePath("/learn/draft-prospects");
 
   return NextResponse.json({

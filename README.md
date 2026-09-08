@@ -95,11 +95,24 @@ On Vercel, `vercel.json` schedules a **daily** Cron at `0 6 * * *` (06:00 UTC) t
 - `revalidatePath('/news')`
 - `revalidatePath('/news/fantasy')`
 - `revalidatePath('/teams')`
+- `revalidatePath('/learn')`
 - `revalidatePath('/learn/draft-prospects')`
 
 Hobby only allows **once-per-day** Cron. Pages still refresh without the Cron: the 300-second ISR / fetch revalidate keeps times and scores reasonably fresh between visits. On Pro you can change the expression to hourly (for example `15 * * * *`) if you want a background warm more often.
 
 Team depth charts use the same ESPN public API family (`…/teams/{id}/depthcharts` plus roster names), cached for **600 seconds** and tagged `depth-charts`. The daily Cron busts that tag too. If ESPN is down, the profile still renders and we say so.
+
+## How 2027 draft prospects refresh
+
+The top-12 board is **not** a hand-edited mock.
+
+1. The app tries ESPN’s public 2027 draft athlete list:
+   `https://sports.core.api.espn.com/v2/sports/football/leagues/nfl/seasons/2027/draft/athletes`
+2. That list is empty until ESPN publishes the class. Until then we show a cited early consensus (The Athletic, Yahoo Sports, Sporting News) of names that sit on at least two of those boards.
+3. Next.js caches the fetch for **600 seconds** and tags it `draft-prospects`. `/learn/draft-prospects` and `/learn` also set `export const revalidate = 600`.
+4. The daily Hobby Cron busts the tag and `/learn/draft-prospects`.
+
+Rankings move. The page says so. This is not a betting slip.
 
 ## How NFL news refreshes
 
