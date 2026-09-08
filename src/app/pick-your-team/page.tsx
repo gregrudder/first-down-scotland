@@ -16,7 +16,7 @@ export default function PickYourTeamPage() {
       <PageIntro eyebrow="Find your lot" title="Pick my team">
         <p>
           You do not need a childhood in Ohio. You need a side so you can find
-          other Scottish and UK fans of that club: on Discord when it opens, and
+          other Scottish and UK fans of that club: on Discord, and
           in the pubs we list. If you already support a team, pick it from the 32.
           Or take a short quiz, or spin the ball. Saved on this device only. Pick
           again whenever you like.

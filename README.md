@@ -23,7 +23,7 @@ Three jobs: learn the game, meet fans of your team, keep that club in one place.
 - **`/film-room`** : curated watch-to-learn films (America’s Game, Hard Knocks, All or Nothing, Quarterback, Wide Receiver). Official where-to-look hints only; no streams.
 - **`/watch-near-you`** : Scottish pubs that show the NFL, framed as places to meet fans of the same team and arrange meetups. Free listings; demo featured card; more cities coming. Always call ahead.
 - **`/about`** : what the site is for (learn + meet your team)
-- **`/community`** : Discord as the chat home for Scottish / UK fans of the team you picked (invite via env; coming soon if unset; no in-app chat; no hardcoded invite)
+- **`/community`** : Discord as the chat home for Scottish / UK fans of the team you picked (Join the Discord CTA; default invite in the repo; override with `NEXT_PUBLIC_DISCORD_INVITE`; no in-app chat)
 - **`/feedback`** : short tester form (posts to `/api/feedback`; Resend or Formspree). Inbox address is an env var, not in the repo.
 - **`/history`** : short NFL history for UK beginners (timeline, not a thesis)
 - **`/teams`** and **`/teams/[slug]`** : all 32 club profiles (2026-season snapshot), ESPN depth chart, official YouTube, and the relevant pods
@@ -65,7 +65,7 @@ Copy `.env.example` if you want a local file. Nothing is required for day-to-day
 | --- | --- | --- |
 | `CRON_SECRET` | Recommended in production | Protects `GET`/`POST` `/api/revalidate`. Vercel Cron sends `Authorization: Bearer <CRON_SECRET>`. You can also pass `?secret=...`. |
 | `NEXT_PUBLIC_SITE_URL` | Optional | Canonical / Open Graph / sitemap base URL. If unset, we use `VERCEL_PROJECT_PRODUCTION_URL` or `https://first-down-scotland.vercel.app` — never a preview `*.vercel.app` host (those hit SSO). |
-| `NEXT_PUBLIC_DISCORD_INVITE` | Optional | If set to a valid discord.gg / discord.com invite, `/community` shows Join the Discord. If unset or invalid, the page shows Discord coming soon (no hardcoded invite). |
+| `NEXT_PUBLIC_DISCORD_INVITE` | Optional | Override the Community join link. If unset or invalid, the app uses the public First Down Scotland invite (`https://discord.gg/dVuNUT4Cgf`). |
 | `NEXT_PUBLIC_CONTACT_EMAIL` | Optional | Overrides the Watch near you “get in touch” mailto (defaults to `info@g4-marketing.net`). |
 | `FORMSPREE_FORM_ID` | For `/feedback` on Hobby | Server-only Formspree form hash, or the full `https://formspree.io/f/…` URL. Inbox is set in the Formspree dashboard, not in this repo. |
 | `RESEND_API_KEY` | For `/feedback` (option B) | Server-only. Sends via [Resend](https://resend.com). Needs a verified sending domain to reach an arbitrary inbox. |
