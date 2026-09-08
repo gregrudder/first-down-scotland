@@ -3,6 +3,7 @@ import Link from "next/link";
 import { LeagueTabs } from "@/components/LeagueTabs";
 import { LiveScoreboard } from "@/components/LiveScoreboard";
 import { PageIntro } from "@/components/PageIntro";
+import { UkKickoffTip } from "@/components/UkKickoffTip";
 import { getNflLiveScoreboard, teamsOnBye } from "@/lib/espn";
 
 export const revalidate = 20;
@@ -28,6 +29,7 @@ export default async function ScoresPage() {
         </p>
       </PageIntro>
       <LeagueTabs active="scores" />
+      <UkKickoffTip compact className="mt-6" />
       <LiveScoreboard initial={{ fixtures, byes }} />
       <p className="mt-10 max-w-2xl text-sm leading-6 text-cream-dim">
         This is a scoreboard, not a play-by-play machine. For kick-off explainers

@@ -107,7 +107,7 @@ export const glossary: GlossaryEntry[] = [
   },
   {
     term: "Field goal",
-    short: "A kick through the posts worth 3 points.",
+    short: "A kick through the posts worth 3 points. If the defence catch a missed attempt, including in the end zone, they can return it for a touchdown.",
     lessonSlug: "how-you-score",
   },
   {
@@ -133,6 +133,7 @@ export const glossary: GlossaryEntry[] = [
   {
     term: "Hail Mary",
     short: "A very long, hopeful pass into the end zone as time expires.",
+    lessonSlug: "plays",
   },
   {
     term: "Holding",
@@ -266,7 +267,7 @@ export const glossary: GlossaryEntry[] = [
   },
   {
     term: "Return",
-    short: "Running the ball back after a kick-off, punt or interception.",
+    short: "Running the ball back after a kick-off, punt, interception or a missed field goal.",
     lessonSlug: "special-teams",
   },
   {

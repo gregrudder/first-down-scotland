@@ -208,6 +208,10 @@ export const lessons: Lesson[] = [
         text: "The scoring team tries the extra point or two-point conversion, then kicks off to the other side. That is why you see a mini-play after every six-pointer.",
       },
       {
+        type: "p",
+        text: "One more way a touchdown happens, and it surprises beginners: if the defence catch a field goal attempt, including in the end zone, they can run it the other way. Reach the opposite end zone and that is a touchdown, the same 6 points as any other. They can also just down it and take the ball. Rare, loud, and legal. Special teams covers the kicking bit.",
+      },
+      {
         type: "h2",
         text: "A typical scoring drive",
       },
@@ -324,7 +328,7 @@ export const lessons: Lesson[] = [
     number: 5,
     title: "Common plays",
     summary:
-      "Coach-board X’s and O’s for the shapes you see every Sunday: runs, a draw, screens, slants, a deep ball, and a basic blitz.",
+      "Coach-board X’s and O’s for the shapes you see every Sunday: runs, a draw, screens, slants, a deep ball, a Hail Mary, and a basic blitz.",
     minutes: 8,
     blocks: [
       {
@@ -429,7 +433,7 @@ export const lessons: Lesson[] = [
       {
         type: "callout",
         title: "UK kick-off times",
-        text: "Most regular-season games land on a Sunday evening or late into Monday morning UK time. Thursday-night football usually starts in the small hours on Friday. Always check Europe/London, not the US graphic on the telly.",
+        text: "Most regular-season games land on a Sunday evening or late into Monday morning UK time. Thursday-night football usually starts in the small hours on Friday. Always check Europe/London, not the US graphic on the telly. The simple add-on from a US clock: Eastern Time, add 5 hours; Central, add 6; Mountain, add 7; Pacific, add 8. That rule of thumb stays right when both sides change for daylight saving.",
       },
       {
         type: "terms",
@@ -482,6 +486,11 @@ export const lessons: Lesson[] = [
       {
         type: "p",
         text: "The kicker, holder and long snapper come on. The snap has to be clean, the hold has to be tidy, and the kicker has to send it between the posts. From the stands it looks simple. From 50 yards, with a rush coming, it is not.",
+      },
+      {
+        type: "callout",
+        title: "Catch a field goal, run it back",
+        text: "If the defence catch a field goal attempt, including in the end zone, they can run it the other way. Get it to the opposite end zone and that is a touchdown. They can also down it and take over. A blocked kick can turn into the same kind of chaos.",
       },
       {
         type: "callout",

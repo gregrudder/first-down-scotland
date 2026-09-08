@@ -147,6 +147,27 @@ export const plays: Play[] = [
     ],
   },
   {
+    slug: "hail-mary",
+    title: "Hail Mary",
+    alsoCalled: "A last-gasp heave: everyone into the end zone and hope.",
+    summary:
+      "A desperation play. The quarterback drops back, waits as long as they dare, then throws the ball as far as they can into the end zone, hoping someone on their side comes down with it. You usually see it as the clock hits zero.",
+    watch:
+      "Ignore the short stuff. Receivers, the tight end, sometimes the back: they all sprint to the same patch of grass in the end zone. The throw hangs for an age. Then it is a jump-ball: tip it, bat it down, or come down with it.",
+    minutes: 3,
+    caption:
+      "The quarterback drops deep and heaves a long pass toward the end zone. Several receivers flood that area. Defenders collapse on the same spot. It is a jump-ball, not a tidy route.",
+    markers: eleven,
+    paths: [
+      { id: "drop", d: "M156 196 L156 232", kind: "run" },
+      { id: "wr-l", d: "M32 170 C90 90 140 36 168 22", kind: "route" },
+      { id: "te", d: "M248 164 C230 80 210 36 180 24", kind: "route" },
+      { id: "wr-r", d: "M328 170 C270 90 220 36 192 22", kind: "route" },
+      { id: "rb-block", d: "M156 226 L176 200", kind: "block" },
+      { id: "pass", d: "M156 232 C200 150 190 70 180 24", kind: "pass" },
+    ],
+  },
+  {
     slug: "blitz",
     title: "Basic blitz",
     alsoCalled: "Sending extra people after the quarterback.",
