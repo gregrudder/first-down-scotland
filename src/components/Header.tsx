@@ -94,7 +94,7 @@ export function Header() {
         <Link href="/" className="flex items-center gap-3 no-underline">
           <Image
             src="/logo.png"
-            alt=""
+            alt="First Down Scotland logo"
             width={40}
             height={40}
             priority

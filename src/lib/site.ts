@@ -8,6 +8,14 @@ export const site = {
   timeZone: "Europe/London",
 } as const;
 
+/** Home H1 and document title. Kept in one place so the visible heading matches metadata. */
+export const homeSeo = {
+  heading: "FIRST DOWN SCOTLAND NFL",
+  title: "FIRST DOWN SCOTLAND NFL | Learn American football in the UK",
+  description:
+    "FIRST DOWN SCOTLAND NFL is a Scotland-built hub for UK beginners: learn American football in plain English, meet fans of your team, and follow that club in one place.",
+} as const;
+
 export const navItems = [
   { href: "/", label: "Home" },
   { href: "/learn", label: "Learn" },

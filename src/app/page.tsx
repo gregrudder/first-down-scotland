@@ -1,19 +1,45 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { GamesTeaser } from "@/components/GamesTeaser";
+import { JsonLd } from "@/components/JsonLd";
 import { LeagueFollow } from "@/components/LeagueFollow";
 import { LessonCard } from "@/components/LessonCard";
 import { SundayCard } from "@/components/SundayCard";
 import { lessons } from "@/data/lessons";
 import { getGameReports } from "@/lib/game-report";
 import { getNflFixtures } from "@/lib/espn";
-import { site } from "@/lib/site";
+import { absoluteUrl, homeSeo, site } from "@/lib/site";
 
 export const revalidate = 300;
 
+const ogImage = {
+  url: "/og.png",
+  width: 1200,
+  height: 630,
+  alt: homeSeo.heading,
+};
+
 export const metadata: Metadata = {
-  title: "Home",
-  description: site.tagline,
+  title: { absolute: homeSeo.title },
+  description: homeSeo.description,
+  alternates: {
+    canonical: absoluteUrl("/"),
+  },
+  openGraph: {
+    title: homeSeo.heading,
+    description: homeSeo.description,
+    url: absoluteUrl("/"),
+    locale: "en_GB",
+    type: "website",
+    siteName: site.name,
+    images: [ogImage],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: homeSeo.heading,
+    description: homeSeo.description,
+    images: [ogImage.url],
+  },
 };
 
 const pillars = [
@@ -40,14 +66,34 @@ export default async function HomePage() {
 
   return (
     <div>
+      <JsonLd
+        data={{
+          "@context": "https://schema.org",
+          "@type": "WebSite",
+          name: site.name,
+          alternateName: homeSeo.heading,
+          url: absoluteUrl("/"),
+          description: homeSeo.description,
+          inLanguage: site.locale,
+          publisher: {
+            "@type": "Organization",
+            name: site.name,
+            url: absoluteUrl("/"),
+            logo: absoluteUrl("/logo.png"),
+          },
+        }}
+      />
       <section className="field-grid border-b border-line">
         <div className="mx-auto max-w-6xl px-4 py-14 sm:px-6 sm:py-20">
           <p className="text-xs font-semibold uppercase tracking-[0.2em] text-gold">
             Home · Scotland · United Kingdom
           </p>
-          <h1 className="mt-4 max-w-3xl font-display text-4xl leading-[1.1] text-cream sm:text-6xl">
-            Learn the game. Meet fans of your team. Keep that club in one place.
+          <h1 className="mt-4 max-w-4xl font-display text-4xl font-bold leading-[1.05] tracking-tight text-cream sm:text-6xl">
+            {homeSeo.heading}
           </h1>
+          <p className="mt-5 max-w-3xl font-display text-xl leading-snug text-cream sm:text-3xl">
+            Learn the game. Meet fans of your team. Keep that club in one place.
+          </p>
           <p className="mt-5 max-w-2xl text-lg leading-8 text-cream-dim">
             This is the front door. If you are new to American football, or already
             a fan looking for people who actually follow the same side, start here.
