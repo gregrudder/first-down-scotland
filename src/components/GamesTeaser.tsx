@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { UkKickoffTip } from "@/components/UkKickoffTip";
 import type { FixturesResult } from "@/lib/espn";
 import { formatUkTime, ukWeekdayShort } from "@/lib/time";
 
@@ -56,6 +57,7 @@ export function GamesTeaser({ fixtures }: { fixtures: FixturesResult }) {
           ))}
         </ul>
       )}
+      <UkKickoffTip compact className="mt-4" />
     </aside>
   );
 }

@@ -10,7 +10,7 @@ import { plays } from "@/data/plays";
 export const metadata: Metadata = {
   title: "Common plays",
   description:
-    "Beginner X-and-O diagrams for common NFL play types: inside run, sweep, play-action, screen, slant, go route, a basic blitz, and a draw.",
+    "Beginner X-and-O diagrams for common NFL play types: inside run, sweep, play-action, screen, slant, go route, Hail Mary, a basic blitz, and a draw.",
 };
 
 export default function PlaysIndexPage() {
@@ -20,13 +20,13 @@ export default function PlaysIndexPage() {
   return (
     <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6 sm:py-16">
       <p className="text-xs font-semibold uppercase tracking-[0.16em] text-gold">
-        Lesson 5 · about 8 min if you browse them all
+        Lesson 5 · about 9 min if you browse them all
       </p>
       <PageIntro eyebrow="X’s and O’s" title="Common plays">
         <p>
           Coaches draw the sport like this: cream circles for the team with the
           ball, dark circles with gold letters for the other lot, arrows for where
-          people are meant to go. You do not need a 400-page playbook. These eight
+          people are meant to go. You do not need a 400-page playbook. These nine
           shapes cover most of what you will hear on a Sunday.
         </p>
       </PageIntro>

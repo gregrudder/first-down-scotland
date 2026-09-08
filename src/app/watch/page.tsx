@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { PageIntro } from "@/components/PageIntro";
+import { UkKickoffTip } from "@/components/UkKickoffTip";
 import { watchDisclaimer, watchOptions, watchTips } from "@/data/watch";
 
 export const metadata: Metadata = {
@@ -43,6 +44,7 @@ export default function WatchPage() {
 
       <section className="mt-12 max-w-3xl">
         <h2 className="font-display text-3xl text-cream">How to use this without going mad</h2>
+        <UkKickoffTip className="mt-5" />
         <ul className="mt-5 list-disc space-y-3 pl-5 text-base leading-7 text-cream-dim">
           {watchTips.map((tip) => (
             <li key={tip}>{tip}</li>
