@@ -35,7 +35,7 @@ export function UkKickoffTip({
           <li key={item.zone}>
             <span className="font-semibold text-cream">{item.zone}</span>
             {": add "}
-            {item.hours} {item.hours === 1 ? "hour" : "hours"} for the UK
+            {item.hours} hours for the UK
           </li>
         ))}
       </ul>
