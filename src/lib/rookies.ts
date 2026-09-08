@@ -135,7 +135,6 @@ async function fetchJson(
       },
       headers: {
         Accept: "application/json",
-        "User-Agent": "FirstDownScotland/1.0 (https://first-down-scotland.vercel.app)",
       },
     });
     if (!response.ok) throw new Error(`Feed returned ${response.status}`);

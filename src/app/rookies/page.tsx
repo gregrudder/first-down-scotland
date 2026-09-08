@@ -57,7 +57,7 @@ export default async function RookiesPage({
             {board.rookies.length} players from {board.sourceLabel}. {board.statsNote}{" "}
             Stats source: {board.statsSourceLabel}.
             <span className="mt-3 block text-cream-dim">
-              Checked {formatFetchedAt(board.fetchedAt)} UK time.
+              Checked {formatFetchedAt(board.fetchedAt)}.
             </span>
           </aside>
           <RookieWatch board={board} initialTeam={team} />
