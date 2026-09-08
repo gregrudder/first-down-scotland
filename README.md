@@ -16,6 +16,7 @@ Learning is the hero. This is not a TV listings product.
 - **`/news/fantasy`** — NFL fantasy football tips & news (not Scottish football)
 - **`/podcasts`** — recommended NFL and per-team shows to follow (external links; official vs independent labelled)
 - **`/watch`** — high-level UK viewing map (Sky / Channel 5 / 5Action / My5 / DAZN Game Pass / Netflix)
+- **`/film-room`** — curated watch-to-learn films (America’s Game, Hard Knocks, All or Nothing, Quarterback, Wide Receiver). Official where-to-look hints only; no streams.
 - **`/watch-near-you`** — Scottish pubs that show the NFL (free listings; demo featured card; more cities coming)
 - **`/about`** — what the site is for
 - **`/community`** — Discord for Scottish / UK fans (invite via env; no in-app chat)
@@ -138,6 +139,7 @@ curl -H "Authorization: Bearer $CRON_SECRET" https://your-domain.vercel.app/api/
 | `/news` | Auto NFL headlines (RSS, link out) |
 | `/news/fantasy` | Auto NFL fantasy headlines (RSS, link out) |
 | `/watch` | UK viewing explainer |
+| `/film-room` | Watch-to-learn films and series |
 | `/watch-near-you` | Scottish NFL pubs (free listings + demo featured card) |
 | `/community` | Discord community (invite CTA) |
 | `/history` | Short NFL history timeline |

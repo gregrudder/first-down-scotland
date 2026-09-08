@@ -13,6 +13,7 @@ export const navItems = [
   { href: "/pick-your-team", label: "Pick my team" },
   { href: "/this-week", label: "This week" },
   { href: "/watch", label: "Watch" },
+  { href: "/film-room", label: "Film room" },
   { href: "/watch-near-you", label: "Pubs" },
   { href: "/news", label: "News" },
   { href: "/podcasts", label: "Podcasts" },

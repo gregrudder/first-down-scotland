@@ -119,6 +119,10 @@ export default function WatchNearYouPage() {
         <Link href="/watch" className="text-gold">
           Where to watch in the UK
         </Link>
+        . Films that teach the sport:{" "}
+        <Link href="/film-room" className="text-gold">
+          Film room
+        </Link>
         . Kick-off times:{" "}
         <Link href="/this-week" className="text-gold">
           this week’s games

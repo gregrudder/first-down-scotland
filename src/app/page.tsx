@@ -98,6 +98,11 @@ export default async function HomePage() {
                 </Link>
               </li>
               <li>
+                <Link href="/film-room" className="text-cream hover:text-gold">
+                  Film room — watch to learn →
+                </Link>
+              </li>
+              <li>
                 <Link href="/history" className="text-cream hover:text-gold">
                   NFL history →
                 </Link>

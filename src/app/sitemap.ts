@@ -15,6 +15,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/news/fantasy",
     "/podcasts",
     "/watch",
+    "/film-room",
     "/watch-near-you",
     "/community",
     "/history",
