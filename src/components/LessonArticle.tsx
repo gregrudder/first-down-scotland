@@ -1,3 +1,4 @@
+import { DraftBoard } from "@/components/DraftBoard";
 import { FieldDiagram, FieldLegend } from "@/components/FieldDiagram";
 import type { Lesson, LessonBlock } from "@/data/lessons";
 import { getLessonDiagram } from "@/data/lesson-diagrams";
@@ -41,6 +42,8 @@ function Block({ block }: { block: LessonBlock }) {
       if (!diagram) return null;
       return <FieldDiagram diagram={diagram} />;
     }
+    case "draft-board":
+      return <DraftBoard />;
   }
 }
 
