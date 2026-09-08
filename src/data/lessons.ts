@@ -3,7 +3,8 @@ export type LessonBlock =
   | { type: "h2"; text: string }
   | { type: "list"; items: string[] }
   | { type: "callout"; title: string; text: string }
-  | { type: "terms"; items: { term: string; def: string }[] };
+  | { type: "terms"; items: { term: string; def: string }[] }
+  | { type: "diagram"; id: string };
 
 export type Lesson = {
   slug: string;
@@ -43,6 +44,7 @@ export const lessons: Lesson[] = [
           "Goalposts sit at the back of each end zone. They are only used for kicks.",
         ],
       },
+      { type: "diagram", id: "the-field" },
       {
         type: "callout",
         title: "The yellow line is a TV graphic",
@@ -117,6 +119,7 @@ export const lessons: Lesson[] = [
           "If they reach fourth down still short, they have a decision to make.",
         ],
       },
+      { type: "diagram", id: "first-and-ten" },
       {
         type: "p",
         text: "On television you will hear this constantly: “second and seven”, “third and inches”. The first number is which attempt they are on. The second is how far they still need. Once you can read that, you can read the game.",
@@ -195,6 +198,7 @@ export const lessons: Lesson[] = [
           "Safety — 2 points to the defence, if they tackle an attacker in their own end zone. Rare, and very loud.",
         ],
       },
+      { type: "diagram", id: "scoring-end-zone" },
       {
         type: "callout",
         title: "After a touchdown, the game does not just restart",
@@ -261,6 +265,7 @@ export const lessons: Lesson[] = [
           "Offensive line (OL) — five big people whose job is mostly thankless: protect the QB and open holes for runners.",
         ],
       },
+      { type: "diagram", id: "eleven-v-eleven" },
       {
         type: "p",
         text: "Most plays are either a run (the ball is carried) or a pass (it is thrown). Play-action is a bit of theatre: the QB pretends to hand it off, then throws, hoping the defence bites.",
@@ -283,6 +288,7 @@ export const lessons: Lesson[] = [
         title: "The pocket",
         text: "The little protected space the offensive line tries to keep around the quarterback. When it collapses, the QB either gets sacked, throws it away, or scrambles into the open. A lot of the game is just: does the pocket hold?",
       },
+      { type: "diagram", id: "the-pocket" },
       {
         type: "h2",
         text: "Why they keep changing players",
@@ -315,7 +321,7 @@ export const lessons: Lesson[] = [
     number: 5,
     title: "Common plays",
     summary:
-      "Coach-board X’s and O’s for the shapes you see every Sunday: runs, screens, slants, a deep ball, and a basic blitz.",
+      "Coach-board X’s and O’s for the shapes you see every Sunday: runs, a draw, screens, slants, a deep ball, and a basic blitz.",
     minutes: 8,
     blocks: [
       {
@@ -347,6 +353,7 @@ export const lessons: Lesson[] = [
           "Fumble — the ball-carrier drops it, or has it knocked free. Whoever falls on it, owns it. Recovery is a scramble, not a tidy rugby ruck.",
         ],
       },
+      { type: "diagram", id: "interception" },
       {
         type: "p",
         text: "There is also a turnover on downs, which is not a steal so much as a failed fourth-down gamble. The offence came up short; the defence simply takes over.",
@@ -456,6 +463,7 @@ export const lessons: Lesson[] = [
         type: "p",
         text: "The game starts with a kick-off, and so does the second half. After most scores, the team that just scored also kicks off. The other side either catches it and runs, or takes a touchback and starts at a set yard line. Modern kick-off rules keep changing to make returns a bit safer; the idea stays the same: restart, then play.",
       },
+      { type: "diagram", id: "kickoff" },
       {
         type: "h2",
         text: "Punt",
@@ -560,6 +568,9 @@ export const lessons: Lesson[] = [
           "Personal foul / roughing — a dangerous or late hit: helmet to helmet, hitting the kicker, or roughing the passer after they have thrown. Usually 15 yards, and often a first down if the defence did it.",
         ],
       },
+      { type: "diagram", id: "offside" },
+      { type: "diagram", id: "holding" },
+      { type: "diagram", id: "pass-interference" },
       {
         type: "callout",
         title: "Same name, different pain",
