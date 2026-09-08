@@ -17,7 +17,7 @@ export default function PickYourTeamPage() {
         <p>
           You do not need a childhood in Ohio. You need a side to shout at on a
           Sunday. Take a short quiz, or spin the ball and accept whatever lands.
-          Saved on this device only — pick again whenever you like.
+          Saved on this device only: pick again whenever you like.
         </p>
       </PageIntro>
 

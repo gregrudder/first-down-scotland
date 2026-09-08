@@ -65,7 +65,7 @@ function writeLearnProgress(next: SavedLearnProgress): SavedLearnProgress {
     window.localStorage.setItem(LEARN_STORAGE_KEY, JSON.stringify(next));
     window.dispatchEvent(new Event(LEARN_CHANGE_EVENT));
   } catch {
-    // Private mode or blocked storage — keep the in-memory result for this visit.
+    // Private mode or blocked storage: keep the in-memory result for this visit.
   }
   return next;
 }

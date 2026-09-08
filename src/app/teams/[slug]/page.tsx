@@ -33,7 +33,7 @@ export async function generateMetadata({
   if (!team) return { title: "Team" };
   return {
     title: team.name,
-    description: `${team.name} for UK beginners — stadium, colours, Super Bowls, and this week’s depth chart.`,
+    description: `${team.name} for UK beginners: stadium, colours, Super Bowls, and this week’s depth chart.`,
   };
 }
 
@@ -109,12 +109,12 @@ export default async function TeamProfilePage({
           </div>
         ) : (
           <p className="mt-3 text-sm text-cream-dim">
-            Official YouTube not listed — we would rather leave it blank than guess.
+            Official YouTube not listed. We would rather leave it blank than guess.
           </p>
         )}
         <p className="mt-3 text-sm leading-6 text-cream-dim">
           Highlights and club-made shows live on that channel. For a daily chat show,
-          use the pods below — or the{" "}
+          use the pods below, or the{" "}
           <Link href="/podcasts" className="text-gold">
             league list
           </Link>
@@ -192,7 +192,7 @@ export default async function TeamProfilePage({
           Notable names
         </h2>
         <p className="mt-1 text-xs text-cream-dim">
-          A handful of all-time or iconic figures — not this year’s roster.
+          A handful of all-time or iconic figures, not this year’s roster.
         </p>
         <ul className="mt-3 flex flex-wrap gap-2">
           {team.notablePlayers.map((player) => (

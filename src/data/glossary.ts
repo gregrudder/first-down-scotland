@@ -42,7 +42,7 @@ export const glossary: GlossaryEntry[] = [
   },
   {
     term: "Coverage",
-    short: "How the defence accounts for receivers — man-to-man or zone.",
+    short: "How the defence accounts for receivers: man-to-man or zone.",
     lessonSlug: "offence-and-defence",
   },
   {
@@ -117,7 +117,7 @@ export const glossary: GlossaryEntry[] = [
   },
   {
     term: "Go route",
-    short: "A straight sprint down the field — the deep ball. Also called a fade or streak.",
+    short: "A straight sprint down the field: the deep ball. Also called a fade or streak.",
     lessonSlug: "plays",
   },
   {
@@ -164,7 +164,7 @@ export const glossary: GlossaryEntry[] = [
   },
   {
     term: "Mock draft",
-    short: "A guessed Draft order, published for fun. Not the real list — rankings move.",
+    short: "A guessed Draft order, published for fun. Not the real list. Rankings move.",
     lessonSlug: "the-draft",
   },
   {
@@ -174,7 +174,7 @@ export const glossary: GlossaryEntry[] = [
   },
   {
     term: "NFL",
-    short: "National Football League — the top professional American football league.",
+    short: "National Football League: the top professional American football league.",
   },
   {
     term: "Offence",
@@ -339,7 +339,7 @@ export const glossary: GlossaryEntry[] = [
   },
   {
     term: "UDFA",
-    short: "Undrafted free agent — a player who was not picked in the Draft, then signed anyway.",
+    short: "Undrafted free agent: a player who was not picked in the Draft, then signed anyway.",
     lessonSlug: "the-draft",
   },
   {

@@ -9,7 +9,7 @@ import { espnTeamLogo } from "@/lib/team-logo";
 export const metadata: Metadata = {
   title: "NFL podcasts",
   description:
-    "Recommended NFL podcasts for UK beginners — general league shows plus a daily independent pod for each of the 32 teams.",
+    "Recommended NFL podcasts for UK beginners: general league shows plus a daily independent pod for each of the 32 teams.",
 };
 
 export default function PodcastsPage() {
@@ -29,7 +29,7 @@ export default function PodcastsPage() {
           A short list, not a directory of everything ever recorded. Start with a UK
           or beginner league show, then pick a daily team pod once you have a side.
           Labels say whether a show is official, independent, or fan-run. We link out
-          — we do not embed players.
+         : we do not embed players.
         </p>
       </PageIntro>
 
@@ -82,7 +82,7 @@ export default function PodcastsPage() {
                       </div>
                     ) : (
                       <p className="mt-2 text-sm text-cream-dim">
-                        No dedicated pod listed — try the league shows above and the
+                        No dedicated pod listed: try the league shows above and the
                         club YouTube.
                       </p>
                     )}

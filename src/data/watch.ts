@@ -48,7 +48,7 @@ export const watchOptions: WatchOption[] = [
     name: "Netflix",
     kind: "Streaming",
     summary:
-      "A small, advertised handful of regular-season games — not the whole league. If the US feed says Netflix, that is usually the UK home as well.",
+      "A small, advertised handful of regular-season games, not the whole league. If the US feed says Netflix, that is usually the UK home as well.",
     typical:
       "In 2026 that includes the Week 1 Australia game, a Thanksgiving Eve match, two Christmas Day games, and a Week 18 game.",
   },

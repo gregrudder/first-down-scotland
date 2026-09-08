@@ -16,7 +16,7 @@ export function PubCard({ pub }: { pub: PubListing }) {
           className="pointer-events-none absolute inset-0 flex items-center justify-center text-center text-2xl font-semibold uppercase tracking-[0.2em] text-gold/15"
           aria-hidden
         >
-          Demo — not a real pub
+          Demo (not a real pub)
         </p>
       ) : null}
 
@@ -28,7 +28,7 @@ export function PubCard({ pub }: { pub: PubListing }) {
         ) : null}
         {demo ? (
           <span className="rounded-full border border-gold px-2.5 py-0.5 text-xs font-semibold text-gold">
-            DEMO – not a real pub
+            Demo (not a real pub)
           </span>
         ) : (
           <span className="rounded-full border border-line px-2.5 py-0.5 text-xs text-cream-dim">

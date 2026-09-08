@@ -21,7 +21,7 @@ export default async function ThisWeekPage() {
       <PageIntro eyebrow="Fixtures" title="This week’s games">
         <p>
           Kick-offs are converted to the UK. Scores appear if the feed has them. We
-          do not type these in by hand — if ESPN’s public scoreboard hiccups, you
+          do not type these in by hand: if ESPN’s public scoreboard hiccups, you
           will see that here instead of a stale spreadsheet.
         </p>
       </PageIntro>
@@ -79,7 +79,7 @@ export default async function ThisWeekPage() {
 
       <p className="mt-10 max-w-2xl text-sm leading-6 text-cream-dim">
         Light watch hints are guesses from kick-off windows and the US broadcast
-        tag — not a rights guarantee. For the honest map, see{" "}
+        tag, not a rights guarantee. For the honest map, see{" "}
         <Link href="/watch" className="text-gold">
           Where to watch
         </Link>

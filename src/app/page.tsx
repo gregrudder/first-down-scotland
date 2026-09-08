@@ -26,7 +26,7 @@ export default async function HomePage() {
           </h1>
           <p className="mt-5 max-w-2xl text-lg leading-8 text-cream-dim">{site.tagline}</p>
           <p className="mt-3 max-w-2xl text-base leading-7 text-cream-dim">
-            A beginner path in UK English — downs, scoring, the clock — plus automatic
+            A beginner path in UK English (downs, scoring, the clock), plus automatic
             fixtures in London time and an honest note on Sky, Channel 5 and the rest.
             Learning is the point. The telly bit is extra.
           </p>
@@ -87,7 +87,7 @@ export default async function HomePage() {
               </li>
               <li>
                 <Link href="/news" className="text-cream hover:text-gold">
-                  What’s going on — NFL news →
+                  What’s going on: NFL news →
                 </Link>
               </li>
               <li>
@@ -107,7 +107,7 @@ export default async function HomePage() {
               </li>
               <li>
                 <Link href="/film-room" className="text-cream hover:text-gold">
-                  Film room — watch to learn →
+                  Film room: watch to learn →
                 </Link>
               </li>
               <li>
@@ -122,7 +122,7 @@ export default async function HomePage() {
               </li>
               <li>
                 <Link href="/watch-near-you" className="text-cream hover:text-gold">
-                  Watch near you — Scottish pubs →
+                  Watch near you: Scottish pubs →
                 </Link>
               </li>
               <li>
@@ -140,7 +140,7 @@ export default async function HomePage() {
               </li>
               <li>
                 <Link href="/feedback" className="text-cream hover:text-gold">
-                  Feedback — TikTok test notes →
+                  Feedback: TikTok test notes →
                 </Link>
               </li>
             </ul>

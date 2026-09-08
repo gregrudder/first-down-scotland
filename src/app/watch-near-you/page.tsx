@@ -26,7 +26,7 @@ export default function WatchNearYouPage() {
         <p>
           Television rights are one thing. Finding a pub that will actually put
           RedZone on is another. This page is a free, growing list of Scottish
-          spots that show the NFL — plus a home later for featured listings if a
+          spots that show the NFL: plus a home later for featured listings if a
           landlord wants to be easier to find.
         </p>
         <p>
@@ -41,7 +41,7 @@ export default function WatchNearYouPage() {
           <li>Free listings for pubs we can confirm show the NFL.</li>
           <li>
             Featured spots (badge, extra detail) will be available for bar owners
-            who want to stand out — not a hard sell, just a clearer card.
+            who want to stand out. Not a hard sell, just a clearer card.
           </li>
           <li>We will not invent venues. If it is a demo, it says so loudly.</li>
         </ul>
@@ -74,7 +74,7 @@ export default function WatchNearYouPage() {
         <h2 className="font-display text-3xl text-cream">Coming soon</h2>
         <p className="mt-2 text-sm leading-6 text-cream-dim">
           Real listings for more of Edinburgh, Glasgow and the rest of Scotland
-          are being added. If you run a pub — or you have a reliable regular — get
+          are being added. If you run a pub (or you have a reliable regular) get
           in touch and we will check it rather than guess.
         </p>
         <ul className="mt-5 grid gap-3">
@@ -97,12 +97,12 @@ export default function WatchNearYouPage() {
         <p className="text-xs font-semibold uppercase tracking-[0.16em] text-gold">
           For bar owners
         </p>
-        <h2 className="mt-2 font-display text-2xl text-cream">Get listed — or featured</h2>
+        <h2 className="mt-2 font-display text-2xl text-cream">Get listed, or featured</h2>
         <p className="mt-3 text-sm leading-6 text-cream-dim">
           If you already put the NFL on, a free listing helps fans find you
           without another Facebook hunt. Featured cards (like the sample above)
           are for pubs that want a bit more room: screens, booking notes, a
-          Sunday pitch. No hard sell — just a clearer page for people who will
+          Sunday pitch. No hard sell, just a clearer page for people who will
           actually turn up and order wings.
         </p>
         <a

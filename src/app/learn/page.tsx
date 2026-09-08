@@ -25,7 +25,7 @@ export default async function LearnIndexPage() {
           Read them in order if you are brand new. Skip ahead if a word on the broadcast
           sent you here. Each one is written in UK English, for people who did not grow
           up with Friday-night lights. Mark a lesson as read and the stage bars keep
-          score. When you finish a stage — or the whole path — you can sit a 20-question
+          score. When you finish a stage (or the whole path) you can sit a 20-question
           quiz.
         </p>
       </PageIntro>
@@ -50,7 +50,7 @@ export default async function LearnIndexPage() {
           </p>
           <h2 className="mt-2 font-display text-xl text-cream">NFL history</h2>
           <p className="mt-2 text-sm leading-6 text-cream-dim">
-            Merger, Super Bowl, expansion, London — a timeline, not a dissertation.
+            Merger, Super Bowl, expansion, London: a timeline, not a dissertation.
           </p>
         </Link>
         <Link

@@ -1,3 +1,4 @@
+import { FormationKey, PlayerMark } from "@/components/PlayerMark";
 import type { Play, PlayPath } from "@/data/plays";
 
 const pathClass: Record<PlayPath["kind"], string> = {
@@ -40,10 +41,10 @@ export function PlayDiagram({
   return (
     <figure className="overflow-hidden rounded-2xl border border-line bg-navy">
       <svg
-        viewBox="0 0 360 250"
+        viewBox="0 0 360 268"
         role="img"
         aria-labelledby={`${titleId} ${descId}`}
-        className={`w-full ${compact ? "max-h-48" : "max-h-[22rem]"}`}
+        className={`w-full ${compact ? "max-h-72" : "max-h-[26rem]"}`}
       >
         <title id={titleId}>{play.title} diagram</title>
         <desc id={descId}>{play.caption}</desc>
@@ -72,14 +73,14 @@ export function PlayDiagram({
           ))}
         </defs>
 
-        <rect width="360" height="250" fill="#0b1220" />
+        <rect width="360" height="268" fill="#0b1220" />
         {[30, 90, 150, 210, 270, 330].map((x) => (
           <line
             key={x}
             x1={x}
             y1="16"
             x2={x}
-            y2="234"
+            y2="252"
             stroke="rgba(244,239,228,0.06)"
             strokeWidth="1"
           />
@@ -88,11 +89,11 @@ export function PlayDiagram({
         <line x1="16" y1="142" x2="344" y2="142" stroke="#e8b84a" strokeWidth="2.5" />
         <text
           x="20"
-          y="136"
+          y="134"
           fill="#e8b84a"
-          fontSize="9"
+          fontSize="12"
+          fontWeight="700"
           fontFamily="ui-sans-serif, system-ui, sans-serif"
-          letterSpacing="0.12em"
         >
           LOS
         </text>
@@ -102,35 +103,7 @@ export function PlayDiagram({
         ))}
 
         {play.markers.map((marker) => (
-          <g key={marker.id} transform={`translate(${marker.x} ${marker.y})`}>
-            <circle
-              r={compact ? 8 : 10}
-              fill={marker.kind === "O" ? "#f4efe4" : "#121b2e"}
-              stroke={marker.kind === "O" ? "#e8b84a" : "#e8b84a"}
-              strokeWidth="1.6"
-            />
-            <text
-              textAnchor="middle"
-              y={compact ? 3.2 : 4}
-              fill={marker.kind === "O" ? "#0b1220" : "#e8b84a"}
-              fontSize={compact ? 10 : 12}
-              fontWeight="700"
-              fontFamily="ui-sans-serif, system-ui, sans-serif"
-            >
-              {marker.kind}
-            </text>
-            {!compact && marker.label ? (
-              <text
-                textAnchor="middle"
-                y="20"
-                fill="#c9c2b3"
-                fontSize="8"
-                fontFamily="ui-sans-serif, system-ui, sans-serif"
-              >
-                {marker.label}
-              </text>
-            ) : null}
-          </g>
+          <PlayerMark key={marker.id} marker={marker} />
         ))}
       </svg>
       {!compact ? (
@@ -144,17 +117,20 @@ export function PlayDiagram({
 
 export function PlayLegend() {
   return (
-    <div className="flex flex-wrap gap-x-5 gap-y-2 rounded-2xl border border-line bg-navy-2 px-4 py-3 text-sm text-cream-dim">
-      <span>
-        <span className="font-semibold text-cream">O</span> = offence
-      </span>
-      <span>
-        <span className="font-semibold text-gold">X</span> = defence
-      </span>
-      <span>Solid gold arrow = run</span>
-      <span>Cream arrow = route</span>
-      <span>Dashed arrow = throw</span>
-      <span className="text-live">Red arrow = rush / blitz</span>
+    <div className="space-y-3">
+      <div className="flex flex-wrap gap-x-5 gap-y-2 rounded-2xl border border-line bg-navy-2 px-4 py-3 text-sm text-cream-dim">
+        <span>
+          <span className="font-semibold text-cream">Cream circle</span> = offence
+        </span>
+        <span>
+          <span className="font-semibold text-gold">Gold letters on dark</span> = defence
+        </span>
+        <span>Solid gold arrow = run</span>
+        <span>Cream arrow = route</span>
+        <span>Dashed arrow = throw</span>
+        <span className="text-live">Red arrow = rush / blitz</span>
+      </div>
+      <FormationKey />
     </div>
   );
 }

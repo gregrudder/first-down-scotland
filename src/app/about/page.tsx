@@ -5,7 +5,7 @@ import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "About",
-  description: "What First Down Scotland is for — and what it is not.",
+  description: "What First Down Scotland is for, and what it is not.",
 };
 
 export default function AboutPage() {
@@ -19,7 +19,7 @@ export default function AboutPage() {
         <p>
           This site is for people in Scotland and the rest of the UK who keep meaning
           to “get” American football and then bounce off the jargon. It is a learning
-          app first: a short path, a glossary, and only then the week’s fixtures and a
+          app first. A short path, a glossary, and only then the week’s fixtures and a
           calm note on where those games might be on television.
         </p>
         <p>
@@ -30,7 +30,7 @@ export default function AboutPage() {
         </p>
         <p>
           The tone is meant to be welcoming rather than matey-American. We use UK
-          spelling — defence, favourite, organised — and we explain US words when the
+          spelling (defence, favourite, organised) and we explain US words when the
           broadcast will say them differently.
         </p>
       </div>
@@ -83,7 +83,7 @@ export default function AboutPage() {
         </li>
         <li>
           <Link href="/watch-near-you" className="text-gold">
-            Watch near you — pubs →
+            Watch near you: pubs →
           </Link>
         </li>
         <li>

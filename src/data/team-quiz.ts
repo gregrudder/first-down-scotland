@@ -25,7 +25,7 @@ export const quizQuestions: QuizQuestion[] = [
         weights: { underdog: 3, "new-energy": 1 },
       },
       {
-        label: "A good laugh and a shirt I like — results are bonus",
+        label: "A good laugh and a shirt I like: results are bonus",
         weights: { colourful: 2, offence: 2 },
       },
     ],
@@ -35,11 +35,11 @@ export const quizQuestions: QuizQuestion[] = [
     prompt: "Which colours pull you in?",
     options: [
       {
-        label: "Navy, black, silver — keep it classic",
+        label: "Navy, black, silver: keep it classic",
         weights: { classic: 3 },
       },
       {
-        label: "Teal, purple, orange — I want to be seen",
+        label: "Teal, purple, orange: I want to be seen",
         weights: { colourful: 3 },
       },
       {
@@ -65,7 +65,7 @@ export const quizQuestions: QuizQuestion[] = [
         weights: { warm: 3 },
       },
       {
-        label: "Doesn’t matter — I’ll be on the sofa either way",
+        label: "Doesn’t matter: I’ll be on the sofa either way",
         weights: { civilised: 1 },
       },
     ],
@@ -83,7 +83,7 @@ export const quizQuestions: QuizQuestion[] = [
         weights: { civilised: 3 },
       },
       {
-        label: "A mix is fine — some late, some early",
+        label: "A mix is fine: some late, some early",
         weights: { civilised: 1, "late-night": 1 },
       },
     ],
@@ -101,7 +101,7 @@ export const quizQuestions: QuizQuestion[] = [
         weights: { "small-town": 3 },
       },
       {
-        label: "Either — I have never been, I’ll never go, it’s vibes",
+        label: "Either: I have never been, I’ll never go, it’s vibes",
         weights: { history: 1, "new-energy": 1 },
       },
     ],
@@ -144,7 +144,7 @@ export const quizQuestions: QuizQuestion[] = [
   },
   {
     id: "losing",
-    prompt: "When they lose — and they will — what’s your move?",
+    prompt: "When they lose (and they will) what’s your move?",
     options: [
       {
         label: "Still wear the hat. Loyalty is the point.",
@@ -246,7 +246,7 @@ export function whyThisFits(
     .map((tag) => tagLines[tag]);
 
   if (top.length === 0) {
-    return `${team.name} is a solid first club — pick them, learn the sport, and see if it sticks.`;
+    return `${team.name} is a solid first club: pick them, learn the sport, and see if it sticks.`;
   }
 
   return `${team.name} fit because ${top.join(", and ")}. That is enough to start. You can always pick again.`;

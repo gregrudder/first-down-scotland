@@ -6,7 +6,7 @@ import { filmRoomDisclaimer, filmRoomLater, filmTitles } from "@/data/film-room"
 export const metadata: Metadata = {
   title: "Film room",
   description:
-    "Curated NFL films and series for UK beginners: America’s Game, Hard Knocks, All or Nothing, Quarterback and Wide Receiver — with honest notes on where they usually live.",
+    "Curated NFL films and series for UK beginners: America’s Game, Hard Knocks, All or Nothing, Quarterback and Wide Receiver: with honest notes on where they usually live.",
 };
 
 export default function FilmRoomPage() {
@@ -58,7 +58,7 @@ export default function FilmRoomPage() {
       <section className="mt-12 max-w-3xl rounded-2xl border border-dashed border-line bg-navy-2/60 p-5">
         <h2 className="font-display text-2xl text-cream">On the list</h2>
         <p className="mt-2 text-sm leading-6 text-cream-dim">
-          Room for more. Nothing here is a promise — just what we would add next
+          Room for more. Nothing here is a promise: just what we would add next
           without stuffing the page.
         </p>
         <ul className="mt-4 list-disc space-y-2 pl-5 text-sm leading-6 text-cream-dim">

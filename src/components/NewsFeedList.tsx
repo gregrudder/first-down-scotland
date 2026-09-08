@@ -47,7 +47,7 @@ export function NewsFeedList({
       </div>
       <p className="mt-10 text-sm leading-6 text-cream-dim">
         Sources this page asks: {sourceLabels.join(", ")}. Headlines and short
-        snippets only — follow the link for the story. If you are still learning the
+        snippets only: follow the link for the story. If you are still learning the
         jargon, start with{" "}
         <Link href="/learn" className="text-gold">
           the lessons

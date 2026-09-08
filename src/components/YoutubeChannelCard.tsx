@@ -18,7 +18,7 @@ export function YoutubeChannelCard({
           </p>
           <h3 className="mt-2 font-display text-xl text-cream">{channel.handle}</h3>
           <p className="mt-2 text-sm leading-6 text-cream-dim">
-            Club-made highlights and shows. We link out — we do not embed the player.
+            Club-made highlights and shows. We link out: we do not embed the player.
           </p>
           <p className="mt-4">
             <a

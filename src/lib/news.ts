@@ -144,7 +144,7 @@ async function getNewsFromFeeds(
       fetchedAt,
       failedSources: feeds.map((feed) => feed.label),
       error:
-        "None of the public news feeds answered just now. Headlines are not typed in by hand — try again in a few minutes.",
+        "None of the public news feeds answered just now. Headlines are not typed in by hand: try again in a few minutes.",
     };
   }
 

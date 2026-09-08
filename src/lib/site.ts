@@ -3,7 +3,7 @@ export const site = {
   shortName: "First Down",
   tagline: "Built in Scotland, for anyone in the UK getting into the NFL.",
   description:
-    "A learn-the-NFL guide for Scottish and UK beginners — clear lessons, a jargon decoder, this week’s kick-offs in UK time, and honest notes on where to watch.",
+    "A learn-the-NFL guide for Scottish and UK beginners: clear lessons, a jargon decoder, this week’s kick-offs in UK time, and honest notes on where to watch.",
   locale: "en-GB",
   timeZone: "Europe/London",
 } as const;
@@ -41,7 +41,7 @@ function withProtocol(hostOrUrl: string): string {
   return /^https?:\/\//i.test(hostOrUrl) ? hostOrUrl : `https://${hostOrUrl}`;
 }
 
-/** Unique Vercel preview hosts are SSO-gated — never use them for canonical URLs. */
+/** Unique Vercel preview hosts are SSO-gated: never use them for canonical URLs. */
 function isVercelPreviewHost(hostOrUrl: string): boolean {
   try {
     const host = new URL(withProtocol(hostOrUrl)).hostname.toLowerCase();
@@ -54,7 +54,7 @@ function isVercelPreviewHost(hostOrUrl: string): boolean {
 
 /**
  * Public origin for robots, sitemap, and Open Graph.
- * Prefer an explicit canonical, then the project production domain — never a preview deployment URL.
+ * Prefer an explicit canonical, then the project production domain: never a preview deployment URL.
  */
 export function siteOrigin(): string {
   const onVercel = Boolean(process.env.VERCEL);
