@@ -96,6 +96,11 @@ export default function AboutPage() {
             Community →
           </Link>
         </li>
+        <li>
+          <Link href="/feedback" className="text-gold">
+            Feedback →
+          </Link>
+        </li>
       </ul>
     </div>
   );
