@@ -59,7 +59,7 @@ export default async function LessonPage({ params }: LessonPageProps) {
             2027 class
           </p>
           <p className="mt-2 text-sm leading-6 text-cream-dim">
-            Twelve names on the early boards — rank, college, and why they matter. Rankings
+            Twelve names on the early boards: rank, college, and why they matter. Rankings
             move every Saturday.
           </p>
           <Link href="/learn/draft-prospects" className="mt-3 inline-block text-sm font-semibold text-gold">

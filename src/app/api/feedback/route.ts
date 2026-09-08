@@ -46,7 +46,7 @@ function parsePayload(input: unknown): FeedbackPayload | { error: string } {
     return { error: "Pick a favourite bit." };
   }
   if (!OPTION_IDS.pay.has(pay as FeedbackPayload["pay"])) {
-    return { error: "Answer the £2 question — even a no is useful." };
+    return { error: "Answer the £2 question: even a no is useful." };
   }
 
   const startedAt = typeof raw.startedAt === "number" ? raw.startedAt : Number(raw.startedAt);
@@ -88,7 +88,7 @@ export async function POST(request: Request) {
   const slot = takeFeedbackSlot(rateLimitKey(request));
   if (!slot.ok) {
     return NextResponse.json(
-      { error: "Easy — a few notes are already in the queue. Try again in a bit." },
+      { error: "Easy: a few notes are already in the queue. Try again in a bit." },
       { status: 429, headers: { "Retry-After": String(slot.retryAfterSec) } },
     );
   }

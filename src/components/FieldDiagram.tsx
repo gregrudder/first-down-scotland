@@ -1,4 +1,5 @@
-import type { DiagramMarker, DiagramPath, LessonDiagram } from "@/data/lesson-diagrams";
+import { FormationKey, PlayerMark } from "@/components/PlayerMark";
+import type { DiagramPath, LessonDiagram } from "@/data/lesson-diagrams";
 
 const pathClass: Record<NonNullable<DiagramPath["kind"]>, string> = {
   run: "stroke-gold",
@@ -8,60 +9,18 @@ const pathClass: Record<NonNullable<DiagramPath["kind"]>, string> = {
   block: "stroke-cream-dim",
 };
 
-function Marker({ marker, compact }: { marker: DiagramMarker; compact?: boolean }) {
-  if (marker.kind === "ball") {
-    return (
-      <g transform={`translate(${marker.x} ${marker.y})`}>
-        <ellipse rx="7" ry="5" fill="#c47a2c" stroke="#e8b84a" strokeWidth="1.2" />
-      </g>
-    );
-  }
-
-  return (
-    <g transform={`translate(${marker.x} ${marker.y})`}>
-      <circle
-        r={compact ? 8 : 10}
-        fill={marker.kind === "O" ? "#f4efe4" : "#121b2e"}
-        stroke="#e8b84a"
-        strokeWidth="1.6"
-      />
-      <text
-        textAnchor="middle"
-        y={compact ? 3.2 : 4}
-        fill={marker.kind === "O" ? "#0b1220" : "#e8b84a"}
-        fontSize={compact ? 10 : 12}
-        fontWeight="700"
-        fontFamily="ui-sans-serif, system-ui, sans-serif"
-      >
-        {marker.kind}
-      </text>
-      {!compact && marker.label ? (
-        <text
-          textAnchor="middle"
-          y="20"
-          fill="#c9c2b3"
-          fontSize="8"
-          fontFamily="ui-sans-serif, system-ui, sans-serif"
-        >
-          {marker.label}
-        </text>
-      ) : null}
-    </g>
-  );
-}
-
 function FieldLayout() {
   const ticks = [70, 98, 126, 154, 182, 210, 238, 266, 294];
   return (
     <g>
-      <rect width="360" height="160" fill="#0b1220" />
-      <rect x="8" y="16" width="40" height="128" fill="rgba(232,184,74,0.12)" />
-      <rect x="312" y="16" width="40" height="128" fill="rgba(232,184,74,0.12)" />
+      <rect width="360" height="176" fill="#0b1220" />
+      <rect x="8" y="20" width="40" height="136" fill="rgba(232,184,74,0.12)" />
+      <rect x="312" y="20" width="40" height="136" fill="rgba(232,184,74,0.12)" />
       <rect
         x="8"
-        y="16"
+        y="20"
         width="344"
-        height="128"
+        height="136"
         fill="none"
         stroke="rgba(244,239,228,0.2)"
         strokeWidth="1.5"
@@ -70,19 +29,18 @@ function FieldLayout() {
         <line
           key={x}
           x1={x}
-          y1="16"
+          y1="20"
           x2={x}
-          y2="144"
+          y2="156"
           stroke="rgba(244,239,228,0.12)"
           strokeWidth="1"
         />
       ))}
-      <line x1="180" y1="16" x2="180" y2="144" stroke="rgba(232,184,74,0.45)" strokeWidth="1.4" />
-      <line x1="48" y1="16" x2="48" y2="144" stroke="#e8b84a" strokeWidth="1.6" />
-      <line x1="312" y1="16" x2="312" y2="144" stroke="#e8b84a" strokeWidth="1.6" />
-      {/* Simple goalposts */}
-      <path d="M18 36 L18 20 L38 20 L38 36" fill="none" stroke="#e8b84a" strokeWidth="1.6" />
-      <path d="M322 36 L322 20 L342 20 L342 36" fill="none" stroke="#e8b84a" strokeWidth="1.6" />
+      <line x1="180" y1="20" x2="180" y2="156" stroke="rgba(232,184,74,0.45)" strokeWidth="1.4" />
+      <line x1="48" y1="20" x2="48" y2="156" stroke="#e8b84a" strokeWidth="1.6" />
+      <line x1="312" y1="20" x2="312" y2="156" stroke="#e8b84a" strokeWidth="1.6" />
+      <path d="M18 40 L18 24 L38 24 L38 40" fill="none" stroke="#e8b84a" strokeWidth="1.6" />
+      <path d="M322 40 L322 24 L342 24 L342 40" fill="none" stroke="#e8b84a" strokeWidth="1.6" />
     </g>
   );
 }
@@ -90,14 +48,14 @@ function FieldLayout() {
 function PlayLayout({ showFirstDown }: { showFirstDown?: boolean }) {
   return (
     <g>
-      <rect width="360" height="250" fill="#0b1220" />
+      <rect width="360" height="268" fill="#0b1220" />
       {[30, 90, 150, 210, 270, 330].map((x) => (
         <line
           key={x}
           x1={x}
           y1="16"
           x2={x}
-          y2="234"
+          y2="252"
           stroke="rgba(244,239,228,0.06)"
           strokeWidth="1"
         />
@@ -105,26 +63,24 @@ function PlayLayout({ showFirstDown }: { showFirstDown?: boolean }) {
       <line x1="16" y1="142" x2="344" y2="142" stroke="#e8b84a" strokeWidth="2.5" />
       <text
         x="20"
-        y="136"
+        y="134"
         fill="#e8b84a"
-        fontSize="9"
+        fontSize="12"
+        fontWeight="700"
         fontFamily="ui-sans-serif, system-ui, sans-serif"
-        letterSpacing="0.12em"
       >
         LOS
       </text>
       {showFirstDown ? (
-        <>
-          <line
-            x1="16"
-            y1="72"
-            x2="344"
-            y2="72"
-            stroke="#f3d27a"
-            strokeWidth="2"
-            strokeDasharray="6 5"
-          />
-        </>
+        <line
+          x1="16"
+          y1="72"
+          x2="344"
+          y2="72"
+          stroke="#f3d27a"
+          strokeWidth="2"
+          strokeDasharray="6 5"
+        />
       ) : null}
     </g>
   );
@@ -141,7 +97,7 @@ export function FieldDiagram({
   const descId = `diagram-desc-${diagram.id}${compact ? "-mini" : ""}`;
   const markerPrefix = `diagram-arrow-${diagram.id}${compact ? "-mini" : ""}`;
   const isField = diagram.layout === "field";
-  const height = isField ? 160 : 250;
+  const height = isField ? 176 : 268;
 
   return (
     <figure className="overflow-hidden rounded-2xl border border-line bg-navy">
@@ -149,7 +105,7 @@ export function FieldDiagram({
         viewBox={`0 0 360 ${height}`}
         role="img"
         aria-labelledby={`${titleId} ${descId}`}
-        className={`w-full ${compact ? "max-h-44" : isField ? "max-h-56" : "max-h-[22rem]"}`}
+        className={`w-full ${compact ? "max-h-52" : isField ? "max-h-64" : "max-h-[26rem]"}`}
       >
         <title id={titleId}>{diagram.title} diagram</title>
         <desc id={descId}>{diagram.caption}</desc>
@@ -195,7 +151,7 @@ export function FieldDiagram({
         ))}
 
         {diagram.markers.map((marker) => (
-          <Marker key={marker.id} marker={marker} compact={compact} />
+          <PlayerMark key={marker.id} marker={marker} />
         ))}
 
         {(diagram.notes ?? []).map((note) => (
@@ -205,9 +161,9 @@ export function FieldDiagram({
             y={note.y}
             textAnchor="middle"
             fill={note.fill ?? "#c9c2b3"}
-            fontSize="9"
+            fontSize="12"
+            fontWeight="700"
             fontFamily="ui-sans-serif, system-ui, sans-serif"
-            letterSpacing="0.08em"
           >
             {note.text}
           </text>
@@ -222,18 +178,23 @@ export function FieldDiagram({
   );
 }
 
-export function FieldLegend() {
+export function FieldLegend({ showPositions = true }: { showPositions?: boolean }) {
   return (
-    <div className="flex flex-wrap gap-x-5 gap-y-2 rounded-2xl border border-line bg-navy-2 px-4 py-3 text-sm text-cream-dim">
-      <span>
-        <span className="font-semibold text-cream">O</span> = offence
-      </span>
-      <span>
-        <span className="font-semibold text-gold">X</span> = defence
-      </span>
-      <span>Gold oval = the ball</span>
-      <span>Solid gold line = line of scrimmage</span>
-      <span className="text-live">Red arrow = rush</span>
+    <div className="space-y-3">
+      <div className="flex flex-wrap gap-x-5 gap-y-2 rounded-2xl border border-line bg-navy-2 px-4 py-3 text-sm text-cream-dim">
+        <span>
+          <span className="font-semibold text-cream">Cream circle</span> = offence (they have the
+          ball)
+        </span>
+        <span>
+          <span className="font-semibold text-gold">Gold letters on dark</span> = defence
+        </span>
+        <span>Gold oval = the ball</span>
+        <span>Solid gold line = line of scrimmage (LOS)</span>
+        <span className="text-live">Red arrow = rush</span>
+      </div>
+      {showPositions ? <FormationKey /> : null}
     </div>
   );
 }
+

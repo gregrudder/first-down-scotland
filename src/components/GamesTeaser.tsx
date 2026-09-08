@@ -35,7 +35,7 @@ export function GamesTeaser({ fixtures }: { fixtures: FixturesResult }) {
 
       {preview.length === 0 ? (
         <p className="mt-4 text-sm leading-6 text-cream-dim">
-          No games are listed on the live feed just now — the week may be between slates.
+          No games are listed on the live feed just now: the week may be between slates.
         </p>
       ) : (
         <ul className="mt-4 divide-y divide-line">

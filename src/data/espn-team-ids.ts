@@ -1,6 +1,6 @@
 /**
  * ESPN’s public NFL team IDs. Stable identifiers used by their scoreboard
- * and depth-chart endpoints — not invented slugs.
+ * and depth-chart endpoints: not invented slugs.
  */
 export const espnTeamIds: Record<string, number> = {
   ARI: 22,

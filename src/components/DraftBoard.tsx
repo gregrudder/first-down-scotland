@@ -9,7 +9,7 @@ export function DraftBoard() {
           <p className="mt-2 font-display text-2xl text-cream">Worst record</p>
           <p className="mt-2 text-sm leading-6 text-cream-dim">
             The club that won the fewest games last season usually picks first. That is
-            the consolation prize for a rough year — a shot at the best available player.
+            the consolation prize for a rough year: a shot at the best available player.
           </p>
         </div>
         <div>

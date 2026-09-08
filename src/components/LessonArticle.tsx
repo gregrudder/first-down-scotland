@@ -48,11 +48,19 @@ function Block({ block }: { block: LessonBlock }) {
 }
 
 export function LessonArticle({ lesson }: { lesson: Lesson }) {
-  const hasDiagram = lesson.blocks.some((block) => block.type === "diagram");
+  const diagrams = lesson.blocks.flatMap((block) => {
+    if (block.type !== "diagram") return [];
+    const diagram = getLessonDiagram(block.id);
+    return diagram ? [diagram] : [];
+  });
+  const hasDiagram = diagrams.length > 0;
+  const showPositions = diagrams.some((diagram) =>
+    diagram.markers.some((marker) => Boolean(marker.label)),
+  );
 
   return (
     <article className="space-y-6">
-      {hasDiagram ? <FieldLegend /> : null}
+      {hasDiagram ? <FieldLegend showPositions={showPositions} /> : null}
       {lesson.blocks.map((block, index) => (
         <Block key={`${lesson.slug}-${index}`} block={block} />
       ))}

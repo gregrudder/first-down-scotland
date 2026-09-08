@@ -3,7 +3,7 @@ import { favouriteOptions, foundOptions, payOptions, recommendOptions, type Feed
 const SUBJECT_PREFIX = "[FDS feedback]";
 
 function labelOf<T extends { id: string; label: string }>(options: readonly T[], id: string | undefined): string {
-  return options.find((option) => option.id === id)?.label ?? id ?? "—";
+  return options.find((option) => option.id === id)?.label ?? id ?? "-";
 }
 
 export function feedbackSubject(payload: FeedbackPayload): string {
@@ -16,13 +16,13 @@ export function feedbackBody(payload: FeedbackPayload): string {
   const lines = [
     `Found us: ${labelOf(foundOptions, payload.found)}${payload.foundOther ? ` (${payload.foundOther})` : ""}`,
     `Favourite: ${labelOf(favouriteOptions, payload.favourite)}${payload.favouriteOther ? ` (${payload.favouriteOther})` : ""}`,
-    `Most confusing: ${payload.confusing || "—"}`,
-    `Broken: ${payload.broken || "—"}`,
+    `Most confusing: ${payload.confusing || "-"}`,
+    `Broken: ${payload.broken || "-"}`,
     `Pay £2/mo + private Discord: ${labelOf(payOptions, payload.pay)}`,
-    `What would make £2 worth it: ${payload.worthIt || "—"}`,
-    `Anything else: ${payload.else || "—"}`,
-    `Name: ${payload.name || "—"}`,
-    `Team: ${payload.team || "—"}`,
+    `What would make £2 worth it: ${payload.worthIt || "-"}`,
+    `Anything else: ${payload.else || "-"}`,
+    `Name: ${payload.name || "-"}`,
+    `Team: ${payload.team || "-"}`,
     `Recommend to a mate new to the NFL: ${labelOf(recommendOptions, payload.recommend)}`,
   ];
   return lines.join("\n");

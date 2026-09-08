@@ -18,7 +18,7 @@ export type PubListing = {
 
 /**
  * Listings are either a clearly fictional demo, or real venues we could
- * confirm from the pub’s own site. Add new live rows here — do not invent
+ * confirm from the pub’s own site. Add new live rows here: do not invent
  * names or addresses.
  */
 export const pubs: PubListing[] = [
@@ -44,7 +44,7 @@ export const pubs: PubListing[] = [
     postcode: "EH6 8HH",
     shows: "NFL RedZone on Sundays in season",
     screens: "Three 50-inch screens (as advertised on their site)",
-    bookingNote: "Popular on Sundays — call or book ahead.",
+    bookingNote: "Popular on Sundays: call or book ahead.",
     website: "https://www.dukesleith.co.uk/live-sport",
     status: "live",
     sourceNote: "Confirmed on dukesleith.co.uk (live sport / NFL RedZone Sundays).",
@@ -62,7 +62,7 @@ export const pubs: PubListing[] = [
     website: "https://malonesedinburgh.com/sport/",
     status: "live",
     sourceNote:
-      "Confirmed as a live-sport bar with Super Bowl parties on malonesedinburgh.com. Weekly NFL Sundays are less clearly advertised — check with the pub.",
+      "Confirmed as a live-sport bar with Super Bowl parties on malonesedinburgh.com. Weekly NFL Sundays are less clearly advertised: check with the pub.",
   },
   {
     id: "malones-glasgow",
@@ -73,7 +73,7 @@ export const pubs: PubListing[] = [
     postcode: "G2 4AB",
     shows: "NFL Sundays in season",
     screens: "Three floors with HD / 4K screens (as advertised on their site)",
-    bookingNote: "Central and busy — worth checking they have the game you want.",
+    bookingNote: "Central and busy: worth checking they have the game you want.",
     website: "https://malonesbarglasgow.com/nfl-american-football-glasgow/",
     status: "live",
     sourceNote: "Confirmed on malonesbarglasgow.com (NFL Sundays page).",
@@ -87,7 +87,7 @@ export const pubs: PubListing[] = [
     postcode: "G1 2BS",
     shows: "NFL Sundays and Super Bowl (as advertised)",
     screens: "HD screens (as advertised on their site)",
-    bookingNote: "They mention pre-bookable NFL packages — confirm what’s on this week.",
+    bookingNote: "They mention pre-bookable NFL packages: confirm what’s on this week.",
     website: "https://www.socialpubandkitchen.co.uk/ark-glasgow/live-sport-pub",
     status: "live",
     sourceNote: "Confirmed on the Ark / Social Pub & Kitchen live-sport page (NFL Sundays).",
@@ -97,7 +97,7 @@ export const pubs: PubListing[] = [
 export const comingSoonPlaces = [
   {
     city: "Edinburgh",
-    note: "More neighbourhood listings after Leith and Haymarket — Stockbridge, the Southside, and out of town.",
+    note: "More neighbourhood listings after Leith and Haymarket: Stockbridge, the Southside, and out of town.",
   },
   {
     city: "Glasgow",

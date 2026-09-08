@@ -50,7 +50,7 @@ export const generalPodcasts: Podcast[] = [
     id: "athletic-football-show",
     title: "The Athletic Football Show",
     blurb:
-      "Serious NFL reporting from The Athletic — scheme, roster building, the draft. US-hosted; still one of the clearest league pods.",
+      "Serious NFL reporting from The Athletic: scheme, roster building, the draft. US-hosted; still one of the clearest league pods.",
     kind: "independent",
     artworkUrl:
       "https://is1-ssl.mzstatic.com/image/thumb/Podcasts211/v4/ea/63/c8/ea63c86c-3dbe-d92a-ce16-b602d4abf094/mza_10236654564714042422.jpeg/600x600bb.jpg",
@@ -221,7 +221,7 @@ function lockedOnPodcast(teamSlug: string): Podcast | null {
     id: `locked-on-${teamSlug}`,
     title: `Locked On ${entry.name}`,
     blurb:
-      "Independent daily show from the Locked On network — local beat talk, not the club’s official audio. About 25 minutes; good once you have picked a side.",
+      "Independent daily show from the Locked On network: local beat talk, not the club’s official audio. About 25 minutes; good once you have picked a side.",
     kind: "independent",
     teamSlug,
     artworkUrl: lockedOnArtwork[teamSlug],
@@ -234,7 +234,7 @@ const extraTeamPodcasts: Podcast[] = [
   {
     id: "packers-unscripted",
     title: "Packers Unscripted",
-    blurb: "The club’s own long-running audio show — pressers, roster talk, from packers.com.",
+    blurb: "The club’s own long-running audio show: pressers, roster talk, from packers.com.",
     kind: "official",
     teamSlug: "green-bay-packers",
     artworkUrl:
@@ -244,7 +244,7 @@ const extraTeamPodcasts: Podcast[] = [
   {
     id: "patriots-unfiltered",
     title: "Patriots Unfiltered",
-    blurb: "The club’s official daily-style show from patriots.com — roster talk and presser reaction.",
+    blurb: "The club’s official daily-style show from patriots.com: roster talk and presser reaction.",
     kind: "official",
     teamSlug: "new-england-patriots",
     artworkUrl:
@@ -254,7 +254,7 @@ const extraTeamPodcasts: Podcast[] = [
   {
     id: "chargers-weekly",
     title: "Chargers Weekly",
-    blurb: "Official Chargers podcast network flagship — guests from the radio booth and the beat.",
+    blurb: "Official Chargers podcast network flagship: guests from the radio booth and the beat.",
     kind: "official",
     teamSlug: "los-angeles-chargers",
     artworkUrl:

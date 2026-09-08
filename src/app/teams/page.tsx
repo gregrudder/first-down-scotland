@@ -8,7 +8,7 @@ import { divisions, teamProfileNote, teamsInDivision } from "@/data/team-profile
 export const metadata: Metadata = {
   title: "NFL teams",
   description:
-    "All 32 NFL teams by conference and division — stadium, colours, Super Bowls, and a short beginner brief.",
+    "All 32 NFL teams by conference and division: stadium, colours, Super Bowls, and a short beginner brief.",
 };
 
 export default function TeamsIndexPage() {
@@ -21,7 +21,7 @@ export default function TeamsIndexPage() {
           <Link href="/history" className="text-gold">
             short history
           </Link>{" "}
-          first. Profiles are snapshots for the 2026 season — stadiums get renamed.
+          first. Profiles are snapshots for the 2026 season: stadiums get renamed.
           Each club page also has a live depth chart, the official YouTube, and a
           pod or two to follow.
         </p>

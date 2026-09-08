@@ -140,7 +140,7 @@ export function FeedbackForm() {
         <p className="text-xs font-semibold uppercase tracking-[0.16em] text-gold">Received</p>
         <h2 className="mt-2 font-display text-2xl text-cream">That’s in the inbox.</h2>
         <p className="mt-3 text-base leading-7 text-cream-dim">
-          Thanks — a short note from a real Sunday is worth more than a long survey.
+          Thanks. A short note from a real Sunday is worth more than a long survey.
           Back to the lessons when you like.
         </p>
       </div>
@@ -203,7 +203,7 @@ export function FeedbackForm() {
 
       <label className="block">
         <span className={labelClass}>Most confusing bit?</span>
-        <p className={hintClass}>A word, a page, a diagram — whatever made you pause.</p>
+        <p className={hintClass}>A word, a page, a diagram. Whatever made you pause.</p>
         <textarea
           className={`mt-2 min-h-28 ${fieldClass}`}
           value={confusing}

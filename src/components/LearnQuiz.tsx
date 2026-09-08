@@ -85,7 +85,7 @@ export function LearnQuiz() {
                 </p>
                 <p className="mt-2 text-base text-cream">{entry.prompt}</p>
                 <p className="mt-2 text-sm leading-6 text-cream-dim">
-                  You said: {entry.options[picked] ?? "—"}
+                  You said: {entry.options[picked] ?? "-"}
                   {correct ? null : (
                     <>
                       <br />
@@ -129,7 +129,7 @@ export function LearnQuiz() {
         </h1>
         <p className="mt-4 text-lg leading-8 text-cream-dim">
           Everything here is in the lessons. No trick scores. Your result stays in
-          this browser — there is no account.
+          this browser. There is no account.
         </p>
         <ol className="mt-8 grid gap-3 sm:grid-cols-2">
           {learnBadges.map((entry) => (

@@ -47,7 +47,7 @@ export function NewsThumb({
             onError={() => setFailed(true)}
           />
         ) : (
-          // Feed CDNs we have not allow-listed yet — lazy load, no referrer.
+          // Feed CDNs we have not allow-listed yet: lazy load, no referrer.
           // eslint-disable-next-line @next/next/no-img-element
           <img
             src={src}

@@ -10,7 +10,7 @@ export const revalidate = 600;
 export const metadata: Metadata = {
   title: "NFL news",
   description:
-    "What’s going on in the NFL — headlines pulled automatically from ESPN, BBC Sport and the Guardian. We link out; we do not republish the articles.",
+    "What’s going on in the NFL: headlines pulled automatically from ESPN, BBC Sport and the Guardian. We link out; we do not republish the articles.",
 };
 
 export default async function NewsPage() {
@@ -20,7 +20,7 @@ export default async function NewsPage() {
     <div className="mx-auto max-w-3xl px-4 py-12 sm:px-6 sm:py-16">
       <PageIntro eyebrow="Headlines" title="What’s going on in the NFL">
         <p>
-          A beginner-friendly pile of recent headlines. We pull public RSS feeds —
+          A beginner-friendly pile of recent headlines. We pull public RSS feeds : 
           you read the full piece on the original site. Nothing here is typed in by
           hand, and we do not copy whole articles.
         </p>

@@ -46,14 +46,14 @@ export const teamProfiles: TeamProfile[] = [
       note: "Retractable roof; the grass tray rolls in from outside.",
     },
     founded:
-      "Oldest continuously run pro football club in the US — roots in 1898 Chicago. Charter NFL member in 1920. Moved to St. Louis in 1960, Arizona in 1988.",
+      "Oldest continuously run pro football club in the US: roots in 1898 Chicago. Charter NFL member in 1920. Moved to St. Louis in 1960, Arizona in 1988.",
     notablePlayers: ["Larry Fitzgerald", "Kurt Warner", "Pat Tillman", "Anquan Boldin"],
     achievements: [
       "NFL championships in 1925 and 1947 (pre–Super Bowl).",
       "One Super Bowl appearance: lost XLIII in February 2009.",
     ],
     scotlandHook:
-      "A desert bird in a retractable-roof ground — late UK kick-offs, but the red-and-yellow kit is unmistakable on a grey Sunday.",
+      "A desert bird in a retractable-roof ground: late UK kick-offs, but the red-and-yellow kit is unmistakable on a grey Sunday.",
   },
   {
     slug: "atlanta-falcons",
@@ -78,7 +78,7 @@ export const teamProfiles: TeamProfile[] = [
     notablePlayers: ["Julio Jones", "Matt Ryan", "Deion Sanders", "Michael Vick"],
     achievements: [
       "Two Super Bowl appearances: lost XXXIII (1999) and LI (2017).",
-      "Super Bowl LI is the 28–3 collapse — still the first fact many UK viewers learn about them.",
+      "Super Bowl LI is the 28–3 collapse: still the first fact many UK viewers learn about them.",
     ],
     scotlandHook:
       "A big southern city, a falcon on the helmet, and a stadium that looks like a spaceship. Easy to explain in the pub.",
@@ -94,7 +94,7 @@ export const teamProfiles: TeamProfile[] = [
     primary: "#241773",
     secondary: "#9E7C0C",
     nicknames:
-      "Officially the Ravens — named for Edgar Allan Poe, who died in Baltimore. Often just called Baltimore or the Purple.",
+      "Officially the Ravens: named for Edgar Allan Poe, who died in Baltimore. Often just called Baltimore or the Purple.",
     stadium: {
       name: "M&T Bank Stadium",
       location: "Baltimore, Maryland",
@@ -106,7 +106,7 @@ export const teamProfiles: TeamProfile[] = [
     notablePlayers: ["Ray Lewis", "Ed Reed", "Jonathan Ogden", "Joe Flacco"],
     achievements: [
       "Two Super Bowl titles: XXXV (February 2001) and XLVII (February 2013).",
-      "Famous for defence first — Lewis and Reed are the poster names.",
+      "Famous for defence first: Lewis and Reed are the poster names.",
     ],
     scotlandHook:
       "Purple, a literary bird, and a mean defence. Very on-brand if you liked English at school and rain on a Saturday.",
@@ -122,7 +122,7 @@ export const teamProfiles: TeamProfile[] = [
     primary: "#00338D",
     secondary: "#C60C30",
     nicknames:
-      "Officially the Bills. The fan culture is often called Bills Mafia — a fan nickname, not a club department. Table-breaking after wins is a supporter tradition, not a rule.",
+      "Officially the Bills. The fan culture is often called Bills Mafia: a fan nickname, not a club department. Table-breaking after wins is a supporter tradition, not a rule.",
     stadium: {
       name: "Highmark Stadium",
       location: "Orchard Park, New York",
@@ -134,7 +134,7 @@ export const teamProfiles: TeamProfile[] = [
     notablePlayers: ["Jim Kelly", "Thurman Thomas", "Bruce Smith", "Andre Reed"],
     achievements: [
       "Two AFL titles in the mid-1960s.",
-      "Four straight Super Bowl appearances (XXV–XXVIII) — all losses. Still waiting on a Lombardi Trophy.",
+      "Four straight Super Bowl appearances (XXV–XXVIII): all losses. Still waiting on a Lombardi Trophy.",
     ],
     scotlandHook:
       "Snow, tea-time kick-offs, and a new 2026 stadium. The most British kind of sporting heartbreak, with better snacks.",
@@ -164,7 +164,7 @@ export const teamProfiles: TeamProfile[] = [
       "Cam Newton’s 2015 MVP season is the high-water mark most beginners hear about.",
     ],
     scotlandHook:
-      "Electric blue and a big cat. Quietly stylish, rarely the favourite — a solid “I just liked the shirt” pick.",
+      "Electric blue and a big cat. Quietly stylish, rarely the favourite: a solid “I just liked the shirt” pick.",
   },
   {
     slug: "chicago-bears",
@@ -177,7 +177,7 @@ export const teamProfiles: TeamProfile[] = [
     primary: "#0B162A",
     secondary: "#C83803",
     nicknames:
-      "Officially the Bears. Monsters of the Midway is a historic nickname for the club, especially the old defensive sides — often used, not official.",
+      "Officially the Bears. Monsters of the Midway is a historic nickname for the club, especially the old defensive sides: often used, not official.",
     stadium: {
       name: "Soldier Field",
       location: "Chicago, Illinois",
@@ -192,7 +192,7 @@ export const teamProfiles: TeamProfile[] = [
       "One Super Bowl title: XX in January 1986, the ’85 defence still on highlight reels.",
     ],
     scotlandHook:
-      "Navy, orange, and a city that understands winter. Proper old-club energy — like supporting a 19th-century football side that also invented the league.",
+      "Navy, orange, and a city that understands winter. Proper old-club energy: like supporting a 19th-century football side that also invented the league.",
   },
   {
     slug: "cincinnati-bengals",
@@ -233,7 +233,7 @@ export const teamProfiles: TeamProfile[] = [
     primary: "#311D00",
     secondary: "#FF3C00",
     nicknames:
-      "Officially the Browns — named for coach Paul Brown, not the colour, though the kit is brown. The Dawg Pound is the famous end-zone crowd, often used as a fan nickname.",
+      "Officially the Browns: named for coach Paul Brown, not the colour, though the kit is brown. The Dawg Pound is the famous end-zone crowd, often used as a fan nickname.",
     stadium: {
       name: "Huntington Bank Field",
       location: "Cleveland, Ohio",
@@ -249,7 +249,7 @@ export const teamProfiles: TeamProfile[] = [
       "No Super Bowl appearances. The modern Browns are defined as much by waiting as by Jim Brown’s films.",
     ],
     scotlandHook:
-      "No logo on the helmet, just grit. The ultimate “we’ve been through it” pick — very Scottish, if you squint.",
+      "No logo on the helmet, just grit. The ultimate “we’ve been through it” pick: very Scottish, if you squint.",
   },
   {
     slug: "dallas-cowboys",
@@ -262,7 +262,7 @@ export const teamProfiles: TeamProfile[] = [
     primary: "#041E42",
     secondary: "#869397",
     nicknames:
-      "Officially the Cowboys. America’s Team is a 1970s media nickname that stuck — many fans of other clubs reject it. Often just Dallas.",
+      "Officially the Cowboys. America’s Team is a 1970s media nickname that stuck: many fans of other clubs reject it. Often just Dallas.",
     stadium: {
       name: "AT&T Stadium",
       location: "Arlington, Texas",
@@ -277,7 +277,7 @@ export const teamProfiles: TeamProfile[] = [
       "The 1990s three-in-four-years run is the dynasty people still argue about.",
     ],
     scotlandHook:
-      "Silver star, huge stadium, everyone has an opinion. Instant recognition — like mentioning Manchester United to someone who does not watch football.",
+      "Silver star, huge stadium, everyone has an opinion. Instant recognition: like mentioning Manchester United to someone who does not watch football.",
   },
   {
     slug: "denver-broncos",
@@ -305,7 +305,7 @@ export const teamProfiles: TeamProfile[] = [
       "Elway’s late-career titles and Manning’s last season are the two eras beginners meet first.",
     ],
     scotlandHook:
-      "Orange at altitude. Kick-offs will test your kettle — mountain time is late in the UK.",
+      "Orange at altitude. Kick-offs will test your kettle: mountain time is late in the UK.",
   },
   {
     slug: "detroit-lions",
@@ -328,11 +328,11 @@ export const teamProfiles: TeamProfile[] = [
     founded: "1930 as the Portsmouth Spartans; moved to Detroit in 1934.",
     notablePlayers: ["Barry Sanders", "Calvin Johnson", "Joe Schmidt", "Matthew Stafford"],
     achievements: [
-      "Four NFL championships, last in 1957 — all before the Super Bowl.",
+      "Four NFL championships, last in 1957: all before the Super Bowl.",
       "No Super Bowl appearances as of 2026. The 2020s sides finally made them relevant again.",
     ],
     scotlandHook:
-      "Decades of pain, then a roar. Honolulu blue is having a moment — and Detroit in winter feels familiar.",
+      "Decades of pain, then a roar. Honolulu blue is having a moment, and Detroit in winter feels familiar.",
   },
   {
     slug: "green-bay-packers",
@@ -354,7 +354,7 @@ export const teamProfiles: TeamProfile[] = [
       note: "Oldest continuously operating NFL stadium. No corporate name on the building.",
     },
     founded:
-      "1919; NFL from 1921. Community-owned — there is no billionaire owner, which is unique in the league.",
+      "1919; NFL from 1921. Community-owned: there is no billionaire owner, which is unique in the league.",
     notablePlayers: ["Vince Lombardi (coach)", "Bart Starr", "Brett Favre", "Aaron Rodgers"],
     achievements: [
       "13 NFL championships, including Super Bowls I, II, XXXI and XLV.",
@@ -381,7 +381,7 @@ export const teamProfiles: TeamProfile[] = [
       opened: 2002,
       note: "Opened as Reliant, named NRG Stadium from 2014, briefly Houston Stadium during the 2026 World Cup, then Reliant again for the 2026 NFL season.",
     },
-    founded: "2002 expansion — the league’s newest club. Replaced the Oilers after they left for Tennessee.",
+    founded: "2002 expansion: the league’s newest club. Replaced the Oilers after they left for Tennessee.",
     notablePlayers: ["Andre Johnson", "J.J. Watt", "Arian Foster", "DeAndre Hopkins"],
     achievements: [
       "No Super Bowl appearances as of 2026.",
@@ -409,7 +409,7 @@ export const teamProfiles: TeamProfile[] = [
       note: "Retractable roof.",
     },
     founded:
-      "1953 as the Baltimore Colts (the second club of that name). Moved to Indianapolis in 1984 — still a sore subject in Baltimore.",
+      "1953 as the Baltimore Colts (the second club of that name). Moved to Indianapolis in 1984: still a sore subject in Baltimore.",
     notablePlayers: ["Peyton Manning", "Johnny Unitas", "Marvin Harrison", "Reggie Wayne"],
     achievements: [
       "Two Super Bowl titles: V (January 1971, as Baltimore) and XLI (February 2007, as Indianapolis).",
@@ -457,7 +457,7 @@ export const teamProfiles: TeamProfile[] = [
     primary: "#E31837",
     secondary: "#FFB81C",
     nicknames:
-      "Officially the Chiefs. Chiefs Kingdom is a fan/marketing nickname. The tomahawk chop chant is widely used and also widely criticised — know it exists; it is not “the official song”.",
+      "Officially the Chiefs. Chiefs Kingdom is a fan/marketing nickname. The tomahawk chop chant is widely used and also widely criticised: know it exists; it is not “the official song”.",
     stadium: {
       name: "Arrowhead Stadium",
       location: "Kansas City, Missouri",
@@ -501,7 +501,7 @@ export const teamProfiles: TeamProfile[] = [
       "Last Super Bowl appearance: XXXVII (lost, 2003).",
     ],
     scotlandHook:
-      "Black and silver. Always the coolest kit in the room, whatever the score — the leather-jacket option.",
+      "Black and silver. Always the coolest kit in the room, whatever the score: the leather-jacket option.",
   },
   {
     slug: "los-angeles-chargers",
@@ -542,7 +542,7 @@ export const teamProfiles: TeamProfile[] = [
     primary: "#003594",
     secondary: "#FFA300",
     nicknames:
-      "Officially the Rams. The Greatest Show on Turf was a nickname for the early-2000s St. Louis offence — an era, not the current club name.",
+      "Officially the Rams. The Greatest Show on Turf was a nickname for the early-2000s St. Louis offence: an era, not the current club name.",
     stadium: {
       name: "SoFi Stadium",
       location: "Inglewood, California",
@@ -558,7 +558,7 @@ export const teamProfiles: TeamProfile[] = [
       "NFL championships in 1945 and 1951 as well.",
     ],
     scotlandHook:
-      "Royal blue and a horn on the helmet. Hollywood, but with pads — and a Super Bowl in living memory.",
+      "Royal blue and a horn on the helmet. Hollywood, but with pads, and a Super Bowl in living memory.",
   },
   {
     slug: "miami-dolphins",
@@ -598,7 +598,7 @@ export const teamProfiles: TeamProfile[] = [
     primary: "#4F2683",
     secondary: "#FFC62F",
     nicknames:
-      "Officially the Vikings. Skol is the chant, borrowed from a Scandinavian toast — a fan cry, not the club name. Purple People Eaters was a 1970s defensive line nickname.",
+      "Officially the Vikings. Skol is the chant, borrowed from a Scandinavian toast: a fan cry, not the club name. Purple People Eaters was a 1970s defensive line nickname.",
     stadium: {
       name: "U.S. Bank Stadium",
       location: "Minneapolis, Minnesota",
@@ -610,7 +610,7 @@ export const teamProfiles: TeamProfile[] = [
     notablePlayers: ["Alan Page", "Randy Moss", "Fran Tarkenton", "Adrian Peterson"],
     achievements: [
       "One NFL championship (1969, the last before the merger season).",
-      "Four Super Bowl appearances — all losses (IV, VIII, IX, XI). Still waiting on the Lombardi.",
+      "Four Super Bowl appearances: all losses (IV, VIII, IX, XI). Still waiting on the Lombardi.",
     ],
     scotlandHook:
       "Purple, horns, and weather that will make you feel at home. The Nordic branding writes itself north of Berwick.",
@@ -636,7 +636,7 @@ export const teamProfiles: TeamProfile[] = [
     founded: "1960 AFL as the Boston Patriots; New England from 1971.",
     notablePlayers: ["Tom Brady", "Rob Gronkowski", "John Hannah", "Andre Tippett"],
     achievements: [
-      "Six Super Bowl titles: XXXVI, XXXVIII, XXXIX, XLIX, LI and LIII — tied with Pittsburgh for the most.",
+      "Six Super Bowl titles: XXXVI, XXXVIII, XXXIX, XLIX, LI and LIII: tied with Pittsburgh for the most.",
       "Lost Super Bowl LX in February 2026 (29–13 to Seattle), falling short of a record seventh.",
     ],
     scotlandHook:
@@ -661,7 +661,7 @@ export const teamProfiles: TeamProfile[] = [
       opened: 1975,
       note: "Indoor dome; hosted Super Bowl LIX in February 2025.",
     },
-    founded: "1967 NFL expansion, on All Saints' Day — hence the name.",
+    founded: "1967 NFL expansion, on All Saints' Day: hence the name.",
     notablePlayers: ["Drew Brees", "Rickey Jackson", "Willie Roaf", "Marques Colston"],
     achievements: [
       "One Super Bowl title: XLIV (February 2010), four years after Hurricane Katrina.",
@@ -696,7 +696,7 @@ export const teamProfiles: TeamProfile[] = [
       "XLII and XLVI were the two giant-killings of the Brady Patriots. Also several pre–Super Bowl NFL titles.",
     ],
     scotlandHook:
-      "Big-city classic. The royal blue from the old Super Bowl clips — and they played in the first regular-season NFL game in London (Wembley, 2007).",
+      "Big-city classic. The royal blue from the old Super Bowl clips, and they played in the first regular-season NFL game in London (Wembley, 2007).",
   },
   {
     slug: "new-york-jets",
@@ -724,7 +724,7 @@ export const teamProfiles: TeamProfile[] = [
       "No Super Bowl appearances since. The guarantee is still the first story anyone tells.",
     ],
     scotlandHook:
-      "Gotham green and a long wait for glory. Banter comes included — the other New York club, on at a decent UK hour.",
+      "Gotham green and a long wait for glory. Banter comes included: the other New York club, on at a decent UK hour.",
   },
   {
     slug: "philadelphia-eagles",
@@ -751,7 +751,7 @@ export const teamProfiles: TeamProfile[] = [
       "LIX was 40–22 over the Chiefs in New Orleans, stopping a Kansas City three-peat.",
     ],
     scotlandHook:
-      "Midnight green and a famously loyal crowd. They will adopt you if you adopt them — the loud-end, scarf-up option.",
+      "Midnight green and a famously loyal crowd. They will adopt you if you adopt them: the loud-end, scarf-up option.",
   },
   {
     slug: "pittsburgh-steelers",
@@ -775,7 +775,7 @@ export const teamProfiles: TeamProfile[] = [
     founded: "1933 as the Pirates; Steelers from 1940.",
     notablePlayers: ["Joe Greene", "Terry Bradshaw", "Jack Lambert", "Troy Polamalu"],
     achievements: [
-      "Six Super Bowl titles: IX, X, XIII, XIV, XL and XLIII — tied with New England for the most.",
+      "Six Super Bowl titles: IX, X, XIII, XIV, XL and XLIII: tied with New England for the most.",
       "The 1970s four-in-six-years run is the original TV dynasty.",
     ],
     scotlandHook:
@@ -820,7 +820,7 @@ export const teamProfiles: TeamProfile[] = [
     primary: "#002244",
     secondary: "#69BE28",
     nicknames:
-      "Officially the Seahawks. Often Hawks. The 12s (or 12th Man) is a fan nickname — Seattle retired the number 12 for supporters. Legion of Boom was the 2010s secondary.",
+      "Officially the Seahawks. Often Hawks. The 12s (or 12th Man) is a fan nickname: Seattle retired the number 12 for supporters. Legion of Boom was the 2010s secondary.",
     stadium: {
       name: "Lumen Field",
       location: "Seattle, Washington",
@@ -835,7 +835,7 @@ export const teamProfiles: TeamProfile[] = [
       "LX was 29–13 over New England at Levi’s Stadium; Kenneth Walker III was named MVP. Lost XLIX on the famous goal-line interception.",
     ],
     scotlandHook:
-      "Rain, navy, and that wild neon green. The most Pacific-Northwest, almost-Scottish pick — and the reigning champions as the 2026 season opened.",
+      "Rain, navy, and that wild neon green. The most Pacific-Northwest, almost-Scottish pick, and the reigning champions as the 2026 season opened.",
   },
   {
     slug: "tampa-bay-buccaneers",
@@ -860,7 +860,7 @@ export const teamProfiles: TeamProfile[] = [
     notablePlayers: ["Warren Sapp", "Derrick Brooks", "John Lynch", "Mike Alstott"],
     achievements: [
       "Two Super Bowl titles: XXXVII (January 2003) and LV (February 2021).",
-      "LV was Tom Brady’s seventh ring, in his first Tampa season — still the clip UK highlights use.",
+      "LV was Tom Brady’s seventh ring, in his first Tampa season: still the clip UK highlights use.",
     ],
     scotlandHook:
       "Pewter, red, and a pirate flag. Sunshine football with a wink, and a Super Bowl you probably saw on telly.",
@@ -876,7 +876,7 @@ export const teamProfiles: TeamProfile[] = [
     primary: "#0C2340",
     secondary: "#4B92DB",
     nicknames:
-      "Officially the Titans (since 1999). The same franchise was the Houston Oilers — older fans still say Oilers. That is history, not the current name.",
+      "Officially the Titans (since 1999). The same franchise was the Houston Oilers: older fans still say Oilers. That is history, not the current name.",
     stadium: {
       name: "Nissan Stadium",
       location: "Nashville, Tennessee",
@@ -919,12 +919,12 @@ export const teamProfiles: TeamProfile[] = [
       "No Super Bowl appearances in the 2000s or 2010s.",
     ],
     scotlandHook:
-      "Burgundy and gold in the capital. A club still introducing its new name, which is fine — you can start on the same page.",
+      "Burgundy and gold in the capital. A club still introducing its new name, which is fine: you can start on the same page.",
   },
 ];
 
 export const teamProfileNote =
-  "Stadium names and listed seating capacities are for the 2026 NFL season, mainly from Wikipedia’s current NFL stadiums list (cited there to club media guides and reporting). Super Bowl counts are after Super Bowl LX (8 February 2026). Naming rights, renovations and new builds change — treat figures as a snapshot, not a deed.";
+  "Stadium names and listed seating capacities are for the 2026 NFL season, mainly from Wikipedia’s current NFL stadiums list (cited there to club media guides and reporting). Super Bowl counts are after Super Bowl LX (8 February 2026). Naming rights, renovations and new builds change: treat figures as a snapshot, not a deed.";
 
 export const divisions: { conference: Conference; division: Division }[] = [
   { conference: "AFC", division: "East" },

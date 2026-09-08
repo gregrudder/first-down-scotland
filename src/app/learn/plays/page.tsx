@@ -24,10 +24,10 @@ export default function PlaysIndexPage() {
       </p>
       <PageIntro eyebrow="X’s and O’s" title="Common plays">
         <p>
-          Coaches draw the sport like this: circles for the team with the ball,
-          crosses for the other lot, arrows for where people are meant to go.           You do
-          not need a 400-page playbook. These eight shapes cover most of what you
-          will hear on a Sunday.
+          Coaches draw the sport like this: cream circles for the team with the
+          ball, dark circles with gold letters for the other lot, arrows for where
+          people are meant to go. You do not need a 400-page playbook. These eight
+          shapes cover most of what you will hear on a Sunday.
         </p>
       </PageIntro>
       <CompactLessonProgress slug="plays" />

@@ -27,7 +27,7 @@ export const lessons: Lesson[] = [
     blocks: [
       {
         type: "p",
-        text: "If you grew up on football — the round-ball kind — the NFL looks busy on purpose. Lots of stopping. Lots of people swapping. A pitch marked in yards. Once you know what everyone is actually trying to do, the noise drops away.",
+        text: "If you grew up on football (the round-ball kind), the NFL looks busy on purpose. Lots of stopping. Lots of people swapping. A pitch marked in yards. Once you know what everyone is actually trying to do, the noise drops away.",
       },
       {
         type: "h2",
@@ -40,7 +40,7 @@ export const lessons: Lesson[] = [
       {
         type: "list",
         items: [
-          "A yard is a bit shorter than a metre — about 91cm. You do not need to convert it in your head.",
+          "A yard is a bit shorter than a metre: about 91cm. You do not need to convert it in your head.",
           "Hash marks are the short dashes near the middle. The ball is spotted on or between them after each play.",
           "Goalposts sit at the back of each end zone. They are only used for kicks.",
         ],
@@ -105,7 +105,7 @@ export const lessons: Lesson[] = [
     blocks: [
       {
         type: "p",
-        text: "This is the idea that unlocks everything else. The offence does not get unlimited time with the ball. They get four attempts — called downs — to gain 10 yards. Manage that, and they get a fresh set of four. Fail, and the other lot usually get the ball.",
+        text: "This is the idea that unlocks everything else. The offence does not get unlimited time with the ball. They get four attempts (called downs) to gain 10 yards. Manage that, and they get a fresh set of four. Fail, and the other lot usually get the ball.",
       },
       {
         type: "h2",
@@ -136,15 +136,15 @@ export const lessons: Lesson[] = [
       {
         type: "list",
         items: [
-          "Punt — kick the ball away so the other team starts further back. The safe, common choice.",
-          "Field goal — if they are close enough, try to kick it through the posts for 3 points.",
-          "Go for it — run or pass and try to get the remaining yards. Fail, and the defence takes over on the spot.",
+          "Punt: kick the ball away so the other team starts further back. The safe, common choice.",
+          "Field goal: if they are close enough, try to kick it through the posts for 3 points.",
+          "Go for it: run or pass and try to get the remaining yards. Fail, and the defence takes over on the spot.",
         ],
       },
       {
         type: "callout",
         title: "Turnover on downs",
-        text: "If a team goes for it on fourth down and comes up short, the other side gets the ball where the play ended. No kick. No second chance. That is why fourth-down bravado makes crowds roar — and groan.",
+        text: "If a team goes for it on fourth down and comes up short, the other side gets the ball where the play ended. No kick. No second chance. That is why fourth-down bravado makes crowds roar, and groan.",
       },
       {
         type: "h2",
@@ -159,7 +159,7 @@ export const lessons: Lesson[] = [
         items: [
           {
             term: "Snap",
-            def: "The moment the ball is passed back from the ground to start a play — usually to the quarterback.",
+            def: "The moment the ball is passed back from the ground to start a play: usually to the quarterback.",
           },
           {
             term: "Line of scrimmage",
@@ -167,7 +167,7 @@ export const lessons: Lesson[] = [
           },
           {
             term: "First down",
-            def: "A fresh set of four attempts, earned by gaining the required yards — or given after a penalty or kick-off.",
+            def: "A fresh set of four attempts, earned by gaining the required yards, or given after a penalty or kick-off.",
           },
         ],
       },
@@ -192,11 +192,11 @@ export const lessons: Lesson[] = [
       {
         type: "list",
         items: [
-          "Touchdown — 6 points. Carry or catch the ball in the opponent’s end zone, or recover it there.",
-          "Extra point — usually 1 more, a short kick after a touchdown. Almost automatic, until it isn’t.",
-          "Two-point conversion — instead of the kick, try to run or pass into the end zone from the 2-yard line for 2.",
-          "Field goal — 3 points. Kick the ball through the posts, usually on fourth down when a touchdown looks unlikely.",
-          "Safety — 2 points to the defence, if they tackle an attacker in their own end zone. Rare, and very loud.",
+          "Touchdown: 6 points. Carry or catch the ball in the opponent’s end zone, or recover it there.",
+          "Extra point: usually 1 more, a short kick after a touchdown. Almost automatic, until it isn’t.",
+          "Two-point conversion: instead of the kick, try to run or pass into the end zone from the 2-yard line for 2.",
+          "Field goal: 3 points. Kick the ball through the posts, usually on fourth down when a touchdown looks unlikely.",
+          "Safety: 2 points to the defence, if they tackle an attacker in their own end zone. Rare, and very loud.",
         ],
       },
       { type: "diagram", id: "scoring-end-zone" },
@@ -211,7 +211,7 @@ export const lessons: Lesson[] = [
       },
       {
         type: "p",
-        text: "A team gets the ball around their own 25. They string together first downs — a run here, a catch there — and slowly eat up the field. Inside the 20 they have reached the red zone, where scores become likely. They either punch it in for a touchdown or settle for a field goal. Then the other team has a turn.",
+        text: "A team gets the ball around their own 25. They string together first downs (a run here, a catch there) and slowly eat up the field. Inside the 20 they have reached the red zone, where scores become likely. They either punch it in for a touchdown or settle for a field goal. Then the other team has a turn.",
       },
       {
         type: "p",
@@ -259,11 +259,11 @@ export const lessons: Lesson[] = [
       {
         type: "list",
         items: [
-          "Quarterback (QB) — the organiser. Takes the snap, then hands off, runs, or throws.",
-          "Running back (RB) — takes hand-offs and short passes. Often the person bursting through the middle.",
-          "Wide receivers (WR) — the sprinters out wide, trying to get open for a catch.",
-          "Tight end (TE) — a hybrid: blocks like a lineman, catches like a receiver.",
-          "Offensive line (OL) — five big people whose job is mostly thankless: protect the QB and open holes for runners.",
+          "Quarterback (QB): the organiser. Takes the snap, then hands off, runs, or throws.",
+          "Running back (RB): takes hand-offs and short passes. Often the person bursting through the middle.",
+          "Wide receivers (WR): the sprinters out wide, trying to get open for a catch.",
+          "Tight end (TE): a hybrid: blocks like a lineman, catches like a receiver.",
+          "Offensive line (OL): five big people whose job is mostly thankless: protect the QB and open holes for runners.",
         ],
       },
       { type: "diagram", id: "eleven-v-eleven" },
@@ -278,10 +278,10 @@ export const lessons: Lesson[] = [
       {
         type: "list",
         items: [
-          "Defensive line (DL) — try to shove the offensive line backwards, sack the QB, or stuff the run.",
-          "Linebackers (LB) — the all-rounders behind the line. Tackle, cover, blitz.",
-          "Cornerbacks (CB) — mark the wide receivers.",
-          "Safeties (S) — the last line, deeper down the field.",
+          "Defensive line (DL): try to shove the offensive line backwards, sack the QB, or stuff the run.",
+          "Linebackers (LB): the all-rounders behind the line. Tackle, cover, blitz.",
+          "Cornerbacks (CB): mark the wide receivers.",
+          "Safeties (S): the last line, deeper down the field.",
         ],
       },
       {
@@ -311,7 +311,7 @@ export const lessons: Lesson[] = [
           },
           {
             term: "Coverage",
-            def: "How the defence marks receivers — man-to-man, or a zone where each defender patrols an area.",
+            def: "How the defence marks receivers: man-to-man, or a zone where each defender patrols an area.",
           },
         ],
       },
@@ -350,8 +350,8 @@ export const lessons: Lesson[] = [
       {
         type: "list",
         items: [
-          "Interception — the defence catch a pass meant for an attacker. The player who caught it can run the other way until they are tackled.",
-          "Fumble — the ball-carrier drops it, or has it knocked free. Whoever falls on it, owns it. Recovery is a scramble, not a tidy rugby ruck.",
+          "Interception: the defence catch a pass meant for an attacker. The player who caught it can run the other way until they are tackled.",
+          "Fumble: the ball-carrier drops it, or has it knocked free. Whoever falls on it, owns it. Recovery is a scramble, not a tidy rugby ruck.",
         ],
       },
       { type: "diagram", id: "interception" },
@@ -377,7 +377,7 @@ export const lessons: Lesson[] = [
         items: [
           {
             term: "Takeaway",
-            def: "Another word for a turnover caused by the defence — an interception or a fumble recovery.",
+            def: "Another word for a turnover caused by the defence: an interception or a fumble recovery.",
           },
           {
             term: "Loose ball",
@@ -401,7 +401,7 @@ export const lessons: Lesson[] = [
       },
       {
         type: "h2",
-        text: "When the clock runs — and when it does not",
+        text: "When the clock runs, and when it does not",
       },
       {
         type: "p",
@@ -410,10 +410,10 @@ export const lessons: Lesson[] = [
       {
         type: "list",
         items: [
-          "Timeouts — each team gets three per half. They freeze the clock and let coaches talk.",
-          "Two-minute warning — an automatic timeout when two minutes remain in the second and fourth quarters.",
-          "Half-time — about 12–13 minutes. Long enough to put the kettle on.",
-          "Overtime — if it is tied after four quarters, they play extra time with its own rules. Regular-season overtime is shorter than the play-offs.",
+          "Timeouts: each team gets three per half. They freeze the clock and let coaches talk.",
+          "Two-minute warning: an automatic timeout when two minutes remain in the second and fourth quarters.",
+          "Half-time: about 12–13 minutes. Long enough to put the kettle on.",
+          "Overtime: if it is tied after four quarters, they play extra time with its own rules. Regular-season overtime is shorter than the play-offs.",
         ],
       },
       {
@@ -454,7 +454,7 @@ export const lessons: Lesson[] = [
     blocks: [
       {
         type: "p",
-        text: "Special teams are the kicking units. They are “special” only because they are not the ordinary offence or defence. For a few plays each game they decide field position — and sometimes the result.",
+        text: "Special teams are the kicking units. They are “special” only because they are not the ordinary offence or defence. For a few plays each game they decide field position, and sometimes the result.",
       },
       {
         type: "h2",
@@ -471,7 +471,7 @@ export const lessons: Lesson[] = [
       },
       {
         type: "p",
-        text: "On fourth down, if you are too far away to kick a field goal and not brave enough to go for it, you punt. A specialist drop-kicks the ball as far downfield as they can. The other team’s returner tries to catch it and run. Or they call a fair catch — a wee wave of the hand that says “I will catch this, nobody hit me, and I will not run.”",
+        text: "On fourth down, if you are too far away to kick a field goal and not brave enough to go for it, you punt. A specialist drop-kicks the ball as far downfield as they can. The other team’s returner tries to catch it and run. Or they call a fair catch: a wee wave of the hand that says “I will catch this, nobody hit me, and I will not run.”",
       },
       {
         type: "h2",
@@ -515,7 +515,7 @@ export const lessons: Lesson[] = [
     blocks: [
       {
         type: "p",
-        text: "Sooner or later a yellow cloth flies, the play dies, and everyone stands around while a referee talks into a microphone. That is a penalty. It looks like a row. It is usually just a yardage tax — annoying, then over.",
+        text: "Sooner or later a yellow cloth flies, the play dies, and everyone stands around while a referee talks into a microphone. That is a penalty. It looks like a row. It is usually just a yardage tax: annoying, then over.",
       },
       {
         type: "h2",
@@ -544,7 +544,7 @@ export const lessons: Lesson[] = [
       },
       {
         type: "p",
-        text: "Yards are walked off against the guilty team. If the offence is flagged, they usually get shoved backwards — further from the end zone they want. If the defence is flagged, the offence is moved forward, and many defensive penalties also give a first down. That is why a defensive flag late in a drive can feel like a gift.",
+        text: "Yards are walked off against the guilty team. If the offence is flagged, they usually get shoved backwards, further from the end zone they want. If the defence is flagged, the offence is moved forward, and many defensive penalties also give a first down. That is why a defensive flag late in a drive can feel like a gift.",
       },
       {
         type: "p",
@@ -561,12 +561,12 @@ export const lessons: Lesson[] = [
       {
         type: "list",
         items: [
-          "False start — an attacker twitches or moves before the snap. Almost always 5 yards. Dead ball: the play never really starts.",
-          "Offside / neutral zone — a defender is across the line when the ball is snapped, or lined up in that slim gap the width of the ball. Usually 5 yards.",
-          "Holding — grabbing a player you are not allowed to hold. Offensive holding is typically 10 yards. Defensive holding is usually 5 and a first down.",
-          "Pass interference — illegally stopping a catch, often by grabbing or bumping a receiver before the ball arrives. Defensive PI can be a long walk and a first down. Offensive PI is usually 10 yards.",
-          "Delay of game — the offence did not snap before the play clock hit zero. Five yards, and a wee bit of embarrassment.",
-          "Personal foul / roughing — a dangerous or late hit: helmet to helmet, hitting the kicker, or roughing the passer after they have thrown. Usually 15 yards, and often a first down if the defence did it.",
+          "False start: an attacker twitches or moves before the snap. Almost always 5 yards. Dead ball: the play never really starts.",
+          "Offside / neutral zone: a defender is across the line when the ball is snapped, or lined up in that slim gap the width of the ball. Usually 5 yards.",
+          "Holding: grabbing a player you are not allowed to hold. Offensive holding is typically 10 yards. Defensive holding is usually 5 and a first down.",
+          "Pass interference: illegally stopping a catch, often by grabbing or bumping a receiver before the ball arrives. Defensive PI can be a long walk and a first down. Offensive PI is usually 10 yards.",
+          "Delay of game: the offence did not snap before the play clock hit zero. Five yards, and a wee bit of embarrassment.",
+          "Personal foul / roughing: a dangerous or late hit: helmet to helmet, hitting the kicker, or roughing the passer after they have thrown. Usually 15 yards, and often a first down if the defence did it.",
         ],
       },
       { type: "diagram", id: "offside" },
@@ -593,7 +593,7 @@ export const lessons: Lesson[] = [
         type: "list",
         items: [
           "Did the play “count”? Wait for the announcement before celebrating or groaning.",
-          "Who was it on — offence or defence? That tells you which way the ball will move.",
+          "Who was it on, offence or defence? That tells you which way the ball will move.",
           "How many yards, and is it a first down? Those two facts reset the down-and-distance graphic.",
           "If two flags fly, officials may offset them (both cancel) or pick the more serious one. Rare, and they will say so.",
         ],
@@ -627,7 +627,7 @@ export const lessons: Lesson[] = [
     blocks: [
       {
         type: "p",
-        text: "You now have enough to sit down with a match and follow it. This last lesson is a checklist — the things that actually help, rather than a demand that you become a coach overnight.",
+        text: "You now have enough to sit down with a match and follow it. This last lesson is a checklist: the things that actually help, rather than a demand that you become a coach overnight.",
       },
       {
         type: "h2",
@@ -658,7 +658,7 @@ export const lessons: Lesson[] = [
       {
         type: "list",
         items: [
-          "On a passing play, glance at the quarterback first — then find where they are looking.",
+          "On a passing play, glance at the quarterback first, then find where they are looking.",
           "On a running play, watch the gap the runner is aiming at, not the crowd of bodies.",
           "In the red zone, expect tighter throws and more motion. Everyone is compressed.",
           "After a big play, check whether the clock is running. That tells you how urgent the next snap is.",
@@ -675,7 +675,7 @@ export const lessons: Lesson[] = [
       {
         type: "callout",
         title: "You are allowed to be a beginner",
-        text: "US commentary assumes you have been watching since childhood. You have not. Pause, look up a word, skip a blowout if you like. The sport is better once you know the shape of it — not because you pretended you always did.",
+        text: "US commentary assumes you have been watching since childhood. You have not. Pause, look up a word, skip a blowout if you like. The sport is better once you know the shape of it, not because you pretended you always did.",
       },
       {
         type: "h2",
@@ -683,7 +683,7 @@ export const lessons: Lesson[] = [
       },
       {
         type: "p",
-        text: "Pick a game this week that kicks off at a civilised UK hour. Keep this site open on the glossary. Follow one team’s quarterback for a quarter, then just enjoy the noise. If a London game is on the slate, even better — the crowd will sound like home.",
+        text: "Pick a game this week that kicks off at a civilised UK hour. Keep this site open on the glossary. Follow one team’s quarterback for a quarter, then just enjoy the noise. If a London game is on the slate, even better: the crowd will sound like home.",
       },
     ],
   },
@@ -705,13 +705,13 @@ export const lessons: Lesson[] = [
       },
       {
         type: "p",
-        text: "College football is the main feeder. A 21-year-old quarterback from Ohio State is the NFL’s version of a brilliant youth prospect — except the club that wants him cannot just offer a wage. They have to wait their turn, or trade for someone else’s turn.",
+        text: "College football is the main feeder. A 21-year-old quarterback from Ohio State is the NFL’s version of a brilliant youth prospect: except the club that wants him cannot just offer a wage. They have to wait their turn, or trade for someone else’s turn.",
       },
       {
         type: "list",
         items: [
           "Seven rounds, spread over three days.",
-          "Each club has one pick per round to start with — 32 picks, plus extras.",
+          "Each club has one pick per round to start with: 32 picks, plus extras.",
           "Round 1 is the television event. Rounds 2–7 are where most rosters are actually built.",
           "A “first-rounder” is a player taken in that opening round. People will say it like a medal.",
         ],
@@ -722,7 +722,7 @@ export const lessons: Lesson[] = [
       },
       {
         type: "p",
-        text: "The order is mostly the reverse of last season’s table. Win fewer games, pick earlier. Win the Super Bowl, pick last. That is the league’s way of giving struggling clubs a chance to get better — and giving you a reason to care in December when your lot are 4–10.",
+        text: "The order is mostly the reverse of last season’s table. Win fewer games, pick earlier. Win the Super Bowl, pick last. That is the league’s way of giving struggling clubs a chance to get better, and giving you a reason to care in December when your lot are 4–10.",
       },
       { type: "draft-board" },
       {
@@ -732,7 +732,7 @@ export const lessons: Lesson[] = [
       },
       {
         type: "h2",
-        text: "Trades — moving up, moving back",
+        text: "Trades: moving up, moving back",
       },
       {
         type: "p",
@@ -748,7 +748,7 @@ export const lessons: Lesson[] = [
       },
       {
         type: "p",
-        text: "Plenty of good players are not picked at all. When the last round ends, those names become undrafted free agents — UDFAs. Any club can offer them a contract. Making the 53-man roster from there is hard. Landing on the practice squad is a common first job. Some of the league’s best stories start with “nobody called his name”.",
+        text: "Plenty of good players are not picked at all. When the last round ends, those names become undrafted free agents: UDFAs. Any club can offer them a contract. Making the 53-man roster from there is hard. Landing on the practice squad is a common first job. Some of the league’s best stories start with “nobody called his name”.",
       },
       {
         type: "h2",
@@ -759,7 +759,7 @@ export const lessons: Lesson[] = [
         items: [
           "A high pick is hope. Bad seasons are sold as “we’ll be picking in the top ten”.",
           "Rookies are cheap relative to veterans. A clever Draft can rebuild a club without a Hollywood spending spree.",
-          "Your team’s first-rounder will be on every preview show until they prove they belong — or they don’t.",
+          "Your team’s first-rounder will be on every preview show until they prove they belong, or they don’t.",
           "Mock drafts (guessing the order) are a cottage industry. Treat them as entertainment, not scripture. Rankings move.",
         ],
       },
@@ -798,7 +798,7 @@ export const lessons: Lesson[] = [
           },
           {
             term: "UDFA",
-            def: "Undrafted free agent — a player who was not picked, then signed anyway.",
+            def: "Undrafted free agent: a player who was not picked, then signed anyway.",
           },
           {
             term: "Mock draft",

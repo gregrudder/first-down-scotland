@@ -18,7 +18,7 @@ export const learnBadges: LearnBadge[] = [
     name: "Practice Squad",
     min: 0,
     max: 7,
-    blurb: "Still finding the ball. Read a couple of lessons and have another go — that is what the practice squad is for.",
+    blurb: "Still finding the ball. Read a couple of lessons and have another go: that is what the practice squad is for.",
   },
   {
     id: "rookie",
@@ -39,7 +39,7 @@ export const learnBadges: LearnBadge[] = [
     name: "Hall of Famer",
     min: 18,
     max: 20,
-    blurb: "That is a serious Sunday. You have earned the loud badge — and you are allowed to explain a first down to the pub.",
+    blurb: "That is a serious Sunday. You have earned the loud badge, and you are allowed to explain a first down to the pub.",
   },
 ];
 
@@ -103,7 +103,7 @@ export const learnQuizQuestions: LearnQuizQuestion[] = [
       "The quarter is over",
     ],
     correctIndex: 2,
-    explain: "That is a turnover on downs. No kick, no second chance — the defence take over on the spot.",
+    explain: "That is a turnover on downs. No kick, no second chance: the defence take over on the spot.",
   },
   {
     id: "touchdown-points",
@@ -136,7 +136,7 @@ export const learnQuizQuestions: LearnQuizQuestion[] = [
     prompt: "How many players can each team have on the field at once?",
     options: ["7", "11", "15", "22"],
     correctIndex: 1,
-    explain: "Eleven each. They are not the same 11 all afternoon — offence, defence and special teams swap in.",
+    explain: "Eleven each. They are not the same 11 all afternoon: offence, defence and special teams swap in.",
   },
   {
     id: "pocket",
@@ -203,7 +203,7 @@ export const learnQuizQuestions: LearnQuizQuestion[] = [
     prompt: "How long is each quarter on the game clock?",
     options: ["10 minutes", "12 minutes", "15 minutes", "20 minutes"],
     correctIndex: 2,
-    explain: "Four quarters of 15 minutes — one hour of game clock. The broadcast still lasts about three hours.",
+    explain: "Four quarters of 15 minutes: one hour of game clock. The broadcast still lasts about three hours.",
   },
   {
     id: "two-minute-warning",

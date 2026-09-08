@@ -66,7 +66,7 @@ function ResultBody() {
                 >
                   {entry.name}
                 </Link>
-                <span> — {entry.oneLiner}</span>
+                <span>: {entry.oneLiner}</span>
               </li>
             ))}
           </ul>
