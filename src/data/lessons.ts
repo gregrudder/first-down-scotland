@@ -991,7 +991,7 @@ export const lessons: Lesson[] = [
           "Draft from the sofa with the app open. First few rounds are stars. Later rounds are guesses and kickers.",
           "Each week: check byes and injuries, set the lineup before Thursday if needed, then watch your players’ real games.",
           "Use our fantasy news tab for headlines, not as a commandment. A “start him” article is one opinion.",
-          "If the Discord is live, that is a decent place to find a UK league of beginners. Do not pay a stranger for a “winning system”.",
+          "The Discord is a decent place to find a UK league of beginners. Do not pay a stranger for a “winning system”.",
         ],
       },
       {

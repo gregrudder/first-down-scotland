@@ -13,7 +13,7 @@ import { contactEmail, listingMailto } from "@/lib/contact";
 export const metadata: Metadata = {
   title: "Watch near you",
   description:
-    "Scottish pubs that show the NFL, so you can meet fans of the team you support. Call ahead, then arrange who is going in Discord when it is live.",
+    "Scottish pubs that show the NFL, so you can meet fans of the team you support. Call ahead, then arrange who is going in Discord.",
 };
 
 export default function WatchNearYouPage() {
@@ -26,7 +26,7 @@ export default function WatchNearYouPage() {
         <p>
           These are pubs that put the NFL on, so you can sit with fans of the
           same side you picked rather than shouting at the sofa on your own. Use
-          Discord (when the invite is live) to arrange who is going. Television
+          Discord to arrange who is going. Television
           rights are one thing. Finding a room that will actually put RedZone on
           is another.
         </p>

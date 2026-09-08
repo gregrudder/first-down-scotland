@@ -17,7 +17,7 @@ export default function FilmRoomPage() {
           Live games are chaotic if you are still on lesson two. These are the series
           that teach the sport while you sit on the sofa. Five to start with. More
           will land here when they are worth a beginner’s Sunday. Talk it through in
-          your team channel later, once Discord is live.
+          your team channel on Discord.
         </p>
         <p>{filmRoomDisclaimer}</p>
       </PageIntro>

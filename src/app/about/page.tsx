@@ -27,10 +27,10 @@ export default function AboutPage() {
         </p>
         <p>
           Discord is the chat home: general room, an NFL room, and a channel per
-          club so you are not shouting into the void. The invite goes live when
-          the server is ready, not before. The pub list is for the real-world
-          bit: places that put the NFL on, where you can sit with people who
-          picked the same side, or arrange a meetup once chat is open.
+          club so you are not shouting into the void. Join from Community. The
+          pub list is for the real-world bit: places that put the NFL on, where
+          you can sit with people who picked the same side, or arrange a meetup
+          in your team channel.
         </p>
         <p>
           You can find bits of this elsewhere online. The sell is that this app

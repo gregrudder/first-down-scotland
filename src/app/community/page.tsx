@@ -6,11 +6,11 @@ import { PageIntro } from "@/components/PageIntro";
 export const metadata: Metadata = {
   title: "Community",
   description:
-    "Discord is the chat home for First Down Scotland: meet Scottish and UK fans of the NFL team you support, then arrange pub meetups at the spots we list.",
+    "Join the First Down Scotland Discord: meet Scottish and UK fans of the NFL team you support, then arrange pub meetups at the spots we list.",
 };
 
 const howItWorks = [
-  "When the invite is up, join the server, say hello in #general, and pick the channel for the team you support. Lurk until you have a side if you need to.",
+  "Join the server, say hello in #general, and pick the channel for the team you support. Lurk until you have a side if you need to.",
   "Use that team room to find other UK fans of the same club, and to arrange who is going to a pub from Watch near you.",
   "Be decent. It is meant to be a small UK room for people still learning the sport, not a US sports-radio shout.",
   "If someone asks for no spoilers, don’t post the score. Easy.",
@@ -42,16 +42,14 @@ export default function CommunityPage() {
 
       <div className="mt-12 space-y-6 text-base leading-7 text-cream-dim">
         <p>
-          One First Down Scotland server is planned: general chat for beginners,
-          an NFL room for the week’s games, and a channel per team so you hang
-          with fans of your side. That is the shape of it. The invite itself is
-          not live yet. We would rather say coming soon than send you to a dead
-          door.
+          One First Down Scotland server: general chat for beginners, an NFL
+          room for the week’s games, and a channel per team so you hang with
+          fans of your side. That is the shape of it.
         </p>
         <p>
           We are not building in-app chat. Discord already does rooms; we would
           only make a worse version. Fixtures, news and where to watch stay
-          here as helpers.
+          here as helpers. Lessons stay free.
         </p>
       </div>
 
@@ -62,9 +60,8 @@ export default function CommunityPage() {
         <h2 className="mt-2 font-display text-2xl text-cream">Meet in the real world</h2>
         <p className="mt-3 text-base leading-7 text-cream-dim">
           The Discord is for chat. The pub list is for turning up. Find a
-          Scottish spot that shows the NFL, then (when the invite is live) use
-          your team channel to see who else is going. You do not have to watch
-          on your own.
+          Scottish spot that shows the NFL, then use your team channel to see
+          who else is going. You do not have to watch on your own.
         </p>
         <p className="mt-4 text-sm">
           <Link href="/watch-near-you" className="font-semibold text-gold">
@@ -78,13 +75,13 @@ export default function CommunityPage() {
       </section>
 
       <section className="mt-12">
-        <h2 className="font-display text-3xl text-cream">Team channels, when it opens</h2>
+        <h2 className="font-display text-3xl text-cream">Team channels</h2>
         <p className="mt-4 text-base leading-7 text-cream-dim">
-          All 32 teams will have their own channel. You will not find a wall of
-          logos on this page: just pick your room once you are in. A few names we
-          expect:
+          All 32 teams have their own channel. You will not find a wall of
+          logos on this page: just pick your room once you are in. A few names
+          you will see:
         </p>
-        <ul className="mt-5 flex flex-wrap gap-2" aria-label="Planned Discord channels">
+        <ul className="mt-5 flex flex-wrap gap-2" aria-label="Discord channels">
           {exampleChannels.map((name) => (
             <li
               key={name}
@@ -96,7 +93,7 @@ export default function CommunityPage() {
         </ul>
         <p className="mt-4 text-sm leading-6 text-cream-dim">
           Plus one for every other club. If you have not chosen a team yet,
-          #general will be the right place, and{" "}
+          #general is the right place, and{" "}
           <Link href="/pick-your-team" className="text-gold">
             Pick my team
           </Link>{" "}
@@ -105,7 +102,7 @@ export default function CommunityPage() {
       </section>
 
       <section className="mt-12">
-        <h2 className="font-display text-3xl text-cream">How it will work</h2>
+        <h2 className="font-display text-3xl text-cream">How it works</h2>
         <ol className="mt-5 list-decimal space-y-3 pl-5 text-base leading-7 text-cream-dim">
           {howItWorks.map((item) => (
             <li key={item}>{item}</li>
@@ -116,7 +113,7 @@ export default function CommunityPage() {
       <section className="mt-12">
         <h2 className="font-display text-3xl text-cream">House rules</h2>
         <p className="mt-3 text-sm text-cream-dim">
-          These will apply from day one. Five things, then we’re away.
+          Five things, then we’re away.
         </p>
         <ul className="mt-5 list-disc space-y-3 pl-5 text-base leading-7 text-cream-dim">
           {houseRules.map((item) => (
