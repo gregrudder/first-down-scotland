@@ -112,13 +112,24 @@ export async function POST(request: Request) {
   try {
     const result = await deliverFeedback(parsed);
     if (!result.ok) {
+      console.error("[feedback] delivery failed", result.reason, result.error);
+      if (result.reason === "unconfigured") {
+        return NextResponse.json(
+          {
+            error:
+              "Could not send that just now. The live site does not have a feedback inbox wired up yet.",
+          },
+          { status: 503 },
+        );
+      }
       return NextResponse.json(
         { error: "Could not send that just now. Try again in a minute." },
         { status: 502 },
       );
     }
     return NextResponse.json({ ok: true });
-  } catch {
+  } catch (error) {
+    console.error("[feedback] delivery threw", error);
     return NextResponse.json(
       { error: "Could not send that just now. Try again in a minute." },
       { status: 502 },
