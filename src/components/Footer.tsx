@@ -20,8 +20,8 @@ export function Footer() {
           <p className="mt-2 text-sm leading-6 text-cream-dim">{site.tagline}</p>
           <p className="mt-3 text-xs leading-5 text-cream-dim">
             Independent learning and community project. Not affiliated with the NFL.
-            Fixture times come from ESPN’s public scoreboard and are shown in
-            Europe/London.
+            Fixture times, scores and standings come from ESPN’s public APIs and
+            are shown in Europe/London.
           </p>
         </div>
         <nav className="flex flex-wrap gap-x-4 gap-y-2 text-sm" aria-label="Footer">

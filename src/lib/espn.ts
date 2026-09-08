@@ -1,11 +1,15 @@
 import { formatUkDate, ukDateKey } from "@/lib/time";
 
+import { teams } from "@/data/teams";
+
 const SCOREBOARD_URL =
   "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard";
 
 const FETCH_TIMEOUT_MS = 8_000;
 export const FIXTURES_REVALIDATE_SECONDS = 300;
 export const FIXTURES_CACHE_TAG = "fixtures";
+export const SCORES_REVALIDATE_SECONDS = 20;
+export const SCORES_CACHE_TAG = "scores";
 
 export type GameStatus = "scheduled" | "in-progress" | "final" | "other";
 
@@ -278,17 +282,27 @@ function parseScoreboard(data: unknown, fetchedAt: string): FixturesSuccess {
   };
 }
 
-async function fetchScoreboard(url: string): Promise<unknown> {
+type ScoreboardCache = {
+  revalidate?: number;
+  tags?: string[];
+  cache?: "no-store";
+};
+
+async function fetchScoreboard(url: string, cache?: ScoreboardCache): Promise<unknown> {
   const controller = new AbortController();
   const timer = setTimeout(() => controller.abort(), FETCH_TIMEOUT_MS);
 
   try {
     const response = await fetch(url, {
       signal: controller.signal,
-      next: {
-        revalidate: FIXTURES_REVALIDATE_SECONDS,
-        tags: [FIXTURES_CACHE_TAG],
-      },
+      ...(cache?.cache === "no-store"
+        ? { cache: "no-store" as const }
+        : {
+            next: {
+              revalidate: cache?.revalidate ?? FIXTURES_REVALIDATE_SECONDS,
+              tags: cache?.tags ?? [FIXTURES_CACHE_TAG],
+            },
+          }),
       headers: {
         Accept: "application/json",
       },
@@ -312,11 +326,11 @@ function withParams(params: Record<string, string | number>): string {
   return `${SCOREBOARD_URL}?${search.toString()}`;
 }
 
-export async function getNflFixtures(): Promise<FixturesResult> {
+async function loadScoreboard(cache?: ScoreboardCache): Promise<FixturesResult> {
   const fetchedAt = new Date().toISOString();
 
   try {
-    const primary = parseScoreboard(await fetchScoreboard(SCOREBOARD_URL), fetchedAt);
+    const primary = parseScoreboard(await fetchScoreboard(SCOREBOARD_URL, cache), fetchedAt);
     if (primary.games.length > 0) return primary;
 
     const fallbackParams: Record<string, string | number> = {};
@@ -326,7 +340,7 @@ export async function getNflFixtures(): Promise<FixturesResult> {
 
     if (Object.keys(fallbackParams).length > 0) {
       const fallback = parseScoreboard(
-        await fetchScoreboard(withParams(fallbackParams)),
+        await fetchScoreboard(withParams(fallbackParams), cache),
         fetchedAt,
       );
       if (fallback.games.length > 0) return fallback;
@@ -345,6 +359,18 @@ export async function getNflFixtures(): Promise<FixturesResult> {
       error: message,
     };
   }
+}
+
+export async function getNflFixtures(): Promise<FixturesResult> {
+  return loadScoreboard({
+    revalidate: FIXTURES_REVALIDATE_SECONDS,
+    tags: [FIXTURES_CACHE_TAG],
+  });
+}
+
+/** Near-live scoreboard: not shared with the 5-minute fixtures cache. */
+export async function getNflLiveScoreboard(): Promise<FixturesResult> {
+  return loadScoreboard({ cache: "no-store" });
 }
 
 export function groupGamesByUkDate(games: NflGame[]) {
@@ -370,4 +396,30 @@ export function weekHeading(fixtures: FixturesSuccess): string {
   );
   if (fixtures.seasonYear) bits.unshift(String(fixtures.seasonYear));
   return bits.join(" · ");
+}
+
+export function teamsOnBye(fixtures: FixturesSuccess): TeamSide[] {
+  if (fixtures.seasonType !== 2 || fixtures.games.length === 0) return [];
+
+  const playing = new Set<string>();
+  for (const game of fixtures.games) {
+    playing.add(game.home.abbreviation.toUpperCase());
+    playing.add(game.away.abbreviation.toUpperCase());
+  }
+  if (playing.size >= 32) return [];
+
+  return teams
+    .filter((team) => !playing.has(team.abbreviation.toUpperCase()))
+    .map((team) => ({
+      name: team.name,
+      shortName: team.shortName,
+      abbreviation: team.abbreviation,
+    }));
+}
+
+export function seasonHasStarted(fixtures: FixturesSuccess): boolean {
+  if ((fixtures.weekNumber ?? 0) > 1) return true;
+  return fixtures.games.some(
+    (game) => game.status === "in-progress" || game.status === "final",
+  );
 }

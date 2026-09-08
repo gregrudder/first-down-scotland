@@ -12,6 +12,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/learn/draft-prospects",
     "/glossary",
     "/this-week",
+    "/scores",
+    "/standings",
+    "/rookies",
     "/news",
     "/news/fantasy",
     "/podcasts",
@@ -34,6 +37,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
     url: absoluteUrl(path),
     changeFrequency:
       path === "/this-week" ||
+      path === "/scores" ||
+      path === "/standings" ||
+      path === "/rookies" ||
       path === "/news" ||
       path === "/news/fantasy" ||
       path === "/learn/draft-prospects"

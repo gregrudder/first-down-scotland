@@ -27,7 +27,11 @@ export default function TeamsIndexPage() {
           </Link>{" "}
           if you want to find other UK fans of that club. Each profile is the
           roster-and-depth stop in one place: 2026 snapshot, live ESPN depth chart,
-          official YouTube, and a pod or two. Stadiums get renamed.
+          official YouTube, and a pod or two. The live{" "}
+          <Link href="/standings" className="text-gold">
+            standings table
+          </Link>{" "}
+          sits by division. Stadiums get renamed.
         </p>
       </PageIntro>
 

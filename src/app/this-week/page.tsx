@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { SundayCard } from "@/components/SundayCard";
 import { GameCard } from "@/components/GameCard";
+import { LeagueTabs } from "@/components/LeagueTabs";
 import { PageIntro } from "@/components/PageIntro";
 import { getNflFixtures, groupGamesByUkDate, weekHeading } from "@/lib/espn";
 import { getGameReports } from "@/lib/game-report";
@@ -34,6 +35,7 @@ export default async function ThisWeekPage() {
           open for everyone.
         </p>
       </PageIntro>
+      <LeagueTabs active="games" />
 
       <div className="mt-8">
         <SundayCard fixtures={fixtures} reports={reports} />
@@ -103,6 +105,14 @@ export default async function ThisWeekPage() {
         . To sit with fans of your team, try{" "}
         <Link href="/watch-near-you" className="text-gold">
           pubs near you
+        </Link>
+        . For a board that polls while games are on, use{" "}
+        <Link href="/scores" className="text-gold">
+          live scores
+        </Link>
+        . The table is on{" "}
+        <Link href="/standings" className="text-gold">
+          Standings
         </Link>
         .
       </p>

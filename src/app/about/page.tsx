@@ -36,8 +36,10 @@ export default function AboutPage() {
           You can find bits of this elsewhere online. The sell is that this app
           does it together, in UK English, aimed at Scottish and UK fans. It is
           not a TV listings clone, a US magazine, a betting tip sheet, or a live
-          play-by-play machine. Kick-off times come from ESPN’s public scoreboard
-          and are shown in Europe/London. If that feed fails, we say so. The tone
+          play-by-play machine. Kick-off times, live scores and standings come from
+          ESPN’s public APIs and are shown in Europe/London. Rookie Watch uses that
+          draft list plus Sleeper’s public season stats. If a feed fails, we say
+          so. The tone
           is meant to be welcoming rather than matey-American. We use UK spelling
           (defence, favourite, organised) and we explain US words when the
           broadcast will say them differently.
@@ -68,6 +70,21 @@ export default function AboutPage() {
         <li>
           <Link href="/this-week" className="text-gold">
             This week’s games →
+          </Link>
+        </li>
+        <li>
+          <Link href="/scores" className="text-gold">
+            Live scores →
+          </Link>
+        </li>
+        <li>
+          <Link href="/standings" className="text-gold">
+            Standings →
+          </Link>
+        </li>
+        <li>
+          <Link href="/rookies" className="text-gold">
+            Rookie Watch →
           </Link>
         </li>
         <li>

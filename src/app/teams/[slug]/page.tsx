@@ -8,7 +8,9 @@ import { TrademarkNote } from "@/components/TrademarkNote";
 import { YoutubeChannelCard } from "@/components/YoutubeChannelCard";
 import { podcastsForTeam } from "@/data/podcasts";
 import { getTeamYoutube } from "@/data/team-youtube";
+import { DivisionStandingsCard } from "@/components/StandingsBoard";
 import { getTeamDepthChart } from "@/lib/depth-chart";
+import { divisionForTeam, getNflStandings } from "@/lib/standings";
 import { espnTeamLogo } from "@/lib/team-logo";
 import {
   getTeamProfile,
@@ -56,6 +58,9 @@ export default async function TeamProfilePage({
   const youtube = getTeamYoutube(team.slug);
   const shows = podcastsForTeam(team.slug);
   const depthChart = await getTeamDepthChart(team.abbreviation);
+  const standings = await getNflStandings();
+  const divisionTable =
+    standings.ok ? divisionForTeam(standings, team.abbreviation) : undefined;
 
   return (
     <div className="mx-auto max-w-3xl px-4 py-12 sm:px-6 sm:py-16">
@@ -105,6 +110,32 @@ export default async function TeamProfilePage({
         </Link>
         .
       </p>
+
+      {divisionTable ? (
+        <div className="mt-8">
+          <DivisionStandingsCard
+            division={divisionTable}
+            highlight={team.abbreviation}
+          />
+          <p className="mt-3 text-sm">
+            <Link href="/standings" className="text-gold">
+              Full standings →
+            </Link>
+            {" · "}
+            <Link href={`/rookies?team=${team.abbreviation}`} className="text-gold">
+              This club’s rookies →
+            </Link>
+          </p>
+        </div>
+      ) : standings.ok === false ? (
+        <p className="mt-8 text-sm leading-6 text-cream-dim">
+          Live division table is unavailable just now. Try{" "}
+          <Link href="/standings" className="text-gold">
+            Standings
+          </Link>{" "}
+          in a minute.
+        </p>
+      ) : null}
 
       <DepthChart chart={depthChart} />
 
