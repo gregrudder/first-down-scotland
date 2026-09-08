@@ -9,7 +9,7 @@ import { espnTeamLogo } from "@/lib/team-logo";
 export const metadata: Metadata = {
   title: "NFL podcasts",
   description:
-    "Recommended NFL podcasts for UK beginners: general league shows plus a daily independent pod for each of the 32 teams.",
+    "Recommended NFL podcasts for UK fans: general league shows, plus a daily pod for the team you support, in one place.",
 };
 
 export default function PodcastsPage() {
@@ -26,9 +26,10 @@ export default function PodcastsPage() {
     <div className="mx-auto max-w-3xl px-4 py-12 sm:px-6 sm:py-16">
       <PageIntro eyebrow="Listen" title="Podcasts to lock onto">
         <p>
-          A short list, not a directory of everything ever recorded. Start with a UK
-          or beginner league show, then pick a daily team pod once you have a side.
-          Meeting fans of that club lives on{" "}
+          A short list, not a directory of everything ever recorded. Once you have
+          a side, the daily club pod is how you follow that team in one place,
+          instead of hunting US feeds. Start with a UK or beginner league show if
+          you are still learning. Meeting fans of that club lives on{" "}
           <Link href="/community" className="text-gold">
             Community
           </Link>{" "}

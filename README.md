@@ -1,14 +1,14 @@
 # First Down Scotland
 
-A **learning hub** for Scottish and UK NFL beginners, plus a **community to meet fans of the team you support**. Discord is the chat home. The pub list is for real-world meetups with people who picked the same side.
+A **learning hub** for Scottish and UK NFL beginners, a **community to meet fans of the team you support**, and a **one-stop shop for that club** (news, fantasy, podcasts, depth, watch). Discord is the chat home. The pub list is for real-world meetups with people who picked the same side.
 
-**Tagline:** Learn the NFL, then meet fans of the team you support. Built in Scotland, for the UK.
+**Tagline:** Learn the NFL. Meet fans of your team. Follow that club in one place. Built in Scotland, for the UK.
 
-Lead with those two things. Fixtures, watch notes and news stay as helpers. This is not a TV listings product or a magazine clone.
+Three jobs: learn the game, meet fans of your team, keep that club in one place. This is not a TV listings product or a magazine clone.
 
 ## What v1 includes
 
-- **`/`** : value prop (learn the game, meet your team), Start learning + Meet your team CTAs, beginner lessons, Sunday card, and a small games teaser
+- **`/`** : value prop (learn, meet your team, follow that club in one place), Start learning + Meet your team CTAs, beginner lessons, Sunday card, and a small games teaser
 - **`/learn`** and **`/learn/[slug]`** : beginner lessons in UK English, including X-and-O play diagrams at `/learn/plays` and a Draft explainer at `/learn/the-draft`. Stage progress bars and a 20-question quiz at `/learn/quiz` (saved in the browser as `fds-learn`). Badges: Practice Squad (0–7) → Rookie (8–12) → Starter (13–17) → Hall of Famer (18–20).
 - **`/learn/draft-prospects`** : top 2027 Draft names (ESPN when the official list fills; otherwise a cited early consensus board), cached 600s, Cron-busted
 - **`/glossary`** : searchable jargon decoder

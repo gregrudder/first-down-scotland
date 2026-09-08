@@ -22,15 +22,29 @@ export default async function HomePage() {
             Scotland · United Kingdom
           </p>
           <h1 className="mt-4 max-w-3xl font-display text-4xl leading-[1.1] text-cream sm:text-6xl">
-            Learn the game. Meet fans of your team.
+            Learn the game. Meet fans of your team. Keep it in one place.
           </h1>
           <p className="mt-5 max-w-2xl text-lg leading-8 text-cream-dim">{site.tagline}</p>
           <p className="mt-3 max-w-2xl text-base leading-7 text-cream-dim">
-            Beginner lessons in UK English, then a place to find people who support
-            the same club: Discord for chat, and Scottish pubs for real-world meetups.
-            Fixtures, watch notes and news stay as helpers. This is not a listings
-            site wearing a Saltire.
+            Beginner lessons in UK English. Discord and Scottish pubs so you can
+            meet people who support the same club. Then news, fantasy, podcasts,
+            depth charts and watch notes for that side, so you are not hopping six
+            American sites. Aimed at fans in Scotland and the rest of the UK.
           </p>
+          <ul className="mt-6 grid max-w-2xl gap-3 text-sm sm:grid-cols-3">
+            <li className="rounded-2xl border border-line bg-navy-2/70 px-4 py-3">
+              <p className="font-semibold text-cream">Learn the game</p>
+              <p className="mt-1 text-xs leading-5 text-cream-dim">Beginner path, glossary, diagrams.</p>
+            </li>
+            <li className="rounded-2xl border border-line bg-navy-2/70 px-4 py-3">
+              <p className="font-semibold text-cream">Meet your team</p>
+              <p className="mt-1 text-xs leading-5 text-cream-dim">Discord chat and pub meetups.</p>
+            </li>
+            <li className="rounded-2xl border border-line bg-navy-2/70 px-4 py-3">
+              <p className="font-semibold text-cream">Follow that club</p>
+              <p className="mt-1 text-xs leading-5 text-cream-dim">News, pods, depth and watch, in one app.</p>
+            </li>
+          </ul>
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
             <Link
               href={start ? `/learn/${start.slug}` : "/learn"}
@@ -116,7 +130,7 @@ export default async function HomePage() {
               </li>
               <li>
                 <Link href="/news" className="text-cream hover:text-gold">
-                  NFL news (helper) →
+                  NFL news →
                 </Link>
               </li>
               <li>

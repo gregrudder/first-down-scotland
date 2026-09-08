@@ -6,7 +6,7 @@ import { site } from "@/lib/site";
 export const metadata: Metadata = {
   title: "About",
   description:
-    "First Down Scotland is a learning hub and a community to meet fans of the NFL team you support, in Scotland and the rest of the UK.",
+    "First Down Scotland is a learning hub, a community to meet fans of your NFL team, and a one-stop shop for that club, for Scotland and the rest of the UK.",
 };
 
 export default function AboutPage() {
@@ -20,9 +20,10 @@ export default function AboutPage() {
         <p>
           This site is for people in Scotland and the rest of the UK who keep meaning
           to “get” American football, then bounce off the jargon, and then realise
-          there is nowhere obvious to talk about it. We are a learning hub first:
-          short lessons, a glossary, diagrams. Then we are a community so you can
-          meet fans of the team you actually support.
+          there is nowhere obvious to talk about it. Three jobs: learn the game,
+          meet fans of the team you support, and keep that club in one place
+          (news, fantasy, podcasts, depth, watch notes) so you are not hopping six
+          American tabs.
         </p>
         <p>
           Discord is the chat home: general room, an NFL room, and a channel per
@@ -32,13 +33,14 @@ export default function AboutPage() {
           picked the same side, or arrange a meetup once chat is open.
         </p>
         <p>
-          Fixtures, where to watch, news and podcasts stay as helpers. This is
-          not a TV guide, a magazine clone, a fantasy assistant, a betting tip
-          sheet, or a live play-by-play machine. Kick-off times come from ESPN’s
-          public scoreboard and are shown in Europe/London. If that feed fails,
-          we say so. The tone is meant to be welcoming rather than
-          matey-American. We use UK spelling (defence, favourite, organised) and
-          we explain US words when the broadcast will say them differently.
+          You can find bits of this elsewhere online. The sell is that this app
+          does it together, in UK English, aimed at Scottish and UK fans. It is
+          not a TV listings clone, a US magazine, a betting tip sheet, or a live
+          play-by-play machine. Kick-off times come from ESPN’s public scoreboard
+          and are shown in Europe/London. If that feed fails, we say so. The tone
+          is meant to be welcoming rather than matey-American. We use UK spelling
+          (defence, favourite, organised) and we explain US words when the
+          broadcast will say them differently.
         </p>
       </div>
 

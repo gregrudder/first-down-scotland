@@ -177,9 +177,9 @@ export function SundayCard({
         </h2>
         <p className="mt-3 text-sm leading-6 text-cream-dim">
           A weekly card for the club you support: kick-off in UK time, one
-          plain-English thing to look for, and pubs where fans of that side might
-          gather. The full slate stays free below. Discord is the chat home when
-          the invite is ready.
+          plain-English thing to look for, depth, and pubs where fans of that
+          side might gather. News, pods and watch notes for that team live in
+          the same app. Discord is the chat home when the invite is ready.
         </p>
         <Link
           href="/pick-your-team"
@@ -283,7 +283,8 @@ export function SundayCard({
           </p>
           <p className="mt-1 text-sm leading-6 text-cream-dim">
             Chat with other UK fans of {team.shortName} on Discord when it opens,
-            or find a pub that will put the game on.
+            or find a pub that will put the game on. News, pods and the depth
+            chart for this club live in the same app.
           </p>
           <p className="mt-2 text-sm leading-6">
             <Link href="/community" className="text-gold hover:text-gold-soft">

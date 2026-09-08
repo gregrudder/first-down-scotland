@@ -5,9 +5,9 @@ export function DepthChart({ chart }: { chart: DepthChartResult }) {
     <section className="mt-8">
       <h2 className="font-display text-2xl text-cream">Depth chart</h2>
       <p className="mt-2 text-sm leading-6 text-cream-dim">
-        Who is lined up first at each spot. This is ESPN’s public chart. It can
-        change every week after injuries, form, and selection. We do not type the
-        names in by hand.
+        Who is lined up first at each spot, so you do not have to hunt ESPN
+        yourself. This is their public chart. It can change every week after
+        injuries, form, and selection. We do not type the names in by hand.
       </p>
 
       {!chart.ok ? (

@@ -15,8 +15,9 @@ export default function WatchPage() {
       <PageIntro eyebrow="United Kingdom" title="Where to watch">
         <p>{watchDisclaimer}</p>
         <p>
-          This page is the sofa map. If you would rather sit with fans of the
-          team you picked, open{" "}
+          Watch info for your team, in the same app as the lessons and the
+          community. If you would rather sit with fans of the side you picked,
+          open{" "}
           <Link href="/watch-near-you" className="text-gold">
             Watch near you
           </Link>

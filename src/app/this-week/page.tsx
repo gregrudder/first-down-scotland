@@ -11,7 +11,7 @@ export const revalidate = 300;
 export const metadata: Metadata = {
   title: "This week’s games",
   description:
-    "This week’s NFL kick-offs in UK time, as a helper: plus a Sunday card if you have picked a team, so you can meet fans of that side.",
+    "This week’s NFL kick-offs in UK time, plus a Sunday card if you have picked a team: what to watch for, depth, and where fans of that side might meet.",
 };
 
 export default async function ThisWeekPage() {
@@ -21,13 +21,12 @@ export default async function ThisWeekPage() {
     <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6 sm:py-16">
       <PageIntro eyebrow="This week for you" title="This week’s games">
         <p>
-          Kick-offs are converted to the UK so you know when your side is on.
-          The slate is a helper, not the product. Scores appear if the feed has
-          them. We do not type these in by hand: if ESPN’s public scoreboard
-          hiccups, you will see that here instead of a stale spreadsheet. If you
-          have picked a team, your Sunday card sits at the top: what to look for,
-          and where fans of that club might meet. The full list stays open for
-          everyone.
+          Kick-offs are converted to the UK so you know when your side is on,
+          without another American tab. Scores appear if the feed has them. We do
+          not type these in by hand: if ESPN’s public scoreboard hiccups, you will
+          see that here instead of a stale spreadsheet. If you have picked a team,
+          your Sunday card sits at the top: what to look for, depth, and where
+          fans of that club might meet. The full list stays open for everyone.
         </p>
       </PageIntro>
 

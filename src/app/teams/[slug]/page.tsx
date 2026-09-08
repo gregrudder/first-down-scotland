@@ -33,7 +33,7 @@ export async function generateMetadata({
   if (!team) return { title: "Team" };
   return {
     title: team.name,
-    description: `${team.name} for UK beginners: stadium, colours, Super Bowls, and this week’s depth chart.`,
+    description: `${team.name} in one place for UK fans: stadium, colours, Super Bowls, this week’s depth chart, YouTube and pods.`,
   };
 }
 
@@ -93,6 +93,18 @@ export default async function TeamProfilePage({
       </div>
 
       <p className="mt-6 text-base leading-7 text-cream">{team.scotlandHook}</p>
+      <p className="mt-3 text-sm leading-6 text-cream-dim">
+        Depth, official YouTube and a pod for this club, in one place. Meet other
+        UK fans of the {team.shortName} on{" "}
+        <Link href="/community" className="text-gold">
+          Community
+        </Link>{" "}
+        and in{" "}
+        <Link href="/watch-near-you" className="text-gold">
+          pubs
+        </Link>
+        .
+      </p>
 
       <DepthChart chart={depthChart} />
 
@@ -234,6 +246,14 @@ export default async function TeamProfilePage({
         {" · "}
         <Link href="/learn" className="text-gold">
           Learn the sport
+        </Link>
+        {" · "}
+        <Link href="/community" className="text-gold">
+          Meet fans of this team
+        </Link>
+        {" · "}
+        <Link href="/news" className="text-gold">
+          NFL news
         </Link>
       </p>
       <p className="mt-8 text-xs leading-5 text-cream-dim">{teamProfileNote}</p>

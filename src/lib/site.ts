@@ -1,9 +1,9 @@
 export const site = {
   name: "First Down Scotland",
   shortName: "First Down",
-  tagline: "Learn the NFL, then meet fans of the team you support. Built in Scotland, for the UK.",
+  tagline: "Learn the NFL. Meet fans of your team. Follow that club in one place. Built in Scotland, for the UK.",
   description:
-    "A learning hub for Scottish and UK NFL beginners, plus a community to meet fans of the team you picked. Lessons in UK English, Discord for chat, and pubs for real-world meetups. Fixtures and news stay as helpers.",
+    "A learning hub for Scottish and UK NFL beginners, a community to meet fans of the team you picked, and a one-stop shop for that club: news, fantasy, podcasts, depth and where to watch. Discord for chat, pubs for real-world meetups.",
   locale: "en-GB",
   timeZone: "Europe/London",
 } as const;
