@@ -16,26 +16,109 @@ export const homeSeo = {
     "FIRST DOWN SCOTLAND NFL is a Scotland-built hub for UK beginners: learn American football in plain English, meet fans of your team, and follow that club in one place.",
 } as const;
 
-export const navItems = [
-  { href: "/", label: "Home" },
+export type NavItem = {
+  href: string;
+  label: string;
+};
+
+export type NavGroup = {
+  id: string;
+  label: string;
+  items: readonly NavItem[];
+};
+
+export const navHome: NavItem = { href: "/", label: "Home" };
+
+/** Three site jobs, shown as a short desktop bar beside the hamburger. */
+export const navShortcuts: readonly NavItem[] = [
   { href: "/learn", label: "Learn" },
-  { href: "/pick-your-team", label: "Pick my team" },
-  { href: "/community", label: "Community" },
-  { href: "/watch-near-you", label: "Pubs" },
   { href: "/this-week", label: "This week" },
-  { href: "/scores", label: "Scores" },
-  { href: "/standings", label: "Standings" },
-  { href: "/watch", label: "Watch" },
-  { href: "/film-room", label: "Film room" },
-  { href: "/news", label: "News" },
-  { href: "/podcasts", label: "Podcasts" },
-  { href: "/history", label: "History" },
-  { href: "/teams", label: "Teams" },
-  { href: "/rookies", label: "Rookies" },
-  { href: "/glossary", label: "Glossary" },
-  { href: "/feedback", label: "Feedback" },
-  { href: "/about", label: "About" },
-] as const;
+  { href: "/community", label: "Community" },
+];
+
+export const navGroups: readonly NavGroup[] = [
+  {
+    id: "learn",
+    label: "Learn",
+    items: [
+      { href: "/learn", label: "Lessons" },
+      { href: "/learn/plays", label: "Playbook" },
+      { href: "/learn/quiz", label: "Quiz" },
+      { href: "/glossary", label: "Glossary" },
+      { href: "/film-room", label: "Film room" },
+      { href: "/learn/draft-prospects", label: "Draft prospects" },
+    ],
+  },
+  {
+    id: "league",
+    label: "Follow the league",
+    items: [
+      { href: "/this-week", label: "This week" },
+      { href: "/scores", label: "Scores" },
+      { href: "/standings", label: "Standings" },
+      { href: "/rookies", label: "Rookie Watch" },
+    ],
+  },
+  {
+    id: "team",
+    label: "Your team",
+    items: [
+      { href: "/pick-your-team", label: "Pick my team" },
+      { href: "/teams", label: "Teams" },
+      { href: "/news", label: "News" },
+      { href: "/news/fantasy", label: "Fantasy" },
+      { href: "/podcasts", label: "Podcasts" },
+    ],
+  },
+  {
+    id: "community",
+    label: "Community",
+    items: [
+      { href: "/community", label: "Community" },
+      { href: "/watch-near-you", label: "Pubs" },
+    ],
+  },
+  {
+    id: "more",
+    label: "Watch and more",
+    items: [
+      { href: "/watch", label: "Watch" },
+      { href: "/history", label: "History" },
+      { href: "/feedback", label: "Feedback" },
+      { href: "/about", label: "About" },
+    ],
+  },
+];
+
+export const navItems: readonly NavItem[] = [
+  navHome,
+  ...navGroups.flatMap((group) => group.items),
+];
+
+export function isCurrentNav(pathname: string, href: string): boolean {
+  if (href === "/") return pathname === "/";
+  if (pathname !== href && !pathname.startsWith(`${href}/`)) return false;
+  return !navItems.some(
+    (item) =>
+      item.href !== href &&
+      item.href.length > href.length &&
+      (pathname === item.href || pathname.startsWith(`${item.href}/`)),
+  );
+}
+
+export function navGroupIdForPath(pathname: string): string | null {
+  for (const group of navGroups) {
+    if (group.items.some((item) => isCurrentNav(pathname, item.href))) {
+      return group.id;
+    }
+  }
+  return null;
+}
+
+export function isShortcutCurrent(pathname: string, href: string): boolean {
+  if (href === "/learn") return navGroupIdForPath(pathname) === "learn";
+  return isCurrentNav(pathname, href);
+}
 
 const FALLBACK_PRODUCTION = "https://first-down-scotland.vercel.app";
 const FALLBACK_LOCAL = "http://localhost:3000";
