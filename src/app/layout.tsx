@@ -1,4 +1,6 @@
 import type { Metadata, Viewport } from "next";
+import { Analytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Figtree, Fraunces } from "next/font/google";
 import { SiteShell } from "@/components/SiteShell";
 import { absoluteUrl, site } from "@/lib/site";
@@ -85,6 +87,8 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     >
       <body className="min-h-full font-sans">
         <SiteShell>{children}</SiteShell>
+        <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );
