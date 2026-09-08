@@ -34,6 +34,7 @@ Out of scope: live fantasy scoring / league apps, live play-by-play UI, betting,
 - Next.js (App Router) + TypeScript + Tailwind CSS v4
 - ESPN public scoreboard API (no keys)
 - Vercel-ready ISR + optional Cron revalidation
+- Vercel Web Analytics + Speed Insights (`@vercel/analytics`, `@vercel/speed-insights` in the root layout). **Turn on Analytics (and Speed Insights) in the Vercel project dashboard** if they are not already enabled; the packages do not collect in local `next dev`.
 
 ## Run locally
 
