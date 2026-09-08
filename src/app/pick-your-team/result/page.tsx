@@ -11,7 +11,8 @@ import { saveTeam } from "@/lib/team-storage";
 function ResultBody() {
   const params = useSearchParams();
   const abbreviation = params.get("team") ?? "";
-  const via = params.get("via") === "spin" ? "spin" : "quiz";
+  const viaRaw = params.get("via");
+  const via = viaRaw === "spin" || viaRaw === "choose" ? viaRaw : "quiz";
   const tags = (params.get("tags") ?? "")
     .split(",")
     .filter(isTeamTag);
@@ -28,6 +29,7 @@ function ResultBody() {
   const story = useMemo(() => {
     if (!team) return "";
     if (via === "spin") return team.oneLiner;
+    if (via === "choose") return team.oneLiner;
     return whyThisFits(team, tags);
   }, [team, via, tags]);
 
@@ -50,7 +52,9 @@ function ResultBody() {
     <div className="mx-auto max-w-3xl px-4 py-12 sm:px-6 sm:py-16">
       <TeamResultCard
         team={team}
-        eyebrow={via === "spin" ? "The ball has spoken" : "Your match"}
+        eyebrow={
+          via === "spin" ? "The ball has spoken" : via === "choose" ? "Your pick" : "Your match"
+        }
         story={story}
       />
 

@@ -7,7 +7,7 @@ import { TrademarkNote } from "@/components/TeamResultCard";
 export const metadata: Metadata = {
   title: "Pick my team",
   description:
-    "Pick an NFL team so you can find other Scottish and UK fans of that side: a short quiz, or spin the ball.",
+    "Pick an NFL team so you can find other Scottish and UK fans of that side: choose from the 32, take a short quiz, or spin the ball.",
 };
 
 export default function PickYourTeamPage() {
@@ -17,14 +17,30 @@ export default function PickYourTeamPage() {
         <p>
           You do not need a childhood in Ohio. You need a side so you can find
           other Scottish and UK fans of that club: on Discord when it opens, and
-          in the pubs we list. Take a short quiz, or spin the ball. Saved on this
-          device only. Pick again whenever you like.
+          in the pubs we list. If you already support a team, pick it from the 32.
+          Or take a short quiz, or spin the ball. Saved on this device only. Pick
+          again whenever you like.
         </p>
       </PageIntro>
 
       <HubSavedTeam />
 
-      <div className="mt-10 grid gap-4 sm:grid-cols-2">
+      <Link
+        href="/pick-your-team/choose"
+        className="mt-10 block rounded-2xl border border-gold/40 bg-navy-2 p-6 transition hover:border-gold/60 hover:bg-navy-3"
+      >
+        <p className="text-xs font-semibold uppercase tracking-[0.16em] text-gold">
+          I already have a team
+        </p>
+        <h2 className="mt-2 font-display text-2xl text-cream">Pick from the 32</h2>
+        <p className="mt-3 text-sm leading-6 text-cream-dim">
+          Browse or search every club. Tap the one you support. Colours and your
+          Sunday card follow.
+        </p>
+        <p className="mt-4 text-sm font-semibold text-gold">Choose a club →</p>
+      </Link>
+
+      <div className="mt-4 grid gap-4 sm:grid-cols-2">
         <Link
           href="/pick-your-team/quiz"
           className="rounded-2xl border border-line bg-navy-2 p-6 transition hover:border-gold/50 hover:bg-navy-3"
