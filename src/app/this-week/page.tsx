@@ -4,6 +4,7 @@ import { SundayCard } from "@/components/SundayCard";
 import { GameCard } from "@/components/GameCard";
 import { PageIntro } from "@/components/PageIntro";
 import { getNflFixtures, groupGamesByUkDate, weekHeading } from "@/lib/espn";
+import { getGameReports } from "@/lib/game-report";
 import { formatFetchedAt } from "@/lib/time";
 
 export const revalidate = 300;
@@ -11,27 +12,31 @@ export const revalidate = 300;
 export const metadata: Metadata = {
   title: "This week’s games",
   description:
-    "This week’s NFL kick-offs in UK time, plus a Sunday card if you have picked a team: what to watch for, depth, and where fans of that side might meet.",
+    "This week’s NFL kick-offs in UK time, with a short preview or post-match report on each game, plus a Sunday card if you have picked a team: what to watch for, depth, and where fans of that side might meet.",
 };
 
 export default async function ThisWeekPage() {
   const fixtures = await getNflFixtures();
+  const reports = fixtures.ok ? await getGameReports(fixtures.games) : {};
 
   return (
     <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6 sm:py-16">
       <PageIntro eyebrow="This week for you" title="This week’s games">
         <p>
           Kick-offs are converted to the UK so you know when your side is on,
-          without another American tab. Scores appear if the feed has them. We do
-          not type these in by hand: if ESPN’s public scoreboard hiccups, you will
-          see that here instead of a stale spreadsheet. If you have picked a team,
-          your Sunday card sits at the top: what to look for, depth, and where
-          fans of that club might meet. The full list stays open for everyone.
+          without another American tab. Each game has a short preview, or a
+          post-match report after full time (or a clear “report coming” note until
+          a feed publishes one). We link out for the full piece. Scores appear if
+          the feed has them. We do not type these in by hand: if ESPN’s public
+          scoreboard hiccups, you will see that here instead of a stale spreadsheet.
+          If you have picked a team, your Sunday card sits at the top: what to look
+          for, depth, and where fans of that club might meet. The full list stays
+          open for everyone.
         </p>
       </PageIntro>
 
       <div className="mt-8">
-        <SundayCard fixtures={fixtures} />
+        <SundayCard fixtures={fixtures} reports={reports} />
       </div>
 
       {!fixtures.ok ? (
@@ -79,7 +84,7 @@ export default async function ThisWeekPage() {
                   <h2 className="font-display text-2xl text-cream">{group.heading}</h2>
                   <div className="mt-4 grid gap-4 lg:grid-cols-2">
                     {group.games.map((game) => (
-                      <GameCard key={game.id} game={game} />
+                      <GameCard key={game.id} game={game} report={reports[game.id]} />
                     ))}
                   </div>
                 </section>

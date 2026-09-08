@@ -4,6 +4,7 @@ import { FANTASY_NEWS_CACHE_TAG, NEWS_CACHE_TAG } from "@/data/news-feeds";
 import { DEPTH_CHART_CACHE_TAG } from "@/lib/depth-chart";
 import { DRAFT_PROSPECTS_CACHE_TAG } from "@/lib/draft-prospects";
 import { FIXTURES_CACHE_TAG } from "@/lib/espn";
+import { GAME_REPORTS_CACHE_TAG } from "@/lib/game-report";
 
 function isAuthorised(request: NextRequest): boolean {
   const secret = process.env.CRON_SECRET;
@@ -22,6 +23,7 @@ async function revalidateFixtures() {
   revalidateTag(FANTASY_NEWS_CACHE_TAG, "max");
   revalidateTag(DEPTH_CHART_CACHE_TAG, "max");
   revalidateTag(DRAFT_PROSPECTS_CACHE_TAG, "max");
+  revalidateTag(GAME_REPORTS_CACHE_TAG, "max");
   revalidatePath("/");
   revalidatePath("/this-week");
   revalidatePath("/news");
@@ -38,6 +40,7 @@ async function revalidateFixtures() {
       FANTASY_NEWS_CACHE_TAG,
       DEPTH_CHART_CACHE_TAG,
       DRAFT_PROSPECTS_CACHE_TAG,
+      GAME_REPORTS_CACHE_TAG,
     ],
     at: new Date().toISOString(),
   });

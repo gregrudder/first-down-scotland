@@ -6,12 +6,14 @@ import { LessonCard } from "@/components/LessonCard";
 import { lessons } from "@/data/lessons";
 import { getDraftProspects } from "@/lib/draft-prospects";
 import { getNflFixtures } from "@/lib/espn";
+import { getGameReports } from "@/lib/game-report";
 import { site } from "@/lib/site";
 
 export const revalidate = 300;
 
 export default async function HomePage() {
   const [fixtures, draftBoard] = await Promise.all([getNflFixtures(), getDraftProspects()]);
+  const reports = fixtures.ok ? await getGameReports(fixtures.games) : {};
   const start = lessons[0];
 
   return (
@@ -82,7 +84,7 @@ export default async function HomePage() {
           </div>
         </div>
         <div className="space-y-4 lg:pt-16">
-          <SundayCard fixtures={fixtures} compact />
+          <SundayCard fixtures={fixtures} reports={reports} compact />
           <GamesTeaser fixtures={fixtures} />
           <DraftProspectsTeaser board={draftBoard} compact />
           <div className="rounded-2xl border border-line bg-navy-2 p-5">

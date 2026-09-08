@@ -1,5 +1,7 @@
 import Image from "next/image";
+import { GameReportBlock } from "@/components/GameReportBlock";
 import type { NflGame, TeamSide } from "@/lib/espn";
+import type { GameReport } from "@/lib/game-report";
 import { formatUkTime } from "@/lib/time";
 import { watchHintForGame } from "@/lib/watch-hints";
 
@@ -60,7 +62,13 @@ function TeamRow({
   );
 }
 
-export function GameCard({ game }: { game: NflGame }) {
+export function GameCard({
+  game,
+  report,
+}: {
+  game: NflGame;
+  report?: GameReport;
+}) {
   const showScore = game.status === "in-progress" || game.status === "final";
   const venue = [game.venue, game.venueCity].filter(Boolean).join(" · ");
 
@@ -85,6 +93,7 @@ export function GameCard({ game }: { game: NflGame }) {
 
       {venue ? <p className="mt-4 text-xs text-cream-dim">{venue}</p> : null}
       <p className="mt-2 text-sm leading-6 text-cream-dim">{watchHintForGame(game)}</p>
+      {report ? <GameReportBlock report={report} /> : null}
     </article>
   );
 }
