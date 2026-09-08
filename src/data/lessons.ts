@@ -2,7 +2,7 @@ export type LessonBlock =
   | { type: "p"; text: string }
   | { type: "h2"; text: string }
   | { type: "list"; items: string[] }
-  | { type: "callout"; title: string; text: string }
+  | { type: "callout"; title: string; text: string; href?: string; linkLabel?: string }
   | { type: "terms"; items: { term: string; def: string }[] }
   | { type: "diagram"; id: string }
   | { type: "draft-board" }
@@ -173,6 +173,13 @@ export const lessons: Lesson[] = [
           },
         ],
       },
+      {
+        type: "callout",
+        title: "Offside / offsides",
+        text: "Cross that line before the snap and it is offside. US commentary often says offsides. The Penalties lesson has the yellow flag, the yards, and the other calls you will hear every Sunday. This page is just the line itself.",
+        href: "/learn/penalties",
+        linkLabel: "Open the Penalties lesson →",
+      },
     ],
   },
   {
@@ -200,6 +207,11 @@ export const lessons: Lesson[] = [
           "Field goal: 3 points. Kick the ball through the posts, usually on fourth down when a touchdown looks unlikely.",
           "Safety: 2 points to the defence, if they tackle an attacker in their own end zone. Rare, and very loud.",
         ],
+      },
+      {
+        type: "callout",
+        title: "A missed field goal can still be a touchdown",
+        text: "If the defence catch a field goal attempt, including in the end zone, they can run it back. Get it the other way and it is six points, the same as any other return touchdown. The kick only counts if it goes through the posts.",
       },
       { type: "diagram", id: "scoring-end-zone" },
       {
@@ -324,7 +336,7 @@ export const lessons: Lesson[] = [
     number: 5,
     title: "Common plays",
     summary:
-      "Coach-board X’s and O’s for the shapes you see every Sunday: runs, a draw, screens, slants, a deep ball, and a basic blitz.",
+      "Coach-board X’s and O’s for the shapes you see every Sunday: runs, a draw, screens, slants, a deep ball, a Hail Mary, and a basic blitz.",
     minutes: 8,
     blocks: [
       {
@@ -429,7 +441,7 @@ export const lessons: Lesson[] = [
       {
         type: "callout",
         title: "UK kick-off times",
-        text: "Most regular-season games land on a Sunday evening or late into Monday morning UK time. Thursday-night football usually starts in the small hours on Friday. Always check Europe/London, not the US graphic on the telly.",
+        text: "Most regular-season games land on a Sunday evening or late into Monday morning UK time. Thursday-night football usually starts in the small hours on Friday. If a US graphic only gives a zone: Eastern add 5 hours, Central 6, Mountain 7, Pacific 8. That rule of thumb still works with daylight saving. This site’s fixtures are already in Europe/London.",
       },
       {
         type: "terms",
@@ -484,6 +496,10 @@ export const lessons: Lesson[] = [
         text: "The kicker, holder and long snapper come on. The snap has to be clean, the hold has to be tidy, and the kicker has to send it between the posts. From the stands it looks simple. From 50 yards, with a rush coming, it is not.",
       },
       {
+        type: "p",
+        text: "If the kick is short or wide, and a defender catches it, they can return it. That includes a catch in the end zone. Run it the length of the field and the defence have a touchdown. Beginners often think a missed kick is just a dead ball. It is not, unless they down it or it goes out of play.",
+      },
+      {
         type: "callout",
         title: "Hidden yards",
         text: "A great punt can pin the other team on their own 5-yard line. A clumsy one can hand them a short field. Special teams rarely fill highlight reels, but coaches notice them every Monday.",
@@ -501,7 +517,7 @@ export const lessons: Lesson[] = [
           },
           {
             term: "Blocked kick",
-            def: "The defence get a hand on a punt or field goal. Chaos usually follows.",
+            def: "The defence get a hand on a punt or field goal. Chaos usually follows, and a return for a touchdown is legal.",
           },
         ],
       },

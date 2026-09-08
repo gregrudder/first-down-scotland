@@ -147,6 +147,27 @@ export const plays: Play[] = [
     ],
   },
   {
+    slug: "hail-mary",
+    title: "Hail Mary",
+    alsoCalled: "A desperation heave: everyone sprints to the end zone and you throw it up.",
+    summary:
+      "Late on the clock, usually the last play, the quarterback drops and throws as far as they can into the end zone. Several receivers flood the same patch of grass and hope someone comes down with it.",
+    watch:
+      "The clock is almost gone and the offence is too far away for an ordinary play. Receivers all sprint to the same end of the field. The ball hangs. Then it is a scramble: catch, tip, or incomplete.",
+    minutes: 3,
+    caption:
+      "Three receivers sprint deep toward the end zone. The quarterback drops and heaves a long pass into the cluster. The running back stays in to block. Defence is the dark circles with gold letters.",
+    markers: eleven,
+    paths: [
+      { id: "drop", d: "M156 196 L156 218", kind: "block" },
+      { id: "rb-block", d: "M156 226 L168 200", kind: "block" },
+      { id: "wr-l", d: "M32 170 C80 110 120 50 140 24", kind: "route" },
+      { id: "te", d: "M248 164 C230 110 210 50 190 28", kind: "route" },
+      { id: "wr-r", d: "M328 170 C280 110 240 50 220 24", kind: "route" },
+      { id: "pass", d: "M156 218 C200 140 210 70 200 26", kind: "pass" },
+    ],
+  },
+  {
     slug: "blitz",
     title: "Basic blitz",
     alsoCalled: "Sending extra people after the quarterback.",

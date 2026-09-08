@@ -56,6 +56,7 @@ export const watchOptions: WatchOption[] = [
 
 export const watchTips = [
   "International games in London, and the other European venues, are usually shown across 5, Sky and Game Pass. Those are the easiest Sundays to meet other fans in a pub.",
+  "If a US graphic only gives a time zone: Eastern add 5 hours for the UK, Central 6, Mountain 7, Pacific 8. That rule of thumb still works with daylight saving. This site’s fixtures are already in Europe/London.",
   "A US network name on the scoreboard (NBC, CBS, FOX, ESPN) is not a UK channel. Use it only as a clue that the game is a national US broadcast.",
   "RedZone is a Sky / Game Pass product that hops between scoring drives. Brilliant once you know the sport; chaotic if you are still on lesson two.",
   "We do not scrape per-game UK rights. If two apps disagree, trust the broadcaster, not a spreadsheet.",
