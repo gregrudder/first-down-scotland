@@ -1,15 +1,17 @@
 import Link from "next/link";
+import { DraftProspectsTeaser } from "@/components/DraftProspectsTeaser";
 import { GamesTeaser } from "@/components/GamesTeaser";
 import { HomeTeamCard } from "@/components/TeamMark";
 import { LessonCard } from "@/components/LessonCard";
 import { lessons } from "@/data/lessons";
+import { getDraftProspects } from "@/lib/draft-prospects";
 import { getNflFixtures } from "@/lib/espn";
 import { site } from "@/lib/site";
 
 export const revalidate = 300;
 
 export default async function HomePage() {
-  const fixtures = await getNflFixtures();
+  const [fixtures, draftBoard] = await Promise.all([getNflFixtures(), getDraftProspects()]);
   const start = lessons[0];
 
   return (
@@ -67,11 +69,17 @@ export default async function HomePage() {
         <div className="space-y-4 lg:pt-16">
           <HomeTeamCard />
           <GamesTeaser fixtures={fixtures} />
+          <DraftProspectsTeaser board={draftBoard} compact />
           <div className="rounded-2xl border border-line bg-navy-2 p-5">
             <p className="text-xs font-semibold uppercase tracking-[0.16em] text-gold">
               Also useful
             </p>
             <ul className="mt-3 space-y-2 text-sm">
+              <li>
+                <Link href="/learn/draft-prospects" className="text-cream hover:text-gold">
+                  2027 draft prospects →
+                </Link>
+              </li>
               <li>
                 <Link href="/glossary" className="text-cream hover:text-gold">
                   Jargon decoder →

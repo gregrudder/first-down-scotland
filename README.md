@@ -10,6 +10,7 @@ Learning is the hero. This is not a TV listings product.
 
 - **`/`** — value prop, Start learning CTA, full lesson list, and a small “games this week” teaser
 - **`/learn`** and **`/learn/[slug]`** — beginner lessons in UK English, including X-and-O play diagrams at `/learn/plays` and a Draft explainer at `/learn/the-draft`. Stage progress bars and a 20-question quiz at `/learn/quiz` (saved in the browser as `fds-learn`). Badges: Practice Squad (0–7) → Rookie (8–12) → Starter (13–17) → Hall of Famer (18–20).
+- **`/learn/draft-prospects`** — top 2027 Draft names (ESPN when the official list fills; otherwise a cited early consensus board), cached 600s, Cron-busted
 - **`/glossary`** — searchable jargon decoder
 - **`/this-week`** — this week’s NFL games from ESPN’s public scoreboard, times in `Europe/London`
 - **`/news`** — NFL headlines pulled automatically from public RSS (ESPN, BBC Sport, the Guardian)
@@ -87,14 +88,31 @@ On Vercel, `vercel.json` schedules a **daily** Cron at `0 6 * * *` (06:00 UTC) t
 - `revalidateTag('fixtures', 'max')`
 - `revalidateTag('news', 'max')`
 - `revalidateTag('news-fantasy', 'max')`
+- `revalidateTag('depth-charts', 'max')`
+- `revalidateTag('draft-prospects', 'max')`
 - `revalidatePath('/')`
 - `revalidatePath('/this-week')`
 - `revalidatePath('/news')`
 - `revalidatePath('/news/fantasy')`
+- `revalidatePath('/teams')`
+- `revalidatePath('/learn')`
+- `revalidatePath('/learn/draft-prospects')`
 
 Hobby only allows **once-per-day** Cron. Pages still refresh without the Cron: the 300-second ISR / fetch revalidate keeps times and scores reasonably fresh between visits. On Pro you can change the expression to hourly (for example `15 * * * *`) if you want a background warm more often.
 
 Team depth charts use the same ESPN public API family (`…/teams/{id}/depthcharts` plus roster names), cached for **600 seconds** and tagged `depth-charts`. The daily Cron busts that tag too. If ESPN is down, the profile still renders and we say so.
+
+## How 2027 draft prospects refresh
+
+The top-12 board is **not** a hand-edited mock.
+
+1. The app tries ESPN’s public 2027 draft athlete list:
+   `https://sports.core.api.espn.com/v2/sports/football/leagues/nfl/seasons/2027/draft/athletes`
+2. That list is empty until ESPN publishes the class. Until then we show a cited early consensus (The Athletic, Yahoo Sports, Sporting News) of names that sit on at least two of those boards.
+3. Next.js caches the fetch for **600 seconds** and tags it `draft-prospects`. `/learn/draft-prospects` and `/learn` also set `export const revalidate = 600`.
+4. The daily Hobby Cron busts the tag and `/learn/draft-prospects`.
+
+Rankings move. The page says so. This is not a betting slip.
 
 ## How NFL news refreshes
 
@@ -138,6 +156,7 @@ curl -H "Authorization: Bearer $CRON_SECRET" https://your-domain.vercel.app/api/
 | --- | --- |
 | `/` | Learning home + fixtures teaser |
 | `/learn` | Lesson index, stage progress bars |
+| `/learn/draft-prospects` | Top 2027 draft prospects (cached) |
 | `/learn/what-youre-watching` … `/learn/the-draft` | The lessons, including the Draft |
 | `/learn/plays` and `/learn/plays/[slug]` | Common play diagrams |
 | `/learn/quiz` | 20-question path quiz + badges (`fds-learn`) |

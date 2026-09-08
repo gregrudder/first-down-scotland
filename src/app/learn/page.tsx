@@ -1,9 +1,13 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { DraftProspectsTeaser } from "@/components/DraftProspectsTeaser";
 import { LearnPathProgress } from "@/components/LearnProgress";
 import { LessonCard } from "@/components/LessonCard";
 import { PageIntro } from "@/components/PageIntro";
 import { lessons } from "@/data/lessons";
+import { getDraftProspects } from "@/lib/draft-prospects";
+
+export const revalidate = 600;
 
 export const metadata: Metadata = {
   title: "Learn the NFL",
@@ -11,7 +15,9 @@ export const metadata: Metadata = {
     "A short, ordered path for UK beginners: the field, downs, scoring, common plays with diagrams, turnovers, the clock, penalties, what to look for on telly, and the NFL Draft.",
 };
 
-export default function LearnIndexPage() {
+export default async function LearnIndexPage() {
+  const board = await getDraftProspects();
+
   return (
     <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6 sm:py-16">
       <PageIntro eyebrow="Learning path" title="Short lessons. Start at one.">
@@ -30,6 +36,9 @@ export default function LearnIndexPage() {
         {lessons.map((lesson) => (
           <LessonCard key={lesson.slug} lesson={lesson} />
         ))}
+      </div>
+      <div className="mt-10">
+        <DraftProspectsTeaser board={board} />
       </div>
       <div className="mt-10 grid gap-4 sm:grid-cols-2">
         <Link
