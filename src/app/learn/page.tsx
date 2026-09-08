@@ -56,6 +56,19 @@ export default function LearnIndexPage() {
             Stadium, colours, a few iconic names, Super Bowls at a glance.
           </p>
         </Link>
+        <Link
+          href="/learn/draft-prospects"
+          className="rounded-2xl border border-line bg-navy-2 p-5 transition hover:border-gold/50 hover:bg-navy-3 sm:col-span-2"
+        >
+          <p className="text-xs font-semibold uppercase tracking-[0.16em] text-gold">
+            2027 class
+          </p>
+          <h2 className="mt-2 font-display text-xl text-cream">Top draft prospects</h2>
+          <p className="mt-2 text-sm leading-6 text-cream-dim">
+            Twelve names on the early boards. Rankings move. Read the{" "}
+            <span className="text-gold">Draft lesson</span> if “pick 1” still sounds like bingo.
+          </p>
+        </Link>
       </div>
     </div>
   );

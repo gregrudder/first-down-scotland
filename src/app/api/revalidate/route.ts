@@ -2,6 +2,7 @@ import { revalidatePath, revalidateTag } from "next/cache";
 import { NextRequest, NextResponse } from "next/server";
 import { FANTASY_NEWS_CACHE_TAG, NEWS_CACHE_TAG } from "@/data/news-feeds";
 import { DEPTH_CHART_CACHE_TAG } from "@/lib/depth-chart";
+import { DRAFT_PROSPECTS_CACHE_TAG } from "@/lib/draft-prospects";
 import { FIXTURES_CACHE_TAG } from "@/lib/espn";
 
 function isAuthorised(request: NextRequest): boolean {
@@ -20,15 +21,23 @@ async function revalidateFixtures() {
   revalidateTag(NEWS_CACHE_TAG, "max");
   revalidateTag(FANTASY_NEWS_CACHE_TAG, "max");
   revalidateTag(DEPTH_CHART_CACHE_TAG, "max");
+  revalidateTag(DRAFT_PROSPECTS_CACHE_TAG, "max");
   revalidatePath("/");
   revalidatePath("/this-week");
   revalidatePath("/news");
   revalidatePath("/news/fantasy");
   revalidatePath("/teams");
+  revalidatePath("/learn/draft-prospects");
 
   return NextResponse.json({
     revalidated: true,
-    tags: [FIXTURES_CACHE_TAG, NEWS_CACHE_TAG, FANTASY_NEWS_CACHE_TAG, DEPTH_CHART_CACHE_TAG],
+    tags: [
+      FIXTURES_CACHE_TAG,
+      NEWS_CACHE_TAG,
+      FANTASY_NEWS_CACHE_TAG,
+      DEPTH_CHART_CACHE_TAG,
+      DRAFT_PROSPECTS_CACHE_TAG,
+    ],
     at: new Date().toISOString(),
   });
 }

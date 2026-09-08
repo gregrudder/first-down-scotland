@@ -9,6 +9,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/",
     "/learn",
     "/learn/quiz",
+    "/learn/draft-prospects",
     "/glossary",
     "/this-week",
     "/news",
