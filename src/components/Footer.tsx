@@ -30,12 +30,16 @@ export function Footer() {
           </p>
         </div>
         <nav
-          className="grid gap-6 sm:grid-cols-2 lg:grid-cols-5"
+          className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
           aria-label="Footer"
         >
           {navGroups.map((group) => (
-            <div key={group.id}>
-              <p className="text-xs font-semibold uppercase tracking-[0.16em] text-gold">
+            <div key={group.id} className={group.priority === "low" ? "opacity-90" : undefined}>
+              <p
+                className={`text-xs font-semibold tracking-[0.16em] uppercase ${
+                  group.priority === "low" ? "text-cream-dim" : "text-gold"
+                }`}
+              >
                 {group.label}
               </p>
               <ul className="mt-3 space-y-2 text-sm">
