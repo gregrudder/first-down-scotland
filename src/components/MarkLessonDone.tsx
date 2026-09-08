@@ -55,7 +55,7 @@ export function MarkLessonDone({
           <button
             type="button"
             onClick={mark}
-            className="inline-flex items-center justify-center rounded-full bg-gold px-5 py-2.5 text-sm font-semibold text-navy hover:bg-gold-soft"
+            className="inline-flex items-center justify-center rounded-full bg-gold px-5 py-2.5 text-sm font-semibold text-gold-ink hover:bg-gold-soft"
           >
             Mark as read
           </button>

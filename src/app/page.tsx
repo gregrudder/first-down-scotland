@@ -57,7 +57,7 @@ export default async function HomePage() {
           <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
             <Link
               href="/learn"
-              className="inline-flex items-center justify-center rounded-full bg-gold px-6 py-3 text-sm font-semibold text-navy hover:bg-gold-soft"
+              className="inline-flex items-center justify-center rounded-full bg-gold px-6 py-3 text-sm font-semibold text-gold-ink hover:bg-gold-soft"
             >
               Start learning
             </Link>
@@ -184,7 +184,7 @@ export default async function HomePage() {
             <div className="mt-4 flex flex-wrap gap-3">
               <Link
                 href="/pick-your-team"
-                className="inline-flex items-center justify-center rounded-full bg-gold px-5 py-2.5 text-sm font-semibold text-navy hover:bg-gold-soft"
+                className="inline-flex items-center justify-center rounded-full bg-gold px-5 py-2.5 text-sm font-semibold text-gold-ink hover:bg-gold-soft"
               >
                 Pick my team
               </Link>

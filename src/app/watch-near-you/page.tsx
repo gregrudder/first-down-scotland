@@ -108,7 +108,7 @@ export default function WatchNearYouPage() {
         </p>
         <a
           href={listingMailto()}
-          className="mt-5 inline-flex items-center justify-center rounded-full bg-gold px-5 py-2.5 text-sm font-semibold text-navy hover:bg-gold-soft"
+          className="mt-5 inline-flex items-center justify-center rounded-full bg-gold px-5 py-2.5 text-sm font-semibold text-gold-ink hover:bg-gold-soft"
         >
           Get in touch
         </a>

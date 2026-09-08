@@ -103,7 +103,7 @@ export function LearnQuiz() {
           <button
             type="button"
             onClick={retake}
-            className="inline-flex items-center justify-center rounded-full bg-gold px-5 py-2.5 text-sm font-semibold text-navy hover:bg-gold-soft"
+            className="inline-flex items-center justify-center rounded-full bg-gold px-5 py-2.5 text-sm font-semibold text-gold-ink hover:bg-gold-soft"
           >
             Have another go
           </button>
@@ -149,7 +149,7 @@ export function LearnQuiz() {
           <button
             type="button"
             onClick={() => setStarted(true)}
-            className="inline-flex items-center justify-center rounded-full bg-gold px-5 py-2.5 text-sm font-semibold text-navy hover:bg-gold-soft"
+            className="inline-flex items-center justify-center rounded-full bg-gold px-5 py-2.5 text-sm font-semibold text-gold-ink hover:bg-gold-soft"
           >
             Start the quiz
           </button>

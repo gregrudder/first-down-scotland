@@ -117,7 +117,7 @@ export function FootballSpin() {
           type="button"
           onClick={spin}
           disabled={spinning}
-          className="inline-flex min-w-44 items-center justify-center rounded-full bg-gold px-6 py-3 text-sm font-semibold text-navy hover:bg-gold-soft disabled:opacity-60"
+          className="inline-flex min-w-44 items-center justify-center rounded-full bg-gold px-6 py-3 text-sm font-semibold text-gold-ink hover:bg-gold-soft disabled:opacity-60"
         >
           {spinning ? "Spinning…" : landed ? "Spin again" : "Spin the ball"}
         </button>

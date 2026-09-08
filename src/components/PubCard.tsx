@@ -22,7 +22,7 @@ export function PubCard({ pub }: { pub: PubListing }) {
 
       <div className="relative flex flex-wrap items-center gap-2">
         {pub.featured ? (
-          <span className="rounded-full bg-gold px-2.5 py-0.5 text-xs font-semibold text-navy">
+          <span className="rounded-full bg-gold px-2.5 py-0.5 text-xs font-semibold text-gold-ink">
             Featured
           </span>
         ) : null}

@@ -25,7 +25,7 @@ export function YoutubeChannelCard({
               href={channel.url}
               target="_blank"
               rel="noreferrer"
-              className="inline-flex rounded-full bg-gold px-4 py-2 text-sm font-semibold text-navy hover:bg-gold-soft"
+              className="inline-flex rounded-full bg-gold px-4 py-2 text-sm font-semibold text-gold-ink hover:bg-gold-soft"
             >
               Watch on YouTube →
             </a>
