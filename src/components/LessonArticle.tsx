@@ -1,4 +1,6 @@
+import { FieldDiagram, FieldLegend } from "@/components/FieldDiagram";
 import type { Lesson, LessonBlock } from "@/data/lessons";
+import { getLessonDiagram } from "@/data/lesson-diagrams";
 
 function Block({ block }: { block: LessonBlock }) {
   switch (block.type) {
@@ -34,12 +36,20 @@ function Block({ block }: { block: LessonBlock }) {
           ))}
         </dl>
       );
+    case "diagram": {
+      const diagram = getLessonDiagram(block.id);
+      if (!diagram) return null;
+      return <FieldDiagram diagram={diagram} />;
+    }
   }
 }
 
 export function LessonArticle({ lesson }: { lesson: Lesson }) {
+  const hasDiagram = lesson.blocks.some((block) => block.type === "diagram");
+
   return (
     <article className="space-y-6">
+      {hasDiagram ? <FieldLegend /> : null}
       {lesson.blocks.map((block, index) => (
         <Block key={`${lesson.slug}-${index}`} block={block} />
       ))}

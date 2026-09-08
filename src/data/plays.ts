@@ -192,6 +192,26 @@ export const plays: Play[] = [
       { id: "s", d: "M208 54 L176 160", kind: "rush" },
     ],
   },
+  {
+    slug: "draw",
+    title: "Draw",
+    alsoCalled: "A delayed run that looks like a pass for a beat.",
+    summary:
+      "The quarterback drops as if to throw. The defence start to chase the pass. Then the ball is handed to the back, who runs through the gap the rushers just left.",
+    watch:
+      "If the quarterback’s first step is backwards but the ball never goes in the air, look for the back slipping up the middle behind a late block.",
+    minutes: 3,
+    caption:
+      "The quarterback drops a step as if to pass. Defenders climb upfield. The running back takes a delayed hand-off through the space they vacated.",
+    markers: eleven,
+    paths: [
+      { id: "drop", d: "M156 188 L156 204", kind: "block" },
+      { id: "give", d: "M156 204 L156 216", kind: "block" },
+      { id: "draw", d: "M156 216 C168 180 164 140 156 100", kind: "run" },
+      { id: "rush-l", d: "M100 122 L128 176", kind: "rush" },
+      { id: "rush-r", d: "M212 122 L186 176", kind: "rush" },
+    ],
+  },
 ];
 
 export function getPlay(slug: string): Play | undefined {
