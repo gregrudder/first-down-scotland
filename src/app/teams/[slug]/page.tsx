@@ -4,8 +4,10 @@ import { notFound } from "next/navigation";
 import { PodcastCard } from "@/components/PodcastCard";
 import { TeamLogo } from "@/components/TeamLogo";
 import { TrademarkNote } from "@/components/TrademarkNote";
+import { YoutubeChannelCard } from "@/components/YoutubeChannelCard";
 import { podcastsForTeam } from "@/data/podcasts";
 import { getTeamYoutube } from "@/data/team-youtube";
+import { espnTeamLogo } from "@/lib/team-logo";
 import {
   getTeamProfile,
   getTeamSlugs,
@@ -87,21 +89,17 @@ export default async function TeamProfilePage({
 
       <p className="mt-6 text-base leading-7 text-cream">{team.scotlandHook}</p>
 
-      <section className="mt-8 rounded-2xl border border-line bg-navy-2 p-5">
+      <section className="mt-8">
         <h2 className="text-xs font-semibold uppercase tracking-[0.16em] text-gold">
           Watch and listen
         </h2>
         {youtube ? (
-          <p className="mt-3">
-            <a
-              href={youtube.url}
-              target="_blank"
-              rel="noreferrer"
-              className="inline-flex rounded-full bg-gold px-4 py-2 text-sm font-semibold text-navy hover:bg-gold-soft"
-            >
-              Official YouTube {youtube.handle} →
-            </a>
-          </p>
+          <div className="mt-3">
+            <YoutubeChannelCard
+              channel={youtube}
+              fallbackSrc={espnTeamLogo(team.abbreviation)}
+            />
+          </div>
         ) : (
           <p className="mt-3 text-sm text-cream-dim">
             Official YouTube not listed — we would rather leave it blank than guess.
@@ -122,7 +120,11 @@ export default async function TeamProfilePage({
         {shows.length > 0 ? (
           <div className="mt-4 grid gap-4">
             {shows.map((show) => (
-              <PodcastCard key={show.id} show={show} />
+              <PodcastCard
+                key={show.id}
+                show={show}
+                fallbackSrc={espnTeamLogo(team.abbreviation)}
+              />
             ))}
           </div>
         ) : (
