@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { LessonReadMark } from "@/components/LearnProgress";
 import type { Lesson } from "@/data/lessons";
 
 export function LessonCard({ lesson, featured = false }: { lesson: Lesson; featured?: boolean }) {
@@ -13,7 +14,10 @@ export function LessonCard({ lesson, featured = false }: { lesson: Lesson; featu
         <span className="text-xs font-semibold uppercase tracking-[0.16em] text-gold">
           Lesson {lesson.number}
         </span>
-        <span className="text-xs text-cream-dim">{lesson.minutes} min</span>
+        <span className="flex items-center gap-2">
+          <LessonReadMark slug={lesson.slug} />
+          <span className="text-xs text-cream-dim">{lesson.minutes} min</span>
+        </span>
       </div>
       <h3 className="mt-3 font-display text-xl text-cream group-hover:text-gold-soft">
         {lesson.title}

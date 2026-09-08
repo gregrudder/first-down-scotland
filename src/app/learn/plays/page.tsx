@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { CompactLessonProgress } from "@/components/LearnProgress";
+import { MarkLessonDone } from "@/components/MarkLessonDone";
 import { PlayDiagram, PlayLegend } from "@/components/PlayDiagram";
 import { PageIntro } from "@/components/PageIntro";
 import { getNextLesson, getPreviousLesson } from "@/data/lessons";
@@ -28,6 +30,7 @@ export default function PlaysIndexPage() {
           will hear on a Sunday.
         </p>
       </PageIntro>
+      <CompactLessonProgress slug="plays" />
 
       <div className="mt-8">
         <PlayLegend />
@@ -49,6 +52,12 @@ export default function PlaysIndexPage() {
           </Link>
         ))}
       </div>
+
+      <MarkLessonDone
+        slug="plays"
+        nextHref={next ? `/learn/${next.slug}` : "/learn/quiz"}
+        nextLabel={next ? `Next: ${next.title} →` : "Take the 20-question quiz →"}
+      />
 
       <nav className="mt-12 flex flex-col gap-4 border-t border-line pt-8 sm:flex-row sm:justify-between">
         {previous ? (
