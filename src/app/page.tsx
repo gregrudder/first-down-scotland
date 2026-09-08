@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { GamesTeaser } from "@/components/GamesTeaser";
+import { LeagueFollow } from "@/components/LeagueFollow";
 import { LessonCard } from "@/components/LessonCard";
 import { SundayCard } from "@/components/SundayCard";
 import { lessons } from "@/data/lessons";
@@ -141,6 +142,16 @@ export default async function HomePage() {
                   Watch
                 </Link>
               </li>
+              <li>
+                <Link href="/standings" className="text-gold hover:text-gold-soft">
+                  Standings
+                </Link>
+              </li>
+              <li>
+                <Link href="/scores" className="text-gold hover:text-gold-soft">
+                  Scores
+                </Link>
+              </li>
             </ul>
           </div>
         </div>
@@ -203,6 +214,7 @@ export default async function HomePage() {
           <GamesTeaser fixtures={fixtures} />
         </aside>
       </section>
+      <LeagueFollow />
     </div>
   );
 }

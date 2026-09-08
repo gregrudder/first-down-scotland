@@ -86,7 +86,12 @@ export default async function DraftProspectsPage() {
         <Link href="/learn/the-draft" className="text-gold">
           The Draft lesson
         </Link>{" "}
-        covers rounds, pick order, trades and UDFAs. Then come back here.
+        covers rounds, pick order, trades and UDFAs. This season’s already-drafted
+        rookies live on{" "}
+        <Link href="/rookies" className="text-gold">
+          Rookie Watch
+        </Link>
+        .
       </p>
     </div>
   );

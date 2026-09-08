@@ -34,6 +34,11 @@ const POSITION_LABELS: Record<string, string> = {
   SS: "Safety",
   RB: "Running back",
   TE: "Tight end",
+  FB: "Full-back",
+  PK: "Place kicker",
+  K: "Place kicker",
+  P: "Punter",
+  LS: "Long snapper",
   ATH: "Athlete",
 };
 

@@ -12,7 +12,10 @@ Three jobs: learn the game, meet fans of your team, keep that club in one place.
 - **`/learn`** and **`/learn/[slug]`** : beginner lessons in UK English, including X-and-O play diagrams at `/learn/plays` and a Draft explainer at `/learn/the-draft`. Stage progress bars and a 20-question quiz at `/learn/quiz` (saved in the browser as `fds-learn`). Badges: Practice Squad (0–7) → Rookie (8–12) → Starter (13–17) → Hall of Famer (18–20).
 - **`/learn/draft-prospects`** : top 2027 Draft names (ESPN when the official list fills; otherwise a cited early consensus board), cached 600s, Cron-busted
 - **`/glossary`** : searchable jargon decoder
-- **`/this-week`** : this week’s NFL games from ESPN’s public scoreboard, times in `Europe/London`, plus a **Your Sunday** card for the team saved in the browser (`fds-team`). Each fixture has a short beginner preview or a post-match report (score + snippet + outbound link; “report coming” until a feed publishes one). Fair-use summaries only. Also UK kick-off, what to watch for, a Learn tie-in, optional ESPN QB snapshot, and a Scottish pub meetup hint. The full slate stays free.
+- **`/this-week`** : this week’s NFL games from ESPN’s public scoreboard, times in `Europe/London`, plus a **Your Sunday** card for the team saved in the browser (`fds-team`). Each fixture has a short beginner preview or a post-match report (score + snippet + outbound link; “report coming” until a feed publishes one). Fair-use summaries only. Also UK kick-off, what to watch for, a Learn tie-in, optional ESPN QB snapshot, and a Scottish pub meetup hint. The full slate stays free. Tabs also lead to live scores, standings, and Rookie Watch.
+- **`/scores`** : near-live scoreboard for the current week (Scheduled / Live / Final / Bye). Server fetch is uncached against ESPN; the `/api/scores` response is CDN-cached for **20 seconds**. The page polls that API every 20s while a game is on, 30s near kick-off, and 2 minutes midweek.
+- **`/standings`** : AFC / NFC by division, with wins-losses-ties, points for/against, and division rank. ESPN public standings (`type=0&level=3`), cached **300 seconds**.
+- **`/rookies`** : Rookie Watch for **this season’s drafted class** (the live scoreboard year; in 2026 that is the 2026 draft, not the 2025 class and not the 2027 college board). ESPN draft list plus Sleeper regular-season stats when any counting numbers exist. Cached **600 seconds**. Filter by team, position, or round.
 - **`/news`** : NFL headlines pulled automatically from public RSS (ESPN, BBC Sport, the Guardian). Helper, not the product.
 - **`/news/fantasy`** : NFL fantasy football tips & news (not Scottish football)
 - **`/podcasts`** : recommended NFL and per-team shows to follow (external links; official vs independent labelled)
@@ -27,7 +30,7 @@ Three jobs: learn the game, meet fans of your team, keep that club in one place.
 - **`/pick-your-team`** : quiz or spinning-ball surprise to pick a team (so you can find other fans of that club); saved in the browser as `fds-team`
 - PWA basics: web manifest, icons, mobile-first layout, `theme-color`
 
-Out of scope: live fantasy scoring / league apps, live play-by-play UI, betting, accounts, push notifications, App Store builds, perfect per-game UK rights.
+Out of scope: live fantasy scoring / league apps, live play-by-play UI, betting, accounts, push notifications, App Store builds, perfect per-game UK rights. The live scoreboard is scores and clock only.
 
 ## Stack
 
@@ -101,23 +104,49 @@ Fixtures are **not** edited by hand.
 3. Kick-off timestamps are converted to **Europe/London**.
 4. Next.js caches the fetch for **300 seconds** and tags it `fixtures`.
 5. `/` and `/this-week` also set `export const revalidate = 300`.
+6. `/scores` uses a **separate, uncached** ESPN scoreboard fetch so a 5-minute fixtures cache cannot stall the live board. The page and `/api/scores` set `revalidate = 20`. The browser polls `/api/scores` (Cache-Control `s-maxage=20`) every 20 seconds while any game is in progress.
+
+## How standings refresh
+
+1. The app calls ESPN’s public standings API, grouped by conference and division:
+   `https://site.api.espn.com/apis/v2/sports/football/nfl/standings?type=0&level=3`
+2. We show wins, losses, ties, points for / against, and a division rank we derive from win percentage (then wins, then point difference).
+3. Next.js caches the fetch for **300 seconds** and tags it `standings`. `/standings` sets `export const revalidate = 300`.
+4. Club profiles (`/teams/[slug]`) reuse the same payload for that club’s division table.
+
+## How Rookie Watch refreshes
+
+1. Season year comes from the live ESPN scoreboard (today: **2026** regular season, Week 1). The draft class is that same year: **2026 NFL Draft**, not 2025 (those players are year two) and not the 2027 college prospects board.
+2. ESPN’s public draft list:
+   `https://site.api.espn.com/apis/site/v2/sports/football/nfl/draft?year={seasonYear}`
+3. Season counting stats come from Sleeper’s public regular-season dump:
+   `https://api.sleeper.app/v1/stats/nfl/regular/{seasonYear}`
+   Player IDs are matched via `https://api.sleeper.app/v1/players/nfl` **only after** that stats dump has real counting numbers. Before Week 1 we skip that large file and say stats are not available yet.
+4. Next.js caches draft/stats for **600 seconds** (`rookies` tag). The Sleeper players map uses **86400 seconds**. `/rookies` sets `export const revalidate = 600`.
+5. If a match or a stat is missing, the card says so. We do not invent numbers. Offensive line and long-snapper cards explain that box-score stats are not listed.
 
 On Vercel, `vercel.json` schedules a **daily** Cron at `0 6 * * *` (06:00 UTC) to `GET /api/revalidate`. That route runs:
 
 - `revalidateTag('fixtures', 'max')`
+- `revalidateTag('scores', 'max')`
+- `revalidateTag('standings', 'max')`
+- `revalidateTag('rookies', 'max')`
 - `revalidateTag('news', 'max')`
 - `revalidateTag('news-fantasy', 'max')`
 - `revalidateTag('depth-charts', 'max')`
 - `revalidateTag('draft-prospects', 'max')`
 - `revalidatePath('/')`
 - `revalidatePath('/this-week')`
+- `revalidatePath('/scores')`
+- `revalidatePath('/standings')`
+- `revalidatePath('/rookies')`
 - `revalidatePath('/news')`
 - `revalidatePath('/news/fantasy')`
 - `revalidatePath('/teams')`
 - `revalidatePath('/learn')`
 - `revalidatePath('/learn/draft-prospects')`
 
-Hobby only allows **once-per-day** Cron. Pages still refresh without the Cron: the 300-second ISR / fetch revalidate keeps times and scores reasonably fresh between visits. On Pro you can change the expression to hourly (for example `15 * * * *`) if you want a background warm more often.
+Hobby only allows **once-per-day** Cron. Pages still refresh without the Cron: the 300-second ISR / fetch revalidate keeps times and standings reasonably fresh between visits, and `/scores` polls every 20 seconds while games are on. On Pro you can change the expression to hourly (for example `15 * * * *`) if you want a background warm more often. No new environment variables are required for standings, scores, or Rookie Watch.
 
 Team depth charts use the same ESPN public API family (`…/teams/{id}/depthcharts` plus roster names), cached for **600 seconds** and tagged `depth-charts`. The daily Cron busts that tag too. If ESPN is down, the profile still renders and we say so.
 
@@ -181,6 +210,9 @@ curl -H "Authorization: Bearer $CRON_SECRET" https://your-domain.vercel.app/api/
 | `/learn/quiz` | 20-question path quiz + badges (`fds-learn`) |
 | `/glossary` | Jargon decoder |
 | `/this-week` | Auto fixtures |
+| `/scores` | Near-live scoreboard (20s poll while live) |
+| `/standings` | AFC / NFC by division |
+| `/rookies` | This season’s drafted rookies + stats |
 | `/news` | Auto NFL headlines (RSS, link out) |
 | `/news/fantasy` | Auto NFL fantasy headlines (RSS, link out) |
 | `/watch` | UK viewing explainer |

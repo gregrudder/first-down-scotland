@@ -28,9 +28,14 @@ export function GamesTeaser({ fixtures }: { fixtures: FixturesResult }) {
             {fixtures.seasonTypeName} {fixtures.weekLabel} · UK times
           </p>
         </div>
-        <Link href="/this-week" className="shrink-0 text-sm text-gold">
-          Full slate →
-        </Link>
+        <div className="flex shrink-0 flex-col items-end gap-1 text-sm">
+          <Link href="/this-week" className="text-gold">
+            Full slate →
+          </Link>
+          <Link href="/scores" className="text-gold">
+            Live scores →
+          </Link>
+        </div>
       </div>
 
       {preview.length === 0 ? (

@@ -66,6 +66,19 @@ export default async function LearnIndexPage() {
             Stadium, colours, a few iconic names, Super Bowls at a glance.
           </p>
         </Link>
+        <Link
+          href="/rookies"
+          className="rounded-2xl border border-line bg-navy-2 p-5 transition hover:border-gold/50 hover:bg-navy-3"
+        >
+          <p className="text-xs font-semibold uppercase tracking-[0.16em] text-gold">
+            This season
+          </p>
+          <h2 className="mt-2 font-display text-xl text-cream">Rookie Watch</h2>
+          <p className="mt-2 text-sm leading-6 text-cream-dim">
+            The 2026 drafted class, with team, round and season stats when the
+            feed has them. Separate from the 2027 college board above.
+          </p>
+        </Link>
       </div>
       <p className="mt-10 max-w-3xl text-sm leading-6 text-cream-dim">
         When a lesson clicks, come find people who support the same team:{" "}
