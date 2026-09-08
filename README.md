@@ -20,7 +20,7 @@ Learning is the hero. This is not a TV listings product.
 - **`/about`** — what the site is for
 - **`/community`** — Discord for Scottish / UK fans (invite via env; no in-app chat)
 - **`/history`** — short NFL history for UK beginners (timeline, not a thesis)
-- **`/teams`** and **`/teams/[slug]`** — all 32 club profiles (2026-season snapshot), official YouTube, and the relevant pods
+- **`/teams`** and **`/teams/[slug]`** — all 32 club profiles (2026-season snapshot), ESPN depth chart, official YouTube, and the relevant pods
 - **`/pick-your-team`** — quiz or spinning-ball surprise to pick a team; saved in the browser as `fds-team`
 - PWA basics: web manifest, icons, mobile-first layout, `theme-color`
 
@@ -86,6 +86,8 @@ On Vercel, `vercel.json` schedules a **daily** Cron at `0 6 * * *` (06:00 UTC) t
 
 Hobby only allows **once-per-day** Cron. Pages still refresh without the Cron: the 300-second ISR / fetch revalidate keeps times and scores reasonably fresh between visits. On Pro you can change the expression to hourly (for example `15 * * * *`) if you want a background warm more often.
 
+Team depth charts use the same ESPN public API family (`…/teams/{id}/depthcharts` plus roster names), cached for **600 seconds** and tagged `depth-charts`. The daily Cron busts that tag too. If ESPN is down, the profile still renders and we say so.
+
 ## How NFL news refreshes
 
 Headlines are **not** pasted in by hand.
@@ -139,7 +141,7 @@ curl -H "Authorization: Bearer $CRON_SECRET" https://your-domain.vercel.app/api/
 | `/community` | Discord community (invite CTA) |
 | `/history` | Short NFL history timeline |
 | `/teams` | All 32 teams by conference / division |
-| `/teams/[slug]` | Club profile (stadium, colours, Super Bowls) |
+| `/teams/[slug]` | Club profile (stadium, colours, Super Bowls, live depth chart) |
 | `/pick-your-team` | Quiz or spin to pick a team (saved as `fds-team`) |
 | `/about` | Project purpose |
 

@@ -1,12 +1,14 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { DepthChart } from "@/components/DepthChart";
 import { PodcastCard } from "@/components/PodcastCard";
 import { TeamLogo } from "@/components/TeamLogo";
 import { TrademarkNote } from "@/components/TrademarkNote";
 import { YoutubeChannelCard } from "@/components/YoutubeChannelCard";
 import { podcastsForTeam } from "@/data/podcasts";
 import { getTeamYoutube } from "@/data/team-youtube";
+import { getTeamDepthChart } from "@/lib/depth-chart";
 import { espnTeamLogo } from "@/lib/team-logo";
 import {
   getTeamProfile,
@@ -14,6 +16,8 @@ import {
   teamProfileNote,
   teamsInDivision,
 } from "@/data/team-profiles";
+
+export const revalidate = 600;
 
 export function generateStaticParams() {
   return getTeamSlugs().map((slug) => ({ slug }));
@@ -29,7 +33,7 @@ export async function generateMetadata({
   if (!team) return { title: "Team" };
   return {
     title: team.name,
-    description: `${team.name} for UK beginners — stadium, colours, Super Bowls, and who they are.`,
+    description: `${team.name} for UK beginners — stadium, colours, Super Bowls, and this week’s depth chart.`,
   };
 }
 
@@ -51,6 +55,7 @@ export default async function TeamProfilePage({
   );
   const youtube = getTeamYoutube(team.slug);
   const shows = podcastsForTeam(team.slug);
+  const depthChart = await getTeamDepthChart(team.abbreviation);
 
   return (
     <div className="mx-auto max-w-3xl px-4 py-12 sm:px-6 sm:py-16">
@@ -88,6 +93,8 @@ export default async function TeamProfilePage({
       </div>
 
       <p className="mt-6 text-base leading-7 text-cream">{team.scotlandHook}</p>
+
+      <DepthChart chart={depthChart} />
 
       <section className="mt-8">
         <h2 className="text-xs font-semibold uppercase tracking-[0.16em] text-gold">
