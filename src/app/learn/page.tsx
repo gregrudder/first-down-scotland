@@ -12,7 +12,7 @@ export const revalidate = 600;
 export const metadata: Metadata = {
   title: "Learn the NFL",
   description:
-    "A short, ordered path for UK beginners: the field, downs, scoring, common plays with diagrams, turnovers, the clock, penalties, what to look for on telly, and the NFL Draft.",
+    "A short, ordered path for UK beginners: the field, downs, scoring, common plays with diagrams, turnovers, the clock, penalties, what to look for on telly, the NFL Draft, and fantasy football.",
 };
 
 export default async function LearnIndexPage() {

@@ -5,7 +5,9 @@ export type LessonBlock =
   | { type: "callout"; title: string; text: string }
   | { type: "terms"; items: { term: string; def: string }[] }
   | { type: "diagram"; id: string }
-  | { type: "draft-board" };
+  | { type: "draft-board" }
+  | { type: "fantasy-lineup" }
+  | { type: "snake-draft" };
 
 export type Lesson = {
   slug: string;
@@ -803,6 +805,213 @@ export const lessons: Lesson[] = [
           {
             term: "Mock draft",
             def: "A guessed order, published for fun and clicks. It is not the real list.",
+          },
+        ],
+      },
+    ],
+  },
+  {
+    slug: "fantasy-football",
+    number: 12,
+    title: "Fantasy football",
+    summary:
+      "NFL fantasy is not FPL. How a league works, how a week scores, and which apps UK beginners actually use.",
+    minutes: 9,
+    blocks: [
+      {
+        type: "p",
+        text: "If you say “fantasy football” in a Scottish pub, people hear Fantasy Premier League. This lesson is the other one: NFL fantasy. You pick real American-football players, they score points from what they do on Sunday (and Monday, and Thursday), and you try to beat your mates. Your favourite NFL club can still lose. Your fantasy side can still win.",
+      },
+      {
+        type: "callout",
+        title: "Not Saturday 3pm",
+        text: "FPL is Premier League players and one big public game. NFL fantasy is usually a private league of 8, 10 or 12 people, with a draft, a bench, and a head-to-head match each week. Same idea (stats become points). Different sport, different apps, different jargon.",
+      },
+      {
+        type: "h2",
+        text: "What you are actually doing",
+      },
+      {
+        type: "p",
+        text: "Before the season (or in a sitting in August/September), everyone in the league takes turns picking NFL players. Those players go on your roster. Each NFL week you choose who starts. Points come from yards, touchdowns, catches, and a few other things the scoring settings name. Highest score in your match-up that week gets the win.",
+      },
+      {
+        type: "list",
+        items: [
+          "You are not picking an NFL club. You are picking players from lots of clubs.",
+          "A player can only be on one roster in that league. If you draft Ja’Marr Chase, nobody else has him.",
+          "Your lineup “locks” when that player’s real game kicks off. Set it before the Thursday nighter if he is playing then.",
+          "Byes exist: if your running back’s NFL team has a week off, he scores nothing. Sit him.",
+        ],
+      },
+      { type: "fantasy-lineup" },
+      {
+        type: "h2",
+        text: "How a week works",
+      },
+      {
+        type: "p",
+        text: "Think of one NFL week as one fantasy round. Most weeks run Thursday night (US) through Monday night. In Britain that often means Friday morning through Tuesday morning. You want your starters in before the first relevant kick-off.",
+      },
+      {
+        type: "list",
+        items: [
+          "Check who is injured, and who is on a bye. The app will flag both.",
+          "Start your best available players in the slots the league allows. Leave the rest on the bench: they still put up stats, they just do not count for you that week.",
+          "After the slate, your score is compared with one rival (in a classic head-to-head league) or with the whole field (in some other formats).",
+          "Then you look at the waiver wire: players nobody owns, who you might add, usually in the middle of the UK week.",
+        ],
+      },
+      {
+        type: "callout",
+        title: "UK times will catch you out once",
+        text: "A “Sunday 1pm ET” game is 6pm in Britain in the autumn, 5pm once the US clocks change. Thursday Night Football is Friday in the small hours. If your quarterback plays Thursday, set him before you go to bed on Thursday, not on Saturday.",
+      },
+      {
+        type: "h2",
+        text: "Scoring, without the spreadsheet",
+      },
+      {
+        type: "p",
+        text: "Leagues pick a scoring flavour. The app shows the exact list. These are the ones you will hear.",
+      },
+      {
+        type: "terms",
+        items: [
+          {
+            term: "Standard",
+            def: "Points for yards and touchdowns. A rushing touchdown is usually 6. Passing touchdowns are often 4. A chunk of passing yards might be 1 point per 25 yards.",
+          },
+          {
+            term: "PPR",
+            def: "Points Per Reception: every catch is worth a point (or a fraction). Receivers and pass-catching backs become more valuable. Very common.",
+          },
+          {
+            term: "Half PPR",
+            def: "A catch is worth half a point. A compromise, and a frequent default.",
+          },
+          {
+            term: "DST / DEF",
+            def: "A whole NFL defence and special teams as one roster slot. They score for sacks, takeaways, and keeping points off the board. Not one defender.",
+          },
+        ],
+      },
+      {
+        type: "p",
+        text: "Kickers score for field goals and extra points if your league uses them. Some modern leagues drop kickers. Interceptions and fumbles usually cost the player who made them. You do not need to memorise the table: open the scoring page in the app once, then forget it until an argument.",
+      },
+      {
+        type: "h2",
+        text: "Common formats",
+      },
+      {
+        type: "p",
+        text: "If someone invites you to “a league”, ask which of these it is. The invite link is not enough.",
+      },
+      {
+        type: "terms",
+        items: [
+          {
+            term: "Redraft",
+            def: "The ordinary one. You draft in August or September, play the season, then everyone starts from scratch next year. Best first league.",
+          },
+          {
+            term: "Keeper",
+            def: "Redraft, except you may keep a couple of players into next season. A gentle step toward dynasty.",
+          },
+          {
+            term: "Dynasty",
+            def: "You keep almost the whole roster year after year, including rookies you pick in a separate draft. It is a long relationship with 12 other people. Do not join one if you might vanish in November.",
+          },
+          {
+            term: "Best ball",
+            def: "You draft a big squad, then you never set a weekly lineup. Each week the app counts your best legal combination. Popular if you like drafts and hate tinkering. Underdog and similar sites run a lot of these.",
+          },
+        ],
+      },
+      {
+        type: "list",
+        items: [
+          "Head-to-head: you vs one other manager that week. Wins and losses make a table. Play-offs at the end.",
+          "Superflex: you can start a second quarterback in the flex. Quarterbacks become gold dust.",
+          "Auction draft: everyone gets a budget and bids. Less common as a first experience than a snake draft.",
+          "Daily fantasy (DraftKings, FanDuel and the like): a fresh lineup for one slate, often with an entry fee. That is a different product. This site does not do tips or odds.",
+        ],
+      },
+      { type: "snake-draft" },
+      {
+        type: "h2",
+        text: "Where people actually play",
+      },
+      {
+        type: "p",
+        text: "There is no one official home. UK beginners usually land where their mate already has a league. These are the names you will see.",
+      },
+      {
+        type: "list",
+        items: [
+          "Sleeper: the app a lot of dedicated leagues use. Clean on a phone, good chat, handles redraft, dynasty and a lot of custom scoring. If someone in your Discord says “I’ll send a Sleeper link”, this is it.",
+          "ESPN Fantasy: bundled with an ESPN account. Huge in casual US leagues, works in a browser, slightly clunkier on mobile. Fine for a first redraft.",
+          "Yahoo Fantasy: the other big casual host. Same idea as ESPN: easy to join, lots of public and private leagues.",
+          "NFL Fantasy (NFL.com): the league’s own product. Simple, official, a bit plain. Perfectly usable.",
+          "CBS Sports: another long-running host. You will meet it less often in a UK group chat, but it is still out there.",
+          "Best-ball specialists (Underdog and similar): you draft, they auto-score. Different rhythm to a weekly Sleeper league.",
+        ],
+      },
+      {
+        type: "callout",
+        title: "Join the league your people are already in",
+        text: "Do not download five apps and compare them in a spreadsheet. Ask the group which host they use. Learning the sport matters more than picking the “best” platform. Sleeper is a strong default if you are founding the league yourself.",
+      },
+      {
+        type: "h2",
+        text: "Waivers, without panic",
+      },
+      {
+        type: "p",
+        text: "Players on nobody’s roster sit on the waiver wire (or free agency, depending on the app). After a big week, everyone wants the same unknown running back. Most leagues queue claims and process them on a set day.",
+      },
+      {
+        type: "list",
+        items: [
+          "FAAB: you bid pretend budget (Free Agent Acquisition Budget). Highest bid gets the player.",
+          "Rolling waivers / inverse order: the worst team, or the team that has claimed least recently, goes first. The app will say which.",
+          "In the UK the claim often processes Wednesday. Set it Tuesday night if you care.",
+          "You usually drop someone to add someone. Do not drop a star on a bye unless you know what you are doing.",
+        ],
+      },
+      {
+        type: "h2",
+        text: "A sensible way in from Scotland",
+      },
+      {
+        type: "list",
+        items: [
+          "Start with a redraft league of people you actually talk to. Ten or twelve teams. PPR or half PPR. Snake draft.",
+          "Draft from the sofa with the app open. First few rounds are stars. Later rounds are guesses and kickers.",
+          "Each week: check byes and injuries, set the lineup before Thursday if needed, then watch your players’ real games.",
+          "Use our fantasy news tab for headlines, not as a commandment. A “start him” article is one opinion.",
+          "If the Discord is live, that is a decent place to find a UK league of beginners. Do not pay a stranger for a “winning system”.",
+        ],
+      },
+      {
+        type: "terms",
+        items: [
+          {
+            term: "Draft",
+            def: "The session where the league picks players. Snake (back and forth) is the usual shape.",
+          },
+          {
+            term: "Waiver wire",
+            def: "The pool of unowned players, plus the process for claiming them.",
+          },
+          {
+            term: "Lock",
+            def: "The moment a player’s real game starts, after which you cannot swap them out.",
+          },
+          {
+            term: "Boom / bust",
+            def: "A player who either piles up points or does very little. Fun, not a personality test.",
           },
         ],
       },
