@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { CompactLessonProgress } from "@/components/LearnProgress";
 import { LessonArticle } from "@/components/LessonArticle";
+import { MarkLessonDone } from "@/components/MarkLessonDone";
 import {
   getLesson,
   getLessonSlugs,
@@ -47,15 +49,15 @@ export default async function LessonPage({ params }: LessonPageProps) {
         {lesson.title}
       </h1>
       <p className="mt-4 text-lg leading-8 text-cream-dim">{lesson.summary}</p>
+      <CompactLessonProgress slug={lesson.slug} />
       <div className="gold-rule my-8" />
       <LessonArticle lesson={lesson} />
 
-      <div className="mt-12 flex flex-col gap-3 rounded-2xl border border-line bg-navy-2 p-5 sm:flex-row sm:items-center sm:justify-between">
-        <p className="text-sm text-cream-dim">Ready to try a real match?</p>
-        <Link href="/this-week" className="text-sm font-semibold text-gold">
-          See this week’s games →
-        </Link>
-      </div>
+      <MarkLessonDone
+        slug={lesson.slug}
+        nextHref={next ? `/learn/${next.slug}` : "/learn/quiz"}
+        nextLabel={next ? `Next: ${next.title} →` : "Take the 20-question quiz →"}
+      />
 
       <nav className="mt-8 flex flex-col gap-4 border-t border-line pt-8 sm:flex-row sm:justify-between">
         {previous ? (
