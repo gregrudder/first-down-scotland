@@ -4,6 +4,7 @@ import { SundayCard } from "@/components/SundayCard";
 import { GameCard } from "@/components/GameCard";
 import { LeagueTabs } from "@/components/LeagueTabs";
 import { PageIntro } from "@/components/PageIntro";
+import { UkKickoffHelper } from "@/components/UkKickoffHelper";
 import { getNflFixtures, groupGamesByUkDate, weekHeading } from "@/lib/espn";
 import { getGameReports } from "@/lib/game-report";
 import { formatFetchedAt } from "@/lib/time";
@@ -36,6 +37,10 @@ export default async function ThisWeekPage() {
         </p>
       </PageIntro>
       <LeagueTabs active="games" />
+
+      <div className="mt-8">
+        <UkKickoffHelper />
+      </div>
 
       <div className="mt-8">
         <SundayCard fixtures={fixtures} reports={reports} />

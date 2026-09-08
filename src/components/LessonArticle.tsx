@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { DraftBoard } from "@/components/DraftBoard";
 import { FantasyLineup, SnakeDraft } from "@/components/FantasyDiagrams";
 import { FieldDiagram, FieldLegend } from "@/components/FieldDiagram";
@@ -25,6 +26,11 @@ function Block({ block }: { block: LessonBlock }) {
         <aside className="rounded-2xl border border-gold/30 bg-navy-3 px-5 py-4">
           <p className="text-sm font-semibold text-gold">{block.title}</p>
           <p className="mt-2 text-sm leading-6 text-cream">{block.text}</p>
+          {block.href && block.linkLabel ? (
+            <Link href={block.href} className="mt-3 inline-block text-sm font-semibold text-gold">
+              {block.linkLabel}
+            </Link>
+          ) : null}
         </aside>
       );
     case "terms":

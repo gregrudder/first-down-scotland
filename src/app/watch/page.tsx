@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { PageIntro } from "@/components/PageIntro";
+import { UkKickoffHelper } from "@/components/UkKickoffHelper";
 import { watchDisclaimer, watchOptions, watchTips } from "@/data/watch";
 
 export const metadata: Metadata = {
@@ -24,6 +25,10 @@ export default function WatchPage() {
           .
         </p>
       </PageIntro>
+
+      <div className="mt-10">
+        <UkKickoffHelper showFixturesLink />
+      </div>
 
       <div className="mt-10 grid gap-4 md:grid-cols-2">
         {watchOptions.map((option) => (
