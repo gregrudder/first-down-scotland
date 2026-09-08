@@ -10,7 +10,7 @@ export function Footer() {
           <p className="flex items-center gap-3 font-display text-lg text-cream">
             <Image
               src="/logo.png"
-              alt=""
+              alt="First Down Scotland logo"
               width={36}
               height={36}
               className="h-9 w-9 rounded-[9px]"

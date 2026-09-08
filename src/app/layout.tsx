@@ -23,7 +23,7 @@ const fraunces = Fraunces({
 export const metadata: Metadata = {
   metadataBase: new URL(absoluteUrl("/")),
   title: {
-    default: `${site.name}: learn, meet, follow your team`,
+    default: `${site.name} NFL: learn American football in the UK`,
     template: `%s · ${site.name}`,
   },
   description: site.description,
@@ -42,7 +42,7 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: site.name }],
   openGraph: {
-    title: `${site.name}: learn, meet, follow your team`,
+    title: `${site.name} NFL: learn American football in the UK`,
     description: site.description,
     locale: "en_GB",
     type: "website",
@@ -52,13 +52,13 @@ export const metadata: Metadata = {
         url: "/og.png",
         width: 1200,
         height: 630,
-        alt: site.name,
+        alt: `${site.name} NFL`,
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: `${site.name}: learn, meet, follow your team`,
+    title: `${site.name} NFL: learn American football in the UK`,
     description: site.description,
     images: ["/og.png"],
   },

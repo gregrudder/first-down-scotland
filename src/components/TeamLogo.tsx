@@ -52,7 +52,7 @@ export function TeamLogo({
     // eslint-disable-next-line @next/next/no-img-element
     <img
       src={espnTeamLogo(abbr)}
-      alt=""
+      alt={`${abbr} logo`}
       width={size}
       height={size}
       className="object-contain"

@@ -6,7 +6,7 @@ export function GamesTeaser({ fixtures }: { fixtures: FixturesResult }) {
   if (!fixtures.ok) {
     return (
       <aside className="rounded-2xl border border-line bg-navy-2 p-5">
-        <p className="text-xs font-semibold uppercase tracking-[0.16em] text-gold">This week</p>
+        <h2 className="text-xs font-semibold uppercase tracking-[0.16em] text-gold">This week</h2>
         <p className="mt-3 text-sm leading-6 text-cream-dim">{fixtures.error}</p>
         <Link href="/this-week" className="mt-4 inline-block text-sm text-gold">
           Open this week →
@@ -21,9 +21,9 @@ export function GamesTeaser({ fixtures }: { fixtures: FixturesResult }) {
     <aside className="rounded-2xl border border-line bg-navy-2 p-5">
       <div className="flex items-start justify-between gap-3">
         <div>
-          <p className="text-xs font-semibold uppercase tracking-[0.16em] text-gold">
+          <h2 className="text-xs font-semibold uppercase tracking-[0.16em] text-gold">
             Games this week
-          </p>
+          </h2>
           <p className="mt-1 text-sm text-cream-dim">
             {fixtures.seasonTypeName} {fixtures.weekLabel} · UK times
           </p>
