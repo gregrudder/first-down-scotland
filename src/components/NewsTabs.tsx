@@ -19,7 +19,7 @@ export function NewsTabs({ active }: { active: "nfl" | "fantasy" }) {
             href={tab.href}
             aria-current={selected ? "page" : undefined}
             className={`flex-1 rounded-full px-4 py-2 text-center text-sm font-semibold ${
-              selected ? "bg-gold text-navy" : "text-cream-dim hover:text-cream"
+              selected ? "bg-gold text-gold-ink" : "text-cream-dim hover:text-cream"
             }`}
           >
             {tab.label}

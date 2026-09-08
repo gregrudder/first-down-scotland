@@ -82,14 +82,14 @@ export function LearnPathProgress() {
           {continueSlug ? (
             <Link
               href={`/learn/${continueSlug}`}
-              className="inline-flex items-center justify-center rounded-full bg-gold px-5 py-2.5 text-sm font-semibold text-navy hover:bg-gold-soft"
+              className="inline-flex items-center justify-center rounded-full bg-gold px-5 py-2.5 text-sm font-semibold text-gold-ink hover:bg-gold-soft"
             >
               {path.done === 0 ? "Start lesson 1" : "Continue the path"} →
             </Link>
           ) : (
             <Link
               href="/learn/quiz"
-              className="inline-flex items-center justify-center rounded-full bg-gold px-5 py-2.5 text-sm font-semibold text-navy hover:bg-gold-soft"
+              className="inline-flex items-center justify-center rounded-full bg-gold px-5 py-2.5 text-sm font-semibold text-gold-ink hover:bg-gold-soft"
             >
               Take the 20-question quiz →
             </Link>

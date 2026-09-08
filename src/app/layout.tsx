@@ -2,8 +2,10 @@ import type { Metadata, Viewport } from "next";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Figtree, Fraunces } from "next/font/google";
+import Script from "next/script";
 import { SiteShell } from "@/components/SiteShell";
 import { absoluteUrl, site } from "@/lib/site";
+import { teamThemeBootScript } from "@/lib/team-theme";
 import "./globals.css";
 
 const figtree = Figtree({
@@ -89,6 +91,9 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       className={`${figtree.variable} ${fraunces.variable} h-full antialiased`}
     >
       <body className="min-h-full font-sans">
+        <Script id="fds-team-theme" strategy="beforeInteractive">
+          {teamThemeBootScript()}
+        </Script>
         <SiteShell>{children}</SiteShell>
         <Analytics />
         <SpeedInsights />

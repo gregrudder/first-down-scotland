@@ -187,7 +187,7 @@ export function SundayCard({
         </p>
         <Link
           href="/pick-your-team"
-          className="mt-4 inline-flex rounded-full bg-gold px-5 py-2.5 text-sm font-semibold text-navy hover:bg-gold-soft"
+          className="mt-4 inline-flex rounded-full bg-gold px-5 py-2.5 text-sm font-semibold text-gold-ink hover:bg-gold-soft"
         >
           Pick my team →
         </Link>

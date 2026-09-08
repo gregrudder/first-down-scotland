@@ -8,8 +8,11 @@
   --cream-dim: #c9c2b3;
   --gold: #e8b84a;
   --gold-soft: #f3d27a;
+  --gold-ink: #0b1220;
+  --team-primary: var(--gold);
+  --team-secondary: var(--gold-soft);
   --line: rgba(244, 239, 228, 0.12);
-  --line-strong: rgba(232, 184, 74, 0.45);
+  --line-strong: color-mix(in srgb, var(--gold) 45%, transparent);
   --good: #3dba7a;
   --live: #ff6b4a;
   --focus: #8cb4ff;
@@ -23,6 +26,7 @@
   --color-cream-dim: var(--cream-dim);
   --color-gold: var(--gold);
   --color-gold-soft: var(--gold-soft);
+  --color-gold-ink: var(--gold-ink);
   --color-line: var(--line);
   --color-good: var(--good);
   --color-live: var(--live);
@@ -38,8 +42,8 @@ html {
 body {
   min-height: 100%;
   background:
-    radial-gradient(1200px 500px at 10% -10%, rgba(232, 184, 74, 0.08), transparent 50%),
-    radial-gradient(900px 400px at 100% 0%, rgba(77, 142, 245, 0.08), transparent 45%),
+    radial-gradient(1200px 500px at 10% -10%, color-mix(in srgb, var(--gold) 12%, transparent), transparent 50%),
+    radial-gradient(900px 400px at 100% 0%, color-mix(in srgb, var(--gold-soft) 10%, transparent), transparent 45%),
     var(--navy);
   color: var(--cream);
   font-family: var(--font-sans);
@@ -47,7 +51,7 @@ body {
 
 ::selection {
   background: var(--gold);
-  color: var(--navy);
+  color: var(--gold-ink);
 }
 
 :focus-visible {
