@@ -22,13 +22,14 @@ export default async function HomePage() {
             Scotland · United Kingdom
           </p>
           <h1 className="mt-4 max-w-3xl font-display text-4xl leading-[1.1] text-cream sm:text-6xl">
-            Learn the NFL first. Then see what’s on this week.
+            Learn the game. Meet fans of your team.
           </h1>
           <p className="mt-5 max-w-2xl text-lg leading-8 text-cream-dim">{site.tagline}</p>
           <p className="mt-3 max-w-2xl text-base leading-7 text-cream-dim">
-            A beginner path in UK English (downs, scoring, the clock), plus automatic
-            fixtures in London time and an honest note on Sky, Channel 5 and the rest.
-            Learning is the point. The telly bit is extra.
+            Beginner lessons in UK English, then a place to find people who support
+            the same club: Discord for chat, and Scottish pubs for real-world meetups.
+            Fixtures, watch notes and news stay as helpers. This is not a listings
+            site wearing a Saltire.
           </p>
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
             <Link
@@ -38,10 +39,10 @@ export default async function HomePage() {
               Start learning
             </Link>
             <Link
-              href="/this-week#your-sunday"
+              href="/community"
               className="inline-flex items-center justify-center rounded-full border border-line px-6 py-3 text-sm font-semibold text-cream hover:border-gold/50"
             >
-              Your Sunday
+              Meet your team
             </Link>
           </div>
         </div>
@@ -76,6 +77,34 @@ export default async function HomePage() {
             </p>
             <ul className="mt-3 space-y-2 text-sm">
               <li>
+                <Link href="/community" className="text-cream hover:text-gold">
+                  Community: Discord for your team →
+                </Link>
+                <p className="mt-1 text-xs leading-5 text-cream-dim">
+                  The chat home for Scottish and UK fans of the side you picked.
+                  Invite when it is ready, not a dead link.
+                </p>
+              </li>
+              <li>
+                <Link href="/watch-near-you" className="text-cream hover:text-gold">
+                  Pubs: meet fans of your team →
+                </Link>
+                <p className="mt-1 text-xs leading-5 text-cream-dim">
+                  Places that put the NFL on, so you can sit with your lot rather
+                  than shout at the sofa on your own.
+                </p>
+              </li>
+              <li>
+                <Link href="/pick-your-team" className="text-cream hover:text-gold">
+                  Pick my team →
+                </Link>
+              </li>
+              <li>
+                <Link href="/this-week#your-sunday" className="text-cream hover:text-gold">
+                  Your Sunday →
+                </Link>
+              </li>
+              <li>
                 <Link href="/learn/draft-prospects" className="text-cream hover:text-gold">
                   2027 draft prospects →
                 </Link>
@@ -87,7 +116,7 @@ export default async function HomePage() {
               </li>
               <li>
                 <Link href="/news" className="text-cream hover:text-gold">
-                  What’s going on: NFL news →
+                  NFL news (helper) →
                 </Link>
               </li>
               <li>
@@ -121,31 +150,8 @@ export default async function HomePage() {
                 </Link>
               </li>
               <li>
-                <Link href="/watch-near-you" className="text-cream hover:text-gold">
-                  Watch near you: Scottish pubs →
-                </Link>
-              </li>
-              <li>
-                <Link href="/this-week#your-sunday" className="text-cream hover:text-gold">
-                  Your Sunday →
-                </Link>
-              </li>
-              <li>
-                <Link href="/pick-your-team" className="text-cream hover:text-gold">
-                  Pick your team →
-                </Link>
-              </li>
-              <li>
-                <Link href="/community" className="text-cream hover:text-gold">
-                  Community →
-                </Link>
-                <p className="mt-1 text-xs leading-5 text-cream-dim">
-                  Meet other UK beginners. Learning stays here; chat is next door.
-                </p>
-              </li>
-              <li>
                 <Link href="/feedback" className="text-cream hover:text-gold">
-                  Feedback: TikTok test notes →
+                  Feedback →
                 </Link>
               </li>
             </ul>

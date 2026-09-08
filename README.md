@@ -1,30 +1,30 @@
 # First Down Scotland
 
-A **learn the NFL** app for Scottish and UK beginners, with fixtures and a honest where-to-watch note on the side.
+A **learning hub** for Scottish and UK NFL beginners, plus a **community to meet fans of the team you support**. Discord is the chat home. The pub list is for real-world meetups with people who picked the same side.
 
-**Tagline:** Built in Scotland, for anyone in the UK getting into the NFL.
+**Tagline:** Learn the NFL, then meet fans of the team you support. Built in Scotland, for the UK.
 
-Learning is the hero. This is not a TV listings product.
+Lead with those two things. Fixtures, watch notes and news stay as helpers. This is not a TV listings product or a magazine clone.
 
 ## What v1 includes
 
-- **`/`** — value prop, Start learning CTA, full lesson list, and a small “games this week” teaser
-- **`/learn`** and **`/learn/[slug]`** — beginner lessons in UK English, including X-and-O play diagrams at `/learn/plays` and a Draft explainer at `/learn/the-draft`. Stage progress bars and a 20-question quiz at `/learn/quiz` (saved in the browser as `fds-learn`). Badges: Practice Squad (0–7) → Rookie (8–12) → Starter (13–17) → Hall of Famer (18–20).
-- **`/learn/draft-prospects`** — top 2027 Draft names (ESPN when the official list fills; otherwise a cited early consensus board), cached 600s, Cron-busted
-- **`/glossary`** — searchable jargon decoder
-- **`/this-week`** — this week’s NFL games from ESPN’s public scoreboard, times in `Europe/London`, plus a **Your Sunday** card personalised from the team saved in the browser (`fds-team`): UK kick-off, where to watch, one beginner “what to watch for”, a Learn tie-in, optional ESPN QB snapshot, and a Scottish pub hint. The full slate stays free.
-- **`/news`** — NFL headlines pulled automatically from public RSS (ESPN, BBC Sport, the Guardian)
-- **`/news/fantasy`** — NFL fantasy football tips & news (not Scottish football)
-- **`/podcasts`** — recommended NFL and per-team shows to follow (external links; official vs independent labelled)
-- **`/watch`** — high-level UK viewing map (Sky / Channel 5 / 5Action / My5 / DAZN Game Pass / Netflix)
-- **`/film-room`** — curated watch-to-learn films (America’s Game, Hard Knocks, All or Nothing, Quarterback, Wide Receiver). Official where-to-look hints only; no streams.
-- **`/watch-near-you`** — Scottish pubs that show the NFL (free listings; demo featured card; more cities coming)
-- **`/about`** — what the site is for
-- **`/community`** — Discord for Scottish / UK fans (invite via env; no in-app chat)
-- **`/feedback`** — short tester form (posts to `/api/feedback`; Resend or Formspree). Inbox address is an env var, not in the repo.
-- **`/history`** — short NFL history for UK beginners (timeline, not a thesis)
-- **`/teams`** and **`/teams/[slug]`** — all 32 club profiles (2026-season snapshot), ESPN depth chart, official YouTube, and the relevant pods
-- **`/pick-your-team`** — quiz or spinning-ball surprise to pick a team; saved in the browser as `fds-team`
+- **`/`** : value prop (learn the game, meet your team), Start learning + Meet your team CTAs, beginner lessons, Sunday card, and a small games teaser
+- **`/learn`** and **`/learn/[slug]`** : beginner lessons in UK English, including X-and-O play diagrams at `/learn/plays` and a Draft explainer at `/learn/the-draft`. Stage progress bars and a 20-question quiz at `/learn/quiz` (saved in the browser as `fds-learn`). Badges: Practice Squad (0–7) → Rookie (8–12) → Starter (13–17) → Hall of Famer (18–20).
+- **`/learn/draft-prospects`** : top 2027 Draft names (ESPN when the official list fills; otherwise a cited early consensus board), cached 600s, Cron-busted
+- **`/glossary`** : searchable jargon decoder
+- **`/this-week`** : helper slate of this week’s NFL games from ESPN’s public scoreboard, times in `Europe/London`, plus a **Your Sunday** card for the team saved in the browser (`fds-team`): UK kick-off, what to watch for, a Learn tie-in, optional ESPN QB snapshot, and a Scottish pub meetup hint. The full slate stays free.
+- **`/news`** : NFL headlines pulled automatically from public RSS (ESPN, BBC Sport, the Guardian). Helper, not the product.
+- **`/news/fantasy`** : NFL fantasy football tips & news (not Scottish football)
+- **`/podcasts`** : recommended NFL and per-team shows to follow (external links; official vs independent labelled)
+- **`/watch`** : high-level UK viewing map (Sky / Channel 5 / 5Action / My5 / DAZN Game Pass / Netflix)
+- **`/film-room`** : curated watch-to-learn films (America’s Game, Hard Knocks, All or Nothing, Quarterback, Wide Receiver). Official where-to-look hints only; no streams.
+- **`/watch-near-you`** : Scottish pubs that show the NFL, framed as places to meet fans of the same team and arrange meetups. Free listings; demo featured card; more cities coming. Always call ahead.
+- **`/about`** : what the site is for (learn + meet your team)
+- **`/community`** : Discord as the chat home for Scottish / UK fans of the team you picked (invite via env; coming soon if unset; no in-app chat; no hardcoded invite)
+- **`/feedback`** : short tester form (posts to `/api/feedback`; Resend or Formspree). Inbox address is an env var, not in the repo.
+- **`/history`** : short NFL history for UK beginners (timeline, not a thesis)
+- **`/teams`** and **`/teams/[slug]`** : all 32 club profiles (2026-season snapshot), ESPN depth chart, official YouTube, and the relevant pods
+- **`/pick-your-team`** : quiz or spinning-ball surprise to pick a team (so you can find other fans of that club); saved in the browser as `fds-team`
 - PWA basics: web manifest, icons, mobile-first layout, `theme-color`
 
 Out of scope: live fantasy scoring / league apps, live play-by-play UI, betting, accounts, push notifications, App Store builds, perfect per-game UK rights.

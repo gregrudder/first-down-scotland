@@ -6,7 +6,7 @@ import { watchDisclaimer, watchOptions, watchTips } from "@/data/watch";
 export const metadata: Metadata = {
   title: "Where to watch",
   description:
-    "Honest high-level guidance on watching the NFL in the UK: Sky, Channel 5, 5Action, My5, DAZN Game Pass and Netflix.",
+    "Honest high-level guidance on watching the NFL in the UK (Sky, Channel 5, Game Pass), plus pubs if you would rather meet fans of your team.",
 };
 
 export default function WatchPage() {
@@ -14,6 +14,14 @@ export default function WatchPage() {
     <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6 sm:py-16">
       <PageIntro eyebrow="United Kingdom" title="Where to watch">
         <p>{watchDisclaimer}</p>
+        <p>
+          This page is the sofa map. If you would rather sit with fans of the
+          team you picked, open{" "}
+          <Link href="/watch-near-you" className="text-gold">
+            Watch near you
+          </Link>
+          .
+        </p>
       </PageIntro>
 
       <div className="mt-10 grid gap-4 md:grid-cols-2">
@@ -44,9 +52,13 @@ export default function WatchPage() {
           <Link href="/this-week" className="text-gold">
             This week’s games
           </Link>{" "}
-          are automatic. Looking for a pub in Scotland?{" "}
+          are automatic. Looking for a pub in Scotland to meet fans of your team?{" "}
           <Link href="/watch-near-you" className="text-gold">
             Watch near you
+          </Link>
+          . Chat lives on{" "}
+          <Link href="/community" className="text-gold">
+            Community
           </Link>
           . For films and series that teach the sport, open the{" "}
           <Link href="/film-room" className="text-gold">

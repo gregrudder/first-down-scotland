@@ -55,7 +55,7 @@ export const watchOptions: WatchOption[] = [
 ];
 
 export const watchTips = [
-  "International games in London, and the other European venues, are usually shown across 5, Sky and Game Pass. Those are the easiest “put it on in the pub” Sundays.",
+  "International games in London, and the other European venues, are usually shown across 5, Sky and Game Pass. Those are the easiest Sundays to meet other fans in a pub.",
   "A US network name on the scoreboard (NBC, CBS, FOX, ESPN) is not a UK channel. Use it only as a clue that the game is a national US broadcast.",
   "RedZone is a Sky / Game Pass product that hops between scoring drives. Brilliant once you know the sport; chaotic if you are still on lesson two.",
   "We do not scrape per-game UK rights. If two apps disagree, trust the broadcaster, not a spreadsheet.",

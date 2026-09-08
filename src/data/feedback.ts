@@ -8,8 +8,9 @@ export const favouriteOptions = [
   { id: "learn", label: "Learn" },
   { id: "plays", label: "Plays / diagrams" },
   { id: "pick-my-team", label: "Pick my team" },
+  { id: "community", label: "Community / Discord" },
+  { id: "watch-near-you", label: "Pubs / meetups" },
   { id: "fixtures", label: "This week’s fixtures" },
-  { id: "watch-near-you", label: "Watch near you / pubs" },
   { id: "podcasts", label: "Podcasts" },
   { id: "other", label: "Something else" },
 ] as const;

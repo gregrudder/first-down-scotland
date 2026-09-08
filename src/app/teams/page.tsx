@@ -21,9 +21,13 @@ export default function TeamsIndexPage() {
           <Link href="/history" className="text-gold">
             short history
           </Link>{" "}
-          first. Profiles are snapshots for the 2026 season: stadiums get renamed.
-          Each club page also has a live depth chart, the official YouTube, and a
-          pod or two to follow.
+          first.{" "}
+          <Link href="/pick-your-team" className="text-gold">
+            Pick a side
+          </Link>{" "}
+          if you want to find other UK fans of that club. Profiles are snapshots for
+          the 2026 season: stadiums get renamed. Each club page also has a live
+          depth chart, the official YouTube, and a pod or two to follow.
         </p>
       </PageIntro>
 

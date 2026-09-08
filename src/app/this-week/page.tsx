@@ -11,7 +11,7 @@ export const revalidate = 300;
 export const metadata: Metadata = {
   title: "This week’s games",
   description:
-    "This week’s NFL kick-offs in Europe/London time, plus a personalised Sunday card if you have picked a team.",
+    "This week’s NFL kick-offs in UK time, as a helper: plus a Sunday card if you have picked a team, so you can meet fans of that side.",
 };
 
 export default async function ThisWeekPage() {
@@ -21,10 +21,12 @@ export default async function ThisWeekPage() {
     <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6 sm:py-16">
       <PageIntro eyebrow="This week for you" title="This week’s games">
         <p>
-          Kick-offs are converted to the UK. Scores appear if the feed has them. We
-          do not type these in by hand: if ESPN’s public scoreboard hiccups, you
-          will see that here instead of a stale spreadsheet. If you have picked a
-          team, your Sunday card sits at the top. The full slate stays open for
+          Kick-offs are converted to the UK so you know when your side is on.
+          The slate is a helper, not the product. Scores appear if the feed has
+          them. We do not type these in by hand: if ESPN’s public scoreboard
+          hiccups, you will see that here instead of a stale spreadsheet. If you
+          have picked a team, your Sunday card sits at the top: what to look for,
+          and where fans of that club might meet. The full list stays open for
           everyone.
         </p>
       </PageIntro>
@@ -41,8 +43,12 @@ export default async function ThisWeekPage() {
             Last attempt {formatFetchedAt(fixtures.fetchedAt)}. You can still{" "}
             <Link href="/learn" className="text-gold">
               keep learning
-            </Link>{" "}
-            or read{" "}
+            </Link>
+            ,{" "}
+            <Link href="/community" className="text-gold">
+              meet your team
+            </Link>
+            , or read{" "}
             <Link href="/watch" className="text-gold">
               where to watch
             </Link>
@@ -89,6 +95,10 @@ export default async function ThisWeekPage() {
         tag, not a rights guarantee. For the honest map, see{" "}
         <Link href="/watch" className="text-gold">
           Where to watch
+        </Link>
+        . To sit with fans of your team, try{" "}
+        <Link href="/watch-near-you" className="text-gold">
+          pubs near you
         </Link>
         .
       </p>

@@ -31,7 +31,7 @@ export function DraftProspectsTeaser({
         </Link>
       </div>
       <p className="mt-2 text-sm leading-6 text-cream-dim">
-        Names you will hear between now and April. Rough rank only — boards move
+        Names you will hear between now and April. Rough rank only: boards move
         after every Saturday.
       </p>
       <ol className="mt-4 divide-y divide-line">

@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Your team",
-  description: "The NFL team you picked: colours, a short why, and where to start learning.",
+  description:
+    "The NFL team you picked: learn the game, then meet Scottish and UK fans of that side.",
 };
 
 export default function TeamResultLayout({

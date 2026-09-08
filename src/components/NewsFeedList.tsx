@@ -19,8 +19,12 @@ export function NewsFeedList({
           Last attempt {formatFetchedAt(news.fetchedAt)}. You can still{" "}
           <Link href="/learn" className="text-gold">
             keep learning
-          </Link>{" "}
-          or check{" "}
+          </Link>
+          ,{" "}
+          <Link href="/community" className="text-gold">
+            meet your team
+          </Link>
+          , or check{" "}
           <Link href="/this-week" className="text-gold">
             this week’s games
           </Link>
@@ -51,6 +55,10 @@ export function NewsFeedList({
         jargon, start with{" "}
         <Link href="/learn" className="text-gold">
           the lessons
+        </Link>
+        . To meet fans of your team, open{" "}
+        <Link href="/community" className="text-gold">
+          Community
         </Link>
         .
       </p>

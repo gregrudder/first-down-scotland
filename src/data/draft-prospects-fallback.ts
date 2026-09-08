@@ -43,7 +43,7 @@ export const fallbackProspects: DraftProspect[] = [
     name: "Dylan Stewart",
     position: "EDGE",
     college: "South Carolina",
-    why: "A pass rusher with bend — the kind of player who wrecks a pocket. Edge rushers go early because they change quarterbacks’ nights.",
+    why: "A pass rusher with bend, the kind of player who wrecks a pocket. Edge rushers go early because they change quarterbacks’ nights.",
   },
   {
     id: "dante-moore",
@@ -83,7 +83,7 @@ export const fallbackProspects: DraftProspect[] = [
     name: "Trevor Goosby",
     position: "OT",
     college: "Texas",
-    why: "A big left tackle with light feet. Blind-side tackles protect the quarterback’s back — clubs pay for that.",
+    why: "A big left tackle with light feet. Blind-side tackles protect the quarterback’s back: clubs pay for that.",
   },
   {
     id: "jordan-seaton",
@@ -107,7 +107,7 @@ export const fallbackProspects: DraftProspect[] = [
     name: "Charlie Becker",
     position: "WR",
     college: "Indiana",
-    why: "Burst onto boards after a big Indiana season. Contested catches and long speed — the “where did he come from?” name.",
+    why: "Burst onto boards after a big Indiana season. Contested catches and long speed: the “where did he come from?” name.",
   },
 ];
 

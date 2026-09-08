@@ -28,8 +28,16 @@ export default function PodcastsPage() {
         <p>
           A short list, not a directory of everything ever recorded. Start with a UK
           or beginner league show, then pick a daily team pod once you have a side.
-          Labels say whether a show is official, independent, or fan-run. We link out
-         : we do not embed players.
+          Meeting fans of that club lives on{" "}
+          <Link href="/community" className="text-gold">
+            Community
+          </Link>{" "}
+          and in{" "}
+          <Link href="/watch-near-you" className="text-gold">
+            pubs
+          </Link>
+          . Labels say whether a show is official, independent, or fan-run. We link
+          out: we do not embed players.
         </p>
       </PageIntro>
 
