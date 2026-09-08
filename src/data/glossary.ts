@@ -46,6 +46,11 @@ export const glossary: GlossaryEntry[] = [
     lessonSlug: "offence-and-defence",
   },
   {
+    term: "Compensatory pick",
+    short: "An extra Draft pick awarded, usually later on, to clubs that lost more free agents than they signed.",
+    lessonSlug: "the-draft",
+  },
+  {
     term: "Delay of game",
     short: "A penalty when the offence does not snap the ball before the play clock hits zero.",
     lessonSlug: "penalties",
@@ -54,6 +59,11 @@ export const glossary: GlossaryEntry[] = [
     term: "Down",
     short: "One of four attempts to gain 10 yards. Also used as “second down”.",
     lessonSlug: "downs-and-distance",
+  },
+  {
+    term: "Draft",
+    short: "The annual event where clubs take turns picking college players. Seven rounds, late April.",
+    lessonSlug: "the-draft",
   },
   {
     term: "Drive",
@@ -151,6 +161,11 @@ export const glossary: GlossaryEntry[] = [
     term: "Linebacker",
     short: "A defender who stands behind the defensive line and does a bit of everything.",
     lessonSlug: "offence-and-defence",
+  },
+  {
+    term: "Mock draft",
+    short: "A guessed Draft order, published for fun. Not the real list — rankings move.",
+    lessonSlug: "the-draft",
   },
   {
     term: "Neutral zone",
@@ -321,6 +336,11 @@ export const glossary: GlossaryEntry[] = [
     term: "Two-point conversion",
     short: "After a touchdown, a run or pass from the 2-yard line worth 2 points instead of kicking.",
     lessonSlug: "how-you-score",
+  },
+  {
+    term: "UDFA",
+    short: "Undrafted free agent — a player who was not picked in the Draft, then signed anyway.",
+    lessonSlug: "the-draft",
   },
   {
     term: "Wide receiver",

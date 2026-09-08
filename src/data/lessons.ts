@@ -4,7 +4,8 @@ export type LessonBlock =
   | { type: "list"; items: string[] }
   | { type: "callout"; title: string; text: string }
   | { type: "terms"; items: { term: string; def: string }[] }
-  | { type: "diagram"; id: string };
+  | { type: "diagram"; id: string }
+  | { type: "draft-board" };
 
 export type Lesson = {
   slug: string;
@@ -669,7 +670,7 @@ export const lessons: Lesson[] = [
       },
       {
         type: "p",
-        text: "A yellow flag lands, everyone argues, and 40 seconds vanish. The last lesson covers the common calls. In the moment, just wait for the referee: who did what, how many yards, and whether it is a first down. The glossary is there when a new phrase appears.",
+        text: "A yellow flag lands, everyone argues, and 40 seconds vanish. The penalties lesson covers the common calls. In the moment, just wait for the referee: who did what, how many yards, and whether it is a first down. The glossary is there when a new phrase appears.",
       },
       {
         type: "callout",
@@ -683,6 +684,127 @@ export const lessons: Lesson[] = [
       {
         type: "p",
         text: "Pick a game this week that kicks off at a civilised UK hour. Keep this site open on the glossary. Follow one team’s quarterback for a quarter, then just enjoy the noise. If a London game is on the slate, even better — the crowd will sound like home.",
+      },
+    ],
+  },
+  {
+    slug: "the-draft",
+    number: 11,
+    title: "The NFL Draft",
+    summary:
+      "How clubs pick college players, why a bad season can mean a high pick, and how to follow Draft night from the sofa in Scotland.",
+    minutes: 8,
+    blocks: [
+      {
+        type: "p",
+        text: "The Draft is not a pub raffle and it is not the transfer window. Once a year, usually in late April, the 32 clubs take turns choosing young players out of American college football. Those players become rookies. The show lasts three days. The noise lasts all spring.",
+      },
+      {
+        type: "h2",
+        text: "What they are actually picking",
+      },
+      {
+        type: "p",
+        text: "College football is the main feeder. A 21-year-old quarterback from Ohio State is the NFL’s version of a brilliant youth prospect — except the club that wants him cannot just offer a wage. They have to wait their turn, or trade for someone else’s turn.",
+      },
+      {
+        type: "list",
+        items: [
+          "Seven rounds, spread over three days.",
+          "Each club has one pick per round to start with — 32 picks, plus extras.",
+          "Round 1 is the television event. Rounds 2–7 are where most rosters are actually built.",
+          "A “first-rounder” is a player taken in that opening round. People will say it like a medal.",
+        ],
+      },
+      {
+        type: "h2",
+        text: "Who picks first",
+      },
+      {
+        type: "p",
+        text: "The order is mostly the reverse of last season’s table. Win fewer games, pick earlier. Win the Super Bowl, pick last. That is the league’s way of giving struggling clubs a chance to get better — and giving you a reason to care in December when your lot are 4–10.",
+      },
+      { type: "draft-board" },
+      {
+        type: "callout",
+        title: "Tie-breakers exist. You can ignore them.",
+        text: "If two teams finish with the same record, the league uses a list of tie-breakers (strength of schedule and so on). Commentators will mention it. You do not need the spreadsheet. The published order is the one that matters.",
+      },
+      {
+        type: "h2",
+        text: "Trades — moving up, moving back",
+      },
+      {
+        type: "p",
+        text: "A pick is an asset. Clubs swap them the way football clubs swap players and cash, except the currency is future turns. “Trading up” means giving away extra picks to jump the queue for a player they love. “Trading back” means dropping down the list and collecting more picks. A star already on the roster can be sent the other way as part of the deal.",
+      },
+      {
+        type: "p",
+        text: "This is why a Draft night can go quiet, then explode: two general managers have been on the phone, and suddenly pick 12 is owned by someone else.",
+      },
+      {
+        type: "h2",
+        text: "Undrafted free agents",
+      },
+      {
+        type: "p",
+        text: "Plenty of good players are not picked at all. When the last round ends, those names become undrafted free agents — UDFAs. Any club can offer them a contract. Making the 53-man roster from there is hard. Landing on the practice squad is a common first job. Some of the league’s best stories start with “nobody called his name”.",
+      },
+      {
+        type: "h2",
+        text: "Why fans care",
+      },
+      {
+        type: "list",
+        items: [
+          "A high pick is hope. Bad seasons are sold as “we’ll be picking in the top ten”.",
+          "Rookies are cheap relative to veterans. A clever Draft can rebuild a club without a Hollywood spending spree.",
+          "Your team’s first-rounder will be on every preview show until they prove they belong — or they don’t.",
+          "Mock drafts (guessing the order) are a cottage industry. Treat them as entertainment, not scripture. Rankings move.",
+        ],
+      },
+      {
+        type: "h2",
+        text: "Following it from the UK",
+      },
+      {
+        type: "p",
+        text: "Round 1 is the awkward one: it starts Thursday evening in the US, which is the small hours on Friday in Britain. Rounds 2–3 run Friday night US time. Rounds 4–7 on the Saturday often land at a civilised UK tea-time, because they start around midday in New York.",
+      },
+      {
+        type: "list",
+        items: [
+          "Check Europe/London, not the US graphic. BST in April makes the maths friendlier than midwinter Monday-nighters.",
+          "Sky Sports and NFL Game Pass on DAZN usually carry the coverage. The NFL’s own YouTube often shows the later rounds.",
+          "You do not have to watch seven rounds. Watch the first hour of Round 1 for the theatre, then catch your club’s picks in the morning.",
+          "A “draft grade” the next day is one writer’s hunch. Give the rookies a season.",
+        ],
+      },
+      {
+        type: "callout",
+        title: "London does not get a Draft",
+        text: "The Draft is hosted in a US city that changes. There is no Wembley equivalent. Your job is the same as a Sunday game: know the UK start time, and do not trust a graphic that says “8pm” without a time zone.",
+      },
+      {
+        type: "terms",
+        items: [
+          {
+            term: "Pick",
+            def: "A turn in the Draft. “The 12th pick” is the 12th name called in that round, unless someone traded it.",
+          },
+          {
+            term: "Compensatory pick",
+            def: "An extra pick the league awards, usually later in the Draft, to clubs that lost more free agents than they signed.",
+          },
+          {
+            term: "UDFA",
+            def: "Undrafted free agent — a player who was not picked, then signed anyway.",
+          },
+          {
+            term: "Mock draft",
+            def: "A guessed order, published for fun and clicks. It is not the real list.",
+          },
+        ],
       },
     ],
   },

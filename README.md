@@ -9,7 +9,7 @@ Learning is the hero. This is not a TV listings product.
 ## What v1 includes
 
 - **`/`** — value prop, Start learning CTA, full lesson list, and a small “games this week” teaser
-- **`/learn`** and **`/learn/[slug]`** — ten beginner lessons in UK English, including X-and-O play diagrams at `/learn/plays`. Stage progress bars and a 20-question quiz at `/learn/quiz` (saved in the browser as `fds-learn`). Badges: Practice Squad (0–7) → Rookie (8–12) → Starter (13–17) → Hall of Famer (18–20).
+- **`/learn`** and **`/learn/[slug]`** — beginner lessons in UK English, including X-and-O play diagrams at `/learn/plays` and a Draft explainer at `/learn/the-draft`. Stage progress bars and a 20-question quiz at `/learn/quiz` (saved in the browser as `fds-learn`). Badges: Practice Squad (0–7) → Rookie (8–12) → Starter (13–17) → Hall of Famer (18–20).
 - **`/glossary`** — searchable jargon decoder
 - **`/this-week`** — this week’s NFL games from ESPN’s public scoreboard, times in `Europe/London`
 - **`/news`** — NFL headlines pulled automatically from public RSS (ESPN, BBC Sport, the Guardian)
@@ -138,7 +138,7 @@ curl -H "Authorization: Bearer $CRON_SECRET" https://your-domain.vercel.app/api/
 | --- | --- |
 | `/` | Learning home + fixtures teaser |
 | `/learn` | Lesson index, stage progress bars |
-| `/learn/what-youre-watching` … `/learn/what-to-look-for` | The ten lessons |
+| `/learn/what-youre-watching` … `/learn/the-draft` | The lessons, including the Draft |
 | `/learn/plays` and `/learn/plays/[slug]` | Common play diagrams |
 | `/learn/quiz` | 20-question path quiz + badges (`fds-learn`) |
 | `/glossary` | Jargon decoder |

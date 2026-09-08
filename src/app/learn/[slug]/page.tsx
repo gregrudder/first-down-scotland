@@ -53,6 +53,21 @@ export default async function LessonPage({ params }: LessonPageProps) {
       <div className="gold-rule my-8" />
       <LessonArticle lesson={lesson} />
 
+      {slug === "the-draft" ? (
+        <div className="mt-12 rounded-2xl border border-line bg-navy-2 p-5">
+          <p className="text-xs font-semibold uppercase tracking-[0.16em] text-gold">
+            2027 class
+          </p>
+          <p className="mt-2 text-sm leading-6 text-cream-dim">
+            Twelve names on the early boards — rank, college, and why they matter. Rankings
+            move every Saturday.
+          </p>
+          <Link href="/learn/draft-prospects" className="mt-3 inline-block text-sm font-semibold text-gold">
+            Top 2027 prospects →
+          </Link>
+        </div>
+      ) : null}
+
       <MarkLessonDone
         slug={lesson.slug}
         nextHref={next ? `/learn/${next.slug}` : "/learn/quiz"}

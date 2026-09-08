@@ -24,6 +24,12 @@ export const learnStages: LearnStage[] = [
     summary: "Kicks, flags, and a simple checklist for the telly.",
     slugs: ["special-teams", "penalties", "what-to-look-for"],
   },
+  {
+    id: "the-draft",
+    title: "The Draft",
+    summary: "How clubs pick college players, and how to follow it from the UK.",
+    slugs: ["the-draft"],
+  },
 ];
 
 export function stageForLesson(slug: string): LearnStage | undefined {
