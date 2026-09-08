@@ -18,7 +18,7 @@ Three jobs: learn the game, meet fans of your team, keep that club in one place.
 - **`/rookies`** : Rookie Watch for **this season’s drafted class** (the live scoreboard year; in 2026 that is the 2026 draft, not the 2025 class and not the 2027 college board). ESPN draft list plus Sleeper regular-season stats when any counting numbers exist. Cached **600 seconds**. Filter by team, position, or round.
 - **`/news`** : NFL headlines pulled automatically from public RSS (ESPN, BBC Sport, the Guardian). Helper, not the product.
 - **`/news/fantasy`** : NFL fantasy football tips & news (not Scottish football)
-- **`/podcasts`** : recommended NFL and per-team shows to follow (external links; official vs independent labelled)
+- **`/podcasts`** : UK/Scottish, general league, and per-team shows to follow (external links; official vs independent labelled)
 - **`/watch`** : high-level UK viewing map (Sky / Channel 5 / 5Action / My5 / DAZN Game Pass / Netflix)
 - **`/film-room`** : curated watch-to-learn films (America’s Game, Hard Knocks, All or Nothing, Quarterback, Wide Receiver). Official where-to-look hints only; no streams.
 - **`/watch-near-you`** : Scottish pubs that show the NFL, framed as places to meet fans of the same team and arrange meetups. Free listings; demo featured card; more cities coming. Always call ahead.

@@ -21,7 +21,8 @@ export const podcastKindLabel: Record<PodcastKind, string> = {
   fan: "Fan / beat",
 };
 
-export const generalPodcasts: Podcast[] = [
+/** UK and Scottish shows aimed at fans on this side of the pond. Not team-specific. */
+export const ukScottishPodcasts: Podcast[] = [
   {
     id: "nat-coombs",
     title: "The Nat Coombs Show",
@@ -37,6 +38,65 @@ export const generalPodcasts: Podcast[] = [
     ],
   },
   {
+    id: "inside-the-huddle",
+    title: "Inside The Huddle",
+    blurb:
+      "Sky Sports’ house NFL pod. Neil Reynolds, Jeff Reinebold and Phoebe Schecter: Monday reaction, Thursday preview, with UK kick-off times in mind.",
+    kind: "independent",
+    artworkUrl:
+      "https://is1-ssl.mzstatic.com/image/thumb/Podcasts211/v4/da/e2/aa/dae2aae8-27a4-3e16-d6da-01b720fc7260/mza_2958411363974651150.png/600x600bb.jpg",
+    links: [
+      {
+        label: "Website",
+        href: "https://www.skysports.com/podcasts/36578/11933936/inside-the-huddle",
+      },
+      { label: "Apple", href: "https://podcasts.apple.com/gb/podcast/inside-the-huddle/id396901540" },
+    ],
+  },
+  {
+    id: "across-the-formation",
+    title: "Across The Formation",
+    blurb:
+      "talkSPORT’s British NFL roundup. Will Gavin, Olly Hunter and Sam Harris: one thing they learned, a deep dive, and the game of the week.",
+    kind: "independent",
+    artworkUrl:
+      "https://is1-ssl.mzstatic.com/image/thumb/Podcasts211/v4/9a/e9/a4/9ae9a4d8-e9eb-8c28-29bb-364f3483053a/mza_8488679452409208574.jpeg/600x600bb.jpg",
+    links: [
+      { label: "Website", href: "https://talksport.com/podcasts/1102607/podcasts/" },
+      { label: "Apple", href: "https://podcasts.apple.com/gb/podcast/across-the-formation/id1096156871" },
+      { label: "YouTube", href: "https://www.youtube.com/@talkSPORTUSA" },
+    ],
+  },
+  {
+    id: "stramash",
+    title: "Stramash!",
+    blurb:
+      "NFL from a Scottish point of view. Paul Mitchell, Cameron Hobbs and friends, weekly, and unashamedly this side of the pond.",
+    kind: "independent",
+    artworkUrl:
+      "https://is1-ssl.mzstatic.com/image/thumb/Podcasts112/v4/b3/ee/7d/b3ee7da0-250b-0cc0-a101-e7cf208ee76f/mza_10238095241188850726.png/600x600bb.jpg",
+    links: [
+      { label: "Website", href: "https://scotlandnfl.podbean.com/" },
+      { label: "Apple", href: "https://podcasts.apple.com/gb/podcast/stramash/id1341090814" },
+    ],
+  },
+  {
+    id: "tartan-touchdown",
+    title: "Tartan Touchdown Podcast",
+    blurb:
+      "Scotland’s American football voice: NFL weeks plus the amateur and flag scene at home. Useful if you want the sport, not only the league.",
+    kind: "independent",
+    artworkUrl:
+      "https://is1-ssl.mzstatic.com/image/thumb/Podcasts221/v4/90/a2/81/90a28118-5d2a-67a0-a75c-bd113d90730c/mza_3159629951119768132.jpg/600x600bb.jpg",
+    links: [
+      { label: "Website", href: "https://tartantouchdown.podbean.com/" },
+      {
+        label: "Apple",
+        href: "https://podcasts.apple.com/gb/podcast/tartan-touchdown-podcast/id1782663376",
+      },
+    ],
+  },
+  {
     id: "rookie-playbook",
     title: "The Rookie Playbook",
     blurb:
@@ -45,6 +105,39 @@ export const generalPodcasts: Podcast[] = [
     artworkUrl:
       "https://rookieplaybook.co.uk/wp-content/uploads/2020/02/cropped-RPB-Logo-New-e1582375854775.png",
     links: [{ label: "Website", href: "https://rookieplaybook.co.uk/" }],
+  },
+];
+
+/** League-wide US shows. Not tied to one club; team pods live in the club list. */
+export const generalPodcasts: Podcast[] = [
+  {
+    id: "pat-mcafee",
+    title: "The Pat McAfee Show",
+    blurb:
+      "Weekday sports circus from a former Colts punter. NFL chat, guests, and noise. Entertainment first; not a scheme classroom.",
+    kind: "independent",
+    artworkUrl:
+      "https://is1-ssl.mzstatic.com/image/thumb/Podcasts221/v4/d4/1e/fd/d41efd6c-1286-3647-be02-e53a3f349d6e/mza_14569431522144413673.jpg/600x600bb.jpg",
+    links: [
+      { label: "Apple", href: "https://podcasts.apple.com/gb/podcast/the-pat-mcafee-show/id1435183458" },
+      { label: "Spotify", href: "https://open.spotify.com/show/1ol0jP8hrNHydiAd38G6B1" },
+      { label: "YouTube", href: "https://www.youtube.com/@PatMcAfeeShow" },
+    ],
+  },
+  {
+    id: "move-the-sticks",
+    title: "Move the Sticks with Daniel Jeremiah",
+    blurb:
+      "Scout-eye league talk from Daniel Jeremiah, now with ESPN and Omaha Productions. Roster building, player eval, and why teams are built the way they are.",
+    kind: "independent",
+    artworkUrl:
+      "https://is1-ssl.mzstatic.com/image/thumb/Podcasts221/v4/00/d2/ef/00d2ef90-b144-b448-e6d5-f67638d4686f/mza_8085546856818361669.jpg/600x600bb.jpg",
+    links: [
+      {
+        label: "Apple",
+        href: "https://podcasts.apple.com/gb/podcast/move-the-sticks-with-daniel-jeremiah/id6807071056",
+      },
+    ],
   },
   {
     id: "athletic-football-show",
@@ -60,6 +153,20 @@ export const generalPodcasts: Podcast[] = [
         href: "https://podcasts.apple.com/gb/podcast/the-athletic-football-show-a-show-about-the-nfl/id1528622068",
       },
       { label: "Spotify", href: "https://open.spotify.com/show/24OG6Hat6fGkArLPCTfyWP" },
+    ],
+  },
+  {
+    id: "ringer-nfl",
+    title: "The Ringer NFL Show",
+    blurb:
+      "Sheil Kapadia and The Ringer’s NFL desk. Smart, weekday-length league talk without picking one club.",
+    kind: "independent",
+    artworkUrl:
+      "https://is1-ssl.mzstatic.com/image/thumb/Podcasts221/v4/6d/52/89/6d52898e-e1cd-a3e4-c14f-9f249a405bc3/mza_16391395499274967429.jpg/600x600bb.jpg",
+    links: [
+      { label: "Apple", href: "https://podcasts.apple.com/gb/podcast/the-ringer-nfl-show/id1109282822" },
+      { label: "Spotify", href: "https://open.spotify.com/show/3sYLdv261f5jLvEgDLU9PD" },
+      { label: "YouTube", href: "https://www.youtube.com/@RingerNFL" },
     ],
   },
   {

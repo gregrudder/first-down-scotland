@@ -120,7 +120,7 @@ export const navGroups: readonly NavGroup[] = [
       {
         href: "/podcasts",
         label: "Podcasts",
-        description: "NFL podcasts and audio content.",
+        description: "UK, league-wide and team NFL podcasts.",
       },
     ],
   },
