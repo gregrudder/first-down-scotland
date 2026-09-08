@@ -21,7 +21,7 @@ export function Header() {
                 priority
                 className="h-10 w-10 shrink-0 rounded-[10px]"
               />
-              <span className="hidden leading-tight min-[480px]:block">
+              <span className="hidden leading-tight sm:block">
                 <span className="block font-display text-base font-semibold text-cream sm:text-lg">
                   First Down Scotland
                 </span>

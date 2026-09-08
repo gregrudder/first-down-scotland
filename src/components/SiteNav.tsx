@@ -233,7 +233,7 @@ function NavLink({
   return (
     <Link
       href={item.href}
-      className={`relative flex min-h-12 items-start gap-3 rounded-xl px-3 py-3 transition hover:bg-navy-3 ${
+      className={`relative flex min-h-12 items-start gap-3 rounded-xl px-3 py-3 transition hover:bg-navy-3 lg:min-h-10 lg:py-2 ${
         current ? "bg-navy-3" : ""
       }`}
       aria-current={current ? "page" : undefined}
@@ -245,12 +245,11 @@ function NavLink({
           aria-hidden
         />
       ) : null}
-      <span
-        className={`mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full ${
-          current ? "bg-gold" : "border border-line"
-        }`}
-        aria-hidden
-      />
+      {current ? (
+        <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-gold" aria-hidden />
+      ) : (
+        <span className="mt-1.5 h-1.5 w-1.5 shrink-0" aria-hidden />
+      )}
       <span className="min-w-0">
         <span
           className={`block ${
@@ -400,7 +399,7 @@ function MenuBody({
   const homeLink = (
     <Link
       href={navHome.href}
-      className={`relative mb-4 flex min-h-12 items-center gap-3 rounded-xl px-3 py-3 hover:bg-navy-3 ${
+      className={`relative mb-3 flex min-h-12 items-center gap-3 rounded-xl px-3 py-3 hover:bg-navy-3 lg:mb-2 lg:min-h-10 lg:py-2 ${
         homeCurrent ? "bg-navy-3" : ""
       }`}
       aria-current={homeCurrent ? "page" : undefined}
@@ -409,10 +408,11 @@ function MenuBody({
       {homeCurrent ? (
         <span className="absolute inset-y-2 left-0 w-0.5 rounded-full bg-gold" aria-hidden />
       ) : null}
-      <span
-        className={`h-1.5 w-1.5 rounded-full ${homeCurrent ? "bg-gold" : "border border-line"}`}
-        aria-hidden
-      />
+      {homeCurrent ? (
+        <span className="h-1.5 w-1.5 rounded-full bg-gold" aria-hidden />
+      ) : (
+        <span className="h-1.5 w-1.5" aria-hidden />
+      )}
       <span className={`text-sm font-medium ${homeCurrent ? "text-gold" : "text-cream"}`}>
         {navHome.label}
       </span>
@@ -440,11 +440,11 @@ function MenuBody({
   }
 
   return (
-    <div className="px-5 py-5 lg:px-6 lg:py-6">
+    <div className="px-5 py-4 lg:px-5 lg:py-4">
       {homeLink}
-      <div className="grid gap-8 lg:grid-cols-3">
+      <div className="grid gap-6 lg:grid-cols-3 lg:gap-5">
         {navColumns.map((column) => (
-          <div key={column} className="space-y-7 border-t border-line pt-5 lg:border-t-0 lg:pt-0 lg:border-l lg:border-line lg:pl-6 first:lg:border-l-0 first:lg:pl-0">
+          <div key={column} className="space-y-5 border-t border-line pt-5 lg:border-t-0 lg:border-l lg:border-line lg:pt-0 lg:pl-5 first:lg:border-l-0 first:lg:pl-0">
             {navGroups
               .filter((group) => group.column === column)
               .map((group) => (
@@ -505,7 +505,7 @@ export function SiteMenuPanels() {
           role="dialog"
           aria-modal="true"
           aria-labelledby={`${titleId}-desktop`}
-          className="fds-mega-in mx-auto max-h-[min(38rem,calc(100vh-5.5rem))] max-w-6xl overflow-y-auto rounded-2xl border border-gold/35 bg-navy-2 shadow-2xl"
+          className="fds-mega-in mx-auto max-h-[calc(100vh-4.75rem)] max-w-6xl overflow-y-auto rounded-2xl border border-gold/35 bg-navy-2 shadow-2xl"
         >
           <MenuChrome titleId={`${titleId}-desktop`} onClose={() => setOpen(false)} />
           <nav aria-label="Site">
