@@ -9,6 +9,7 @@ export const site = {
 } as const;
 
 export const navItems = [
+  { href: "/", label: "Home" },
   { href: "/learn", label: "Learn" },
   { href: "/pick-your-team", label: "Pick my team" },
   { href: "/community", label: "Community" },
