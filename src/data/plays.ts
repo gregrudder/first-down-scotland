@@ -59,7 +59,7 @@ export const plays: Play[] = [
       "The play starts to look like a scrum, then one runner appears outside it. Watch the edge: if a defender sets outside, the back may cut back in.",
     minutes: 3,
     caption:
-      "The running back takes the ball and sweeps left around the line, rather than through it. Blockers on that side step out to clear a lane. Defence is the dark circles with gold letters."
+      "The running back takes the ball and sweeps left around the line, rather than through it. Blockers on that side step out to clear a lane. Defence is the dark circles with gold letters.",
     markers: eleven.map((marker) =>
       marker.id === "rb" ? { ...marker, x: 176, y: 226 } : marker,
     ),
