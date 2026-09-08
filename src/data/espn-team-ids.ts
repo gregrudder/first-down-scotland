@@ -1,0 +1,42 @@
+/**
+ * ESPN’s public NFL team IDs. Stable identifiers used by their scoreboard
+ * and depth-chart endpoints — not invented slugs.
+ */
+export const espnTeamIds: Record<string, number> = {
+  ARI: 22,
+  ATL: 1,
+  BAL: 33,
+  BUF: 2,
+  CAR: 29,
+  CHI: 3,
+  CIN: 4,
+  CLE: 5,
+  DAL: 6,
+  DEN: 7,
+  DET: 8,
+  GB: 9,
+  HOU: 34,
+  IND: 11,
+  JAX: 30,
+  KC: 12,
+  LAC: 24,
+  LAR: 14,
+  LV: 13,
+  MIA: 15,
+  MIN: 16,
+  NE: 17,
+  NO: 18,
+  NYG: 19,
+  NYJ: 20,
+  PHI: 21,
+  PIT: 23,
+  SEA: 26,
+  SF: 25,
+  TB: 27,
+  TEN: 10,
+  WSH: 28,
+};
+
+export function espnTeamId(abbreviation: string): number | undefined {
+  return espnTeamIds[abbreviation.toUpperCase()];
+}
