@@ -16,26 +16,154 @@ export const homeSeo = {
     "FIRST DOWN SCOTLAND NFL is a Scotland-built hub for UK beginners: learn American football in plain English, meet fans of your team, and follow that club in one place.",
 } as const;
 
-export const navItems = [
-  { href: "/", label: "Home" },
-  { href: "/learn", label: "Learn" },
-  { href: "/pick-your-team", label: "Pick my team" },
-  { href: "/community", label: "Community" },
-  { href: "/watch-near-you", label: "Pubs" },
-  { href: "/this-week", label: "This week" },
-  { href: "/scores", label: "Scores" },
-  { href: "/standings", label: "Standings" },
-  { href: "/watch", label: "Watch" },
-  { href: "/film-room", label: "Film room" },
-  { href: "/news", label: "News" },
-  { href: "/podcasts", label: "Podcasts" },
-  { href: "/history", label: "History" },
-  { href: "/teams", label: "Teams" },
-  { href: "/rookies", label: "Rookies" },
-  { href: "/glossary", label: "Glossary" },
-  { href: "/feedback", label: "Feedback" },
-  { href: "/about", label: "About" },
-] as const;
+export type NavItem = {
+  href: string;
+  label: string;
+  description?: string;
+  primary?: boolean;
+};
+
+export type NavGroup = {
+  id: string;
+  label: string;
+  column: 1 | 2 | 3;
+  priority?: "low";
+  items: readonly NavItem[];
+};
+
+export const navHome: NavItem = { href: "/", label: "Home" };
+
+export const navGroups: readonly NavGroup[] = [
+  {
+    id: "started",
+    label: "Get started",
+    column: 1,
+    items: [
+      { href: "/learn", label: "Learn the NFL", primary: true },
+      { href: "/pick-your-team", label: "Pick My Team", primary: true },
+      { href: "/glossary", label: "Glossary" },
+    ],
+  },
+  {
+    id: "community",
+    label: "Community",
+    column: 1,
+    items: [
+      {
+        href: "/community",
+        label: "Community",
+        description: "Connect with other NFL fans.",
+        primary: true,
+      },
+      {
+        href: "/watch-near-you",
+        label: "Pubs",
+        description: "Find places showing NFL games.",
+      },
+    ],
+  },
+  {
+    id: "history",
+    label: "History",
+    column: 1,
+    items: [{ href: "/history", label: "History" }],
+  },
+  {
+    id: "follow",
+    label: "Follow the NFL",
+    column: 2,
+    items: [
+      {
+        href: "/this-week",
+        label: "This Week",
+        description: "Games, fixtures and what is coming up.",
+        primary: true,
+      },
+      {
+        href: "/scores",
+        label: "Scores",
+        description: "Live and completed game scores.",
+        primary: true,
+      },
+      {
+        href: "/standings",
+        label: "Standings",
+        description: "AFC and NFC tables.",
+      },
+      {
+        href: "/news",
+        label: "News",
+        description: "Latest NFL news.",
+      },
+      {
+        href: "/rookies",
+        label: "Rookies",
+        description: "This year’s rookie class.",
+      },
+    ],
+  },
+  {
+    id: "watch",
+    label: "Watch & listen",
+    column: 3,
+    items: [
+      {
+        href: "/watch",
+        label: "Watch",
+        description: "Where and how to watch NFL games.",
+      },
+      {
+        href: "/film-room",
+        label: "Film Room",
+        description: "Breakdowns and analysis.",
+      },
+      {
+        href: "/podcasts",
+        label: "Podcasts",
+        description: "NFL podcasts and audio content.",
+      },
+    ],
+  },
+  {
+    id: "teams",
+    label: "Teams",
+    column: 3,
+    items: [{ href: "/teams", label: "Teams" }],
+  },
+  {
+    id: "about",
+    label: "About",
+    column: 3,
+    priority: "low",
+    items: [
+      { href: "/about", label: "About" },
+      { href: "/feedback", label: "Feedback" },
+    ],
+  },
+];
+
+export const navColumns = [1, 2, 3] as const;
+
+export const navItems: readonly NavItem[] = [
+  navHome,
+  ...navGroups.flatMap((group) => group.items),
+];
+
+export function isCurrentNav(
+  pathname: string,
+  href: string,
+  extraHrefs: readonly string[] = [],
+): boolean {
+  if (href === "/") return pathname === "/";
+  if (pathname !== href && !pathname.startsWith(`${href}/`)) return false;
+  const others = [...navItems.map((item) => item.href), ...extraHrefs];
+  return !others.some(
+    (other) =>
+      other !== href &&
+      other.length > href.length &&
+      (pathname === other || pathname.startsWith(`${other}/`)),
+  );
+}
 
 const FALLBACK_PRODUCTION = "https://first-down-scotland.vercel.app";
 const FALLBACK_LOCAL = "http://localhost:3000";

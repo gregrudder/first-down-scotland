@@ -93,3 +93,40 @@ body {
   animation: fds-football-spin var(--fds-spin-ms, 280ms) linear infinite;
   transform-origin: center;
 }
+
+@keyframes fds-drawer-in {
+  from {
+    transform: translateX(1.25rem);
+    opacity: 0.6;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes fds-mega-in {
+  from {
+    transform: translateY(-0.5rem);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.fds-drawer-in {
+  animation: fds-drawer-in 180ms ease-out;
+}
+
+.fds-mega-in {
+  animation: fds-mega-in 180ms ease-out;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fds-drawer-in,
+  .fds-mega-in {
+    animation: none;
+  }
+}
