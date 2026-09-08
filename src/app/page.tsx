@@ -1,7 +1,7 @@
 import Link from "next/link";
+import { SundayCard } from "@/components/SundayCard";
 import { DraftProspectsTeaser } from "@/components/DraftProspectsTeaser";
 import { GamesTeaser } from "@/components/GamesTeaser";
-import { HomeTeamCard } from "@/components/TeamMark";
 import { LessonCard } from "@/components/LessonCard";
 import { lessons } from "@/data/lessons";
 import { getDraftProspects } from "@/lib/draft-prospects";
@@ -38,10 +38,10 @@ export default async function HomePage() {
               Start learning
             </Link>
             <Link
-              href="/this-week"
+              href="/this-week#your-sunday"
               className="inline-flex items-center justify-center rounded-full border border-line px-6 py-3 text-sm font-semibold text-cream hover:border-gold/50"
             >
-              Games this week
+              Your Sunday
             </Link>
           </div>
         </div>
@@ -67,7 +67,7 @@ export default async function HomePage() {
           </div>
         </div>
         <div className="space-y-4 lg:pt-16">
-          <HomeTeamCard />
+          <SundayCard fixtures={fixtures} compact />
           <GamesTeaser fixtures={fixtures} />
           <DraftProspectsTeaser board={draftBoard} compact />
           <div className="rounded-2xl border border-line bg-navy-2 p-5">
@@ -123,6 +123,11 @@ export default async function HomePage() {
               <li>
                 <Link href="/watch-near-you" className="text-cream hover:text-gold">
                   Watch near you: Scottish pubs →
+                </Link>
+              </li>
+              <li>
+                <Link href="/this-week#your-sunday" className="text-cream hover:text-gold">
+                  Your Sunday →
                 </Link>
               </li>
               <li>
