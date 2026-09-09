@@ -19,6 +19,12 @@ const cards = [
     title: "This year’s drafted class",
     body: "This season’s drafted rookies: team, position, round, and season stats when the feed has them.",
   },
+  {
+    href: "/score-history",
+    kicker: "Score history",
+    title: "Has this final happened before?",
+    body: "Type two totals and see how often that scoreline appears in our public historical table.",
+  },
 ] as const;
 
 export function LeagueFollow() {
@@ -29,13 +35,13 @@ export function LeagueFollow() {
           <p className="text-xs font-semibold uppercase tracking-[0.16em] text-gold">
             Follow the league
           </p>
-          <h2 className="mt-2 font-display text-3xl text-cream">Scores, table, rookies</h2>
+          <h2 className="mt-2 font-display text-3xl text-cream">Scores, table, rookies, scorelines</h2>
         </div>
         <Link href="/this-week" className="hidden text-sm text-gold sm:inline">
           This week →
         </Link>
       </div>
-      <div className="mt-6 grid gap-4 md:grid-cols-3">
+      <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         {cards.map((card) => (
           <Link
             key={card.href}

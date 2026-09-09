@@ -5,6 +5,7 @@ import { GameCard } from "@/components/GameCard";
 import { LeagueTabs } from "@/components/LeagueTabs";
 import { PageIntro } from "@/components/PageIntro";
 import { UkKickoffHelper } from "@/components/UkKickoffHelper";
+import { UnusualFinals } from "@/components/UnusualFinals";
 import { getNflFixtures, groupGamesByUkDate, weekHeading } from "@/lib/espn";
 import { getGameReports } from "@/lib/game-report";
 import { formatFetchedAt } from "@/lib/time";
@@ -45,6 +46,11 @@ export default async function ThisWeekPage() {
       <div className="mt-8">
         <SundayCard fixtures={fixtures} reports={reports} />
       </div>
+      {fixtures.ok ? (
+        <div className="mt-8">
+          <UnusualFinals games={fixtures.games} />
+        </div>
+      ) : null}
 
       {!fixtures.ok ? (
         <div className="mt-10 rounded-2xl border border-live/40 bg-navy-2 p-6">
@@ -118,6 +124,10 @@ export default async function ThisWeekPage() {
         . The table is on{" "}
         <Link href="/standings" className="text-gold">
           Standings
+        </Link>
+        . Finished scorelines can be looked up on{" "}
+        <Link href="/score-history" className="text-gold">
+          score history
         </Link>
         .
       </p>

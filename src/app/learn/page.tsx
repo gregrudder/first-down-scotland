@@ -79,6 +79,19 @@ export default async function LearnIndexPage() {
             feed has them. Separate from the 2027 college board above.
           </p>
         </Link>
+        <Link
+          href="/score-history"
+          className="rounded-2xl border border-line bg-navy-2 p-5 transition hover:border-gold/50 hover:bg-navy-3"
+        >
+          <p className="text-xs font-semibold uppercase tracking-[0.16em] text-gold">
+            Fun
+          </p>
+          <h2 className="mt-2 font-display text-xl text-cream">Has this score happened before?</h2>
+          <p className="mt-2 text-sm leading-6 text-cream-dim">
+            Scoreography: look up a final and see how often that exact scoreline
+            appears in our historical table.
+          </p>
+        </Link>
       </div>
       <p className="mt-10 max-w-3xl text-sm leading-6 text-cream-dim">
         When a lesson clicks, come find people who support the same team:{" "}

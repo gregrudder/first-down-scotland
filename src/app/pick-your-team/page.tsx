@@ -69,6 +69,21 @@ export default function PickYourTeamPage() {
         </Link>
       </div>
 
+      <Link
+        href="/score-history"
+        className="mt-4 block rounded-2xl border border-line bg-navy-2 p-6 transition hover:border-gold/50 hover:bg-navy-3"
+      >
+        <p className="text-xs font-semibold uppercase tracking-[0.16em] text-gold">
+          Fun
+        </p>
+        <h2 className="mt-2 font-display text-2xl text-cream">Has this score happened before?</h2>
+        <p className="mt-3 text-sm leading-6 text-cream-dim">
+          A small scoreography toy next to the quiz and the spin: type a final
+          and see how often that scoreline appears in our table.
+        </p>
+        <p className="mt-4 text-sm font-semibold text-gold">Look up a final →</p>
+      </Link>
+
       <p className="mt-10 text-sm leading-6 text-cream-dim">
         Already learning?{" "}
         <Link href="/learn" className="text-gold">

@@ -35,6 +35,9 @@ export function GamesTeaser({ fixtures }: { fixtures: FixturesResult }) {
           <Link href="/scores" className="text-gold">
             Live scores →
           </Link>
+          <Link href="/score-history" className="text-gold">
+            Score history →
+          </Link>
         </div>
       </div>
 

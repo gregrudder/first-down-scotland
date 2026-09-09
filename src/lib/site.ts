@@ -24,6 +24,7 @@ export const navItems = [
   { href: "/watch-near-you", label: "Pubs" },
   { href: "/this-week", label: "This week" },
   { href: "/scores", label: "Scores" },
+  { href: "/score-history", label: "Score history" },
   { href: "/standings", label: "Standings" },
   { href: "/watch", label: "Watch" },
   { href: "/film-room", label: "Film room" },
@@ -35,6 +36,53 @@ export const navItems = [
   { href: "/glossary", label: "Glossary" },
   { href: "/feedback", label: "Feedback" },
   { href: "/about", label: "About" },
+] as const;
+
+export const navGroups = [
+  {
+    label: "Learn",
+    items: [
+      { href: "/learn", label: "Learn" },
+      { href: "/glossary", label: "Glossary" },
+      { href: "/history", label: "History" },
+    ],
+  },
+  {
+    label: "Follow the NFL",
+    items: [
+      { href: "/this-week", label: "This week" },
+      { href: "/scores", label: "Scores" },
+      { href: "/score-history", label: "Score history" },
+      { href: "/standings", label: "Standings" },
+      { href: "/rookies", label: "Rookies" },
+      { href: "/teams", label: "Teams" },
+    ],
+  },
+  {
+    label: "Meet your team",
+    items: [
+      { href: "/pick-your-team", label: "Pick my team" },
+      { href: "/community", label: "Community" },
+      { href: "/watch-near-you", label: "Pubs" },
+    ],
+  },
+  {
+    label: "Watch & listen",
+    items: [
+      { href: "/watch", label: "Watch" },
+      { href: "/film-room", label: "Film room" },
+      { href: "/news", label: "News" },
+      { href: "/podcasts", label: "Podcasts" },
+    ],
+  },
+  {
+    label: "Site",
+    items: [
+      { href: "/", label: "Home" },
+      { href: "/feedback", label: "Feedback" },
+      { href: "/about", label: "About" },
+    ],
+  },
 ] as const;
 
 const FALLBACK_PRODUCTION = "https://first-down-scotland.vercel.app";

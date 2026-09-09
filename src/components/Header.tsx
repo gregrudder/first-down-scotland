@@ -5,7 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useId, useRef, useState } from "react";
 import { NavTeamMark } from "@/components/TeamMark";
-import { navItems } from "@/lib/site";
+import { navGroups, navItems } from "@/lib/site";
 
 function MobileNav() {
   const [open, setOpen] = useState(false);
@@ -54,25 +54,32 @@ function MobileNav() {
       {open ? (
         <nav
           id={menuId}
-          className="absolute right-0 mt-2 w-48 rounded-xl border border-line bg-navy-2 p-2 shadow-xl"
+          className="absolute right-0 mt-2 max-h-[min(80vh,36rem)] w-64 overflow-y-auto rounded-xl border border-line bg-navy-2 p-2 shadow-xl"
           aria-label="Mobile"
         >
-          {navItems.map((item) => {
-            const current = pathname === item.href;
-            return (
-              <Link
-                key={item.href}
-                href={item.href}
-                className={`block rounded-lg px-3 py-2 text-sm hover:bg-navy-3 ${
-                  current ? "bg-navy-3 font-semibold text-gold" : "text-cream"
-                }`}
-                aria-current={current ? "page" : undefined}
-                onClick={() => setOpen(false)}
-              >
-                {item.label}
-              </Link>
-            );
-          })}
+          {navGroups.map((group) => (
+            <div key={group.label} className="mt-1 first:mt-0">
+              <p className="px-3 pt-2 pb-1 text-[0.65rem] font-semibold uppercase tracking-[0.16em] text-gold">
+                {group.label}
+              </p>
+              {group.items.map((item) => {
+                const current = pathname === item.href;
+                return (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    className={`block rounded-lg px-3 py-2 text-sm hover:bg-navy-3 ${
+                      current ? "bg-navy-3 font-semibold text-gold" : "text-cream"
+                    }`}
+                    aria-current={current ? "page" : undefined}
+                    onClick={() => setOpen(false)}
+                  >
+                    {item.label}
+                  </Link>
+                );
+              })}
+            </div>
+          ))}
         </nav>
       ) : null}
     </div>

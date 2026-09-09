@@ -78,6 +78,11 @@ export default function AboutPage() {
           </Link>
         </li>
         <li>
+          <Link href="/score-history" className="text-gold">
+            Has this score happened before? →
+          </Link>
+        </li>
+        <li>
           <Link href="/standings" className="text-gold">
             Standings →
           </Link>
