@@ -47,7 +47,7 @@ const pillars = [
     href: "/learn",
     kicker: "1. Learn the game",
     title: "From first down to Super Bowl, in plain English",
-    body: "Short lessons, a glossary, quizzes and diagrams. Built for UK beginners who keep hearing yards, downs and flags and want them explained without the jargon first.",
+    body: "Short lessons, a glossary, quizzes, diagrams, rivalries and famous players. Mini Games sit next door if you want a score. Built for UK beginners who keep hearing yards, downs and flags and want them explained without the jargon first.",
     cta: "Open Learn",
   },
   {
@@ -107,6 +107,12 @@ export default async function HomePage() {
               className="inline-flex items-center justify-center rounded-full bg-gold px-6 py-3 text-sm font-semibold text-gold-ink hover:bg-gold-soft"
             >
               Start learning
+            </Link>
+            <Link
+              href="/mini-games"
+              className="inline-flex items-center justify-center rounded-full border border-line px-6 py-3 text-sm font-semibold text-cream hover:border-gold/50"
+            >
+              Mini Games
             </Link>
             <Link
               href="/pick-your-team"

@@ -53,6 +53,21 @@ export default function AboutPage() {
           </Link>
         </li>
         <li>
+          <Link href="/learn/rivalries" className="text-gold">
+            NFL rivalries →
+          </Link>
+        </li>
+        <li>
+          <Link href="/learn/famous-players" className="text-gold">
+            Famous players →
+          </Link>
+        </li>
+        <li>
+          <Link href="/mini-games" className="text-gold">
+            Mini Games →
+          </Link>
+        </li>
+        <li>
           <Link href="/pick-your-team" className="text-gold">
             Pick my team →
           </Link>

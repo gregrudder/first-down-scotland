@@ -40,6 +40,22 @@ export const navGroups: readonly NavGroup[] = [
     column: 1,
     items: [
       { href: "/learn", label: "Learn the NFL", primary: true },
+      {
+        href: "/learn/rivalries",
+        label: "Rivalries",
+        description: "Who plays whom, and why some Sundays feel personal.",
+      },
+      {
+        href: "/learn/famous-players",
+        label: "Famous players",
+        description: "Short bios of names the broadcast assumes you know.",
+      },
+      {
+        href: "/mini-games",
+        label: "Mini Games",
+        description: "Short quizzes. Separate from the lessons.",
+        primary: true,
+      },
       { href: "/pick-your-team", label: "Pick My Team", primary: true },
       { href: "/glossary", label: "Glossary" },
     ],

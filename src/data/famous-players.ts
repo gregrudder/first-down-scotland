@@ -1,0 +1,227 @@
+export type FamousPlayer = {
+  id: string;
+  name: string;
+  position: string;
+  era: string;
+  teams: string[];
+  teamAbbrs: string[];
+  why: string;
+  knownFor: string;
+  group: "all-time" | "modern";
+};
+
+export const famousPlayersIntro = {
+  eyebrow: "The names",
+  title: "Famous NFL players",
+  lead:
+    "You do not need a sticker album. You need the names that keep coming up on the broadcast, in the pub, and in every “greatest ever” argument. This is a first list: a mix of all-time figures and people you will still hear about on a Sunday. Short bios, no invented numbers.",
+};
+
+/**
+ * Short beginner bios. Career facts are the well-known ones
+ * (Super Bowl wins, famous nicknames, widely reported MVPs).
+ * We do not quote seasonal stats we cannot stand behind.
+ */
+export const famousPlayers: FamousPlayer[] = [
+  {
+    id: "tom-brady",
+    name: "Tom Brady",
+    position: "Quarterback",
+    era: "2000s–2020s",
+    teams: ["New England Patriots", "Tampa Bay Buccaneers"],
+    teamAbbrs: ["NE", "TB"],
+    why: "If one name stands for the modern NFL, it is his. Brady won seven Super Bowls: six with New England and one with Tampa Bay in Super Bowl LV. He is the player older fans compare everyone else to, and the one beginners keep hearing in documentaries.",
+    knownFor: "Seven Super Bowl wins, five Super Bowl MVPs, two decades as the face of the league.",
+    group: "all-time",
+  },
+  {
+    id: "jerry-rice",
+    name: "Jerry Rice",
+    position: "Wide receiver",
+    era: "1980s–2000s",
+    teams: ["San Francisco 49ers", "Oakland Raiders", "Seattle Seahawks"],
+    teamAbbrs: ["SF", "LV", "SEA"],
+    why: "The standard for catching the ball. Rice won three Super Bowls with the 49ers and left the game holding the main career receiving records. When a commentator says a young wideout “is no Jerry Rice”, this is the person they mean.",
+    knownFor: "Three Super Bowls in San Francisco, and receiving records that stood as the mark for a generation.",
+    group: "all-time",
+  },
+  {
+    id: "joe-montana",
+    name: "Joe Montana",
+    position: "Quarterback",
+    era: "1980s–1990s",
+    teams: ["San Francisco 49ers", "Kansas City Chiefs"],
+    teamAbbrs: ["SF", "KC"],
+    why: "Montana won four Super Bowls with the 49ers and never lost one. Joe Montana to Dwight Clark is The Catch. Later he had a late chapter with the Chiefs. Calm in the last two minutes is still called “Montana-like”.",
+    knownFor: "Four Super Bowl wins, three Super Bowl MVPs, The Catch in the 1981 NFC Championship.",
+    group: "all-time",
+  },
+  {
+    id: "lawrence-taylor",
+    name: "Lawrence Taylor",
+    position: "Linebacker",
+    era: "1980s–1990s",
+    teams: ["New York Giants"],
+    teamAbbrs: ["NYG"],
+    why: "LT changed what a defender was allowed to look like. He rushed the quarterback from the edge and forced offences to rewrite their protection. He won two Super Bowls with the Giants and was the 1986 NFL Most Valuable Player: a rare honour for someone who never took a snap on offence.",
+    knownFor: "Two Super Bowls with New York, 1986 MVP, the template for the modern pass-rusher.",
+    group: "all-time",
+  },
+  {
+    id: "walter-payton",
+    name: "Walter Payton",
+    position: "Running back",
+    era: "1970s–1980s",
+    teams: ["Chicago Bears"],
+    teamAbbrs: ["CHI"],
+    why: "Nickname: Sweetness. Payton was the Bears’ everything-back: runner, blocker, occasional passer, and the face of the 1985 side that won Super Bowl XX. When he retired he was the league’s all-time leading rusher. Emmitt Smith later passed him. The nickname stuck.",
+    knownFor: "Super Bowl XX with Chicago, and a career that set the rushing mark of his era.",
+    group: "all-time",
+  },
+  {
+    id: "jim-brown",
+    name: "Jim Brown",
+    position: "Running back",
+    era: "1950s–1960s",
+    teams: ["Cleveland Browns"],
+    teamAbbrs: ["CLE"],
+    why: "The original unstoppable runner. Brown retired in his prime, after the 1965 season, and went into films. He won an NFL championship with Cleveland in 1964. People who watched him still put him in the “greatest to ever play” sentence, which is why the name survives on modern broadcasts.",
+    knownFor: "Cleveland only, a 1964 title, and a short career that never looked ordinary.",
+    group: "all-time",
+  },
+  {
+    id: "peyton-manning",
+    name: "Peyton Manning",
+    position: "Quarterback",
+    era: "1990s–2010s",
+    teams: ["Indianapolis Colts", "Denver Broncos"],
+    teamAbbrs: ["IND", "DEN"],
+    why: "The quarterback as professor. Manning won Super Bowl XLI with the Colts and Super Bowl 50 with the Broncos. He was regular-season MVP five times. The frantic pointing and shouting before the snap is him changing the play at the line. His younger brother Eli won two Super Bowls with the Giants. Different careers, same surname on the back.",
+    knownFor: "Two Super Bowls with two clubs, five regular-season MVPs, the pre-snap check.",
+    group: "all-time",
+  },
+  {
+    id: "barry-sanders",
+    name: "Barry Sanders",
+    position: "Running back",
+    era: "1980s–1990s",
+    teams: ["Detroit Lions"],
+    teamAbbrs: ["DET"],
+    why: "The highlight reel in a Lions kit. Sanders made defenders miss in a phone box, then retired suddenly in 1999 while still near his best. He never reached a Super Bowl. That is part of why Detroit supporters talk about him with a wince as well as pride.",
+    knownFor: "A Lions career, sudden retirement, and runs that still fill compilation videos.",
+    group: "all-time",
+  },
+  {
+    id: "ray-lewis",
+    name: "Ray Lewis",
+    position: "Linebacker",
+    era: "1990s–2010s",
+    teams: ["Baltimore Ravens"],
+    teamAbbrs: ["BAL"],
+    why: "The middle of the Ravens’ defence for most of two decades. Lewis won Super Bowl XXXV as a young star and Super Bowl XLVII in his last season. The pre-game dance, the voice, the tackling: if a broadcast is explaining “what a middle linebacker does”, they will often cut to him.",
+    knownFor: "Two Super Bowls with Baltimore, and the face of a defence-first franchise.",
+    group: "all-time",
+  },
+  {
+    id: "joe-greene",
+    name: "Joe Greene",
+    position: "Defensive tackle",
+    era: "1960s–1980s",
+    teams: ["Pittsburgh Steelers"],
+    teamAbbrs: ["PIT"],
+    why: "Mean Joe Greene, of the Steel Curtain. Pittsburgh won four Super Bowls in the 1970s (IX, X, XIII, XIV) with a defence that started up front. The “Mean” was a nickname. The Coca-Cola advert with the kid and the jersey is how a lot of people outside the US first met him.",
+    knownFor: "Four Super Bowls, the Steel Curtain, and a nickname that stuck on the back of the shirt.",
+    group: "all-time",
+  },
+  {
+    id: "deion-sanders",
+    name: "Deion Sanders",
+    position: "Cornerback",
+    era: "1980s–2000s",
+    teams: ["Atlanta Falcons", "San Francisco 49ers", "Dallas Cowboys", "Washington", "Baltimore Ravens"],
+    teamAbbrs: ["ATL", "SF", "DAL", "WSH", "BAL"],
+    why: "Prime Time. Sanders covered the best receivers, returned kicks, and played professional baseball in the same era. He won Super Bowl XXIX with the 49ers and Super Bowl XXX with the Cowboys. The gold chains and the confidence were the point as much as the coverage. He later became a college coach.",
+    knownFor: "Two Super Bowls with two clubs, and a cornerback who also scored on returns.",
+    group: "all-time",
+  },
+  {
+    id: "drew-brees",
+    name: "Drew Brees",
+    position: "Quarterback",
+    era: "2000s–2020s",
+    teams: ["San Diego Chargers", "New Orleans Saints"],
+    teamAbbrs: ["LAC", "NO"],
+    why: "Brees arrived in New Orleans after Hurricane Katrina and became the city’s football face. He won Super Bowl XLIV with the Saints, beating Peyton Manning’s Colts. He left as one of the most accurate passers the sport has seen. If you hear “Who Dat”, he is in that story.",
+    knownFor: "Super Bowl XLIV, a long Saints career, and a city that still treats him as one of their own.",
+    group: "all-time",
+  },
+  {
+    id: "patrick-mahomes",
+    name: "Patrick Mahomes",
+    position: "Quarterback",
+    era: "2010s–",
+    teams: ["Kansas City Chiefs"],
+    teamAbbrs: ["KC"],
+    why: "The current measuring stick. Mahomes has won three Super Bowls with Kansas City (LIV, LVII, LVIII) and lost two (LV and LIX). The no-look throws and the late drives are what you will see most Sunday nights on UK television. If a beginner picks a favourite player rather than a favourite club, it is often him.",
+    knownFor: "Three Super Bowl wins with the Chiefs, and the highlight-reel quarterback of this era.",
+    group: "modern",
+  },
+  {
+    id: "travis-kelce",
+    name: "Travis Kelce",
+    position: "Tight end",
+    era: "2010s–",
+    teams: ["Kansas City Chiefs"],
+    teamAbbrs: ["KC"],
+    why: "The tight end who shows up in both the sports pages and the celebrity pages. Kelce has three Super Bowl wins with Mahomes and the Chiefs. A tight end is meant to block and catch. He does the catching part like a wide receiver. If you only know the name from a pop-star headline, he is still a proper footballer.",
+    knownFor: "Three Super Bowls in Kansas City, and the modern tight end as a starring role.",
+    group: "modern",
+  },
+  {
+    id: "aaron-rodgers",
+    name: "Aaron Rodgers",
+    position: "Quarterback",
+    era: "2000s–",
+    teams: ["Green Bay Packers", "New York Jets", "Pittsburgh Steelers"],
+    teamAbbrs: ["GB", "NYJ", "PIT"],
+    why: "Rodgers spent most of his career as the Packers’ quarterback after Brett Favre. He won Super Bowl XLV and several regular-season MVPs. The late career took him to the Jets and then the Steelers. The throwing motion and the “R-E-L-A-X” press conferences are the bits people still impersonate.",
+    knownFor: "Super Bowl XLV with Green Bay, multiple MVPs, and a long second act after Favre.",
+    group: "modern",
+  },
+  {
+    id: "lamar-jackson",
+    name: "Lamar Jackson",
+    position: "Quarterback",
+    era: "2010s–",
+    teams: ["Baltimore Ravens"],
+    teamAbbrs: ["BAL"],
+    why: "A quarterback who can beat you with his legs as well as his arm. Jackson has been NFL MVP more than once (2019 and 2023). Defences have to decide whether to treat him as a runner or a passer, and often get it wrong. If you hear “dual-threat”, they are often talking about him.",
+    knownFor: "Two regular-season MVPs with Baltimore, and a running quarterback who is not a gimmick.",
+    group: "modern",
+  },
+  {
+    id: "josh-allen",
+    name: "Josh Allen",
+    position: "Quarterback",
+    era: "2010s–",
+    teams: ["Buffalo Bills"],
+    teamAbbrs: ["BUF"],
+    why: "The big Bills quarterback. Allen throws it a long way, runs through people, and has made Buffalo a regular AFC contender again. The Bills have not won a Super Bowl. That wait is part of the story, and why a lot of UK night-owls have adopted them.",
+    knownFor: "Buffalo’s modern face, deep throws, and a club still chasing a first Super Bowl.",
+    group: "modern",
+  },
+  {
+    id: "justin-jefferson",
+    name: "Justin Jefferson",
+    position: "Wide receiver",
+    era: "2020s–",
+    teams: ["Minnesota Vikings"],
+    teamAbbrs: ["MIN"],
+    why: "One of the receivers you will hear mentioned with the word “best” while he is still in his twenties. Jefferson plays for Minnesota, makes difficult catches look casual, and shows up in every fantasy league. You do not need his yardage totals. You need the name when the graphic flashes “JJ”.",
+    knownFor: "Minnesota’s star wideout, and a modern “get him the ball” player.",
+    group: "modern",
+  },
+];
+
+export const famousPlayersSourcesNote =
+  "Super Bowl wins, MVP years, and famous plays follow the league’s published championship list and widely reported career summaries (Hall of Fame bios, club records). We do not invent seasonal stats. Nicknames are the ones the players and clubs actually used.";
