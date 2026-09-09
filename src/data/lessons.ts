@@ -240,6 +240,13 @@ export const lessons: Lesson[] = [
         text: "If you see 17–10 at half-time, you do not need to reverse-engineer it live. A 7 usually means a touchdown plus the extra-point kick. A 3 is a field goal. So 17 is often two scores and a kick (7 + 3 + 7), and 10 is a touchdown plus a field goal.",
       },
       {
+        type: "callout",
+        title: "Has this score happened before?",
+        text: "Once the game is over, you can look up whether that exact final has turned up in our historical table, and how rare it is. That habit is called scoreography.",
+        href: "/score-history",
+        linkLabel: "Open score history",
+      },
+      {
         type: "terms",
         items: [
           {

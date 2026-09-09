@@ -1,7 +1,10 @@
 import Image from "next/image";
+import Link from "next/link";
 import { GameReportBlock } from "@/components/GameReportBlock";
 import type { NflGame, TeamSide } from "@/lib/espn";
 import type { GameReport } from "@/lib/game-report";
+import { rarityLabel, lookupWinnerLoser } from "@/lib/score-history";
+import { scoreHistoryPath } from "@/lib/score-history-path";
 import { formatUkTime } from "@/lib/time";
 import { watchHintForGame } from "@/lib/watch-hints";
 
@@ -93,6 +96,14 @@ export function GameCard({
 
       {venue ? <p className="mt-4 text-xs text-cream-dim">{venue}</p> : null}
       <p className="mt-2 text-sm leading-6 text-cream-dim">{watchHintForGame(game)}</p>
+      {game.status === "final" && game.home.score != null && game.away.score != null ? (
+        <p className="mt-2 text-sm">
+          <Link href={scoreHistoryPath(game.home.score, game.away.score)} className="text-gold">
+            {rarityLabel(lookupWinnerLoser(game.home.score, game.away.score).count)} in our
+            score table →
+          </Link>
+        </p>
+      ) : null}
       {report ? <GameReportBlock report={report} /> : null}
     </article>
   );

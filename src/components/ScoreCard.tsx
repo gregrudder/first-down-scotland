@@ -3,6 +3,7 @@ import { TeamLogo } from "@/components/TeamLogo";
 import { getTeamProfileByAbbr } from "@/data/team-profiles";
 import { teamProfilePath } from "@/data/teams";
 import type { NflGame, TeamSide } from "@/lib/espn";
+import { scoreHistoryPath } from "@/lib/score-history-path";
 import { formatUkTime } from "@/lib/time";
 
 function statusTone(status: NflGame["status"] | "bye") {
@@ -107,6 +108,14 @@ export function ScoreCard({
         <Link href="/this-week" className="text-gold">
           Preview or report →
         </Link>
+        {game.status === "final" && game.home.score != null && game.away.score != null ? (
+          <>
+            {" · "}
+            <Link href={scoreHistoryPath(game.home.score, game.away.score)} className="text-gold">
+              Has this final happened before?
+            </Link>
+          </>
+        ) : null}
       </p>
     </article>
   );

@@ -289,6 +289,11 @@ export const glossary: GlossaryEntry[] = [
     lessonSlug: "how-you-score",
   },
   {
+    term: "Scoreography",
+    short: "Asking whether a final scoreline has happened before, and how rare it is. We keep a historical table for that.",
+    lessonSlug: "how-you-score",
+  },
+  {
     term: "Scramble",
     short: "The quarterback runs because the pocket has collapsed, rather than by design.",
   },

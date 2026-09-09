@@ -32,6 +32,7 @@ async function revalidateFixtures() {
   revalidatePath("/");
   revalidatePath("/this-week");
   revalidatePath("/scores");
+  revalidatePath("/score-history");
   revalidatePath("/standings");
   revalidatePath("/rookies");
   revalidatePath("/news");

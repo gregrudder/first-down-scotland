@@ -102,6 +102,11 @@ export const navGroups: readonly NavGroup[] = [
         primary: true,
       },
       {
+        href: "/score-history",
+        label: "Score history",
+        description: "Has this final happened before?",
+      },
+      {
         href: "/standings",
         label: "Standings",
         description: "AFC and NFC tables.",

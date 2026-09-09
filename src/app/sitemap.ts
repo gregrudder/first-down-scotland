@@ -18,6 +18,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/glossary",
     "/this-week",
     "/scores",
+    "/score-history",
     "/standings",
     "/rookies",
     "/news",

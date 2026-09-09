@@ -15,6 +15,7 @@ Three jobs: learn the game, meet fans of your team, keep that club in one place.
 - **`/glossary`** : searchable jargon decoder
 - **`/this-week`** : this week’s NFL games from ESPN’s public scoreboard, times in `Europe/London`, plus a **Your Sunday** card for the team saved in the browser (`fds-team`). Each fixture has a short beginner preview or a post-match report (score + snippet + outbound link; “report coming” until a feed publishes one). Fair-use summaries only. Also UK kick-off, what to watch for, a Learn tie-in, optional ESPN QB snapshot, and a Scottish pub meetup hint. The full slate stays free. Tabs also lead to live scores, standings, and Rookie Watch.
 - **`/scores`** : near-live scoreboard for the current week (Scheduled / Live / Final / Bye). Server fetch is uncached against ESPN; the `/api/scores` response is CDN-cached for **20 seconds**. The page polls that API every 20s while a game is on, 30s near kick-off, and 2 minutes midweek.
+- **`/score-history`** : “Has this score happened before?” Scoreography lookup against a **stored** nflverse schedule snapshot (1999–2025 completed regular-season and play-off games). Winner–loser or home-and-away. Honest empty states if a final is not in the table. Unusual-final notes also appear on Scores and This week when the slate has finished games.
 - **`/standings`** : AFC / NFC by division, with wins-losses-ties, points for/against, and division rank. ESPN public standings (`type=0&level=3`), cached **300 seconds**.
 - **`/rookies`** : Rookie Watch for **this season’s drafted class** (the live scoreboard year; in 2026 that is the 2026 draft, not the 2025 class and not the 2027 college board). ESPN draft list plus Sleeper regular-season stats when any counting numbers exist. Cached **600 seconds**. Filter by team, position, or round.
 - **`/news`** : NFL headlines pulled automatically from public RSS (ESPN, BBC Sport, the Guardian). Helper, not the product.
@@ -126,6 +127,20 @@ Fixtures are **not** edited by hand.
 4. Next.js caches draft/stats for **600 seconds** (`rookies` tag). The Sleeper players map uses **86400 seconds**. `/rookies` sets `export const revalidate = 600`.
 5. If a match or a stat is missing, the card says so. We do not invent numbers. Offensive line and long-snapper cards explain that box-score stats are not listed.
 
+## How score history is built
+
+`/score-history` does **not** scrape Scoreogami or any live box-score site.
+
+1. A committed snapshot lives in `src/data/score-history.json`.
+2. It is generated from the public nflverse / Lee Sharpe schedule file:
+   `https://raw.githubusercontent.com/nflverse/nfldata/master/data/games.csv`
+   (repo: [nflverse/nfldata](https://github.com/nflverse/nfldata)).
+3. The script keeps completed regular-season and postseason games (`REG`, `WC`, `DIV`, `CON`, `SB`) with both scores present. Preseason is not in that file. Future rows with empty scores are dropped.
+4. We precompute winner–loser frequencies (order-independent, so 24–17 equals 17–24) plus a home-and-away index, with first/last example games.
+5. Refresh the snapshot with `npm run build:score-history`. Runtime pages only read the JSON. If a final is missing, the UI says so. We do not invent older history.
+
+The current snapshot covers **1999–2025** (7,276 games). 2026 results appear only after they land in that public file and we rebuild.
+
 On Vercel, `vercel.json` schedules a **daily** Cron at `0 6 * * *` (06:00 UTC) to `GET /api/revalidate`. That route runs:
 
 - `revalidateTag('fixtures', 'max')`
@@ -139,6 +154,7 @@ On Vercel, `vercel.json` schedules a **daily** Cron at `0 6 * * *` (06:00 UTC) t
 - `revalidatePath('/')`
 - `revalidatePath('/this-week')`
 - `revalidatePath('/scores')`
+- `revalidatePath('/score-history')`
 - `revalidatePath('/standings')`
 - `revalidatePath('/rookies')`
 - `revalidatePath('/news')`
@@ -209,9 +225,13 @@ curl -H "Authorization: Bearer $CRON_SECRET" https://your-domain.vercel.app/api/
 | `/learn/what-youre-watching` … `/learn/the-draft` | The lessons, including the Draft |
 | `/learn/plays` and `/learn/plays/[slug]` | Common play diagrams |
 | `/learn/quiz` | 20-question path quiz + badges (`fds-learn`) |
+| `/learn/rivalries` | Rivalries lesson (who plays whom) |
+| `/learn/famous-players` | Famous players lesson |
+| `/mini-games` | Mini Games hub (separate from lessons) |
 | `/glossary` | Jargon decoder |
 | `/this-week` | Auto fixtures |
 | `/scores` | Near-live scoreboard (20s poll while live) |
+| `/score-history` | Has this final happened before? (stored nflverse table) |
 | `/standings` | AFC / NFC by division |
 | `/rookies` | This season’s drafted rookies + stats |
 | `/news` | Auto NFL headlines (RSS, link out) |
@@ -229,7 +249,7 @@ curl -H "Authorization: Bearer $CRON_SECRET" https://your-domain.vercel.app/api/
 
 ## Licence and attribution
 
-Independent fan project. Not affiliated with the NFL, Sky, Channel 5, DAZN, Netflix, the BBC, the Guardian or ESPN. Scoreboard data is read from ESPN’s public site API and may change without notice. News headlines and snippets come from those publishers’ public RSS feeds and link back to the original articles.
+Independent fan project. Not affiliated with the NFL, Sky, Channel 5, DAZN, Netflix, the BBC, the Guardian or ESPN. Scoreboard data is read from ESPN’s public site API and may change without notice. News headlines and snippets come from those publishers’ public RSS feeds and link back to the original articles. Historical final-score frequencies on `/score-history` come from the public nflverse / nfldata schedule file, stored in-repo as a snapshot.
 
 Team profiles use ESPN’s public logo CDN (`https://a.espncdn.com/i/teamlogos/nfl/500/{abbr}.png`) with an abbreviation-circle fallback. Stadium names and listed capacities follow Wikipedia’s current NFL stadiums list for the **2026 season** (cited there to club media guides and reporting). Super Bowl counts are after Super Bowl LX (Seattle 29–13 New England, 8 February 2026; AP / NFL.com). Franchise origins follow the league’s published history and standard reference summaries. Stadium names, capacities and trophy counts can change.
 
