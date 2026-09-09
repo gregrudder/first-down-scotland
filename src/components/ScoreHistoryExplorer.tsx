@@ -218,6 +218,7 @@ export function ScoreHistoryExplorer() {
             <Link
               key={entry.key}
               href={scoreHistoryPath(entry.high, entry.low)}
+              onClick={() => onPreset(entry.key)}
               className="rounded-2xl border border-line bg-navy-2 p-4 transition hover:border-gold/50 hover:bg-navy-3"
             >
               <p className="font-display text-2xl text-cream">
