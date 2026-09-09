@@ -1040,7 +1040,38 @@ export const lessons: Lesson[] = [
       },
     ],
   },
+  {
+    slug: "rivalries",
+    number: 13,
+    title: "NFL rivalries",
+    summary:
+      "Why some fixtures feel personal: Packers v Bears, Cowboys v Eagles, Steelers v Raiders, and the other grudges beginners actually hear about.",
+    minutes: 10,
+    blocks: [
+      {
+        type: "p",
+        text: "This lesson is a set of cards: who plays whom, why it matters, and a few famous moments in plain English. Open the rivalries board to read them.",
+      },
+    ],
+  },
+  {
+    slug: "famous-players",
+    number: 14,
+    title: "Famous players",
+    summary:
+      "Short bios of notable NFL names across eras and positions, written for people who did not grow up arguing about Montana and Brady.",
+    minutes: 10,
+    blocks: [
+      {
+        type: "p",
+        text: "This lesson is a set of player cards: team, position, and why the name still comes up. Open the famous players board to read them.",
+      },
+    ],
+  },
 ];
+
+/** Lessons that render on their own page, not `/learn/[slug]`. */
+export const dedicatedLessonSlugs = ["plays", "rivalries", "famous-players"] as const;
 
 export function getLesson(slug: string): Lesson | undefined {
   return lessons.find((lesson) => lesson.slug === slug);

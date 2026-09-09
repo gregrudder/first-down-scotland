@@ -16,74 +16,175 @@ export const homeSeo = {
     "FIRST DOWN SCOTLAND NFL is a Scotland-built hub for UK beginners: learn American football in plain English, meet fans of your team, and follow that club in one place.",
 } as const;
 
-export const navItems = [
-  { href: "/", label: "Home" },
-  { href: "/learn", label: "Learn" },
-  { href: "/pick-your-team", label: "Pick my team" },
-  { href: "/community", label: "Community" },
-  { href: "/watch-near-you", label: "Pubs" },
-  { href: "/this-week", label: "This week" },
-  { href: "/scores", label: "Scores" },
-  { href: "/score-history", label: "Score history" },
-  { href: "/standings", label: "Standings" },
-  { href: "/watch", label: "Watch" },
-  { href: "/film-room", label: "Film room" },
-  { href: "/news", label: "News" },
-  { href: "/podcasts", label: "Podcasts" },
-  { href: "/history", label: "History" },
-  { href: "/teams", label: "Teams" },
-  { href: "/rookies", label: "Rookies" },
-  { href: "/glossary", label: "Glossary" },
-  { href: "/feedback", label: "Feedback" },
-  { href: "/about", label: "About" },
-] as const;
+export type NavItem = {
+  href: string;
+  label: string;
+  description?: string;
+  primary?: boolean;
+};
 
-export const navGroups = [
+export type NavGroup = {
+  id: string;
+  label: string;
+  column: 1 | 2 | 3;
+  priority?: "low";
+  items: readonly NavItem[];
+};
+
+export const navHome: NavItem = { href: "/", label: "Home" };
+
+export const navGroups: readonly NavGroup[] = [
   {
-    label: "Learn",
+    id: "started",
+    label: "Get started",
+    column: 1,
     items: [
-      { href: "/learn", label: "Learn" },
+      { href: "/learn", label: "Learn the NFL", primary: true },
+      {
+        href: "/learn/rivalries",
+        label: "Rivalries",
+        description: "Who plays whom, and why some Sundays feel personal.",
+      },
+      {
+        href: "/learn/famous-players",
+        label: "Famous players",
+        description: "Short bios of names the broadcast assumes you know.",
+      },
+      {
+        href: "/mini-games",
+        label: "Mini Games",
+        description: "Short quizzes. Separate from the lessons.",
+        primary: true,
+      },
+      { href: "/pick-your-team", label: "Pick My Team", primary: true },
       { href: "/glossary", label: "Glossary" },
-      { href: "/history", label: "History" },
     ],
   },
   {
+    id: "community",
+    label: "Community",
+    column: 1,
+    items: [
+      {
+        href: "/community",
+        label: "Community",
+        description: "Connect with other NFL fans.",
+        primary: true,
+      },
+      {
+        href: "/watch-near-you",
+        label: "Pubs",
+        description: "Find places showing NFL games.",
+      },
+    ],
+  },
+  {
+    id: "history",
+    label: "History",
+    column: 1,
+    items: [{ href: "/history", label: "History" }],
+  },
+  {
+    id: "follow",
     label: "Follow the NFL",
+    column: 2,
     items: [
-      { href: "/this-week", label: "This week" },
-      { href: "/scores", label: "Scores" },
-      { href: "/score-history", label: "Score history" },
-      { href: "/standings", label: "Standings" },
-      { href: "/rookies", label: "Rookies" },
-      { href: "/teams", label: "Teams" },
+      {
+        href: "/this-week",
+        label: "This Week",
+        description: "Games, fixtures and what is coming up.",
+        primary: true,
+      },
+      {
+        href: "/scores",
+        label: "Scores",
+        description: "Live and completed game scores.",
+        primary: true,
+      },
+      {
+        href: "/score-history",
+        label: "Score history",
+        description: "Has this final happened before?",
+      },
+      {
+        href: "/standings",
+        label: "Standings",
+        description: "AFC and NFC tables.",
+      },
+      {
+        href: "/news",
+        label: "News",
+        description: "Latest NFL news.",
+      },
+      {
+        href: "/rookies",
+        label: "Rookies",
+        description: "This year’s rookie class.",
+      },
     ],
   },
   {
-    label: "Meet your team",
-    items: [
-      { href: "/pick-your-team", label: "Pick my team" },
-      { href: "/community", label: "Community" },
-      { href: "/watch-near-you", label: "Pubs" },
-    ],
-  },
-  {
+    id: "watch",
     label: "Watch & listen",
+    column: 3,
     items: [
-      { href: "/watch", label: "Watch" },
-      { href: "/film-room", label: "Film room" },
-      { href: "/news", label: "News" },
-      { href: "/podcasts", label: "Podcasts" },
+      {
+        href: "/watch",
+        label: "Watch",
+        description: "Where and how to watch NFL games.",
+      },
+      {
+        href: "/film-room",
+        label: "Film Room",
+        description: "Breakdowns and analysis.",
+      },
+      {
+        href: "/podcasts",
+        label: "Podcasts",
+        description: "NFL podcasts and audio content.",
+      },
     ],
   },
   {
-    label: "Site",
+    id: "teams",
+    label: "Teams",
+    column: 3,
+    items: [{ href: "/teams", label: "Teams" }],
+  },
+  {
+    id: "about",
+    label: "About",
+    column: 3,
+    priority: "low",
     items: [
-      { href: "/", label: "Home" },
-      { href: "/feedback", label: "Feedback" },
       { href: "/about", label: "About" },
+      { href: "/feedback", label: "Feedback" },
     ],
   },
-] as const;
+];
+
+export const navColumns = [1, 2, 3] as const;
+
+export const navItems: readonly NavItem[] = [
+  navHome,
+  ...navGroups.flatMap((group) => group.items),
+];
+
+export function isCurrentNav(
+  pathname: string,
+  href: string,
+  extraHrefs: readonly string[] = [],
+): boolean {
+  if (href === "/") return pathname === "/";
+  if (pathname !== href && !pathname.startsWith(`${href}/`)) return false;
+  const others = [...navItems.map((item) => item.href), ...extraHrefs];
+  return !others.some(
+    (other) =>
+      other !== href &&
+      other.length > href.length &&
+      (pathname === other || pathname.startsWith(`${other}/`)),
+  );
+}
 
 const FALLBACK_PRODUCTION = "https://first-down-scotland.vercel.app";
 const FALLBACK_LOCAL = "http://localhost:3000";

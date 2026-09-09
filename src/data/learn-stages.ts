@@ -36,6 +36,12 @@ export const learnStages: LearnStage[] = [
     summary: "What NFL fantasy is, how a week works, and where UK fans actually play.",
     slugs: ["fantasy-football"],
   },
+  {
+    id: "the-story",
+    title: "The story",
+    summary: "Rivalries and famous players: the names and grudges the broadcast assumes you know.",
+    slugs: ["rivalries", "famous-players"],
+  },
 ];
 
 export function stageForLesson(slug: string): LearnStage | undefined {

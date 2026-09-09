@@ -5,6 +5,7 @@ import { CompactLessonProgress } from "@/components/LearnProgress";
 import { LessonArticle } from "@/components/LessonArticle";
 import { MarkLessonDone } from "@/components/MarkLessonDone";
 import {
+  dedicatedLessonSlugs,
   getLesson,
   getLessonSlugs,
   getNextLesson,
@@ -18,7 +19,7 @@ type LessonPageProps = {
 
 export function generateStaticParams() {
   return getLessonSlugs()
-    .filter((slug) => slug !== "plays")
+    .filter((slug) => !dedicatedLessonSlugs.includes(slug as (typeof dedicatedLessonSlugs)[number]))
     .map((slug) => ({ slug }));
 }
 

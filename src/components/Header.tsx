@@ -2,143 +2,44 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { useEffect, useId, useRef, useState } from "react";
+import { HeaderTeamCta } from "@/components/HeaderTeamCta";
+import { SiteMenu, SiteMenuButton, SiteMenuPanels } from "@/components/SiteNav";
 import { NavTeamMark } from "@/components/TeamMark";
-import { navGroups, navItems } from "@/lib/site";
-
-function MobileNav() {
-  const [open, setOpen] = useState(false);
-  const pathname = usePathname();
-  const wrapRef = useRef<HTMLDivElement>(null);
-  const menuId = useId();
-
-  useEffect(() => {
-    setOpen(false);
-  }, [pathname]);
-
-  useEffect(() => {
-    if (!open) return;
-
-    function onKey(event: KeyboardEvent) {
-      if (event.key === "Escape") setOpen(false);
-    }
-
-    function onPointerDown(event: PointerEvent) {
-      const root = wrapRef.current;
-      if (!root) return;
-      if (event.target instanceof Node && !root.contains(event.target)) {
-        setOpen(false);
-      }
-    }
-
-    document.addEventListener("keydown", onKey);
-    document.addEventListener("pointerdown", onPointerDown);
-    return () => {
-      document.removeEventListener("keydown", onKey);
-      document.removeEventListener("pointerdown", onPointerDown);
-    };
-  }, [open]);
-
-  return (
-    <div className="relative" ref={wrapRef}>
-      <button
-        type="button"
-        className="rounded-full border border-line px-3 py-2 text-sm text-cream"
-        aria-expanded={open}
-        aria-controls={menuId}
-        onClick={() => setOpen((value) => !value)}
-      >
-        Menu
-      </button>
-      {open ? (
-        <nav
-          id={menuId}
-          className="absolute right-0 mt-2 max-h-[min(80vh,36rem)] w-64 overflow-y-auto rounded-xl border border-line bg-navy-2 p-2 shadow-xl"
-          aria-label="Mobile"
-        >
-          {navGroups.map((group) => (
-            <div key={group.label} className="mt-1 first:mt-0">
-              <p className="px-3 pt-2 pb-1 text-[0.65rem] font-semibold uppercase tracking-[0.16em] text-gold">
-                {group.label}
-              </p>
-              {group.items.map((item) => {
-                const current = pathname === item.href;
-                return (
-                  <Link
-                    key={item.href}
-                    href={item.href}
-                    className={`block rounded-lg px-3 py-2 text-sm hover:bg-navy-3 ${
-                      current ? "bg-navy-3 font-semibold text-gold" : "text-cream"
-                    }`}
-                    aria-current={current ? "page" : undefined}
-                    onClick={() => setOpen(false)}
-                  >
-                    {item.label}
-                  </Link>
-                );
-              })}
-            </div>
-          ))}
-        </nav>
-      ) : null}
-    </div>
-  );
-}
-
-function navLinkClass(current: boolean) {
-  return current
-    ? "rounded-full bg-navy-3 px-2.5 py-2 text-sm font-semibold text-gold"
-    : "rounded-full px-2.5 py-2 text-sm text-cream-dim transition hover:bg-navy-3 hover:text-cream";
-}
 
 export function Header() {
-  const pathname = usePathname();
-
   return (
-    <header className="sticky top-0 z-40 border-b border-gold/35 bg-navy/85 backdrop-blur-md">
-      <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3 sm:px-6">
-        <Link href="/" className="flex items-center gap-3 no-underline">
-          <Image
-            src="/logo.png"
-            alt="First Down Scotland logo"
-            width={40}
-            height={40}
-            priority
-            className="h-10 w-10 rounded-[10px]"
-          />
-          <span className="leading-tight">
-            <span className="block font-display text-base font-semibold text-cream sm:text-lg">
-              First Down Scotland
-            </span>
-            <span className="hidden text-xs text-cream-dim sm:block">
-              Learn. Meet. Follow your team.
-            </span>
-          </span>
-        </Link>
+    <SiteMenu>
+      <div className="sticky top-0 z-50">
+        <header className="border-b border-gold/35 bg-navy/85 backdrop-blur-md">
+          <div className="mx-auto flex max-w-6xl items-center justify-between gap-2 px-4 py-3 sm:gap-4 sm:px-6">
+            <Link href="/" className="flex min-w-0 items-center gap-2 no-underline sm:gap-3">
+              <Image
+                src="/logo.png"
+                alt="First Down Scotland logo"
+                width={40}
+                height={40}
+                priority
+                className="h-10 w-10 shrink-0 rounded-[10px]"
+              />
+              <span className="hidden leading-tight sm:block">
+                <span className="block font-display text-base font-semibold text-cream sm:text-lg">
+                  First Down Scotland
+                </span>
+                <span className="hidden text-xs text-cream-dim sm:block">
+                  Learn. Meet. Follow your team.
+                </span>
+              </span>
+            </Link>
 
-        <nav className="hidden items-center gap-0.5 xl:flex" aria-label="Primary">
-          {navItems.map((item) => {
-            const current = pathname === item.href;
-            return (
-              <Link
-                key={item.href}
-                href={item.href}
-                className={navLinkClass(current)}
-                aria-current={current ? "page" : undefined}
-              >
-                {item.label}
-              </Link>
-            );
-          })}
-          <NavTeamMark />
-        </nav>
-
-        <div className="flex items-center gap-2 xl:hidden">
-          <NavTeamMark className="inline-flex" />
-          <MobileNav />
-        </div>
+            <div className="flex shrink-0 items-center gap-2">
+              <NavTeamMark className="hidden sm:inline-flex" />
+              <HeaderTeamCta />
+              <SiteMenuButton />
+            </div>
+          </div>
+        </header>
+        <SiteMenuPanels />
       </div>
-    </header>
+    </SiteMenu>
   );
 }

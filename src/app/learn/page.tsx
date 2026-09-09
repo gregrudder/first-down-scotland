@@ -12,7 +12,7 @@ export const revalidate = 600;
 export const metadata: Metadata = {
   title: "Learn the NFL",
   description:
-    "A short, ordered path for UK beginners: the field, downs, scoring, common plays with diagrams, turnovers, the clock, penalties, what to look for on telly, the NFL Draft, and fantasy football.",
+    "A short, ordered path for UK beginners: the field, downs, scoring, common plays with diagrams, turnovers, the clock, penalties, what to look for on telly, the NFL Draft, fantasy football, rivalries, and famous players.",
 };
 
 export default async function LearnIndexPage() {
@@ -26,8 +26,9 @@ export default async function LearnIndexPage() {
           sent you here. Each one is written in UK English, for people who did not grow
           up with Friday-night lights. Mark a lesson as read and the stage bars keep
           score. When you finish a stage (or the whole path) you can sit a 20-question
-          quiz. After that, meet fans of the team you support: Discord for chat, pubs
-          for turning up.
+          quiz. Rivalries and famous players are extra reading, not games. Mini Games
+          is a separate hub if you want a score. After that, meet fans of the team you
+          support: Discord for chat, pubs for turning up.
         </p>
       </PageIntro>
       <div className="mt-10">
@@ -42,6 +43,19 @@ export default async function LearnIndexPage() {
         <DraftProspectsTeaser board={board} />
       </div>
       <div className="mt-10 grid gap-4 sm:grid-cols-2">
+        <Link
+          href="/mini-games"
+          className="rounded-2xl border border-line bg-navy-2 p-5 transition hover:border-gold/50 hover:bg-navy-3"
+        >
+          <p className="text-xs font-semibold uppercase tracking-[0.16em] text-gold">
+            Have a go
+          </p>
+          <h2 className="mt-2 font-display text-xl text-cream">Mini Games</h2>
+          <p className="mt-2 text-sm leading-6 text-cream-dim">
+            Rules quiz, Who am I?, down-and-distance calls, and a rivalry match-up.
+            Separate from the lessons.
+          </p>
+        </Link>
         <Link
           href="/history"
           className="rounded-2xl border border-line bg-navy-2 p-5 transition hover:border-gold/50 hover:bg-navy-3"
