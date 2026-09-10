@@ -1,71 +1,18 @@
 "use client";
 
-import { useCallback, useEffect, useId, useRef, useState, useSyncExternalStore } from "react";
+import { useCallback, useEffect, useId, useRef, useState } from "react";
 import type { NflGame } from "@/lib/espn";
-import {
-  highlightsApiPath,
-  isYoutubeVideoId,
-  nflHighlightsSearchUrl,
-  shouldOfferHighlights,
-  youtubeEmbedSrc,
-  type HighlightLookup,
-} from "@/lib/highlights";
-import {
-  readSpoilerFree,
-  SPOILER_FREE_CHANGE_EVENT,
-} from "@/lib/spoiler-storage";
+import { nflHighlightsSearchUrl, shouldOfferHighlights } from "@/lib/highlights";
 
 const SPOILER_FREE_POSTER = "/highlights-spoiler-free.svg";
 
-function subscribeSpoilerFree(onChange: () => void) {
-  window.addEventListener("storage", onChange);
-  window.addEventListener(SPOILER_FREE_CHANGE_EVENT, onChange);
-  return () => {
-    window.removeEventListener("storage", onChange);
-    window.removeEventListener(SPOILER_FREE_CHANGE_EVENT, onChange);
-  };
-}
-
-function EmbedSkeleton() {
-  return (
-    <div
-      className="aspect-video overflow-hidden rounded-xl border border-line bg-navy-3"
-      aria-hidden
-    >
-      <div className="field-grid h-full w-full opacity-40" />
-    </div>
-  );
-}
-
-function YoutubeEmbed({ videoId }: { videoId: string }) {
-  return (
-    <div className="aspect-video overflow-hidden rounded-xl border border-line bg-navy-3">
-      <iframe
-        src={youtubeEmbedSrc(videoId)}
-        title="Match highlights"
-        className="h-full w-full"
-        loading="lazy"
-        allow="accelerometer; encrypted-media; gyroscope; picture-in-picture; fullscreen"
-        allowFullScreen
-        referrerPolicy="strict-origin-when-cross-origin"
-      />
-    </div>
-  );
-}
-
-function SearchFallback({
-  href,
-  loading,
-}: {
-  href: string;
-  loading?: boolean;
-}) {
+function HighlightsLinkOut({ href }: { href: string }) {
   return (
     <div>
       <p className="text-sm leading-6 text-cream-dim">
-        {loading
-          ? "Looking for an official NFL clip to play here."
-          : "No official clip pinned yet. NFL YouTube search for this match-up — titles and thumbnails there often name the winner or the score."}
+        Official NFL YouTube search for this match-up. We link out: the NFL does
+        not allow these clips to play in the app. Titles and thumbnails on
+        YouTube often name the winner or the score.
       </p>
       <p className="mt-2 text-sm">
         <a
@@ -81,51 +28,14 @@ function SearchFallback({
   );
 }
 
-function NormalHighlights({
-  videoId,
-  searchUrl,
-  loading,
-}: {
-  videoId: string | null;
-  searchUrl: string;
-  loading: boolean;
-}) {
-  if (loading && !videoId) {
-    return (
-      <>
-        <p className="text-sm leading-6 text-cream-dim">
-          Looking for an official NFL clip to play here.
-        </p>
-        <div className="mt-3">
-          <EmbedSkeleton />
-        </div>
-      </>
-    );
-  }
-
-  if (videoId && isYoutubeVideoId(videoId)) {
-    return (
-      <>
-        <p className="text-sm leading-6 text-cream-dim">
-          Official clip in the app. YouTube’s own title on the player may still
-          mention the result.
-        </p>
-        <div className="mt-3">
-          <YoutubeEmbed videoId={videoId} />
-        </div>
-      </>
-    );
-  }
-
-  return <SearchFallback href={searchUrl} />;
-}
-
 function SpoilerSafePoster({
+  href,
   confirming,
   onAsk,
   onCancel,
   onConfirm,
 }: {
+  href: string;
   confirming: boolean;
   onAsk: () => void;
   onCancel: () => void;
@@ -133,7 +43,7 @@ function SpoilerSafePoster({
 }) {
   const titleId = useId();
   const descId = useId();
-  const confirmRef = useRef<HTMLButtonElement>(null);
+  const confirmRef = useRef<HTMLAnchorElement>(null);
 
   useEffect(() => {
     if (!confirming) return;
@@ -179,9 +89,9 @@ function SpoilerSafePoster({
               This may reveal the result
             </p>
             <p id={descId} className="mt-2 text-sm leading-6 text-cream-dim">
-              The player can show YouTube’s title and first frame, which often
-              name the winner or the score. The rest of the slate stays
-              spoiler-free.
+              YouTube titles and thumbnails often name the winner or the score.
+              We open the official NFL search in a new tab. The rest of the
+              slate stays spoiler-free.
             </p>
             <div className="mt-4 flex flex-col-reverse gap-2 sm:flex-row sm:justify-end">
               <button
@@ -191,14 +101,16 @@ function SpoilerSafePoster({
               >
                 Not yet
               </button>
-              <button
+              <a
                 ref={confirmRef}
-                type="button"
+                href={href}
+                target="_blank"
+                rel="noreferrer"
                 onClick={onConfirm}
-                className="rounded-full bg-gold px-4 py-2 text-sm font-semibold text-gold-ink hover:bg-gold-soft"
+                className="inline-flex items-center justify-center rounded-full bg-gold px-4 py-2 text-sm font-semibold text-gold-ink hover:bg-gold-soft"
               >
-                Watch highlights
-              </button>
+                Open on YouTube
+              </a>
             </div>
           </div>
         </div>
@@ -209,14 +121,6 @@ function SpoilerSafePoster({
 
 export function GameHighlights({ game }: { game: NflGame }) {
   const searchUrl = nflHighlightsSearchUrl(game);
-  const apiPath = highlightsApiPath(game);
-  const offer = shouldOfferHighlights(game);
-  const [lookup, setLookup] = useState<HighlightLookup | null>(null);
-  const spoilerFree = useSyncExternalStore(
-    subscribeSpoilerFree,
-    readSpoilerFree,
-    () => false,
-  );
   const [unlocked, setUnlocked] = useState(false);
   const [confirming, setConfirming] = useState(false);
   const askConfirm = useCallback(() => setConfirming(true), []);
@@ -226,39 +130,7 @@ export function GameHighlights({ game }: { game: NflGame }) {
     setUnlocked(true);
   }, []);
 
-  useEffect(() => {
-    if (!offer) return;
-    let cancelled = false;
-
-    fetch(apiPath)
-      .then((response) => response.json())
-      .then((payload: { videoId?: unknown; searchUrl?: unknown }) => {
-        if (cancelled) return;
-        const videoId =
-          typeof payload.videoId === "string" && isYoutubeVideoId(payload.videoId)
-            ? payload.videoId
-            : null;
-        const nextSearch =
-          typeof payload.searchUrl === "string" && payload.searchUrl.startsWith("https://")
-            ? payload.searchUrl
-            : searchUrl;
-        setLookup({ videoId, searchUrl: nextSearch });
-      })
-      .catch(() => {
-        if (!cancelled) setLookup({ videoId: null, searchUrl });
-      });
-
-    return () => {
-      cancelled = true;
-    };
-  }, [apiPath, offer, searchUrl]);
-
-  if (!offer) return null;
-
-  const videoId = lookup?.videoId ?? null;
-  const resolvedSearch = lookup?.searchUrl ?? searchUrl;
-  const loading = lookup === null;
-  const showEmbed = unlocked || !spoilerFree;
+  if (!shouldOfferHighlights(game)) return null;
 
   return (
     <div
@@ -271,23 +143,16 @@ export function GameHighlights({ game }: { game: NflGame }) {
 
       {unlocked ? (
         <div className="mt-2">
-          <NormalHighlights videoId={videoId} searchUrl={resolvedSearch} loading={loading} />
+          <HighlightsLinkOut href={searchUrl} />
         </div>
       ) : (
         <>
           <div className="fds-spoiler mt-2">
-            {showEmbed ? (
-              <NormalHighlights
-                videoId={videoId}
-                searchUrl={resolvedSearch}
-                loading={loading}
-              />
-            ) : (
-              <SearchFallback href={resolvedSearch} loading />
-            )}
+            <HighlightsLinkOut href={searchUrl} />
           </div>
           <div className="fds-spoiler-safe mt-2">
             <SpoilerSafePoster
+              href={searchUrl}
               confirming={confirming}
               onAsk={askConfirm}
               onCancel={cancelConfirm}

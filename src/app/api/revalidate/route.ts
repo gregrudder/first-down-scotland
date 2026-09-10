@@ -5,7 +5,6 @@ import { DEPTH_CHART_CACHE_TAG } from "@/lib/depth-chart";
 import { DRAFT_PROSPECTS_CACHE_TAG } from "@/lib/draft-prospects";
 import { FIXTURES_CACHE_TAG, SCORES_CACHE_TAG } from "@/lib/espn";
 import { GAME_REPORTS_CACHE_TAG } from "@/lib/game-report";
-import { HIGHLIGHTS_CACHE_TAG } from "@/lib/highlights";
 import { ROOKIES_CACHE_TAG } from "@/lib/rookies";
 import { STANDINGS_CACHE_TAG } from "@/lib/standings";
 
@@ -30,7 +29,6 @@ async function revalidateFixtures() {
   revalidateTag(DEPTH_CHART_CACHE_TAG, "max");
   revalidateTag(DRAFT_PROSPECTS_CACHE_TAG, "max");
   revalidateTag(GAME_REPORTS_CACHE_TAG, "max");
-  revalidateTag(HIGHLIGHTS_CACHE_TAG, "max");
   revalidatePath("/");
   revalidatePath("/this-week");
   revalidatePath("/scores");
@@ -55,7 +53,6 @@ async function revalidateFixtures() {
       DEPTH_CHART_CACHE_TAG,
       DRAFT_PROSPECTS_CACHE_TAG,
       GAME_REPORTS_CACHE_TAG,
-      HIGHLIGHTS_CACHE_TAG,
     ],
     at: new Date().toISOString(),
   });
