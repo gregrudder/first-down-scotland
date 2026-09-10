@@ -1,14 +1,16 @@
 import type { NewsArticle } from "@/lib/news";
 import { getNflNews } from "@/lib/news";
 import type { NflGame, TeamSide } from "@/lib/espn";
+import {
+  ESPN_SUMMARY_CACHE_TAG,
+  ESPN_SUMMARY_REVALIDATE_SECONDS,
+  fetchEspnSummaryJson,
+} from "@/lib/espn-summary";
 import { stripMarkup } from "@/lib/rss";
 
-export const GAME_REPORTS_CACHE_TAG = "game-reports";
-export const GAME_REPORTS_REVALIDATE_SECONDS = 300;
+export const GAME_REPORTS_CACHE_TAG = ESPN_SUMMARY_CACHE_TAG;
+export const GAME_REPORTS_REVALIDATE_SECONDS = ESPN_SUMMARY_REVALIDATE_SECONDS;
 
-const SUMMARY_URL =
-  "https://site.api.espn.com/apis/site/v2/sports/football/nfl/summary";
-const FETCH_TIMEOUT_MS = 8_000;
 const SNIPPET_MAX = 280;
 
 export type GameReportKind = "preview" | "recap";
@@ -162,26 +164,11 @@ function parseEspnArticle(data: unknown): EspnArticleBits | null {
 }
 
 async function fetchEspnSummary(gameId: string): Promise<EspnArticleBits | null> {
-  if (!/^\d+$/.test(gameId)) return null;
-  const controller = new AbortController();
-  const timer = setTimeout(() => controller.abort(), FETCH_TIMEOUT_MS);
-  try {
-    const url = `${SUMMARY_URL}?event=${encodeURIComponent(gameId)}`;
-    const response = await fetch(url, {
-      signal: controller.signal,
-      next: {
-        revalidate: GAME_REPORTS_REVALIDATE_SECONDS,
-        tags: [GAME_REPORTS_CACHE_TAG],
-      },
-      headers: { Accept: "application/json" },
-    });
-    if (!response.ok) return null;
-    return parseEspnArticle(await response.json());
-  } catch {
-    return null;
-  } finally {
-    clearTimeout(timer);
-  }
+  const data = await fetchEspnSummaryJson(gameId, {
+    revalidate: ESPN_SUMMARY_REVALIDATE_SECONDS,
+    tags: [ESPN_SUMMARY_CACHE_TAG],
+  });
+  return parseEspnArticle(data);
 }
 
 function buildReport(

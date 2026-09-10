@@ -4,11 +4,12 @@ import {
   SCORES_REVALIDATE_SECONDS,
   teamsOnBye,
 } from "@/lib/espn";
+import { withTouchdownScorers } from "@/lib/touchdowns";
 
 export const revalidate = 20;
 
 export async function GET() {
-  const fixtures = await getNflLiveScoreboard();
+  const fixtures = await withTouchdownScorers(await getNflLiveScoreboard());
   const byes = fixtures.ok ? teamsOnBye(fixtures) : [];
 
   return NextResponse.json(

@@ -23,6 +23,14 @@ export type TeamSide = {
   winner?: boolean;
 };
 
+export type TouchdownScorer = {
+  id: string;
+  teamAbbreviation: string;
+  playerName: string;
+  yards?: number;
+  quarter?: string;
+};
+
 export type NflGame = {
   id: string;
   name: string;
@@ -39,6 +47,10 @@ export type NflGame = {
   gamecastUrl?: string;
   home: TeamSide;
   away: TeamSide;
+  /** From ESPN’s per-game summary scoring plays. Omitted when none or the feed has none. */
+  touchdowns?: TouchdownScorer[];
+  /** Wall-clock span from first to last play, in minutes. Omitted when the summary has none. */
+  elapsedMinutes?: number;
 };
 
 export type FixturesSuccess = {

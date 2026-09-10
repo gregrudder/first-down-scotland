@@ -3,20 +3,22 @@ import Link from "next/link";
 import { LeagueTabs } from "@/components/LeagueTabs";
 import { LiveScoreboard } from "@/components/LiveScoreboard";
 import { PageIntro } from "@/components/PageIntro";
+import { SpoilerFreeToggle } from "@/components/SpoilerFreeToggle";
 import { UkKickoffHelper } from "@/components/UkKickoffHelper";
 import { UnusualFinals } from "@/components/UnusualFinals";
 import { getNflLiveScoreboard, teamsOnBye } from "@/lib/espn";
+import { withTouchdownScorers } from "@/lib/touchdowns";
 
 export const revalidate = 20;
 
 export const metadata: Metadata = {
   title: "Live scores",
   description:
-    "Near-live NFL scores for the current week, with UK kick-off times, quarter and clock when a game is on, plus byes.",
+    "Near-live NFL scores for the current week, with UK kick-off times, quarter and clock when a game is on, touchdown scorers when listed, plus byes.",
 };
 
 export default async function ScoresPage() {
-  const fixtures = await getNflLiveScoreboard();
+  const fixtures = await withTouchdownScorers(await getNflLiveScoreboard());
   const byes = fixtures.ok ? teamsOnBye(fixtures) : [];
 
   return (
@@ -24,12 +26,15 @@ export default async function ScoresPage() {
       <PageIntro eyebrow="This week for you" title="Live scores">
         <p>
           A simple scoreboard for the current NFL week: who is playing, the score,
-          and whether it is Scheduled, Live, Final or a Bye. While games are on we
-          poll ESPN’s public scoreboard about every 20 seconds. Midweek it slows
-          down so we are not refreshing an empty Sunday for no reason.
+          who scored the touchdowns when ESPN lists them, and whether it is
+          Scheduled, Live, Final or a Bye. Spoiler-free mode hides the scoreline
+          and scorers until you have watched. While games are on we poll ESPN’s
+          public scoreboard about every 20 seconds. Midweek it slows down so we
+          are not refreshing an empty Sunday for no reason.
         </p>
       </PageIntro>
       <LeagueTabs active="scores" />
+      <SpoilerFreeToggle />
       <div className="mt-8">
         <UkKickoffHelper showFixturesLink />
       </div>

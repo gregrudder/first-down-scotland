@@ -82,11 +82,8 @@ function watchForCopy(team: NflTeam, match: SundayMatch): string {
   }
 
   if (game.status === "final") {
-    const score =
-      typeof game.home.score === "number" && typeof game.away.score === "number"
-        ? ` It finished ${game.away.score}–${game.home.score}.`
-        : "";
-    return `${team.shortName} have played the ${vs}.${score} If you missed it, the Film room is the calm way to catch the story. If you watched, notice whether the pocket held.`;
+    // Scoreline lives on the fixture card; keep this copy spoiler-safe for Morning-after.
+    return `${team.shortName} have played the ${vs}. If you missed it, the Film room is the calm way to catch the story. If you watched, notice whether the pocket held.`;
   }
 
   if (isUkInternational(game)) {
