@@ -21,7 +21,7 @@ export type HighlightGame = {
 };
 
 export type HighlightLookup = {
-  videoId: string | null;
+  watchUrl: string | null;
   searchUrl: string;
 };
 
@@ -34,19 +34,26 @@ type YoutubeSearchItem = {
   };
 };
 
-type YoutubeSearchResponse = {
-  items?: unknown;
-  error?: { message?: unknown; errors?: unknown };
-};
-
 function isRecord(value: unknown): value is Record<string, unknown> {
   return typeof value === "object" && value !== null && !Array.isArray(value);
 }
 
+function asString(value: unknown): string | undefined {
+  return typeof value === "string" && value.trim() ? value.trim() : undefined;
+}
+
+function emptyLookup(searchUrl: string): HighlightLookup {
+  return { watchUrl: null, searchUrl };
+}
+
+export function youtubeApiKey(): string | undefined {
+  const key = process.env.YOUTUBE_API_KEY?.trim();
+  return key || undefined;
+}
+
 /**
  * Official NFL YouTube channel search for this match-up.
- * Used when we have no API key, no embeddable official clip, or the viewer
- * still wants to leave the site.
+ * Always available as a fallback. The NFL blocks in-app embeds, so we never iframe.
  */
 export function nflHighlightsSearchUrl(game: Pick<HighlightGame, "away" | "home">): string {
   const query = highlightsSearchQuery(game);
@@ -65,17 +72,13 @@ export function isYoutubeVideoId(value: string): boolean {
   return YOUTUBE_VIDEO_ID_RE.test(value);
 }
 
-/** Privacy-enhanced embed. No autoplay — the poster frame is still YouTube chrome. */
-export function youtubeEmbedSrc(videoId: string): string {
-  const params = new URLSearchParams({
-    rel: "0",
-    modestbranding: "1",
-    playsinline: "1",
-  });
-  return `https://www.youtube-nocookie.com/embed/${videoId}?${params.toString()}`;
+export function youtubeWatchUrl(videoId: string): string {
+  return `https://www.youtube.com/watch?v=${videoId}`;
 }
 
-export function highlightsApiPath(game: Pick<NflGame, "id" | "status" | "kickoffUtc" | "away" | "home">): string {
+export function highlightsApiPath(
+  game: Pick<NflGame, "id" | "status" | "kickoffUtc" | "away" | "home">,
+): string {
   const params = new URLSearchParams({
     away: game.away.abbreviation,
     home: game.home.abbreviation,
@@ -84,10 +87,6 @@ export function highlightsApiPath(game: Pick<NflGame, "id" | "status" | "kickoff
   });
   if (game.kickoffUtc) params.set("kickoff", game.kickoffUtc);
   return `/api/highlights?${params.toString()}`;
-}
-
-function asString(value: unknown): string | undefined {
-  return typeof value === "string" && value.trim() ? value.trim() : undefined;
 }
 
 function preferredChannel(
@@ -135,13 +134,15 @@ function isPlausibleHighlight(
     return false;
   }
   if (channelPref === "nfl") {
-    // Avoid weekly round-ups: the official game package names both sides.
     return titleHasBothTeams(title, game);
   }
   return title.includes("highlight") && titleHasOneTeam(title, game);
 }
 
-function scoreItem(item: YoutubeSearchItem, game: HighlightGame): { videoId: string; score: number } | null {
+function scoreItem(
+  item: YoutubeSearchItem,
+  game: HighlightGame,
+): { videoId: string; score: number } | null {
   const videoId = asString(item.id?.videoId);
   if (!videoId || !isYoutubeVideoId(videoId)) return null;
 
@@ -183,19 +184,7 @@ function parseSearchItems(payload: unknown): YoutubeSearchItem[] {
   return payload.items.filter(isRecord) as YoutubeSearchItem[];
 }
 
-async function youtubeSearch(params: URLSearchParams, revalidate: number): Promise<YoutubeSearchItem[]> {
-  const key = process.env.YOUTUBE_API_KEY?.trim();
-  if (!key) return [];
-
-  const url = new URL(YOUTUBE_SEARCH_URL);
-  url.search = params.toString();
-  url.searchParams.set("key", key);
-  url.searchParams.set("part", "snippet");
-  url.searchParams.set("type", "video");
-  url.searchParams.set("maxResults", "8");
-  url.searchParams.set("safeSearch", "none");
-  url.searchParams.set("videoEmbeddable", "true");
-
+async function youtubeGet(url: URL, revalidate: number): Promise<unknown> {
   const controller = new AbortController();
   const timer = setTimeout(() => controller.abort(), FETCH_TIMEOUT_MS);
   try {
@@ -207,37 +196,48 @@ async function youtubeSearch(params: URLSearchParams, revalidate: number): Promi
       },
       headers: { Accept: "application/json" },
     });
-    const payload = (await response.json()) as YoutubeSearchResponse;
-    if (!response.ok) return [];
-    return parseSearchItems(payload);
+    if (!response.ok) return null;
+    return response.json();
   } catch {
-    return [];
+    return null;
   } finally {
     clearTimeout(timer);
   }
+}
+
+async function youtubeSearch(params: URLSearchParams, revalidate: number): Promise<YoutubeSearchItem[]> {
+  const key = youtubeApiKey();
+  if (!key) return [];
+
+  const url = new URL(YOUTUBE_SEARCH_URL);
+  url.search = params.toString();
+  url.searchParams.set("key", key);
+  url.searchParams.set("part", "snippet");
+  url.searchParams.set("type", "video");
+  url.searchParams.set("maxResults", "8");
+  url.searchParams.set("safeSearch", "none");
+
+  const payload = await youtubeGet(url, revalidate);
+  return parseSearchItems(payload);
 }
 
 function publishedAfterParam(kickoffUtc: string | undefined): string | undefined {
   if (!kickoffUtc) return undefined;
   const kickoff = Date.parse(kickoffUtc);
   if (!Number.isFinite(kickoff)) return undefined;
-  // A little slack so a same-day upload with a slightly early timestamp still matches.
   return new Date(kickoff - 6 * 60 * 60 * 1000).toISOString();
 }
 
 /**
- * Resolve an embeddable official clip. Never returns titles or thumbnails —
- * those nearly always name the winner or the score.
+ * Resolve an official clip for a **link-out** only. Never returns titles,
+ * thumbnails, or an embed URL — the NFL blocks in-app players.
  *
  * No `YOUTUBE_API_KEY`: skip the Data API and return the NFL search URL only.
  */
 export async function resolveGameHighlight(game: HighlightGame): Promise<HighlightLookup> {
   const searchUrl = nflHighlightsSearchUrl(game);
-  if (!shouldOfferHighlights(game)) {
-    return { videoId: null, searchUrl };
-  }
-  if (!process.env.YOUTUBE_API_KEY?.trim()) {
-    return { videoId: null, searchUrl };
+  if (!shouldOfferHighlights(game) || !youtubeApiKey()) {
+    return emptyLookup(searchUrl);
   }
 
   const revalidate =
@@ -256,16 +256,22 @@ export async function resolveGameHighlight(game: HighlightGame): Promise<Highlig
   if (publishedAfter) nflParams.set("publishedAfter", publishedAfter);
 
   const nflItems = await youtubeSearch(nflParams, revalidate);
-  const nflId = pickOfficialHighlightVideoId(nflItems, game);
-  if (nflId) return { videoId: nflId, searchUrl };
+  let videoId = pickOfficialHighlightVideoId(nflItems, game);
 
-  const wideParams = new URLSearchParams({
-    q: `NFL ${query}`,
-    order: "relevance",
-  });
-  if (publishedAfter) wideParams.set("publishedAfter", publishedAfter);
+  if (!videoId) {
+    const wideParams = new URLSearchParams({
+      q: `NFL ${query}`,
+      order: "relevance",
+    });
+    if (publishedAfter) wideParams.set("publishedAfter", publishedAfter);
+    const wideItems = await youtubeSearch(wideParams, revalidate);
+    videoId = pickOfficialHighlightVideoId(wideItems, game);
+  }
 
-  const wideItems = await youtubeSearch(wideParams, revalidate);
-  const wideId = pickOfficialHighlightVideoId(wideItems, game);
-  return { videoId: wideId, searchUrl };
+  if (!videoId) return emptyLookup(searchUrl);
+
+  return {
+    watchUrl: youtubeWatchUrl(videoId),
+    searchUrl,
+  };
 }

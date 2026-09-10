@@ -73,11 +73,11 @@ export async function GET(request: NextRequest) {
   const ttl = cacheSeconds(status);
   const lookup = shouldOfferHighlights(game)
     ? await resolveGameHighlight(game)
-    : { videoId: null, searchUrl: nflHighlightsSearchUrl(game) };
+    : { watchUrl: null, searchUrl: nflHighlightsSearchUrl(game) };
 
   return NextResponse.json(
     {
-      videoId: lookup.videoId,
+      watchUrl: lookup.watchUrl,
       searchUrl: lookup.searchUrl,
     },
     {
