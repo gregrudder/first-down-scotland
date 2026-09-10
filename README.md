@@ -210,7 +210,7 @@ The News nav stays one item; NFL and Fantasy are tabs on the news pages. This is
 Set `CRON_SECRET` in the Vercel project so the Cron request is accepted. You can also hit the route yourself:
 
 ```bash
-curl -H "Authorization: Bearer $CRON_SECRET" https://your-domain.vercel.app/api/revalidate
+curl -H "Authorization: Bearer $CRON_SECRET" https://www.firstdownscotland.com/api/revalidate
 ```
 
 ## Deploy on Vercel
