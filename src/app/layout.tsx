@@ -91,6 +91,14 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       lang="en-GB"
       className={`${figtree.variable} ${fraunces.variable} h-full antialiased`}
     >
+      <head>
+        {/* Native head tag so AdSense crawlers see the publisher client in the initial HTML. */}
+        <script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1747465358377243"
+          crossOrigin="anonymous"
+        />
+      </head>
       <body className="min-h-full font-sans">
         <Script id="fds-team-theme" strategy="beforeInteractive">
           {teamThemeBootScript()}
@@ -101,14 +109,6 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <SiteShell>{children}</SiteShell>
         <Analytics />
         <SpeedInsights />
-        {/* AdSense site code for Google property verification only. No Auto ads, ad units, or CMP. */}
-        <Script
-          id="fds-adsense"
-          async
-          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1747465358377243"
-          crossOrigin="anonymous"
-          strategy="beforeInteractive"
-        />
       </body>
     </html>
   );
