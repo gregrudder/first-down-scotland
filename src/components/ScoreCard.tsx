@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { TeamLogo } from "@/components/TeamLogo";
+import { TouchdownScorers } from "@/components/TouchdownScorers";
 import { getTeamProfileByAbbr } from "@/data/team-profiles";
 import { teamProfilePath } from "@/data/teams";
 import type { NflGame, TeamSide } from "@/lib/espn";
@@ -102,6 +103,8 @@ export function ScoreCard({
           winner={game.status === "final" && game.home.winner}
         />
       </div>
+
+      <TouchdownScorers touchdowns={showScore ? game.touchdowns : undefined} />
 
       {venue ? <p className="mt-4 text-xs text-cream-dim">{venue}</p> : null}
       <p className="mt-3 text-sm">

@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { GameReportBlock } from "@/components/GameReportBlock";
+import { TouchdownScorers } from "@/components/TouchdownScorers";
 import type { NflGame, TeamSide } from "@/lib/espn";
 import type { GameReport } from "@/lib/game-report";
 import { rarityLabel, lookupWinnerLoser } from "@/lib/score-history";
@@ -93,6 +94,8 @@ export function GameCard({
         </p>
         <TeamRow team={game.home} showScore={showScore} align="right" />
       </div>
+
+      <TouchdownScorers touchdowns={showScore ? game.touchdowns : undefined} />
 
       {venue ? <p className="mt-4 text-xs text-cream-dim">{venue}</p> : null}
       <p className="mt-2 text-sm leading-6 text-cream-dim">{watchHintForGame(game)}</p>
