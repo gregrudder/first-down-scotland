@@ -247,3 +247,8 @@ export function siteOrigin(): string {
 export function absoluteUrl(path = "/"): string {
   return new URL(path || "/", `${siteOrigin()}/`).toString();
 }
+
+/** Outbound fetch User-Agent: identifies us with the public origin, not a preview host. */
+export function siteUserAgent(): string {
+  return `FirstDownScotland/1.0 (${siteOrigin()})`;
+}

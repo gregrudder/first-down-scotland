@@ -4,6 +4,7 @@ import {
   fallbackSources,
   type DraftProspect,
 } from "@/data/draft-prospects-fallback";
+import { siteUserAgent } from "@/lib/site";
 
 export const DRAFT_PROSPECTS_CACHE_TAG = "draft-prospects";
 export const DRAFT_PROSPECTS_REVALIDATE_SECONDS = 600;
@@ -91,7 +92,7 @@ async function fetchJson(url: string): Promise<unknown> {
       },
       headers: {
         Accept: "application/json",
-        "User-Agent": "FirstDownScotland/1.0 (https://first-down-scotland.vercel.app)",
+        "User-Agent": siteUserAgent(),
       },
     });
     if (!response.ok) throw new Error(`ESPN returned ${response.status}`);

@@ -9,6 +9,7 @@ import {
 } from "@/data/news-feeds";
 import { extractOgImage } from "@/lib/news-image";
 import { parseFeedItems, type ParsedRssItem } from "@/lib/rss";
+import { siteUserAgent } from "@/lib/site";
 
 const FETCH_TIMEOUT_MS = 8_000;
 const OG_IMAGE_TIMEOUT_MS = 3_000;
@@ -53,7 +54,7 @@ async function fetchFeedXml(feed: NewsFeed, cacheTag: string): Promise<string> {
       },
       headers: {
         Accept: "application/rss+xml, application/atom+xml, application/xml, text/xml",
-        "User-Agent": "FirstDownScotland/1.0 (https://first-down-scotland.vercel.app)",
+        "User-Agent": siteUserAgent(),
       },
     });
 
@@ -169,7 +170,7 @@ async function fetchOgImage(articleUrl: string, cacheTag: string): Promise<strin
       },
       headers: {
         Accept: "text/html",
-        "User-Agent": "FirstDownScotland/1.0 (https://first-down-scotland.vercel.app)",
+        "User-Agent": siteUserAgent(),
       },
     });
     if (!response.ok) return null;
