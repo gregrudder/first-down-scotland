@@ -91,6 +91,14 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       lang="en-GB"
       className={`${figtree.variable} ${fraunces.variable} h-full antialiased`}
     >
+      <head>
+        {/* Native head tag so AdSense crawlers see the publisher client in the initial HTML. */}
+        <script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1747465358377243"
+          crossOrigin="anonymous"
+        />
+      </head>
       <body className="min-h-full font-sans">
         <Script id="fds-team-theme" strategy="beforeInteractive">
           {teamThemeBootScript()}
@@ -101,7 +109,6 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <SiteShell>{children}</SiteShell>
         <Analytics />
         <SpeedInsights />
-        {/* AdSense: add the Google publisher script only after approval, plus a UK-compliant consent / CMP path before personalised ads. */}
       </body>
     </html>
   );

@@ -200,7 +200,8 @@ export default function PrivacyPage() {
               enabled).</strong> Google AdSense may set cookies to show ads,
               measure them, and — if you consent — personalise them. A Google
               consent / CMP banner will be the place to manage that once ads
-              are live. We have not added the AdSense script yet.
+              are live. The AdSense publisher script is on the site so Google can
+              verify the property. Auto ads and a consent banner are not on yet.
             </li>
           </ul>
           <p className="mt-4">
