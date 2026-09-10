@@ -76,6 +76,10 @@ export const glossary: GlossaryEntry[] = [
     lessonSlug: "what-youre-watching",
   },
   {
+    term: "Dub",
+    short: "Slang for a win. Fans say “dub” or “the dub” to mean getting the W.",
+  },
+  {
     term: "End zone",
     short: "The 10-yard scoring area at each end of the field.",
     lessonSlug: "what-youre-watching",
@@ -349,6 +353,11 @@ export const glossary: GlossaryEntry[] = [
   {
     term: "Touchdown",
     short: "Six points for getting the ball into the opponent’s end zone.",
+    lessonSlug: "how-you-score",
+  },
+  {
+    term: "Tuddy",
+    short: "Slang for a touchdown (TD). Fans say “tuddy” to mean that six-point score.",
     lessonSlug: "how-you-score",
   },
   {
