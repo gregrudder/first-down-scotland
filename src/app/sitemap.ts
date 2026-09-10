@@ -28,6 +28,7 @@ const staticRoutes = [
   "/watch-near-you",
   "/community",
   "/feedback",
+  "/privacy",
   "/history",
   "/teams",
   "/pick-your-team",

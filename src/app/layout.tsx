@@ -101,6 +101,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <SiteShell>{children}</SiteShell>
         <Analytics />
         <SpeedInsights />
+        {/* AdSense: add the Google publisher script only after approval, plus a UK-compliant consent / CMP path before personalised ads. */}
       </body>
     </html>
   );

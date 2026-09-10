@@ -159,6 +159,7 @@ export const navGroups: readonly NavGroup[] = [
     items: [
       { href: "/about", label: "About" },
       { href: "/feedback", label: "Feedback" },
+      { href: "/privacy", label: "Privacy Policy" },
     ],
   },
 ];
