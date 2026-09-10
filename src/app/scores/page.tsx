@@ -28,7 +28,9 @@ export default async function ScoresPage() {
           A simple scoreboard for the current NFL week: who is playing, the score,
           who scored the touchdowns when ESPN lists them, and whether it is
           Scheduled, Live, Final or a Bye. Spoiler-free mode hides the scoreline
-          and scorers until you have watched. While games are on we poll ESPN’s
+          and scorers until you have watched. Highlights stay behind a branded
+          tile in spoiler-free mode so YouTube does not give the score away.
+          While games are on we poll ESPN’s
           public scoreboard about every 20 seconds. Midweek it slows down so we
           are not refreshing an empty Sunday for no reason.
         </p>
