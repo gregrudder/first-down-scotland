@@ -51,6 +51,14 @@ html[data-spoiler-free="on"] .fds-spoiler-safe {
   display: block;
 }
 
+html[data-spoiler-free="on"] .fds-highlights[data-unlocked="true"] .fds-spoiler {
+  display: block !important;
+}
+
+html[data-spoiler-free="on"] .fds-highlights[data-unlocked="true"] .fds-spoiler-safe {
+  display: none !important;
+}
+
 html[data-spoiler-free="on"] .fds-winner {
   color: var(--cream) !important;
 }

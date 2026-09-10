@@ -13,7 +13,7 @@ Three jobs: learn the game, meet fans of your team, keep that club in one place.
 - **`/mini-games`** : separate browser games (rules quiz, Who am I?, down-and-distance decisions, rivalry match-up). Not part of the lesson path.
 - **`/learn/draft-prospects`** : top 2027 Draft names (ESPN when the official list fills; otherwise a cited early consensus board), cached 600s, Cron-busted
 - **`/glossary`** : searchable jargon decoder
-- **`/this-week`** : this week’s NFL games from ESPN’s public scoreboard, times in `Europe/London`, plus a **Your Sunday** card for the team saved in the browser (`fds-team`). Each fixture has a short beginner preview or a post-match report (score + snippet + outbound link; “report coming” until a feed publishes one). Fair-use summaries only. Live and finished cards list **touchdown scorers** under the scoreline when ESPN’s game summary has scoring plays, plus a link-out to the official NFL YouTube search for highlights. **Spoiler-free** (Morning-after) is a toggle on This week and Scores: it hides scores, TD scorers, recaps and highlight chrome, kept in `fds-spoiler-free`. Kick-off, TV and teams stay visible. Also UK kick-off, what to watch for, a Learn tie-in, optional ESPN QB snapshot, and a Scottish pub meetup hint. The full slate stays free. Tabs also lead to live scores, standings, and Rookie Watch.
+- **`/this-week`** : this week’s NFL games from ESPN’s public scoreboard, times in `Europe/London`, plus a **Your Sunday** card for the team saved in the browser (`fds-team`). Each fixture has a short beginner preview or a post-match report (score + snippet + outbound link; “report coming” until a feed publishes one). Fair-use summaries only. Live and finished cards list **touchdown scorers** under the scoreline when ESPN’s game summary has scoring plays, plus **in-app YouTube highlights** when we can resolve an official NFL / club clip (`YOUTUBE_API_KEY`), otherwise a link-out to NFL YouTube search. **Spoiler-free** (Morning-after) is a toggle on This week and Scores: it hides scores, TD scorers and recaps, kept in `fds-spoiler-free`. Highlights stay on the card behind a branded “no spoiler” thumbnail until you confirm. Kick-off, TV and teams stay visible. Also UK kick-off, what to watch for, a Learn tie-in, optional ESPN QB snapshot, and a Scottish pub meetup hint. The full slate stays free. Tabs also lead to live scores, standings, and Rookie Watch.
 - **`/scores`** : near-live scoreboard for the current week (Scheduled / Live / Final / Bye), including TD scorers on live and final cards when the feed has them. Same spoiler-free toggle as This week. Server fetch is uncached against ESPN; the `/api/scores` response is CDN-cached for **20 seconds**. The page polls that API every 20s while a game is on, 30s near kick-off, and 2 minutes midweek.
 - **`/score-history`** : “Has this score happened before?” Scoreography lookup against a **stored** nflverse schedule snapshot (1999–2025 completed regular-season and play-off games). Winner–loser or home-and-away. Honest empty states if a final is not in the table. Unusual-final notes also appear on Scores and This week when the slate has finished games.
 - **`/standings`** : AFC / NFC by division, with wins-losses-ties, points for/against, and division rank. ESPN public standings (`type=0&level=3`), cached **300 seconds**.
@@ -73,6 +73,7 @@ Copy `.env.example` if you want a local file. Nothing is required for day-to-day
 | `RESEND_API_KEY` | For `/feedback` (option B) | Server-only. Sends via [Resend](https://resend.com). Needs a verified sending domain to reach an arbitrary inbox. |
 | `FEEDBACK_TO_EMAIL` | With Resend | Server-only inbox. Never `NEXT_PUBLIC_*`. |
 | `FEEDBACK_FROM_EMAIL` | Optional with Resend | Must be on a domain you verified in Resend. If unset, Resend’s `onboarding@resend.dev` sender is used (test mode: only the Resend account email can receive). |
+| `YOUTUBE_API_KEY` | Optional | Server-only [YouTube Data API v3](https://developers.google.com/youtube/v3) key. When set, live and final cards try to embed an official NFL or club highlight. If unset, the quota is exceeded, or no official clip matches, we fall back to the NFL YouTube search link. Never `NEXT_PUBLIC_*`. |
 
 Locally, if neither Formspree nor Resend is set, `/api/feedback` logs the note and returns success so the form can be tried. In production it returns **503** (“feedback inbox is not wired up”) until one option is configured. Provider failures return **502**. If Resend is set and fails, Formspree is tried next when `FORMSPREE_FORM_ID` is also set.
 
@@ -108,8 +109,8 @@ Fixtures are **not** edited by hand.
 5. `/` and `/this-week` also set `export const revalidate = 300`.
 6. `/scores` uses a **separate, uncached** ESPN scoreboard fetch so a 5-minute fixtures cache cannot stall the live board. The page and `/api/scores` set `revalidate = 20`. The browser polls `/api/scores` (Cache-Control `s-maxage=20`) every 20 seconds while any game is in progress.
 7. Touchdown scorers are **not** on the scoreboard payload. For live and final games we also call ESPN’s per-game summary (`…/summary?event={id}`), already used for recaps, and read `scoringPlays`. Field goals and extras are dropped. If that list is missing, the card still renders. Final-game summaries share the **300-second** `game-reports` cache; in-progress games use the **20-second** `scores` tag so a live board can pick up a new TD without waiting five minutes. The same summary’s first/last play timestamps give an approximate **game length** on finished cards.
-8. **Spoiler-free** is a client preference (`localStorage` key `fds-spoiler-free`, values `on` / `off`). A before-paint script sets `data-spoiler-free="on"` on `<html>` so scores do not flash. CSS then hides `.fds-spoiler` (scoreline, TD list, recaps, this-week unusual-finals, highlight links). The Sunday card’s “what to watch” line does not include the final score. Per-game “Show result” is not in this MVP.
-9. **Highlights** are a link to the official NFL YouTube channel search for that match-up (`youtube.com/@NFL/search?query=…`). We do **not** call the YouTube Data API (that needs a key), do not scrape search results, and do not embed a player — titles and thumbnails on YouTube almost always name the winner or the score. Spoiler-free hides the link. Club YouTube on team pages is unchanged.
+8. **Spoiler-free** is a client preference (`localStorage` key `fds-spoiler-free`, values `on` / `off`). A before-paint script sets `data-spoiler-free="on"` on `<html>` so scores do not flash. CSS then hides `.fds-spoiler` (scoreline, TD list, recaps, this-week unusual-finals, YouTube embed chrome). Highlight tiles stay visible as `.fds-spoiler-safe` branded posters (`/highlights-spoiler-free.svg`) so a YouTube thumbnail never flashes. Tapping asks “This may reveal the result”; confirm embeds that game only and leaves the rest of the slate spoiler-free. The Sunday card’s “what to watch” line does not include the final score. Per-game “Show result” is not in this MVP.
+9. **Highlights** on live and finished cards try to embed an official clip (`youtube-nocookie.com`) under the game card. `GET /api/highlights` is server-only: if `YOUTUBE_API_KEY` is set it searches the NFL channel, then a wider official-club filter, and returns **only** a video id plus the search URL — never a YouTube title or thumbnail. No key, no match, or an API error falls back to `youtube.com/@NFL/search?query=…`. We do not scrape YouTube. Club YouTube on team pages is still a link-out. The daily Cron also busts the `highlights` tag.
 
 ## How standings refresh
 
@@ -154,6 +155,7 @@ On Vercel, `vercel.json` schedules a **daily** Cron at `0 6 * * *` (06:00 UTC) t
 - `revalidateTag('news-fantasy', 'max')`
 - `revalidateTag('depth-charts', 'max')`
 - `revalidateTag('draft-prospects', 'max')`
+- `revalidateTag('highlights', 'max')`
 - `revalidatePath('/')`
 - `revalidatePath('/this-week')`
 - `revalidatePath('/scores')`
@@ -215,7 +217,7 @@ curl -H "Authorization: Bearer $CRON_SECRET" https://your-domain.vercel.app/api/
 
 1. Import the GitHub repo into [Vercel](https://vercel.com/new).
 2. Framework preset: Next.js. Build command: `npm run build`.
-3. Add `CRON_SECRET` (and optionally `NEXT_PUBLIC_SITE_URL`, `NEXT_PUBLIC_DISCORD_INVITE`, and `NEXT_PUBLIC_CONTACT_EMAIL`) under Project Settings → Environment Variables.
+3. Add `CRON_SECRET` (and optionally `NEXT_PUBLIC_SITE_URL`, `NEXT_PUBLIC_DISCORD_INVITE`, `NEXT_PUBLIC_CONTACT_EMAIL`, and `YOUTUBE_API_KEY`) under Project Settings → Environment Variables. `YOUTUBE_API_KEY` is server-only; leave it unset and highlights still work as NFL YouTube search links.
 4. Deploy. Cron jobs from `vercel.json` are registered on Hobby / Pro according to your Vercel plan.
 
 ## Information architecture

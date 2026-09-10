@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" role="img" aria-labelledby="title desc">
+  <title id="title">Highlights  tap after watching</title>
+  <desc id="desc">Spoiler-free · highlights ready. First Down Scotland branded poster. No score, title or YouTube thumbnail.</desc>
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1a2640"/>
+      <stop offset="55%" stop-color="#121b2e"/>
+      <stop offset="100%" stop-color="#0b1220"/>
+    </linearGradient>
+    <linearGradient id="goldFade" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#e8b84a" stop-opacity="0"/>
+      <stop offset="15%" stop-color="#e8b84a"/>
+      <stop offset="50%" stop-color="#f3d27a"/>
+      <stop offset="85%" stop-color="#e8b84a"/>
+      <stop offset="100%" stop-color="#e8b84a" stop-opacity="0"/>
+    </linearGradient>
+    <pattern id="field" width="80" height="40" patternUnits="userSpaceOnUse">
+      <path d="M80 0H0" stroke="#f4efe4" stroke-opacity="0.06" stroke-width="1"/>
+      <path d="M0 0V40" stroke="#f4efe4" stroke-opacity="0.05" stroke-width="1"/>
+    </pattern>
+  </defs>
+  <rect width="1280" height="720" fill="url(#sky)"/>
+  <rect width="1280" height="720" fill="url(#field)"/>
+  <circle cx="180" cy="-40" r="320" fill="#e8b84a" fill-opacity="0.10"/>
+  <circle cx="1180" cy="80" r="260" fill="#f3d27a" fill-opacity="0.08"/>
+  <rect x="0" y="0" width="1280" height="6" fill="#e8b84a"/>
+  <rect x="80" y="168" width="1120" height="3" fill="url(#goldFade)"/>
+
+  <!-- Play mark: brand gold, not a YouTube icon -->
+  <circle cx="640" cy="300" r="64" fill="#0b1220" fill-opacity="0.55" stroke="#e8b84a" stroke-width="3"/>
+  <path d="M624 268 L624 332 L676 300 Z" fill="#e8b84a"/>
+
+  <text x="640" y="122" text-anchor="middle" fill="#e8b84a" font-family="Georgia, 'Times New Roman', serif" font-size="22" letter-spacing="6" font-weight="700">FIRST DOWN SCOTLAND</text>
+  <text x="640" y="430" text-anchor="middle" fill="#f4efe4" font-family="Georgia, 'Times New Roman', serif" font-size="44" font-weight="700">Highlights  tap after watching</text>
+  <text x="640" y="488" text-anchor="middle" fill="#c9c2b3" font-family="ui-sans-serif, system-ui, sans-serif" font-size="26">Spoiler-free · highlights ready</text>
+  <text x="640" y="640" text-anchor="middle" fill="#c9c2b3" font-family="ui-sans-serif, system-ui, sans-serif" font-size="18" fill-opacity="0.9">YouTube titles stay hidden until you choose to watch</text>
+</svg>
