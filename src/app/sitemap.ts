@@ -4,53 +4,95 @@ import { getPlaySlugs } from "@/data/plays";
 import { getTeamSlugs } from "@/data/team-profiles";
 import { absoluteUrl } from "@/lib/site";
 
-export default function sitemap(): MetadataRoute.Sitemap {
-  const staticRoutes = [
-    "/",
-    "/learn",
-    "/learn/quiz",
-    "/learn/draft-prospects",
-    "/mini-games",
-    "/mini-games/rules",
-    "/mini-games/who-am-i",
-    "/mini-games/downs",
-    "/mini-games/rivalries",
-    "/glossary",
-    "/this-week",
-    "/scores",
-    "/score-history",
-    "/standings",
-    "/rookies",
-    "/news",
-    "/news/fantasy",
-    "/podcasts",
-    "/watch",
-    "/film-room",
-    "/watch-near-you",
-    "/community",
-    "/feedback",
-    "/history",
-    "/teams",
-    "/pick-your-team",
-    "/pick-your-team/choose",
-    "/about",
-  ];
-  const lessonRoutes = getLessonSlugs().map((slug) => `/learn/${slug}`);
-  const playRoutes = getPlaySlugs().map((slug) => `/learn/plays/${slug}`);
-  const teamRoutes = getTeamSlugs().map((slug) => `/teams/${slug}`);
+const staticRoutes = [
+  "/",
+  "/learn",
+  "/learn/quiz",
+  "/learn/draft-prospects",
+  "/mini-games",
+  "/mini-games/rules",
+  "/mini-games/who-am-i",
+  "/mini-games/downs",
+  "/mini-games/rivalries",
+  "/glossary",
+  "/this-week",
+  "/scores",
+  "/score-history",
+  "/standings",
+  "/rookies",
+  "/news",
+  "/news/fantasy",
+  "/podcasts",
+  "/watch",
+  "/film-room",
+  "/watch-near-you",
+  "/community",
+  "/feedback",
+  "/history",
+  "/teams",
+  "/pick-your-team",
+  "/pick-your-team/choose",
+  "/about",
+] as const;
 
-  return [...staticRoutes, ...lessonRoutes, ...playRoutes, ...teamRoutes].map((path) => ({
-    url: absoluteUrl(path),
-    changeFrequency:
-      path === "/this-week" ||
-      path === "/scores" ||
-      path === "/standings" ||
-      path === "/rookies" ||
-      path === "/news" ||
-      path === "/news/fantasy" ||
-      path === "/learn/draft-prospects"
-        ? "hourly"
-        : "weekly",
-    priority: path === "/" ? 1 : 0.7,
-  }));
+const hourlyPaths = new Set<string>([
+  "/this-week",
+  "/scores",
+  "/standings",
+  "/rookies",
+  "/news",
+  "/news/fantasy",
+  "/learn/draft-prospects",
+]);
+
+function slugRoutes(load: () => string[], prefix: string): string[] {
+  try {
+    const slugs = load();
+    if (!Array.isArray(slugs)) return [];
+    return slugs.flatMap((slug) => {
+      if (typeof slug !== "string") return [];
+      const clean = slug.trim();
+      if (!clean || /[/?#]/.test(clean)) return [];
+      return [`${prefix}/${clean}`];
+    });
+  } catch (error) {
+    console.error(`sitemap: ${prefix} slugs failed`, error);
+    return [];
+  }
+}
+
+function sitemapEntry(path: string): MetadataRoute.Sitemap[number] | null {
+  try {
+    return {
+      url: absoluteUrl(path),
+      changeFrequency: hourlyPaths.has(path) ? "hourly" : "weekly",
+      priority: path === "/" ? 1 : 0.7,
+    };
+  } catch (error) {
+    console.error("sitemap: skipped path", path, error);
+    return null;
+  }
+}
+
+export default function sitemap(): MetadataRoute.Sitemap {
+  const paths = [
+    ...staticRoutes,
+    ...slugRoutes(getLessonSlugs, "/learn"),
+    ...slugRoutes(getPlaySlugs, "/learn/plays"),
+    ...slugRoutes(getTeamSlugs, "/teams"),
+  ];
+
+  const entries = paths
+    .map(sitemapEntry)
+    .filter((entry): entry is MetadataRoute.Sitemap[number] => entry !== null);
+
+  if (entries.length > 0) return entries;
+
+  return [
+    {
+      url: absoluteUrl("/"),
+      changeFrequency: "weekly",
+      priority: 1,
+    },
+  ];
 }
