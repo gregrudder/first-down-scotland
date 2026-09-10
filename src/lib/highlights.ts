@@ -9,7 +9,6 @@ export const HIGHLIGHTS_REVALIDATE_SECONDS = 3600;
 export const HIGHLIGHTS_LIVE_REVALIDATE_SECONDS = 600;
 
 const YOUTUBE_SEARCH_URL = "https://www.googleapis.com/youtube/v3/search";
-const YOUTUBE_VIDEOS_URL = "https://www.googleapis.com/youtube/v3/videos";
 const FETCH_TIMEOUT_MS = 8_000;
 const YOUTUBE_VIDEO_ID_RE = /^[a-zA-Z0-9_-]{11}$/;
 
@@ -22,8 +21,6 @@ export type HighlightGame = {
 };
 
 export type HighlightLookup = {
-  videoId: string | null;
-  embeddable: boolean;
   watchUrl: string | null;
   searchUrl: string;
 };
@@ -46,7 +43,7 @@ function asString(value: unknown): string | undefined {
 }
 
 function emptyLookup(searchUrl: string): HighlightLookup {
-  return { videoId: null, embeddable: false, watchUrl: null, searchUrl };
+  return { watchUrl: null, searchUrl };
 }
 
 export function youtubeApiKey(): string | undefined {
@@ -56,7 +53,7 @@ export function youtubeApiKey(): string | undefined {
 
 /**
  * Official NFL YouTube channel search for this match-up.
- * Always available as a fallback: the NFL often blocks in-app playback.
+ * Always available as a fallback. The NFL blocks in-app embeds, so we never iframe.
  */
 export function nflHighlightsSearchUrl(game: Pick<HighlightGame, "away" | "home">): string {
   const query = highlightsSearchQuery(game);
@@ -77,16 +74,6 @@ export function isYoutubeVideoId(value: string): boolean {
 
 export function youtubeWatchUrl(videoId: string): string {
   return `https://www.youtube.com/watch?v=${videoId}`;
-}
-
-/** Privacy-enhanced embed. No autoplay — the poster frame is still YouTube chrome. */
-export function youtubeEmbedSrc(videoId: string): string {
-  const params = new URLSearchParams({
-    rel: "0",
-    modestbranding: "1",
-    playsinline: "1",
-  });
-  return `https://www.youtube-nocookie.com/embed/${videoId}?${params.toString()}`;
 }
 
 export function highlightsApiPath(
@@ -229,28 +216,9 @@ async function youtubeSearch(params: URLSearchParams, revalidate: number): Promi
   url.searchParams.set("type", "video");
   url.searchParams.set("maxResults", "8");
   url.searchParams.set("safeSearch", "none");
-  // Do not set videoEmbeddable=true: NFL game packages are often not embeddable,
-  // and we still want the official watch URL for a link-out.
 
   const payload = await youtubeGet(url, revalidate);
   return parseSearchItems(payload);
-}
-
-async function youtubeVideoEmbeddable(videoId: string, revalidate: number): Promise<boolean> {
-  const key = youtubeApiKey();
-  if (!key) return false;
-
-  const url = new URL(YOUTUBE_VIDEOS_URL);
-  url.searchParams.set("part", "status");
-  url.searchParams.set("id", videoId);
-  url.searchParams.set("key", key);
-
-  const payload = await youtubeGet(url, revalidate);
-  if (!isRecord(payload) || !Array.isArray(payload.items)) return false;
-  const item = payload.items.find(isRecord);
-  if (!item) return false;
-  const status = isRecord(item.status) ? item.status : null;
-  return status?.embeddable === true;
 }
 
 function publishedAfterParam(kickoffUtc: string | undefined): string | undefined {
@@ -261,12 +229,10 @@ function publishedAfterParam(kickoffUtc: string | undefined): string | undefined
 }
 
 /**
- * Resolve an official clip. Never returns titles or thumbnails — those nearly
- * always name the winner or the score.
+ * Resolve an official clip for a **link-out** only. Never returns titles,
+ * thumbnails, or an embed URL — the NFL blocks in-app players.
  *
  * No `YOUTUBE_API_KEY`: skip the Data API and return the NFL search URL only.
- * If the clip is not embeddable (typical for NFL game packages), we still
- * return a watch URL so the card can link out to that video.
  */
 export async function resolveGameHighlight(game: HighlightGame): Promise<HighlightLookup> {
   const searchUrl = nflHighlightsSearchUrl(game);
@@ -304,10 +270,7 @@ export async function resolveGameHighlight(game: HighlightGame): Promise<Highlig
 
   if (!videoId) return emptyLookup(searchUrl);
 
-  const embeddable = await youtubeVideoEmbeddable(videoId, revalidate);
   return {
-    videoId,
-    embeddable,
     watchUrl: youtubeWatchUrl(videoId),
     searchUrl,
   };
