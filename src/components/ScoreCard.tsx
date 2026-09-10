@@ -1,9 +1,11 @@
 import Link from "next/link";
+import { GameHighlights } from "@/components/GameHighlights";
 import { TeamLogo } from "@/components/TeamLogo";
 import { TouchdownScorers } from "@/components/TouchdownScorers";
 import { getTeamProfileByAbbr } from "@/data/team-profiles";
 import { teamProfilePath } from "@/data/teams";
 import type { NflGame, TeamSide } from "@/lib/espn";
+import { formatGameLength } from "@/lib/game-length";
 import { scoreHistoryPath } from "@/lib/score-history-path";
 import { formatUkTime } from "@/lib/time";
 
@@ -43,16 +45,22 @@ function TeamScore({
         size={40}
       />
       <div className="min-w-0 flex-1">
-        <p className={`truncate font-semibold ${winner ? "text-gold-soft" : "text-cream"}`}>
+        <p
+          className={`truncate font-semibold ${winner ? "fds-winner text-gold-soft" : "text-cream"}`}
+        >
           {team.shortName}
         </p>
         <p className="text-xs text-cream-dim">
           {team.abbreviation}
-          {team.record ? ` · ${team.record}` : ""}
+          {team.record ? (
+            <span className={showScore ? "fds-spoiler" : undefined}>{` · ${team.record}`}</span>
+          ) : null}
         </p>
       </div>
       {showScore ? (
-        <p className="w-10 text-right font-display text-3xl text-cream">{team.score ?? 0}</p>
+        <p className="fds-spoiler w-10 text-right font-display text-3xl text-cream">
+          {team.score ?? 0}
+        </p>
       ) : null}
     </div>
   );
@@ -65,13 +73,17 @@ export function ScoreCard({
   game: NflGame;
   highlight?: string;
 }) {
-  const showScore = game.status === "in-progress" || game.status === "final";
+  const started = game.status === "in-progress" || game.status === "final";
   const venue = [game.venue, game.venueCity].filter(Boolean).join(" · ");
   const marked =
     highlight &&
     [game.home.abbreviation, game.away.abbreviation].some(
       (abbr) => abbr.toUpperCase() === highlight.toUpperCase(),
     );
+  const lengthLabel =
+    game.status === "final" && game.elapsedMinutes
+      ? formatGameLength(game.elapsedMinutes)
+      : undefined;
 
   return (
     <article
@@ -80,7 +92,11 @@ export function ScoreCard({
       }`}
     >
       <div className="flex items-center justify-between gap-3 text-xs">
-        <p className={`font-semibold uppercase tracking-[0.14em] ${statusTone(game.status)}`}>
+        <p
+          className={`font-semibold uppercase tracking-[0.14em] ${statusTone(game.status)}${
+            game.status === "in-progress" ? " fds-spoiler" : ""
+          }`}
+        >
           {gameStatusLabel(game)}
         </p>
         {game.status === "in-progress" ? (
@@ -94,32 +110,40 @@ export function ScoreCard({
       <div className="mt-4 space-y-3">
         <TeamScore
           team={game.away}
-          showScore={showScore}
+          showScore={started}
           winner={game.status === "final" && game.away.winner}
         />
         <TeamScore
           team={game.home}
-          showScore={showScore}
+          showScore={started}
           winner={game.status === "final" && game.home.winner}
         />
       </div>
 
-      <TouchdownScorers touchdowns={showScore ? game.touchdowns : undefined} />
+      {started ? (
+        <p className="fds-spoiler-safe mt-3 text-xs leading-5 text-cream-dim">
+          Result hidden. Turn off spoiler-free to see the score.
+        </p>
+      ) : null}
+
+      <TouchdownScorers touchdowns={started ? game.touchdowns : undefined} />
 
       {venue ? <p className="mt-4 text-xs text-cream-dim">{venue}</p> : null}
+      {lengthLabel ? <p className="mt-1 text-xs text-cream-dim">{lengthLabel}</p> : null}
       <p className="mt-3 text-sm">
         <Link href="/this-week" className="text-gold">
           Preview or report →
         </Link>
         {game.status === "final" && game.home.score != null && game.away.score != null ? (
-          <>
+          <span className="fds-spoiler">
             {" · "}
             <Link href={scoreHistoryPath(game.home.score, game.away.score)} className="text-gold">
               Has this final happened before?
             </Link>
-          </>
+          </span>
         ) : null}
       </p>
+      <GameHighlights game={game} />
     </article>
   );
 }

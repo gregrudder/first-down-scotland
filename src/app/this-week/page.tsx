@@ -3,6 +3,7 @@ import Link from "next/link";
 import { SundayCard } from "@/components/SundayCard";
 import { GameCard } from "@/components/GameCard";
 import { LeagueTabs } from "@/components/LeagueTabs";
+import { SpoilerFreeToggle } from "@/components/SpoilerFreeToggle";
 import { PageIntro } from "@/components/PageIntro";
 import { UkKickoffHelper } from "@/components/UkKickoffHelper";
 import { UnusualFinals } from "@/components/UnusualFinals";
@@ -35,7 +36,8 @@ export default async function ThisWeekPage() {
           post-match report after full time (or a clear “report coming” note until
           a feed publishes one). We link out for the full piece. Scores appear if
           the feed has them, and live or finished cards list who scored the
-          touchdowns when ESPN’s game summary includes them. We do not type these
+          touchdowns when ESPN’s game summary includes them. Spoiler-free mode
+          hides those until you have watched. We do not type these
           in by hand: if ESPN’s public scoreboard hiccups, you will see that here
           instead of a stale spreadsheet.
           If you have picked a team, your Sunday card sits at the top: what to look
@@ -44,6 +46,7 @@ export default async function ThisWeekPage() {
         </p>
       </PageIntro>
       <LeagueTabs active="games" />
+      <SpoilerFreeToggle />
 
       <div className="mt-8">
         <UkKickoffHelper />

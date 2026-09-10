@@ -49,6 +49,8 @@ export type NflGame = {
   away: TeamSide;
   /** From ESPN’s per-game summary scoring plays. Omitted when none or the feed has none. */
   touchdowns?: TouchdownScorer[];
+  /** Wall-clock span from first to last play, in minutes. Omitted when the summary has none. */
+  elapsedMinutes?: number;
 };
 
 export type FixturesSuccess = {

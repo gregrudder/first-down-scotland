@@ -22,7 +22,7 @@ export function UnusualFinals({
   const shown = unusual.length > 0 ? unusual : rows.slice(0, 3);
 
   return (
-    <aside className="rounded-2xl border border-line bg-navy-2 p-5">
+    <aside className="fds-spoiler rounded-2xl border border-line bg-navy-2 p-5">
       <p className="text-xs font-semibold uppercase tracking-[0.16em] text-gold">
         Score history
       </p>

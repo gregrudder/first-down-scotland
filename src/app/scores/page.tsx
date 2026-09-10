@@ -3,6 +3,7 @@ import Link from "next/link";
 import { LeagueTabs } from "@/components/LeagueTabs";
 import { LiveScoreboard } from "@/components/LiveScoreboard";
 import { PageIntro } from "@/components/PageIntro";
+import { SpoilerFreeToggle } from "@/components/SpoilerFreeToggle";
 import { UkKickoffHelper } from "@/components/UkKickoffHelper";
 import { UnusualFinals } from "@/components/UnusualFinals";
 import { getNflLiveScoreboard, teamsOnBye } from "@/lib/espn";
@@ -26,12 +27,14 @@ export default async function ScoresPage() {
         <p>
           A simple scoreboard for the current NFL week: who is playing, the score,
           who scored the touchdowns when ESPN lists them, and whether it is
-          Scheduled, Live, Final or a Bye. While games are on we poll ESPN’s
+          Scheduled, Live, Final or a Bye. Spoiler-free mode hides the scoreline
+          and scorers until you have watched. While games are on we poll ESPN’s
           public scoreboard about every 20 seconds. Midweek it slows down so we
           are not refreshing an empty Sunday for no reason.
         </p>
       </PageIntro>
       <LeagueTabs active="scores" />
+      <SpoilerFreeToggle />
       <div className="mt-8">
         <UkKickoffHelper showFixturesLink />
       </div>

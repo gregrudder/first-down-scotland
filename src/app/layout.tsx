@@ -6,6 +6,7 @@ import Script from "next/script";
 import { SiteShell } from "@/components/SiteShell";
 import { absoluteUrl, site } from "@/lib/site";
 import { teamThemeBootScript } from "@/lib/team-theme";
+import { spoilerFreeBootScript } from "@/lib/spoiler-storage";
 import "./globals.css";
 
 const figtree = Figtree({
@@ -93,6 +94,9 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       <body className="min-h-full font-sans">
         <Script id="fds-team-theme" strategy="beforeInteractive">
           {teamThemeBootScript()}
+        </Script>
+        <Script id="fds-spoiler-free" strategy="beforeInteractive">
+          {spoilerFreeBootScript()}
         </Script>
         <SiteShell>{children}</SiteShell>
         <Analytics />

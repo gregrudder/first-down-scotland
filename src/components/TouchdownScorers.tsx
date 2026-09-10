@@ -17,7 +17,7 @@ export function TouchdownScorers({
   if (!touchdowns?.length) return null;
 
   return (
-    <ul className="mt-3 space-y-0.5" aria-label="Touchdown scorers">
+    <ul className="fds-spoiler mt-3 space-y-0.5" aria-label="Touchdown scorers">
       {touchdowns.map((td) => {
         const { prefix, rest } = lineBits(td);
         return (

@@ -153,9 +153,25 @@ function summaryCacheFor(status: NflGame["status"]): {
   };
 }
 
+function parseElapsedMinutes(data: unknown): number | undefined {
+  if (!isRecord(data) || !isRecord(data.meta)) return undefined;
+  const first = asString(data.meta.firstPlayWallClock);
+  const last = asString(data.meta.lastPlayWallClock);
+  if (!first || !last) return undefined;
+  const start = Date.parse(first);
+  const end = Date.parse(last);
+  if (!Number.isFinite(start) || !Number.isFinite(end) || end <= start) return undefined;
+  return Math.round((end - start) / 60_000);
+}
+
+type SummaryBits = {
+  touchdowns: TouchdownScorer[];
+  elapsedMinutes?: number;
+};
+
 export async function touchdownsForGames(
   games: NflGame[],
-): Promise<Record<string, TouchdownScorer[]>> {
+): Promise<Record<string, SummaryBits>> {
   const started = games.filter(
     (game) => game.status === "in-progress" || game.status === "final",
   );
@@ -165,10 +181,15 @@ export async function touchdownsForGames(
     started.map(async (game) => {
       try {
         const json = await fetchEspnSummaryJson(game.id, summaryCacheFor(game.status));
-        const list = parseTouchdowns(json);
-        return [game.id, list] as const;
+        return [
+          game.id,
+          {
+            touchdowns: parseTouchdowns(json),
+            elapsedMinutes: parseElapsedMinutes(json),
+          },
+        ] as const;
       } catch {
-        return [game.id, [] as TouchdownScorer[]] as const;
+        return [game.id, { touchdowns: [] as TouchdownScorer[] }] as const;
       }
     }),
   );
@@ -176,7 +197,7 @@ export async function touchdownsForGames(
   return Object.fromEntries(entries);
 }
 
-/** Attach TD scorers onto live/final games. Missing data stays omitted. */
+/** Attach TD scorers and game length onto live/final games. Missing data stays omitted. */
 export async function withTouchdownScorers(result: FixturesResult): Promise<FixturesResult> {
   if (!result.ok) return result;
 
@@ -184,9 +205,15 @@ export async function withTouchdownScorers(result: FixturesResult): Promise<Fixt
   return {
     ...result,
     games: result.games.map((game) => {
-      const touchdowns = byId[game.id];
-      if (!touchdowns?.length) return game;
-      return { ...game, touchdowns };
+      const bits = byId[game.id];
+      if (!bits) return game;
+      return {
+        ...game,
+        ...(bits.touchdowns.length ? { touchdowns: bits.touchdowns } : {}),
+        ...(typeof bits.elapsedMinutes === "number"
+          ? { elapsedMinutes: bits.elapsedMinutes }
+          : {}),
+      };
     }),
   };
 }

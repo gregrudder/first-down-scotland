@@ -18,7 +18,11 @@ export function GameReportBlock({
   const pendingLabel = report.kind === "recap" ? "Report coming" : "Preview";
 
   return (
-    <div className={compact ? "mt-3" : "mt-4 border-t border-line pt-4"}>
+    <div
+      className={`${compact ? "mt-3" : "mt-4 border-t border-line pt-4"}${
+        report.kind === "recap" ? " fds-spoiler" : ""
+      }`}
+    >
       <p className="text-xs font-semibold uppercase tracking-[0.16em] text-gold">
         {report.state === "pending" ? pendingLabel : eyebrow}
       </p>

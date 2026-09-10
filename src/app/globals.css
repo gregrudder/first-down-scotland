@@ -39,6 +39,43 @@ html {
   color: var(--cream);
 }
 
+html[data-spoiler-free="on"] .fds-spoiler {
+  display: none !important;
+}
+
+.fds-spoiler-safe {
+  display: none;
+}
+
+html[data-spoiler-free="on"] .fds-spoiler-safe {
+  display: block;
+}
+
+html[data-spoiler-free="on"] .fds-winner {
+  color: var(--cream) !important;
+}
+
+html[data-spoiler-free="on"] .fds-spoiler-switch {
+  border-color: color-mix(in srgb, var(--gold) 60%, transparent);
+  background: color-mix(in srgb, var(--gold) 15%, transparent);
+}
+
+html[data-spoiler-free="on"] .fds-spoiler-switch-track {
+  background: var(--gold);
+}
+
+.fds-spoiler-switch-thumb {
+  transition: transform 150ms ease;
+}
+
+html[data-spoiler-free="on"] .fds-spoiler-switch-thumb {
+  transform: translateX(1.25rem);
+}
+
+html[data-spoiler-free="on"] .fds-spoiler-switch .fds-spoiler-safe {
+  display: inline;
+}
+
 body {
   min-height: 100%;
   background:
@@ -128,5 +165,9 @@ body {
   .fds-drawer-in,
   .fds-mega-in {
     animation: none;
+  }
+
+  .fds-spoiler-switch-thumb {
+    transition: none;
   }
 }
