@@ -68,7 +68,9 @@ export function byeWeekExplainer(team: NflTeam, weekNumber: number | null): Sund
     learn,
     watchHint: "No kick-off to map until they are back on the board.",
     pubHint:
-      "Scottish pubs that already list NFL Sundays are on Watch near you. A bye week is a good time to call ahead for the next one.",
+      livePubs().length > 0
+        ? "Scottish pubs that already list NFL Sundays are on Watch near you. A bye week is a good time to call ahead for the next one."
+        : "Watch near you is looking for a Glasgow and an Edinburgh home bar. Until those partners are confirmed, Discord is the place to find fans of your team.",
   };
 }
 
@@ -171,6 +173,9 @@ export function pubHintForGame(game: NflGame | null): string {
   const where = names ? ` ${names} already advertise NFL Sundays.` : "";
 
   if (!game) {
+    if (!live.length) {
+      return "Watch near you is looking for a Glasgow and an Edinburgh home bar for Scottish NFL meetups. Until those partners are confirmed, Discord is the place to find fans of your team.";
+    }
     return `A handful of Scottish pubs list the NFL.${where} Good places to meet fans of your team: always call ahead, and use Discord to see who else is going.`.trim();
   }
 
@@ -178,6 +183,13 @@ export function pubHintForGame(game: NflGame | null): string {
   const day = ukWeekdayShort(game.kickoffUtc);
   const sundayWindow =
     day === "Sun" || (day === "Mon" && hour !== null && hour < 3);
+
+  if (!live.length) {
+    if (sundayWindow) {
+      return "This is the pub-friendly window. Watch near you is still finding a Glasgow and Edinburgh home bar — use Discord to see who else is watching, then meet once those partners are confirmed.";
+    }
+    return "Overnight and midweek games are harder in a pub. Game Pass or Sky at home is the usual UK move. For Sundays, Watch near you is looking for a Glasgow and Edinburgh home bar. Discord is the chat home.";
+  }
 
   if (sundayWindow) {
     return `This is the pub-friendly window for meeting fans of your team.${where} Check Watch near you, ring them, and use Discord to arrange who is going.`;

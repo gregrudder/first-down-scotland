@@ -23,7 +23,7 @@ Three jobs: learn the game, meet fans of your team, keep that club in one place.
 - **`/podcasts`** : recommended NFL and per-team shows to follow (external links; official vs independent labelled)
 - **`/watch`** : high-level UK viewing map (Sky / Channel 5 / 5Action / My5 / DAZN Game Pass / Netflix)
 - **`/film-room`** : curated watch-to-learn films (America’s Game, Hard Knocks, All or Nothing, Quarterback, Wide Receiver). Official where-to-look hints only; no streams.
-- **`/watch-near-you`** : Scottish pubs that show the NFL, framed as places to meet fans of the same team and arrange meetups. Free listings; demo featured card; more cities coming. Always call ahead.
+- **`/watch-near-you`** : Partner search for one Glasgow and one Edinburgh home bar for Scottish NFL meetups. No venue directory until those partners are confirmed. Discord in the meantime.
 - **`/about`** : what the site is for (learn + meet your team)
 - **`/community`** : Discord as the chat home for Scottish / UK fans of the team you picked (Join the Discord CTA; default invite in the repo; override with `NEXT_PUBLIC_DISCORD_INVITE`; no in-app chat)
 - **`/feedback`** : short tester form (posts to `/api/feedback`; Resend or Formspree). Inbox address is an env var, not in the repo.
@@ -243,7 +243,7 @@ curl -H "Authorization: Bearer $CRON_SECRET" https://www.firstdownscotland.com/a
 | `/news/fantasy` | Auto NFL fantasy headlines (RSS, link out) |
 | `/watch` | UK viewing explainer |
 | `/film-room` | Watch-to-learn films and series |
-| `/watch-near-you` | Scottish NFL pubs (free listings + demo featured card) |
+| `/watch-near-you` | Glasgow + Edinburgh meetup-partner search (no venue directory yet) |
 | `/community` | Discord community (invite CTA) |
 | `/feedback` | TikTok-test feedback form |
 | `/history` | Short NFL history timeline |
@@ -258,4 +258,4 @@ Independent fan project. Not affiliated with the NFL, Sky, Channel 5, DAZN, Netf
 
 Team profiles use ESPN’s public logo CDN (`https://a.espncdn.com/i/teamlogos/nfl/500/{abbr}.png`) with an abbreviation-circle fallback. Stadium names and listed capacities follow Wikipedia’s current NFL stadiums list for the **2026 season** (cited there to club media guides and reporting). Super Bowl counts are after Super Bowl LX (Seattle 29–13 New England, 8 February 2026; AP / NFL.com). Franchise origins follow the league’s published history and standard reference summaries. Stadium names, capacities and trophy counts can change.
 
-`/watch-near-you` listings live in `src/data/pubs.ts`. Live rows were checked against the pubs’ own sites (Duke’s Leith, Malones Edinburgh / Glasgow, Ark Glasgow). Hours and what is on the screen change — the page says to call ahead. The Gridiron Arms card is a fictional demo.
+`/watch-near-you` is a partner search, not a venue directory. Confirmed Glasgow and Edinburgh home bars will live in `src/data/pubs.ts` (`livePubs()`). That list is empty until partners are agreed. Bar owners can use `/feedback` or the public contact email.

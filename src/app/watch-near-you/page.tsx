@@ -1,91 +1,48 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { DiscordCta } from "@/components/DiscordCta";
 import { PageIntro } from "@/components/PageIntro";
-import { PubCard } from "@/components/PubCard";
-import {
-  comingSoonPlaces,
-  demoPubs,
-  livePubs,
-  pubsDisclaimer,
-} from "@/data/pubs";
+import { meetupPartnerCities } from "@/data/pubs";
 import { contactEmail, listingMailto } from "@/lib/contact";
 
 export const metadata: Metadata = {
   title: "Watch near you",
   description:
-    "Scottish pubs that show the NFL, so you can meet fans of the team you support. Call ahead, then arrange who is going in Discord.",
+    "First Down Scotland is looking for one meetup partner in Glasgow and one in Edinburgh — a city home for Scottish NFL fans. Get in touch if you run a pub.",
 };
 
 export default function WatchNearYouPage() {
-  const demo = demoPubs();
-  const live = livePubs();
-
   return (
     <div className="mx-auto max-w-3xl px-4 py-12 sm:px-6 sm:py-16">
       <PageIntro eyebrow="Meet your team" title="Watch near you">
         <p>
-          These are pubs that put the NFL on, so you can sit with fans of the
-          same side you picked rather than shouting at the sofa on your own. Use
-          Discord to arrange who is going. Television
-          rights are one thing. Finding a room that will actually put RedZone on
-          is another.
+          First Down Scotland is looking for one meetup partner — a home bar —
+          in Glasgow, and one in Edinburgh. This is about a city home for
+          Scottish NFL fans: a regular room where people who picked the same
+          side can actually turn up. It is not a directory of every screen in
+          Scotland, and it is not a pitch for free tabs.
         </p>
         <p>
-          Always call ahead. Packages change, Sundays get busy, and a listing here
-          is not a promise they have your game this week.
+          A Glasgow and Edinburgh partner list will go here once those homes
+          are confirmed. Until then, Discord is the easiest way to find other
+          fans this Sunday.
         </p>
       </PageIntro>
 
       <section className="mt-10">
-        <h2 className="font-display text-2xl text-cream">How this works</h2>
-        <ul className="mt-3 list-disc space-y-2 pl-5 text-sm leading-6 text-cream-dim">
-          <li>Free listings for pubs we can confirm show the NFL, so fans of the same team can find each other.</li>
-          <li>
-            Featured spots (badge, extra detail) will be available for bar owners
-            who want to stand out. Not a hard sell, just a clearer card.
-          </li>
-          <li>We will not invent venues. If it is a demo, it says so loudly.</li>
-        </ul>
-      </section>
-
-      <section className="mt-12">
-        <h2 className="font-display text-3xl text-cream">Sample listing</h2>
+        <h2 className="font-display text-2xl text-cream">Two cities first</h2>
         <p className="mt-2 text-sm leading-6 text-cream-dim">
-          This is what a featured card will look like. It is fiction. Do not go
-          to Sampletown.
+          One partner in each city. When they are confirmed, they will be the
+          places we point fans to.
         </p>
-        <div className="mt-5 grid gap-4">
-          {demo.map((pub) => (
-            <PubCard key={pub.id} pub={pub} />
-          ))}
-        </div>
-      </section>
-
-      <section className="mt-12">
-        <h2 className="font-display text-3xl text-cream">Pubs we can point you at</h2>
-        <p className="mt-2 text-sm leading-6 text-cream-dim">{pubsDisclaimer}</p>
-        <div className="mt-5 grid gap-4">
-          {live.map((pub) => (
-            <PubCard key={pub.id} pub={pub} />
-          ))}
-        </div>
-      </section>
-
-      <section className="mt-12">
-        <h2 className="font-display text-3xl text-cream">Coming soon</h2>
-        <p className="mt-2 text-sm leading-6 text-cream-dim">
-          Real listings for more of Edinburgh, Glasgow and the rest of Scotland
-          are being added. If you run a pub (or you have a reliable regular) get
-          in touch and we will check it rather than guess.
-        </p>
-        <ul className="mt-5 grid gap-3">
-          {comingSoonPlaces.map((place) => (
+        <ul className="mt-5 grid gap-3 sm:grid-cols-2">
+          {meetupPartnerCities.map((place) => (
             <li
               key={place.city}
               className="rounded-2xl border border-dashed border-line bg-navy-2 px-5 py-4"
             >
               <p className="text-xs font-semibold uppercase tracking-[0.16em] text-gold">
-                Coming soon
+                Looking for a partner
               </p>
               <p className="mt-1 font-display text-xl text-cream">{place.city}</p>
               <p className="mt-1 text-sm leading-6 text-cream-dim">{place.note}</p>
@@ -94,26 +51,39 @@ export default function WatchNearYouPage() {
         </ul>
       </section>
 
-      <section className="mt-12 rounded-2xl border border-line bg-navy-2 p-6">
+      <section className="mt-12 rounded-2xl border border-gold/35 bg-navy-2 p-6">
         <p className="text-xs font-semibold uppercase tracking-[0.16em] text-gold">
-          For bar owners
+          For pubs and bars
         </p>
-        <h2 className="mt-2 font-display text-2xl text-cream">Get listed, or featured</h2>
+        <h2 className="mt-2 font-display text-2xl text-cream">
+          Get in touch if you would like to be that home
+        </h2>
         <p className="mt-3 text-sm leading-6 text-cream-dim">
-          If you already put the NFL on, a free listing helps fans of the same
-          team find a table together, instead of another Facebook hunt. Featured
-          cards (like the sample above) are for pubs that want a bit more room:
-          screens, booking notes, a Sunday pitch. No hard sell, just a clearer
-          page for people who will actually turn up and order wings.
+          If you already put the NFL on, or you would like a weekly room for
+          Scottish fans, we would like to hear from you. Use the Feedback page,
+          or send a short email. Tell us the pub, the city, and what you already
+          show. We will take it from there.
         </p>
-        <a
-          href={listingMailto()}
-          className="mt-5 inline-flex items-center justify-center rounded-full bg-gold px-5 py-2.5 text-sm font-semibold text-gold-ink hover:bg-gold-soft"
-        >
-          Get in touch
-        </a>
+        <div className="mt-5 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+          <Link
+            href="/feedback"
+            className="inline-flex items-center justify-center rounded-full bg-gold px-5 py-2.5 text-sm font-semibold text-gold-ink hover:bg-gold-soft"
+          >
+            Get in touch
+          </Link>
+          <a
+            href={listingMailto()}
+            className="inline-flex items-center justify-center rounded-full border border-line px-5 py-2.5 text-sm font-semibold text-cream hover:border-gold/50"
+          >
+            Email a bar enquiry
+          </a>
+        </div>
         <p className="mt-3 text-xs text-cream-dim">{contactEmail()}</p>
       </section>
+
+      <div className="mt-12">
+        <DiscordCta />
+      </div>
 
       <p className="mt-10 text-sm leading-6 text-cream-dim">
         Looking for Sky, Channel 5 or Game Pass rather than a pint?{" "}
