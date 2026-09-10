@@ -101,7 +101,14 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <SiteShell>{children}</SiteShell>
         <Analytics />
         <SpeedInsights />
-        {/* AdSense: add the Google publisher script only after approval, plus a UK-compliant consent / CMP path before personalised ads. */}
+        {/* AdSense site code for Google property verification only. No Auto ads, ad units, or CMP. */}
+        <Script
+          id="fds-adsense"
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1747465358377243"
+          crossOrigin="anonymous"
+          strategy="beforeInteractive"
+        />
       </body>
     </html>
   );
