@@ -27,6 +27,10 @@ export function Footer() {
             <Link href={navHome.href} className="text-gold hover:text-gold-soft">
               {navHome.label}
             </Link>
+            <span className="text-cream-dim"> · </span>
+            <Link href="/privacy" className="text-gold hover:text-gold-soft">
+              Privacy Policy
+            </Link>
           </p>
         </div>
         <nav

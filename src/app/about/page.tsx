@@ -44,6 +44,14 @@ export default function AboutPage() {
           (defence, favourite, organised) and we explain US words when the
           broadcast will say them differently.
         </p>
+        <p>
+          How the site uses your browser, analytics and the feedback form is on
+          the{" "}
+          <Link href="/privacy" className="text-gold">
+            Privacy Policy
+          </Link>
+          .
+        </p>
       </div>
 
       <ul className="mt-10 space-y-3 text-sm">
@@ -145,6 +153,11 @@ export default function AboutPage() {
         <li>
           <Link href="/feedback" className="text-gold">
             Feedback →
+          </Link>
+        </li>
+        <li>
+          <Link href="/privacy" className="text-gold">
+            Privacy Policy →
           </Link>
         </li>
       </ul>
