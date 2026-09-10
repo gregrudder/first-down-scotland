@@ -37,9 +37,10 @@ export default async function ThisWeekPage() {
           a feed publishes one). We link out for the full piece. Scores appear if
           the feed has them, and live or finished cards list who scored the
           touchdowns when ESPN’s game summary includes them. Spoiler-free mode
-          hides those until you have watched. Live and finished cards link out
-          to official NFL YouTube search (the NFL blocks in-app embeds);
-          spoiler-free keeps that link behind a tap. We do not type these
+          hides those until you have watched. Live and finished cards try an
+          official highlight in the app when YouTube allows the embed; otherwise
+          they link out (the NFL often blocks in-app playback). Spoiler-free
+          keeps YouTube’s title and thumbnail behind a tap. We do not type these
           in by hand: if ESPN’s public scoreboard hiccups, you will see that here
           instead of a stale spreadsheet.
           If you have picked a team, your Sunday card sits at the top: what to look

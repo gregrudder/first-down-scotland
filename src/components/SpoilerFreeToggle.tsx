@@ -35,9 +35,9 @@ export function SpoilerFreeToggle() {
         <p className="mt-1 text-sm font-semibold text-cream">Spoiler-free</p>
         <p className="mt-1 max-w-xl text-sm leading-6 text-cream-dim">
           Hide scores, touchdown scorers and recaps until you have watched.
-          Highlight links stay behind a branded tile so YouTube’s title and
-          thumbnail do not appear until you confirm. Teams, UK kick-off and TV
-          stay visible. Saved in this browser.
+          Highlights stay behind a branded tile so YouTube’s title and thumbnail
+          do not appear until you confirm. Teams, UK kick-off and TV stay
+          visible. Saved in this browser.
         </p>
       </div>
       <button
