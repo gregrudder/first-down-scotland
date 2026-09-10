@@ -186,7 +186,7 @@ export function isCurrentNav(
   );
 }
 
-const FALLBACK_PRODUCTION = "https://first-down-scotland.vercel.app";
+const FALLBACK_PRODUCTION = "https://www.firstdownscotland.com";
 const FALLBACK_LOCAL = "http://localhost:3000";
 
 function firstNonEmpty(...values: Array<string | undefined>): string | undefined {
