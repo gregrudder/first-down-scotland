@@ -7,9 +7,9 @@ import { absoluteUrl } from "@/lib/site";
 export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
-  title: "NFL UK Fan Map",
+  title: "NFL Scheme Battles",
   description:
-    "Which NFL team owns Scotland? Put your town on the First Down Scotland fan map and find fans of your club across the UK.",
+    "NFL Scheme Battles: who owns Scotland? Put your town on the First Down Scotland fan map and fight for local areas across the UK.",
   alternates: { canonical: absoluteUrl("/fan-map") },
 };
 
@@ -18,16 +18,16 @@ export default async function FanMapPage() {
 
   return (
     <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6 sm:py-16">
-      <PageIntro eyebrow="NFL UK Fan Map" title="Which NFL team owns Scotland?">
+      <PageIntro eyebrow="NFL Scheme Battles" title="Who owns Scotland?">
         <p>
           Choose your team. Put your town on the map. Find your NFL community.
           Scotland first, then the rest of the UK — down to Wishaw and Motherwell,
           not just the big cities.
         </p>
         <p>
-          Who owns Scotland is a live fight: towns that reach {data.privacyThreshold}{" "}
-          fans are owned by the leading scheme. Flips hit the territory feed.
-          No sign-up.
+          NFL Scheme Battles is the live fight: a town (a scheme) that reaches{" "}
+          {data.privacyThreshold} fans is owned by the leading club. Flips hit
+          the territory feed. No sign-up.
         </p>
       </PageIntro>
       <div className="mt-10">

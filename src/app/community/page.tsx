@@ -42,17 +42,17 @@ export default function CommunityPage() {
 
       <section className="mt-12 rounded-2xl border border-line bg-navy-2 p-6">
         <p className="text-xs font-semibold tracking-[0.16em] text-gold uppercase">
-          Who owns Scotland?
+          NFL Scheme Battles
         </p>
-        <h2 className="mt-2 font-display text-2xl text-cream">Put your town on the map</h2>
+        <h2 className="mt-2 font-display text-2xl text-cream">Who owns Scotland?</h2>
         <p className="mt-3 text-base leading-7 text-cream-dim">
           Discord is the chat. The fan map is the live fight: Scottish towns
           first, then the rest of the UK, so you can see which NFL club
-          actually owns the scheme where you live.
+          actually owns the scheme — the local area — where you live.
         </p>
         <p className="mt-4 text-sm">
           <Link href="/fan-map" className="font-semibold text-gold">
-            Open the fan map →
+            Open NFL Scheme Battles →
           </Link>
         </p>
       </section>
@@ -86,7 +86,7 @@ export default function CommunityPage() {
           </Link>
           <span className="text-cream-dim"> · </span>
           <Link href="/fan-map" className="text-gold">
-            Fan map →
+            Scheme Battles →
           </Link>
           <span className="text-cream-dim"> · </span>
           <Link href="/pick-your-team" className="text-gold">

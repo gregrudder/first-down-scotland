@@ -95,7 +95,7 @@ export default function PickYourTeamPage() {
         </Link>
         , the{" "}
         <Link href="/fan-map" className="text-gold">
-          fan map
+          Scheme Battles
         </Link>
         , and{" "}
         <Link href="/watch-near-you" className="text-gold">

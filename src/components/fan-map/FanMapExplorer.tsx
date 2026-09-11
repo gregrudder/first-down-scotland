@@ -8,7 +8,6 @@ import { TeamLogo } from "@/components/TeamLogo";
 import { Leaderboard } from "@/components/fan-map/Leaderboard";
 import { SchemeBattles } from "@/components/fan-map/SchemeBattles";
 import { TownPanel } from "@/components/fan-map/TownPanel";
-import { WhoOwnsScotland } from "@/components/fan-map/WhoOwnsScotland";
 import { teams } from "@/data/teams";
 import { NATION_FILTERS, type NationFilterId } from "@/lib/fan-map/constants";
 import type { PublicFanMap } from "@/lib/fan-map/types";
@@ -214,8 +213,6 @@ export function FanMapExplorer({ data }: { data: PublicFanMap }) {
           </ul>
         ) : null}
       </div>
-
-      <WhoOwnsScotland data={data} />
 
       <SchemeBattles data={data} />
 

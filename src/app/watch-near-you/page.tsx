@@ -88,7 +88,7 @@ export default function WatchNearYouPage() {
       <p className="mt-10 text-sm leading-6 text-cream-dim">
         Curious which NFL team owns your town?{" "}
         <Link href="/fan-map" className="text-gold">
-          Fan map
+          NFL Scheme Battles
         </Link>
         . Looking for Sky, Channel 5 or Game Pass rather than a pint?{" "}
         <Link href="/watch" className="text-gold">
