@@ -14,7 +14,7 @@ export const revalidate = 300;
 export const metadata: Metadata = {
   title: "Late Night Diary",
   description:
-    "Upcoming NFL games that kick off late for UK fans, in Europe/London time — so you can plan a nap, an early finish, or a day off.",
+    "Full late NFL slate as of today for UK fans, in Europe/London time — 9pm or overnight games so you can plan a nap or a day off. Schedule subject to change.",
   alternates: {
     canonical: absoluteUrl("/late-night-diary"),
   },
@@ -49,6 +49,19 @@ export default async function LateNightDiaryPage() {
         </p>
       </PageIntro>
       <LeagueTabs active="late-nights" />
+
+      <aside
+        className="mt-8 rounded-2xl border border-gold/40 bg-navy-2 px-5 py-4"
+        role="note"
+      >
+        <p className="text-sm font-semibold text-gold">Schedule subject to change</p>
+        <p className="mt-2 text-sm leading-6 text-cream">
+          NFL kick-off times, flex games and TV windows move. This is the late
+          slate as listed today — use it to plan a nap or a day off, then check
+          again before you book anything. The same note stays on All teams and
+          Your team only.
+        </p>
+      </aside>
 
       <div className="mt-8">
         <UkKickoffHelper />
