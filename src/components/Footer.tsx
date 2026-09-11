@@ -18,6 +18,16 @@ export function Footer() {
             {site.name}
           </p>
           <p className="mt-2 text-sm leading-6 text-cream-dim">{site.tagline}</p>
+          <p className="mt-3 text-sm">
+            <Link href="/#launch-list" className="font-semibold text-gold hover:text-gold-soft">
+              Join the launch list
+            </Link>
+            <span className="text-cream-dim">
+              {" "}
+              for a note when Founding extras open. Discord is already live. The
+              rest of the site stays free to browse.
+            </span>
+          </p>
           <p className="mt-3 text-xs leading-5 text-cream-dim">
             Independent learning and community project. Not affiliated with the NFL.
             Fixture times, scores and standings come from ESPN’s public APIs and

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { DiscordCta } from "@/components/DiscordCta";
+import { LaunchListForm } from "@/components/LaunchListForm";
 import { PageIntro } from "@/components/PageIntro";
 
 export const metadata: Metadata = {
@@ -38,6 +39,10 @@ export default function CommunityPage() {
 
       <div className="mt-8">
         <DiscordCta />
+      </div>
+
+      <div className="mt-8">
+        <LaunchListForm source="community" compact />
       </div>
 
       <section className="mt-12 rounded-2xl border border-line bg-navy-2 p-6">
