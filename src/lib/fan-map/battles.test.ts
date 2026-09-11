@@ -95,6 +95,14 @@ describe("flipBanter", () => {
       fillFlipTemplate("🚨 {A} TAKE {TOWN} — {B} out the scheme", "SF", "GB", "Motherwell"),
       "🚨 Packers TAKE MOTHERWELL — 49ers out the scheme",
     );
+    assert.equal(
+      fillFlipTemplate("{B} are on the run — the {A} have took over {town}.", "SF", "GB", "Motherwell"),
+      "49ers are on the run — the Packers have took over Motherwell.",
+    );
+    assert.equal(
+      fillFlipTemplate("{B} on the run — {A} just took over {town}.", "SF", "GB", "Wishaw"),
+      "49ers on the run — Packers just took over Wishaw.",
+    );
   });
 
   it("fills first-claim lines", () => {

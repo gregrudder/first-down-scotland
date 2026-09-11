@@ -46,7 +46,9 @@ export const TAKEOVER_POOL = [
   "{town} flipped — {A} walked the {B} out the scheme.",
   "🚨 {A} TAKE {TOWN} — {B} out the scheme",
   "SHOUT:{A} have taken {town} from the {B}",
+  "{B} are on the run — the {A} have took over {town}.",
   "{B} are on the run. {A} have took over {town}.",
+  "{B} on the run — {A} just took over {town}.",
   "The {B} take an L as their {town} scheme has been taken over by the {A}.",
 ] as const;
 
