@@ -81,6 +81,9 @@ function ResultBody() {
         <Link href="/community" className="font-semibold text-gold">
           Meet fans of this team →
         </Link>
+        <Link href="/fan-map/add" className="text-gold">
+          Put this team on the map →
+        </Link>
         <Link href="/watch-near-you" className="text-gold">
           Pubs near you →
         </Link>

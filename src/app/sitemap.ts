@@ -28,6 +28,8 @@ const staticRoutes = [
   "/film-room",
   "/watch-near-you",
   "/community",
+  "/fan-map",
+  "/fan-map/add",
   "/feedback",
   "/privacy",
   "/history",

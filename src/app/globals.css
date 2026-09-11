@@ -169,6 +169,33 @@ body {
   animation: fds-mega-in 180ms ease-out;
 }
 
+.fds-fan-map .maplibregl-ctrl-group {
+  overflow: hidden;
+  background: var(--navy-2);
+  border: 1px solid var(--line);
+}
+
+.fds-fan-map .maplibregl-ctrl button {
+  background: var(--navy-2);
+}
+
+.fds-fan-map .maplibregl-ctrl button + button {
+  border-top-color: var(--line);
+}
+
+.fds-fan-map .maplibregl-ctrl-icon {
+  filter: invert(1);
+}
+
+.fds-fan-map .maplibregl-ctrl-attrib {
+  background: color-mix(in srgb, var(--navy) 85%, transparent);
+  color: var(--cream-dim);
+}
+
+.fds-fan-map .maplibregl-ctrl-attrib a {
+  color: var(--gold);
+}
+
 @media (prefers-reduced-motion: reduce) {
   .fds-drawer-in,
   .fds-mega-in {

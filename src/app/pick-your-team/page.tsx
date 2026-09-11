@@ -92,8 +92,12 @@ export default function PickYourTeamPage() {
         . Once you have a side,{" "}
         <Link href="/community" className="text-gold">
           Community
-        </Link>{" "}
-        and{" "}
+        </Link>
+        , the{" "}
+        <Link href="/fan-map" className="text-gold">
+          fan map
+        </Link>
+        , and{" "}
         <Link href="/watch-near-you" className="text-gold">
           pubs near you
         </Link>{" "}

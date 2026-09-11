@@ -86,7 +86,11 @@ export default function WatchNearYouPage() {
       </div>
 
       <p className="mt-10 text-sm leading-6 text-cream-dim">
-        Looking for Sky, Channel 5 or Game Pass rather than a pint?{" "}
+        Curious which NFL team owns your town?{" "}
+        <Link href="/fan-map" className="text-gold">
+          Fan map
+        </Link>
+        . Looking for Sky, Channel 5 or Game Pass rather than a pint?{" "}
         <Link href="/watch" className="text-gold">
           Where to watch in the UK
         </Link>

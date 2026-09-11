@@ -10,7 +10,7 @@ export const metadata: Metadata = {
     "How First Down Scotland collects, uses and stores information: analytics, cookies, feedback, browser preferences, ads and your UK GDPR rights.",
 };
 
-const LAST_UPDATED = "10 September 2026";
+const LAST_UPDATED = "11 September 2026";
 
 export default function PrivacyPage() {
   const email = contactEmail();
@@ -60,15 +60,21 @@ export default function PrivacyPage() {
           <h2 className="font-display text-3xl text-cream">What this policy covers</h2>
           <p className="mt-4">
             It covers the website: lessons, fixtures, scores, news headlines,
-            team pages, the feedback form, and the links out to Discord, YouTube
-            and other sites. It does not cover Discord itself, YouTube, ESPN,
-            publishers we link to, or any pub you visit from the listings.
+            team pages, the feedback form, the NFL UK Fan Map, and the links out
+            to Discord, YouTube and other sites. It does not cover Discord
+            itself, YouTube, ESPN, publishers we link to, geocoder providers we
+            query only to standardise a town you picked, or any pub you visit
+            from the listings.
           </p>
         </section>
 
         <section>
           <h2 className="font-display text-3xl text-cream">What we collect</h2>
-          <p className="mt-4">We do not ask you to create an account. There is no login.</p>
+          <p className="mt-4">
+            Most of the site still works without an account. The NFL UK Fan Map
+            is the exception: to stop one person stuffing the map, we ask you to
+            confirm an email with a magic link before you add a town.
+          </p>
           <ul className="mt-4 list-disc space-y-3 pl-5">
             <li>
               <strong className="text-cream">Usage analytics.</strong> The
@@ -112,6 +118,19 @@ export default function PrivacyPage() {
               sent to us unless you later include a team on the feedback form.
             </li>
             <li>
+              <strong className="text-cream">Fan map account.</strong> If you
+              put a team on the map we store the email you confirmed, the NFL
+              club you picked, a standardised UK town (country, nation, council
+              or region, town name, and that town’s centre coordinates from a
+              geocoder), plus optional years following the NFL and watch-party
+              interest. We do not store your name, postcode, street, phone GPS
+              or a free-text address. One registration per email; you can update
+              it. The public map never shows emails or individual pins — only
+              town-level totals. A town needs at least three registrations
+              (unless we raise that threshold) before we show which teams those
+              fans support.
+            </li>
+            <li>
               <strong className="text-cream">What we do not collect as a
               product.</strong> No payment details (the £2 question is research,
               not a checkout). No location from your phone. No advertising
@@ -129,6 +148,10 @@ export default function PrivacyPage() {
             <li>
               Remember your team, spoiler-free setting and lesson progress on
               this browser.
+            </li>
+            <li>
+              Run the fan map: one pin per confirmed email, public town
+              aggregates, and a private admin view of those same aggregates.
             </li>
             <li>
               When ads are switched on, show advertising and (if you agree)
@@ -162,6 +185,10 @@ export default function PrivacyPage() {
               Optional name and free-text on feedback are given because you
               chose to send them. We treat that as a request to read the note.
             </li>
+            <li>
+              Confirming a fan-map email is a request to keep one pin for that
+              address. You can ask us to delete it.
+            </li>
           </ul>
         </section>
 
@@ -179,7 +206,9 @@ export default function PrivacyPage() {
               site).</strong> Favourite team, spoiler-free and lesson progress
               live in localStorage so the page you asked for can remember a
               choice. They stay until you clear site data or change the
-              setting.
+              setting. If you sign in to the fan map we set an httpOnly session
+              cookie so we know which email owns your pin. The admin map uses a
+              separate cookie after the admin password is entered.
             </li>
             <li>
               <strong className="text-cream">Analytics (this site).</strong>{" "}
@@ -240,8 +269,20 @@ export default function PrivacyPage() {
             </li>
             <li>
               <strong className="text-cream">Formspree and/or Resend</strong> —
-              deliver the feedback form to Greg. Which one runs depends on
-              server settings. They see the form contents, not a login.
+              deliver the feedback form to Greg. Resend also sends fan-map
+              magic-link emails when that feature is on. Which one runs depends
+              on server settings.
+            </li>
+            <li>
+              <strong className="text-cream">Neon / Vercel Postgres</strong> —
+              stores fan-map emails and town registrations when the map is
+              wired up.
+            </li>
+            <li>
+              <strong className="text-cream">Town search</strong> — Geoapify,
+              Photon (Komoot) or Nominatim, depending on settings. They see the
+              town name you typed so we can offer UK autocomplete. We do not
+              send them your email.
             </li>
             <li>
               <strong className="text-cream">Google</strong> — YouTube embeds
@@ -284,8 +325,9 @@ export default function PrivacyPage() {
               products.
             </li>
             <li>
-              We do not run a user database of fans or email lists from this
-              site.
+              Fan map emails and town registrations stay until you ask us to
+              delete them, or we close the map. Magic-link tokens expire in
+              about 30 minutes.
             </li>
           </ul>
         </section>

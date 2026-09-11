@@ -40,6 +40,23 @@ export default function CommunityPage() {
         <DiscordCta />
       </div>
 
+      <section className="mt-12 rounded-2xl border border-line bg-navy-2 p-6">
+        <p className="text-xs font-semibold tracking-[0.16em] text-gold uppercase">
+          Who owns Scotland?
+        </p>
+        <h2 className="mt-2 font-display text-2xl text-cream">Put your town on the map</h2>
+        <p className="mt-3 text-base leading-7 text-cream-dim">
+          Discord is the chat. The fan map is the atlas: Scottish towns first,
+          then the rest of the UK, so you can see which NFL club is actually
+          turning up where you live.
+        </p>
+        <p className="mt-4 text-sm">
+          <Link href="/fan-map" className="font-semibold text-gold">
+            Open the fan map →
+          </Link>
+        </p>
+      </section>
+
       <div className="mt-12 space-y-6 text-base leading-7 text-cream-dim">
         <p>
           One First Down Scotland server: general chat for beginners, an NFL
@@ -66,6 +83,10 @@ export default function CommunityPage() {
         <p className="mt-4 text-sm">
           <Link href="/watch-near-you" className="font-semibold text-gold">
             Pubs near you →
+          </Link>
+          <span className="text-cream-dim"> · </span>
+          <Link href="/fan-map" className="text-gold">
+            Fan map →
           </Link>
           <span className="text-cream-dim"> · </span>
           <Link href="/pick-your-team" className="text-gold">

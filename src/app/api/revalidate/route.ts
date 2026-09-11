@@ -5,6 +5,7 @@ import { DEPTH_CHART_CACHE_TAG } from "@/lib/depth-chart";
 import { DRAFT_PROSPECTS_CACHE_TAG } from "@/lib/draft-prospects";
 import { FIXTURES_CACHE_TAG, SCORES_CACHE_TAG } from "@/lib/espn";
 import { GAME_REPORTS_CACHE_TAG } from "@/lib/game-report";
+import { FAN_MAP_CACHE_TAG } from "@/lib/fan-map/data";
 import { HIGHLIGHTS_CACHE_TAG } from "@/lib/highlights";
 import { ROOKIES_CACHE_TAG } from "@/lib/rookies";
 import { STANDINGS_CACHE_TAG } from "@/lib/standings";
@@ -31,6 +32,7 @@ async function revalidateFixtures() {
   revalidateTag(DRAFT_PROSPECTS_CACHE_TAG, "max");
   revalidateTag(GAME_REPORTS_CACHE_TAG, "max");
   revalidateTag(HIGHLIGHTS_CACHE_TAG, "max");
+  revalidateTag(FAN_MAP_CACHE_TAG, "max");
   revalidatePath("/");
   revalidatePath("/this-week");
   revalidatePath("/late-night-diary");
@@ -43,6 +45,7 @@ async function revalidateFixtures() {
   revalidatePath("/teams");
   revalidatePath("/learn");
   revalidatePath("/learn/draft-prospects");
+  revalidatePath("/fan-map");
 
   return NextResponse.json({
     revalidated: true,
@@ -57,6 +60,7 @@ async function revalidateFixtures() {
       DRAFT_PROSPECTS_CACHE_TAG,
       GAME_REPORTS_CACHE_TAG,
       HIGHLIGHTS_CACHE_TAG,
+      FAN_MAP_CACHE_TAG,
     ],
     at: new Date().toISOString(),
   });
