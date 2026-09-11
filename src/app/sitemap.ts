@@ -16,6 +16,7 @@ const staticRoutes = [
   "/mini-games/rivalries",
   "/glossary",
   "/this-week",
+  "/late-night-diary",
   "/scores",
   "/score-history",
   "/standings",
@@ -38,6 +39,7 @@ const staticRoutes = [
 
 const hourlyPaths = new Set<string>([
   "/this-week",
+  "/late-night-diary",
   "/scores",
   "/standings",
   "/rookies",

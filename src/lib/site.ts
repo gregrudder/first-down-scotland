@@ -96,6 +96,12 @@ export const navGroups: readonly NavGroup[] = [
         primary: true,
       },
       {
+        href: "/late-night-diary",
+        label: "Late Night Diary",
+        description: "UK late kick-offs for sleep and work planning.",
+        primary: true,
+      },
+      {
         href: "/scores",
         label: "Scores",
         description: "Live and completed game scores.",

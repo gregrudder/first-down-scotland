@@ -2,24 +2,26 @@ import Link from "next/link";
 
 const tabs = [
   { href: "/this-week", label: "Games" },
+  { href: "/late-night-diary", label: "Late nights" },
   { href: "/scores", label: "Live scores" },
   { href: "/standings", label: "Standings" },
   { href: "/rookies", label: "Rookie Watch" },
 ] as const;
 
+const tabHrefs = {
+  games: "/this-week",
+  "late-nights": "/late-night-diary",
+  scores: "/scores",
+  standings: "/standings",
+  rookies: "/rookies",
+} as const;
+
 export function LeagueTabs({
   active,
 }: {
-  active: "games" | "scores" | "standings" | "rookies";
+  active: keyof typeof tabHrefs;
 }) {
-  const current =
-    active === "games"
-      ? "/this-week"
-      : active === "scores"
-        ? "/scores"
-        : active === "standings"
-          ? "/standings"
-          : "/rookies";
+  const current = tabHrefs[active];
 
   return (
     <nav

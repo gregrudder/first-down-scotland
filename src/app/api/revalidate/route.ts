@@ -33,6 +33,7 @@ async function revalidateFixtures() {
   revalidateTag(HIGHLIGHTS_CACHE_TAG, "max");
   revalidatePath("/");
   revalidatePath("/this-week");
+  revalidatePath("/late-night-diary");
   revalidatePath("/scores");
   revalidatePath("/score-history");
   revalidatePath("/standings");

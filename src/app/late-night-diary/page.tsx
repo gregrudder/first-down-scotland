@@ -1,0 +1,83 @@
+import type { Metadata } from "next";
+import Link from "next/link";
+import { LateNightDiary } from "@/components/LateNightDiary";
+import { LeagueTabs } from "@/components/LeagueTabs";
+import { PageIntro } from "@/components/PageIntro";
+import { UkKickoffHelper } from "@/components/UkKickoffHelper";
+import { getNflFixturesAroundCurrent } from "@/lib/espn";
+import { collectLateNightGames } from "@/lib/late-night-diary";
+import { absoluteUrl } from "@/lib/site";
+import { formatFetchedAt } from "@/lib/time";
+
+export const revalidate = 300;
+
+export const metadata: Metadata = {
+  title: "Late Night Diary",
+  description:
+    "Upcoming NFL games that kick off late for UK fans, in Europe/London time — so you can plan a nap, an early finish, or a day off.",
+  alternates: {
+    canonical: absoluteUrl("/late-night-diary"),
+  },
+};
+
+export default async function LateNightDiaryPage() {
+  const { current, slates } = await getNflFixturesAroundCurrent({
+    behind: 1,
+    ahead: 2,
+  });
+  const { games, error } = collectLateNightGames(slates);
+  const fetchedAt = current.fetchedAt;
+  const weekLine = current.ok
+    ? [current.seasonTypeName, current.weekLabel].filter(Boolean).join(" · ")
+    : null;
+
+  return (
+    <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6 sm:py-16">
+      <PageIntro eyebrow="UK kick-off planner" title="Late Night Diary">
+        <p>
+          For Scottish and UK fans who have a job in the morning. This is the
+          late slate only: Sunday tea-time at 6pm UK stays on{" "}
+          <Link href="/this-week" className="text-gold">
+            This week
+          </Link>
+          . Here you get the 9pm-and-after window and the overnight primetime
+          games, already converted to Europe/London, so you can decide whether to
+          nap, finish early, or book the day off.
+        </p>
+      </PageIntro>
+      <LeagueTabs active="late-nights" />
+
+      <div className="mt-8">
+        <UkKickoffHelper />
+      </div>
+
+      <div className="mt-6 flex flex-wrap items-end justify-between gap-3">
+        <p className="text-sm text-cream-dim">
+          {weekLine ? `${weekLine} · last week, this week, and the next two` : "NFL late slate"}
+        </p>
+        <p className="text-xs text-cream-dim">
+          Refreshed {formatFetchedAt(fetchedAt)} · times in Europe/London
+        </p>
+      </div>
+
+      <LateNightDiary
+        games={games}
+        feedError={!current.ok ? current.error : error?.error}
+      />
+
+      <p className="mt-10 max-w-2xl text-sm leading-6 text-cream-dim">
+        Watch hints are guesses from the kick-off window and the US broadcast
+        tag, not a rights guarantee. See{" "}
+        <Link href="/watch" className="text-gold">
+          Where to watch
+        </Link>
+        . If you have picked a team, we highlight their late games from the same
+        browser preference as the Sunday card. For scores, use{" "}
+        <Link href="/scores" className="text-gold">
+          live scores
+        </Link>{" "}
+        — this diary will not leak them.
+      </p>
+    </div>
+  );
+}

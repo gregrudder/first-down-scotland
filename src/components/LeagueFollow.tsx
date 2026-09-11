@@ -2,6 +2,12 @@ import Link from "next/link";
 
 const cards = [
   {
+    href: "/late-night-diary",
+    kicker: "Late Night Diary",
+    title: "When the late games land in the UK",
+    body: "Sunday night, Monday night, Thursday night: kick-off in UK time so you can plan a nap or a day off.",
+  },
+  {
     href: "/scores",
     kicker: "Live scores",
     title: "Who is winning tonight",
@@ -35,13 +41,15 @@ export function LeagueFollow() {
           <p className="text-xs font-semibold uppercase tracking-[0.16em] text-gold">
             Follow the league
           </p>
-          <h2 className="mt-2 font-display text-3xl text-cream">Scores, table, rookies, scorelines</h2>
+          <h2 className="mt-2 font-display text-3xl text-cream">
+            Late nights, scores, table, rookies
+          </h2>
         </div>
         <Link href="/this-week" className="hidden text-sm text-gold sm:inline">
           This week →
         </Link>
       </div>
-      <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+      <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {cards.map((card) => (
           <Link
             key={card.href}
