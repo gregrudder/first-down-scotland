@@ -118,6 +118,7 @@ export type PublicFanMap = {
       latitude: number;
       longitude: number;
     }>;
+    flips: SchemeFlip[];
   };
   towns: PublicTown[];
   councils: Array<{

@@ -46,9 +46,9 @@ export default function CommunityPage() {
         </p>
         <h2 className="mt-2 font-display text-2xl text-cream">Put your town on the map</h2>
         <p className="mt-3 text-base leading-7 text-cream-dim">
-          Discord is the chat. The fan map is the atlas: Scottish towns first,
-          then the rest of the UK, so you can see which NFL club is actually
-          turning up where you live.
+          Discord is the chat. The fan map is the live fight: Scottish towns
+          first, then the rest of the UK, so you can see which NFL club
+          actually owns the scheme where you live.
         </p>
         <p className="mt-4 text-sm">
           <Link href="/fan-map" className="font-semibold text-gold">

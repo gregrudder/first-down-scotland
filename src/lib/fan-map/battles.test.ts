@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
-import { detectFlip, flipBanter, leadingTeamForTown } from "./battles";
+import { detectFlip, flipBanter, leadingTeamForTown, territoryHeadline } from "./battles";
 import type { FanMapAggregateRow } from "./types";
 
 function row(team: string, placeId = "wishaw"): FanMapAggregateRow {
@@ -60,6 +60,16 @@ describe("leadingTeamForTown", () => {
     const lead = leadingTeamForTown([row("PIT"), row("PIT")], "wishaw", 3);
     assert.equal(lead.meets, false);
     assert.equal(lead.leadingTeam, null);
+  });
+});
+
+describe("territoryHeadline", () => {
+  it("shouts a takeover and a first claim", () => {
+    assert.equal(
+      territoryHeadline("SF", "GB", "Motherwell"),
+      "PACKERS HAVE TAKEN MOTHERWELL FROM THE 49ERS",
+    );
+    assert.equal(territoryHeadline(null, "GB", "Motherwell"), "PACKERS HAVE CLAIMED MOTHERWELL");
   });
 });
 

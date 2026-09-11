@@ -8,6 +8,7 @@ import { TeamLogo } from "@/components/TeamLogo";
 import { Leaderboard } from "@/components/fan-map/Leaderboard";
 import { SchemeBattles } from "@/components/fan-map/SchemeBattles";
 import { TownPanel } from "@/components/fan-map/TownPanel";
+import { WhoOwnsScotland } from "@/components/fan-map/WhoOwnsScotland";
 import { teams } from "@/data/teams";
 import { NATION_FILTERS, type NationFilterId } from "@/lib/fan-map/constants";
 import type { PublicFanMap } from "@/lib/fan-map/types";
@@ -214,39 +215,7 @@ export function FanMapExplorer({ data }: { data: PublicFanMap }) {
         ) : null}
       </div>
 
-      <section className="mt-12 rounded-2xl border border-gold/35 bg-navy-2 p-6">
-        <p className="text-xs font-semibold tracking-[0.16em] text-gold uppercase">
-          Who owns Scotland?
-        </p>
-        <h2 className="mt-2 font-display text-3xl text-cream">
-          {data.whoOwnsScotland.owner
-            ? `${data.whoOwnsScotland.owner.name} currently lead Scotland`
-            : "Nobody owns Scotland yet"}
-        </h2>
-        <p className="mt-3 text-sm leading-6 text-cream-dim">
-          {data.whoOwnsScotland.owner
-            ? `${data.whoOwnsScotland.owner.count} Scottish fans · ${data.whoOwnsScotland.owner.percent}% of the Scotland map. Town colours only appear when a place has at least ${data.privacyThreshold} fans.`
-            : `The first real Scottish registrations will decide this. Towns stay uncoloured until they reach ${data.privacyThreshold} fans.`}
-        </p>
-        {data.whoOwnsScotland.towns.length > 0 ? (
-          <ul className="mt-6 grid gap-3 sm:grid-cols-2">
-            {data.whoOwnsScotland.towns.map((town) => (
-              <li
-                key={town.placeId}
-                className="flex items-center gap-3 rounded-xl border border-line bg-navy px-3 py-3"
-              >
-                <TeamLogo team={town.leadingTeam} size={32} />
-                <span className="min-w-0">
-                  <span className="block text-sm font-medium text-cream">{town.townCity}</span>
-                  <span className="block text-xs text-cream-dim">
-                    {town.leadingTeam.shortName} · {town.fanCount} fans
-                  </span>
-                </span>
-              </li>
-            ))}
-          </ul>
-        ) : null}
-      </section>
+      <WhoOwnsScotland data={data} />
 
       <SchemeBattles data={data} />
 

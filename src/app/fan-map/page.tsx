@@ -24,6 +24,11 @@ export default async function FanMapPage() {
           Scotland first, then the rest of the UK — down to Wishaw and Motherwell,
           not just the big cities.
         </p>
+        <p>
+          Who owns Scotland is a live fight: towns that reach {data.privacyThreshold}{" "}
+          fans are owned by the leading scheme. Flips hit the territory feed.
+          No sign-up.
+        </p>
       </PageIntro>
       <div className="mt-10">
         <FanMapExplorer data={data} />

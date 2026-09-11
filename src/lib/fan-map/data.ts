@@ -20,6 +20,7 @@ export async function getPublicFanMap(): Promise<PublicFanMap> {
     const [rows, flips] = await Promise.all([listAggregateRows(), listFlips(24)]);
     const map = buildPublicFanMap(rows, threshold, true);
     map.schemeBattles.flips = flips;
+    map.whoOwnsScotland.flips = flips.filter((flip) => flip.nation === "Scotland");
     return map;
   } catch (error) {
     console.error("[fan-map] public aggregate failed", error);

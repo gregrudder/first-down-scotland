@@ -38,6 +38,7 @@ export function detectFlip(before: TownLead, after: TownLead): FlipChange | null
 }
 
 const TAKEOVERS = [
+  "SHOUT:{to} have taken {town} from the {from}",
   "{to} took over {town}. {from} are on the run.",
   "{from} take an L. {to} scheme taken over {town}.",
   "Scheme battle: {to} have {town}. {from} on the run.",
@@ -49,6 +50,7 @@ const TAKEOVERS = [
 ];
 
 const CLAIMS = [
+  "SHOUT:{to} have claimed {town}",
   "{to} scheme has claimed {town}.",
   "{to} planted their scheme in {town}.",
   "{town} is on the map — {to} took over first.",
@@ -64,6 +66,20 @@ const LOSSES = [
 function shortName(abbreviation: string | null): string {
   if (!abbreviation) return "That side";
   return getTeam(abbreviation)?.shortName ?? abbreviation;
+}
+
+/** Always-on headline for the territory feed, e.g. PACKERS HAVE TAKEN MOTHERWELL FROM THE 49ERS. */
+export function territoryHeadline(
+  fromTeam: string | null,
+  toTeam: string | null,
+  townCity: string,
+): string {
+  const from = shortName(fromTeam).toUpperCase();
+  const to = shortName(toTeam).toUpperCase();
+  const town = townCity.toUpperCase();
+  if (!fromTeam && toTeam) return `${to} HAVE CLAIMED ${town}`;
+  if (fromTeam && !toTeam) return `${from} HAVE LOST ${town}`;
+  return `${to} HAVE TAKEN ${town} FROM THE ${from}`;
 }
 
 function pick<T>(pool: T[], seed: string): T {
@@ -84,5 +100,11 @@ export function flipBanter(
     : fromTeam && !toTeam
       ? pick(LOSSES, `${townCity}:${fromTeam}`)
       : pick(TAKEOVERS, `${townCity}:${fromTeam}:${toTeam}`);
-  return template.replaceAll("{from}", from).replaceAll("{to}", to).replaceAll("{town}", townCity);
+  const shout = template.startsWith("SHOUT:");
+  const text = template
+    .replace(/^SHOUT:/, "")
+    .replaceAll("{from}", from)
+    .replaceAll("{to}", to)
+    .replaceAll("{town}", townCity);
+  return shout ? text.toUpperCase() : text;
 }
