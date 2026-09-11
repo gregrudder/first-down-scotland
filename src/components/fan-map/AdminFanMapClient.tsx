@@ -3,7 +3,8 @@
 import { useEffect, useMemo, useState } from "react";
 import { TeamLogo } from "@/components/TeamLogo";
 import { HOTSPOT_RADII_MILES } from "@/lib/fan-map/constants";
-import type { AdminStats, HotspotResult } from "@/lib/fan-map/types";
+import { getTeam } from "@/data/teams";
+import type { AdminPin, AdminStats, HotspotResult } from "@/lib/fan-map/types";
 
 export function AdminFanMapClient({ adminConfigured }: { adminConfigured: boolean }) {
   const [password, setPassword] = useState("");
@@ -15,6 +16,7 @@ export function AdminFanMapClient({ adminConfigured }: { adminConfigured: boolea
   const [hotspotMiles, setHotspotMiles] = useState<(typeof HOTSPOT_RADII_MILES)[number]>(15);
   const [hotspot, setHotspot] = useState<HotspotResult | null>(null);
   const [hotspotError, setHotspotError] = useState("");
+  const [pinBusy, setPinBusy] = useState<string | null>(null);
 
   useEffect(() => {
     if (!adminConfigured) return;
@@ -76,6 +78,32 @@ export function AdminFanMapClient({ adminConfigured }: { adminConfigured: boolea
       return;
     }
     setHotspot((await response.json()) as HotspotResult);
+  }
+
+  async function moderatePin(pin: AdminPin, action: "hide" | "unhide" | "delete") {
+    if (action === "delete") {
+      const town = `${pin.townCity} (${pin.teamAbbreviation})`;
+      if (!window.confirm(`Delete the ${town} pin? This cannot be undone.`)) return;
+    }
+    setPinBusy(`${pin.id}:${action}`);
+    setError("");
+    try {
+      const response = await fetch("/api/admin/fan-map/pin", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ id: pin.id, action }),
+      });
+      const json = (await response.json()) as { error?: string };
+      if (!response.ok) {
+        setError(json.error || "Could not change that pin.");
+        return;
+      }
+      await loadStats();
+    } catch {
+      setError("Could not change that pin.");
+    } finally {
+      setPinBusy(null);
+    }
   }
 
   const townOptions = useMemo(
@@ -144,6 +172,7 @@ export function AdminFanMapClient({ adminConfigured }: { adminConfigured: boolea
         <Stat label="Fans" value={stats.totals.fans} />
         <Stat label="Towns" value={stats.totals.towns} />
         <Stat label="Teams" value={stats.totals.teams} />
+        <Stat label="Hidden pins" value={stats.totals.hidden} />
         <Stat label="Councils" value={stats.totals.councils} />
         <Stat label="New today" value={stats.growth.today} />
         <Stat label="New this week" value={stats.growth.week} />
@@ -156,6 +185,82 @@ export function AdminFanMapClient({ adminConfigured }: { adminConfigured: boolea
         registrations in that town. Admin tables can show team splits for content planning,
         but still never export emails or names.
       </p>
+
+      <section>
+        <h2 className="font-display text-2xl text-cream">Moderate pins</h2>
+        <p className="mt-2 text-sm leading-6 text-cream-dim">
+          Hide a stuffed row from the public map, or delete it. Hidden pins stay
+          off the aggregates until you show them again. No emails or cookie ids.
+        </p>
+        {stats.pins.length === 0 ? (
+          <p className="mt-3 text-sm text-cream-dim">No pins yet.</p>
+        ) : (
+          <div className="mt-4 overflow-x-auto">
+            <table className="min-w-full text-left text-sm">
+              <thead>
+                <tr className="text-cream-dim">
+                  {["Team", "Town", "Nation", "Added", "Status", ""].map((header) => (
+                    <th key={header} className="border-b border-line px-2 py-2 font-medium">
+                      {header}
+                    </th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody>
+                {stats.pins.map((pin) => {
+                  const team = getTeam(pin.teamAbbreviation);
+                  return (
+                    <tr key={pin.id} className="text-cream">
+                      <td className="border-b border-line/70 px-2 py-2">
+                        {team?.shortName ?? pin.teamAbbreviation}
+                      </td>
+                      <td className="border-b border-line/70 px-2 py-2">{pin.townCity}</td>
+                      <td className="border-b border-line/70 px-2 py-2">{pin.nation}</td>
+                      <td className="border-b border-line/70 px-2 py-2">
+                        {pin.createdAt.slice(0, 10)}
+                      </td>
+                      <td className="border-b border-line/70 px-2 py-2">
+                        {pin.hidden ? "Hidden" : "Live"}
+                      </td>
+                      <td className="border-b border-line/70 px-2 py-2">
+                        <div className="flex flex-wrap gap-2">
+                          {pin.hidden ? (
+                            <button
+                              type="button"
+                              disabled={pinBusy === `${pin.id}:unhide`}
+                              onClick={() => void moderatePin(pin, "unhide")}
+                              className="rounded-full border border-line px-3 py-1 text-xs text-cream hover:border-gold/50"
+                            >
+                              Show
+                            </button>
+                          ) : (
+                            <button
+                              type="button"
+                              disabled={pinBusy === `${pin.id}:hide`}
+                              onClick={() => void moderatePin(pin, "hide")}
+                              className="rounded-full border border-line px-3 py-1 text-xs text-cream hover:border-gold/50"
+                            >
+                              Hide
+                            </button>
+                          )}
+                          <button
+                            type="button"
+                            disabled={pinBusy === `${pin.id}:delete`}
+                            onClick={() => void moderatePin(pin, "delete")}
+                            className="rounded-full border border-live/40 px-3 py-1 text-xs text-live hover:border-live"
+                          >
+                            Delete
+                          </button>
+                        </div>
+                      </td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          </div>
+        )}
+      </section>
 
       <section>
         <h2 className="font-display text-2xl text-cream">Largest communities</h2>

@@ -340,11 +340,13 @@ export function buildAdminStats(rows: FanMapAggregateRow[], threshold: number, c
       towns: publicMap.counters.towns,
       teams: publicMap.counters.teams,
       councils: publicMap.councils.length,
+      hidden: 0,
       watchPartyYes: rows.filter((row) => row.watchPartyInterest === "yes").length,
       watchPartyMaybe: rows.filter((row) => row.watchPartyInterest === "maybe").length,
       watchPartyNo: rows.filter((row) => row.watchPartyInterest === "no").length,
       watchPartyUnset: rows.filter((row) => !row.watchPartyInterest).length,
     },
+    pins: [],
     growth: {
       today: rows.filter((row) => new Date(row.createdAt) >= startOfToday).length,
       week: rows.filter((row) => new Date(row.createdAt) >= weekAgo).length,

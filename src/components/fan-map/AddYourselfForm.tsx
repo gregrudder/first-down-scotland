@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { TeamLogo } from "@/components/TeamLogo";
 import { useFavouriteTeam } from "@/components/useFavouriteTeam";
 import { teams, type NflTeam } from "@/data/teams";
@@ -48,6 +48,11 @@ export function AddYourselfForm({
   const [submitError, setSubmitError] = useState("");
   const [submitOk, setSubmitOk] = useState(false);
   const [submitting, setSubmitting] = useState(false);
+  const openedAt = useRef(0);
+
+  useEffect(() => {
+    openedAt.current = Date.now();
+  }, []);
 
   useEffect(() => {
     if (!turnstileSiteKey) return;
@@ -110,6 +115,7 @@ export function AddYourselfForm({
           watchPartyInterest: watch || undefined,
           turnstileToken: turnstileToken || undefined,
           website: honeypot,
+          filledMs: Date.now() - openedAt.current,
         }),
       });
       const json = (await response.json()) as { error?: string };

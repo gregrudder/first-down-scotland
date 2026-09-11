@@ -1,16 +1,21 @@
 import { NextResponse } from "next/server";
 import { getTeam } from "@/data/teams";
+import { filledMsOk } from "@/lib/fan-map/anti-spam";
 import { detectFlip, flipBanter, leadingTeamForTown } from "@/lib/fan-map/battles";
-import { ensureFanId, getAuthSecret } from "@/lib/fan-map/auth";
+import { ensureFanId, getAuthSecret, readFanId } from "@/lib/fan-map/auth";
 import {
+  CREATE_RATE_MAX,
   isUkNation,
   isWatchParty,
   isYearsFollowing,
+  REGISTER_RATE_WINDOW_MS,
+  UPDATE_RATE_MAX,
 } from "@/lib/fan-map/constants";
 import { isFiniteCoordinate } from "@/lib/fan-map/geo";
 import { bustFanMapCache } from "@/lib/fan-map/data";
 import {
   findOrCreateFan,
+  getRegistrationForUser,
   insertFlip,
   isFanMapDbConfigured,
   listAggregateRows,
@@ -63,14 +68,6 @@ function parsePlace(raw: unknown): FanMapPlace | { error: string } {
 }
 
 export async function POST(request: Request) {
-  const slot = takeFanMapSlot(request, "register", 5, 60 * 60 * 1000);
-  if (!slot.ok) {
-    return NextResponse.json(
-      { error: "Easy — one pin per fan is plenty. Try again later." },
-      { status: 429, headers: { "Retry-After": String(slot.retryAfterSec) } },
-    );
-  }
-
   if (!isFanMapDbConfigured()) {
     return NextResponse.json(
       { error: "The fan map database is not wired up yet." },
@@ -97,6 +94,13 @@ export async function POST(request: Request) {
   const body = raw as Record<string, unknown>;
   if (typeof body.website === "string" && body.website.trim()) {
     return NextResponse.json({ ok: true });
+  }
+
+  if (!filledMsOk(body.filledMs)) {
+    return NextResponse.json(
+      { error: "That submit was too quick. Have another go in a moment." },
+      { status: 400 },
+    );
   }
 
   const ip = rateLimitKey(request).split("::")[0];
@@ -130,7 +134,27 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Say yes, maybe, or no for watch parties." }, { status: 400 });
   }
 
-  const fanId = await ensureFanId();
+  const existingFanId = await readFanId();
+  const existing = existingFanId ? await getRegistrationForUser(existingFanId) : null;
+  const updating = Boolean(existing);
+  const slot = takeFanMapSlot(
+    request,
+    updating ? "register-update" : "register-create",
+    updating ? UPDATE_RATE_MAX : CREATE_RATE_MAX,
+    REGISTER_RATE_WINDOW_MS,
+  );
+  if (!slot.ok) {
+    return NextResponse.json(
+      {
+        error: updating
+          ? "A few updates at a time is plenty. Try again later."
+          : "Easy — one new pin per fan is plenty. Try again later.",
+      },
+      { status: 429, headers: { "Retry-After": String(slot.retryAfterSec) } },
+    );
+  }
+
+  const fanId = existingFanId ?? (await ensureFanId());
   if (!fanId) {
     return NextResponse.json(
       { error: "Could not start a pin for this browser." },
@@ -166,7 +190,7 @@ export async function POST(request: Request) {
     }
 
     bustFanMapCache();
-    return NextResponse.json({ ok: true, registration });
+    return NextResponse.json({ ok: true, registration, updated: updating });
   } catch (error) {
     console.error("[fan-map] register failed", error);
     return NextResponse.json(

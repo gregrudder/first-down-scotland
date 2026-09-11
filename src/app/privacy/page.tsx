@@ -72,7 +72,8 @@ export default function PrivacyPage() {
           <h2 className="font-display text-3xl text-cream">What we collect</h2>
           <p className="mt-4">
             The site does not ask you to create an account. The NFL UK Fan Map
-            uses a signed browser cookie, an IP rate limit, a honeypot, and
+            uses a signed browser cookie, a stricter IP rate limit on a first
+            pin than on an update, a honeypot, a minimum form-fill time, and
             (when configured) a Cloudflare Turnstile captcha so one person
             cannot stuff the map. We do not collect an email for that.
           </p>

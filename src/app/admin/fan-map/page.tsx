@@ -15,9 +15,9 @@ export default function AdminFanMapPage() {
     <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6 sm:py-16">
       <PageIntro eyebrow="Private" title="Fan map analytics">
         <p>
-          Aggregates only: totals, growth, towns, teams, watch-party interest,
-          and a radius hotspot tool. No emails, names or individual coordinates
-          for export. Gated by <code className="text-cream">FAN_MAP_ADMIN_SECRET</code>.
+          Aggregates, growth, a radius hotspot, and tools to hide or delete
+          stuffed pins. No emails, names or cookie ids. Gated by{" "}
+          <code className="text-cream">FAN_MAP_ADMIN_SECRET</code>.
         </p>
       </PageIntro>
       <div className="mt-10">

@@ -3,6 +3,10 @@ export const NEARBY_MILES = 15;
 export const HOTSPOT_RADII_MILES = [5, 10, 15, 20, 25] as const;
 export const SESSION_TTL_SECONDS = 60 * 60 * 24 * 30;
 export const ADMIN_SESSION_TTL_SECONDS = 60 * 60 * 12;
+export const MIN_FORM_FILL_MS = 3000;
+export const CREATE_RATE_MAX = 3;
+export const UPDATE_RATE_MAX = 20;
+export const REGISTER_RATE_WINDOW_MS = 60 * 60 * 1000;
 
 export const SESSION_COOKIE = "fds-fan-session";
 export const ADMIN_COOKIE = "fds-fan-admin";

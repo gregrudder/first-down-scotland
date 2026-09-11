@@ -9,6 +9,7 @@ import {
   type YearsFollowingId,
 } from "@/lib/fan-map/constants";
 import type {
+  AdminPin,
   FanMapAggregateRow,
   FanMapPlace,
   FanMapRegistrationRow,
@@ -87,10 +88,12 @@ async function ensureSchema(sql: Sql): Promise<void> {
           approx_longitude DOUBLE PRECISION NOT NULL,
           years_following TEXT,
           watch_party_interest TEXT,
+          hidden_at TIMESTAMPTZ,
           created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
           updated_at TIMESTAMPTZ NOT NULL DEFAULT now()
         )
       `;
+      await sql`ALTER TABLE fan_map_registrations ADD COLUMN IF NOT EXISTS hidden_at TIMESTAMPTZ`;
       await sql`CREATE INDEX IF NOT EXISTS fan_map_reg_nation_idx ON fan_map_registrations (nation)`;
       await sql`CREATE INDEX IF NOT EXISTS fan_map_reg_place_idx ON fan_map_registrations (place_id)`;
       await sql`CREATE INDEX IF NOT EXISTS fan_map_reg_team_idx ON fan_map_registrations (team_abbreviation)`;
@@ -292,8 +295,86 @@ export async function listAggregateRows(): Promise<FanMapAggregateRow[]> {
         place_label, approx_latitude, approx_longitude, years_following,
         watch_party_interest, created_at
       FROM fan_map_registrations
+      WHERE hidden_at IS NULL
     `) as Array<Record<string, unknown>>;
     return rows.map(mapAggregate).filter((row): row is FanMapAggregateRow => Boolean(row));
+  });
+}
+
+function mapAdminPin(row: Record<string, unknown>): AdminPin | null {
+  const nation = typeof row.nation === "string" && isUkNation(row.nation) ? row.nation : null;
+  if (!nation) return null;
+  return {
+    id: String(row.id),
+    teamAbbreviation: String(row.team_abbreviation),
+    nation,
+    regionOrCouncilArea: String(row.region_or_council_area),
+    townCity: String(row.town_city),
+    placeId: String(row.place_id),
+    createdAt: new Date(String(row.created_at)).toISOString(),
+    updatedAt: new Date(String(row.updated_at)).toISOString(),
+    hidden: Boolean(row.hidden_at),
+  };
+}
+
+export async function listAdminPins(limit = 200): Promise<AdminPin[]> {
+  return withSql(async (sql) => {
+    const rows = (await sql`
+      SELECT id, team_abbreviation, nation, region_or_council_area, town_city,
+        place_id, created_at, updated_at, hidden_at
+      FROM fan_map_registrations
+      ORDER BY created_at DESC
+      LIMIT ${limit}
+    `) as Array<Record<string, unknown>>;
+    return rows.map(mapAdminPin).filter((row): row is AdminPin => Boolean(row));
+  });
+}
+
+export async function getAdminPin(id: string): Promise<AdminPin | null> {
+  return withSql(async (sql) => {
+    const rows = (await sql`
+      SELECT id, team_abbreviation, nation, region_or_council_area, town_city,
+        place_id, created_at, updated_at, hidden_at
+      FROM fan_map_registrations
+      WHERE id = ${id}
+      LIMIT 1
+    `) as Array<Record<string, unknown>>;
+    return rows[0] ? mapAdminPin(rows[0]) : null;
+  });
+}
+
+export async function hideRegistration(id: string): Promise<boolean> {
+  return withSql(async (sql) => {
+    const rows = (await sql`
+      UPDATE fan_map_registrations
+      SET hidden_at = now(), updated_at = now()
+      WHERE id = ${id} AND hidden_at IS NULL
+      RETURNING id
+    `) as Array<{ id: string }>;
+    return Boolean(rows[0]);
+  });
+}
+
+export async function unhideRegistration(id: string): Promise<boolean> {
+  return withSql(async (sql) => {
+    const rows = (await sql`
+      UPDATE fan_map_registrations
+      SET hidden_at = NULL, updated_at = now()
+      WHERE id = ${id} AND hidden_at IS NOT NULL
+      RETURNING id
+    `) as Array<{ id: string }>;
+    return Boolean(rows[0]);
+  });
+}
+
+export async function deleteRegistration(id: string): Promise<boolean> {
+  return withSql(async (sql) => {
+    const rows = (await sql`
+      DELETE FROM fan_map_registrations
+      WHERE id = ${id}
+      RETURNING id
+    `) as Array<{ id: string }>;
+    return Boolean(rows[0]);
   });
 }
 

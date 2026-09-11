@@ -6,7 +6,7 @@ import {
   emptyPublicFanMap,
 } from "@/lib/fan-map/aggregates";
 import { privacyThreshold } from "@/lib/fan-map/constants";
-import { isFanMapDbConfigured, listAggregateRows, listFlips } from "@/lib/fan-map/db";
+import { isFanMapDbConfigured, listAdminPins, listAggregateRows, listFlips } from "@/lib/fan-map/db";
 import type { AdminStats, HotspotResult, PublicFanMap } from "@/lib/fan-map/types";
 
 export const FAN_MAP_CACHE_TAG = "fan-map";
@@ -32,8 +32,11 @@ export async function getAdminStats(): Promise<AdminStats> {
   if (!isFanMapDbConfigured()) {
     return buildAdminStats([], threshold, false);
   }
-  const rows = await listAggregateRows();
-  return buildAdminStats(rows, threshold, true);
+  const [rows, pins] = await Promise.all([listAggregateRows(), listAdminPins()]);
+  const stats = buildAdminStats(rows, threshold, true);
+  stats.pins = pins;
+  stats.totals.hidden = pins.filter((pin) => pin.hidden).length;
+  return stats;
 }
 
 export async function getHotspot(placeId: string, miles: number): Promise<HotspotResult | null> {
