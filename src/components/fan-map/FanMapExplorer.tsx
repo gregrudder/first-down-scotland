@@ -6,6 +6,7 @@ import { useMemo, useState } from "react";
 import { DiscordCta } from "@/components/DiscordCta";
 import { TeamLogo } from "@/components/TeamLogo";
 import { Leaderboard } from "@/components/fan-map/Leaderboard";
+import { SchemeBattles } from "@/components/fan-map/SchemeBattles";
 import { TownPanel } from "@/components/fan-map/TownPanel";
 import { teams } from "@/data/teams";
 import { NATION_FILTERS, type NationFilterId } from "@/lib/fan-map/constants";
@@ -246,6 +247,8 @@ export function FanMapExplorer({ data }: { data: PublicFanMap }) {
           </ul>
         ) : null}
       </section>
+
+      <SchemeBattles data={data} />
 
       <div className="mt-8 grid gap-4 lg:grid-cols-2">
         <Leaderboard

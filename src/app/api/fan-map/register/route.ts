@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { getTeam } from "@/data/teams";
-import { getMe } from "@/lib/fan-map/auth";
+import { detectFlip, flipBanter, leadingTeamForTown } from "@/lib/fan-map/battles";
+import { ensureFanId, getAuthSecret } from "@/lib/fan-map/auth";
 import {
   isUkNation,
   isWatchParty,
@@ -8,9 +9,17 @@ import {
 } from "@/lib/fan-map/constants";
 import { isFiniteCoordinate } from "@/lib/fan-map/geo";
 import { bustFanMapCache } from "@/lib/fan-map/data";
-import { upsertRegistration } from "@/lib/fan-map/db";
+import {
+  findOrCreateFan,
+  insertFlip,
+  isFanMapDbConfigured,
+  listAggregateRows,
+  upsertRegistration,
+} from "@/lib/fan-map/db";
 import { takeFanMapSlot } from "@/lib/fan-map/rate-limit";
+import { verifyTurnstile } from "@/lib/fan-map/turnstile";
 import type { FanMapPlace } from "@/lib/fan-map/types";
+import { rateLimitKey } from "@/lib/feedback-rate-limit";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -54,25 +63,24 @@ function parsePlace(raw: unknown): FanMapPlace | { error: string } {
 }
 
 export async function POST(request: Request) {
-  const slot = takeFanMapSlot(request, "register", 8, 10 * 60 * 1000);
+  const slot = takeFanMapSlot(request, "register", 5, 60 * 60 * 1000);
   if (!slot.ok) {
     return NextResponse.json(
-      { error: "Easy — one pin per fan is plenty." },
+      { error: "Easy — one pin per fan is plenty. Try again later." },
       { status: 429, headers: { "Retry-After": String(slot.retryAfterSec) } },
     );
   }
 
-  const me = await getMe();
-  if (!me.configured) {
+  if (!isFanMapDbConfigured()) {
     return NextResponse.json(
       { error: "The fan map database is not wired up yet." },
       { status: 503 },
     );
   }
-  if (!me.session) {
+  if (!getAuthSecret()) {
     return NextResponse.json(
-      { error: "Confirm your email first so we can keep one pin per person." },
-      { status: 401 },
+      { error: "Fan map cookies are not configured on this deployment." },
+      { status: 503 },
     );
   }
 
@@ -87,6 +95,19 @@ export async function POST(request: Request) {
   }
 
   const body = raw as Record<string, unknown>;
+  if (typeof body.website === "string" && body.website.trim()) {
+    return NextResponse.json({ ok: true });
+  }
+
+  const ip = rateLimitKey(request).split("::")[0];
+  const captcha = await verifyTurnstile(
+    typeof body.turnstileToken === "string" ? body.turnstileToken : undefined,
+    ip,
+  );
+  if (!captcha.ok) {
+    return NextResponse.json({ error: captcha.error }, { status: captcha.status });
+  }
+
   const teamAbbreviation =
     typeof body.teamAbbreviation === "string" ? body.teamAbbreviation.toUpperCase() : "";
   if (!getTeam(teamAbbreviation)) {
@@ -109,14 +130,41 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Say yes, maybe, or no for watch parties." }, { status: 400 });
   }
 
+  const fanId = await ensureFanId();
+  if (!fanId) {
+    return NextResponse.json(
+      { error: "Could not start a pin for this browser." },
+      { status: 503 },
+    );
+  }
+
   try {
+    await findOrCreateFan(fanId);
+    const beforeRows = await listAggregateRows();
+    const before = leadingTeamForTown(beforeRows, place.placeId);
+
     const registration = await upsertRegistration({
-      userId: me.session.userId,
+      userId: fanId,
       teamAbbreviation,
       place,
       yearsFollowing,
       watchPartyInterest,
     });
+
+    const afterRows = await listAggregateRows();
+    const after = leadingTeamForTown(afterRows, place.placeId);
+    const change = detectFlip(before, after);
+    if (change) {
+      await insertFlip({
+        placeId: place.placeId,
+        townCity: place.townCity,
+        nation: place.nation,
+        fromTeam: change.fromTeam,
+        toTeam: change.toTeam,
+        message: flipBanter(change.fromTeam, change.toTeam, place.townCity),
+      });
+    }
+
     bustFanMapCache();
     return NextResponse.json({ ok: true, registration });
   } catch (error) {

@@ -1,7 +1,6 @@
 export const FAN_MAP_PRIVACY_THRESHOLD_DEFAULT = 3;
 export const NEARBY_MILES = 15;
 export const HOTSPOT_RADII_MILES = [5, 10, 15, 20, 25] as const;
-export const MAGIC_LINK_TTL_MS = 30 * 60 * 1000;
 export const SESSION_TTL_SECONDS = 60 * 60 * 24 * 30;
 export const ADMIN_SESSION_TTL_SECONDS = 60 * 60 * 12;
 

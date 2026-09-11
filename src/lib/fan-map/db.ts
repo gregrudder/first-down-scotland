@@ -12,6 +12,7 @@ import type {
   FanMapAggregateRow,
   FanMapPlace,
   FanMapRegistrationRow,
+  SchemeFlip,
 } from "@/lib/fan-map/types";
 
 type Sql = NeonQueryFunction<false, false>;
@@ -49,20 +50,28 @@ async function ensureSchema(sql: Sql): Promise<void> {
       await sql`
         CREATE TABLE IF NOT EXISTS fan_map_users (
           id TEXT PRIMARY KEY,
-          email TEXT NOT NULL UNIQUE,
-          email_verified_at TIMESTAMPTZ NOT NULL DEFAULT now(),
+          email TEXT UNIQUE,
           created_at TIMESTAMPTZ NOT NULL DEFAULT now()
         )
       `;
+      try {
+        await sql`ALTER TABLE fan_map_users ALTER COLUMN email DROP NOT NULL`;
+      } catch {
+        // Already nullable, or a fresh table.
+      }
       await sql`
-        CREATE TABLE IF NOT EXISTS fan_map_magic_links (
-          token_hash TEXT PRIMARY KEY,
-          email TEXT NOT NULL,
-          expires_at TIMESTAMPTZ NOT NULL,
-          consumed_at TIMESTAMPTZ
+        CREATE TABLE IF NOT EXISTS fan_map_flips (
+          id TEXT PRIMARY KEY,
+          place_id TEXT NOT NULL,
+          town_city TEXT NOT NULL,
+          nation TEXT NOT NULL,
+          from_team TEXT,
+          to_team TEXT,
+          message TEXT NOT NULL,
+          created_at TIMESTAMPTZ NOT NULL DEFAULT now()
         )
       `;
-      await sql`CREATE INDEX IF NOT EXISTS fan_map_magic_links_email_idx ON fan_map_magic_links (email)`;
+      await sql`CREATE INDEX IF NOT EXISTS fan_map_flips_created_idx ON fan_map_flips (created_at DESC)`;
       await sql`
         CREATE TABLE IF NOT EXISTS fan_map_registrations (
           id TEXT PRIMARY KEY,
@@ -100,55 +109,18 @@ async function withSql<T>(work: (sql: Sql) => Promise<T>): Promise<T> {
   return work(sql);
 }
 
-type UserRow = { id: string; email: string };
-
-export async function findOrCreateUser(email: string): Promise<UserRow> {
+export async function findOrCreateFan(fanId: string): Promise<string> {
   return withSql(async (sql) => {
     const existing = (await sql`
-      SELECT id, email FROM fan_map_users WHERE email = ${email} LIMIT 1
-    `) as UserRow[];
-    if (existing[0]) return existing[0];
-
-    const id = newId();
-    const inserted = (await sql`
-      INSERT INTO fan_map_users (id, email)
-      VALUES (${id}, ${email})
-      ON CONFLICT (email) DO UPDATE SET email = EXCLUDED.email
-      RETURNING id, email
-    `) as UserRow[];
-    return inserted[0]!;
-  });
-}
-
-export async function getUserById(id: string): Promise<UserRow | null> {
-  return withSql(async (sql) => {
-    const rows = (await sql`
-      SELECT id, email FROM fan_map_users WHERE id = ${id} LIMIT 1
-    `) as UserRow[];
-    return rows[0] ?? null;
-  });
-}
-
-export async function insertMagicLink(tokenHash: string, email: string, expiresAt: Date): Promise<void> {
-  await withSql(async (sql) => {
+      SELECT id FROM fan_map_users WHERE id = ${fanId} LIMIT 1
+    `) as Array<{ id: string }>;
+    if (existing[0]) return existing[0].id;
     await sql`
-      INSERT INTO fan_map_magic_links (token_hash, email, expires_at)
-      VALUES (${tokenHash}, ${email}, ${expiresAt.toISOString()})
+      INSERT INTO fan_map_users (id)
+      VALUES (${fanId})
+      ON CONFLICT (id) DO NOTHING
     `;
-  });
-}
-
-export async function consumeMagicLink(tokenHash: string): Promise<string | null> {
-  return withSql(async (sql) => {
-    const rows = (await sql`
-      UPDATE fan_map_magic_links
-      SET consumed_at = now()
-      WHERE token_hash = ${tokenHash}
-        AND consumed_at IS NULL
-        AND expires_at > now()
-      RETURNING email
-    `) as Array<{ email: string }>;
-    return rows[0]?.email ?? null;
+    return fanId;
   });
 }
 
@@ -262,6 +234,54 @@ function mapAggregate(row: Record<string, unknown>): FanMapAggregateRow | null {
         : null,
     createdAt: new Date(String(row.created_at)).toISOString(),
   };
+}
+
+export async function insertFlip(input: {
+  placeId: string;
+  townCity: string;
+  nation: UkNation;
+  fromTeam: string | null;
+  toTeam: string | null;
+  message: string;
+}): Promise<void> {
+  await withSql(async (sql) => {
+    await sql`
+      INSERT INTO fan_map_flips (
+        id, place_id, town_city, nation, from_team, to_team, message, created_at
+      )
+      VALUES (
+        ${newId()}, ${input.placeId}, ${input.townCity}, ${input.nation},
+        ${input.fromTeam}, ${input.toTeam}, ${input.message}, now()
+      )
+    `;
+  });
+}
+
+export async function listFlips(limit = 24): Promise<SchemeFlip[]> {
+  return withSql(async (sql) => {
+    const rows = (await sql`
+      SELECT id, place_id, town_city, nation, from_team, to_team, message, created_at
+      FROM fan_map_flips
+      ORDER BY created_at DESC
+      LIMIT ${limit}
+    `) as Array<Record<string, unknown>>;
+    return rows
+      .map((row) => {
+        const nation = typeof row.nation === "string" && isUkNation(row.nation) ? row.nation : null;
+        if (!nation) return null;
+        return {
+          id: String(row.id),
+          placeId: String(row.place_id),
+          townCity: String(row.town_city),
+          nation,
+          fromTeam: row.from_team ? String(row.from_team) : null,
+          toTeam: row.to_team ? String(row.to_team) : null,
+          message: String(row.message),
+          createdAt: new Date(String(row.created_at)).toISOString(),
+        } satisfies SchemeFlip;
+      })
+      .filter((row): row is SchemeFlip => Boolean(row));
+  });
 }
 
 export async function listAggregateRows(): Promise<FanMapAggregateRow[]> {

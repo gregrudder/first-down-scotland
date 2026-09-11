@@ -34,7 +34,7 @@ Three jobs: learn the game, meet fans of your team, keep that club in one place.
 - **`/fan-map`** : NFL UK Fan Map — Scotland first, then the UK. Town-centre aggregates only. CTA at `/fan-map/add`. Private analytics at `/admin/fan-map`.
 - PWA basics: web manifest, icons, mobile-first layout, `theme-color`
 
-Out of scope: live fantasy scoring / league apps, live play-by-play UI, betting, site-wide accounts, push notifications, App Store builds, perfect per-game UK rights. The live scoreboard is scores, clock, and touchdown scorers when ESPN lists them — not a drive chart. The fan map uses a **lightweight email magic-link** (one pin per person), not a full member area.
+Out of scope: live fantasy scoring / league apps, live play-by-play UI, betting, site-wide accounts, push notifications, App Store builds, perfect per-game UK rights. The live scoreboard is scores, clock, and touchdown scorers when ESPN lists them — not a drive chart. The fan map uses a **signed browser cookie** (one pin per browser), not an account.
 
 ## Stack
 
@@ -77,8 +77,8 @@ Copy `.env.example` if you want a local file. Nothing is required for day-to-day
 | `FEEDBACK_FROM_EMAIL` | Optional with Resend | Must be on a domain you verified in Resend. If unset, Resend’s `onboarding@resend.dev` sender is used (test mode: only the Resend account email can receive). |
 | `YOUTUBE_API_KEY` | Optional | Server-only [YouTube Data API v3](https://developers.google.com/youtube/v3) key. When set, live and final cards try to embed an official NFL or club highlight. If unset, the quota is exceeded, or no official clip matches, we fall back to the NFL YouTube search link. Never `NEXT_PUBLIC_*`. |
 | `DATABASE_URL` or `POSTGRES_URL` | For `/fan-map` writes | [Vercel Postgres](https://vercel.com/docs/storage/vercel-postgres) / [Neon](https://neon.tech) connection string. Tables are created on first use (`src/lib/fan-map/schema.sql`). Unset: public map still builds and shows an honest empty state. |
-| `FAN_MAP_AUTH_SECRET` or `AUTH_SECRET` | Required in production for sign-in | HMAC secret for fan-map session cookies. Locally a documented dev secret is used if unset. |
-| `RESEND_API_KEY` + `FAN_MAP_FROM_EMAIL` | For production magic links | Same Resend key as feedback. From-address may reuse `FEEDBACK_FROM_EMAIL`. Locally the link is logged if Resend is unset. |
+| `FAN_MAP_COOKIE_SECRET` or `FAN_MAP_AUTH_SECRET` or `AUTH_SECRET` | Required in production to save a pin | HMAC secret for the anonymous fan-map cookie. Locally a documented dev secret is used if unset. |
+| `NEXT_PUBLIC_TURNSTILE_SITE_KEY` + `TURNSTILE_SECRET_KEY` | Required in production to save a pin | [Cloudflare Turnstile](https://developers.cloudflare.com/turnstile/) captcha. Locally the captcha is skipped if unset. |
 | `FAN_MAP_ADMIN_SECRET` | For `/admin/fan-map` | Password / shared secret for private analytics. Not in the public nav. |
 | `FAN_MAP_PRIVACY_THRESHOLD` | Optional | Towns below this many registrations hide per-team splits. Default **3**. |
 | `GEOAPIFY_API_KEY` | Optional | Better UK town autocomplete. Photon + Nominatim are the no-key fallback. |
@@ -227,12 +227,13 @@ curl -H "Authorization: Bearer $CRON_SECRET" https://www.firstdownscotland.com/a
 
 `/fan-map` is an aggregate map of NFL fans in Scotland and the rest of the UK. It is not a people directory.
 
-1. **Database.** Set `DATABASE_URL` or `POSTGRES_URL` to a Vercel Postgres / Neon database. On first request the app creates `fan_map_users`, `fan_map_magic_links`, and `fan_map_registrations` (see `src/lib/fan-map/schema.sql`).
-2. **Sign-in.** `/fan-map/add` emails a one-time magic link (`RESEND_API_KEY`). Locally, if Resend is unset, the link is printed in the server log. One registration per email; later submits upsert.
+1. **Database.** Set `DATABASE_URL` or `POSTGRES_URL` to a Vercel Postgres / Neon database. On first request the app creates `fan_map_users`, `fan_map_registrations`, and `fan_map_flips` (see `src/lib/fan-map/schema.sql`).
+2. **No sign-up.** `/fan-map/add` is team + town only. Duplicate protection is a signed httpOnly cookie (one pin per browser), an IP rate limit, a honeypot, and Cloudflare Turnstile in production.
 3. **Town search.** The user must pick a UK autocomplete result. We store town / council / nation and the **town-centre** coordinates from the geocoder — never GPS, postcode, or a typed address. Geoapify if `GEOAPIFY_API_KEY` is set; otherwise Photon, then Nominatim.
-4. **Public map.** MapLibre GL + OpenFreeMap dark tiles (no Mapbox token). Clusters by zoom. Scotland is the default nation filter. Live counters come from the database only. Empty state is honest; there are no demo fans.
-5. **Privacy.** Names and emails stay off the public map. A town needs at least `FAN_MAP_PRIVACY_THRESHOLD` (default 3) registrations before we show a per-team split or colour it for “Who owns Scotland?”. Below that we show totals only.
-6. **Admin.** `/admin/fan-map` is env-gated with `FAN_MAP_ADMIN_SECRET`. Aggregates, growth, CSV export, and a 5/10/15/20/25-mile hotspot around a chosen town centre.
+4. **Public map.** MapLibre GL 4 + OpenFreeMap dark tiles (no Mapbox token). Clusters by zoom. Scotland is the default nation filter. Live counters come from the database only. Empty state is honest; there are no demo fans.
+5. **Scheme Battles.** Towns that meet the privacy threshold are owned by the leading team. Takeovers land on a flip feed with scheme banter. Towns-owned tables for Scotland and the UK sit on `/fan-map#scheme-battles`.
+6. **Privacy.** Names and emails stay off the public map. A town needs at least `FAN_MAP_PRIVACY_THRESHOLD` (default 3) registrations before we show a per-team split or colour it for “Who owns Scotland?”. Below that we show totals only.
+7. **Admin.** `/admin/fan-map` is env-gated with `FAN_MAP_ADMIN_SECRET`. Aggregates, growth, CSV export, and a 5/10/15/20/25-mile hotspot around a chosen town centre.
 
 `npm run build` still succeeds with none of these variables set.
 
@@ -275,7 +276,7 @@ curl -H "Authorization: Bearer $CRON_SECRET" https://www.firstdownscotland.com/a
 | `/teams/[slug]` | Club profile (stadium, colours, Super Bowls, live depth chart) |
 | `/pick-your-team` | Quiz or spin to pick a team (saved as `fds-team`) |
 | `/fan-map` | NFL UK Fan Map (Scotland first) |
-| `/fan-map/add` | Put your team on the map (magic-link email) |
+| `/fan-map/add` | Put your team on the map (no account) |
 | `/about` | Project purpose |
 
 ## Licence and attribution
