@@ -325,7 +325,7 @@ export const miniGamesIntro = {
   eyebrow: "Have a go",
   title: "Mini Games",
   lead:
-    "Short, tap-the-answer games. No downloads, no accounts, no heavy graphics. Some help you learn the sport. The fun quizzes are for fans who already like the NFL: famous moments, silly names, late-night survival. Your score stays on this page until you have another go.",
+    "Short, tap-the-answer games. No downloads, no accounts, no heavy graphics. Some help you learn the sport. The fun quizzes are just for a laugh: famous moments, silly names, late-night survival. Your score stays on this page until you have another go.",
 };
 
 const learnMiniGames: MiniGame[] = [
