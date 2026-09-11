@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { FanMapHomeSection } from "@/components/fan-map/FanMapHomeSection";
 import { GamesTeaser } from "@/components/GamesTeaser";
 import { JsonLd } from "@/components/JsonLd";
 import { LeagueFollow } from "@/components/LeagueFollow";
@@ -132,9 +133,17 @@ export default async function HomePage() {
             >
               Find a pub
             </Link>
+            <Link
+              href="/fan-map"
+              className="inline-flex items-center justify-center rounded-full border border-line px-6 py-3 text-sm font-semibold text-cream hover:border-gold/50"
+            >
+              Fan map
+            </Link>
           </div>
         </div>
       </section>
+
+      <FanMapHomeSection />
 
       <section
         aria-label="What this site is for"

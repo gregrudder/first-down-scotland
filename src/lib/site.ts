@@ -72,6 +72,12 @@ export const navGroups: readonly NavGroup[] = [
         primary: true,
       },
       {
+        href: "/fan-map",
+        label: "Fan Map",
+        description: "Which NFL team owns Scotland?",
+        primary: true,
+      },
+      {
         href: "/watch-near-you",
         label: "Pubs",
         description: "Find places showing NFL games.",

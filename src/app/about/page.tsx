@@ -86,6 +86,11 @@ export default function AboutPage() {
           </Link>
         </li>
         <li>
+          <Link href="/fan-map" className="text-gold">
+            Fan map: which NFL team owns Scotland? →
+          </Link>
+        </li>
+        <li>
           <Link href="/watch-near-you" className="text-gold">
             Pubs: meet fans of your team →
           </Link>
