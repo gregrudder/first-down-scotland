@@ -2,9 +2,25 @@
 
 import { useId, useMemo, useState } from "react";
 import Link from "next/link";
-import type { MiniGame } from "@/data/mini-games";
+import type { MiniGame, MiniGameKind } from "@/data/mini-games";
 
 type Answers = Record<string, number>;
+
+function resultBlurb(kind: MiniGameKind | undefined, score: number, total: number): string {
+  if (score === total) {
+    return kind === "fun"
+      ? "Clean sheet. Text the group chat. Then be modest about it for at least four minutes."
+      : "Clean sheet. You can explain that in the pub.";
+  }
+  if (score >= Math.ceil(total * 0.7)) {
+    return kind === "fun"
+      ? "Solid. The ones you missed are the ones you will pretend you knew."
+      : "Solid. Skim the ones you missed and you will be fine on Sunday.";
+  }
+  return kind === "fun"
+    ? "The pub will still let you in. The notes below are banter, not homework."
+    : "Useful miss. The explainers below are the lesson, not a telling-off.";
+}
 
 export function MiniQuiz({ game }: { game: MiniGame }) {
   const [started, setStarted] = useState(false);
@@ -52,11 +68,7 @@ export function MiniQuiz({ game }: { game: MiniGame }) {
           {score}/{total}
         </h1>
         <p className="mt-4 text-lg leading-8 text-cream-dim">
-          {score === total
-            ? "Clean sheet. You can explain that in the pub."
-            : score >= Math.ceil(total * 0.7)
-              ? "Solid. Skim the ones you missed and you will be fine on Sunday."
-              : "Useful miss. The explainers below are the lesson, not a telling-off."}
+          {resultBlurb(game.kind, score, total)}
         </p>
 
         <div className="mt-10 space-y-4">
@@ -105,12 +117,14 @@ export function MiniQuiz({ game }: { game: MiniGame }) {
           >
             All mini games
           </Link>
-          <Link
-            href={game.learnHref}
-            className="inline-flex items-center justify-center rounded-full border border-line px-5 py-2.5 text-sm font-semibold text-cream hover:border-gold/50"
-          >
-            {game.learnLabel}
-          </Link>
+          {game.learnHref && game.learnLabel ? (
+            <Link
+              href={game.learnHref}
+              className="inline-flex items-center justify-center rounded-full border border-line px-5 py-2.5 text-sm font-semibold text-cream hover:border-gold/50"
+            >
+              {game.learnLabel}
+            </Link>
+          ) : null}
         </div>
       </div>
     );
@@ -120,7 +134,7 @@ export function MiniQuiz({ game }: { game: MiniGame }) {
     return (
       <div>
         <p className="text-xs font-semibold uppercase tracking-[0.16em] text-gold">
-          Mini game · about {game.minutes} min
+          {game.kind === "fun" ? "Fun quiz" : "Mini game"} · about {game.minutes} min
         </p>
         <h1 className="mt-3 font-display text-4xl leading-tight text-cream sm:text-5xl">
           {game.title}

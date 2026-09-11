@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
 import { getLessonSlugs } from "@/data/lessons";
+import { getMiniGameSlugs } from "@/data/mini-games";
 import { getPlaySlugs } from "@/data/plays";
 import { getTeamSlugs } from "@/data/team-profiles";
 import { absoluteUrl } from "@/lib/site";
@@ -10,10 +11,6 @@ const staticRoutes = [
   "/learn/quiz",
   "/learn/draft-prospects",
   "/mini-games",
-  "/mini-games/rules",
-  "/mini-games/who-am-i",
-  "/mini-games/downs",
-  "/mini-games/rivalries",
   "/glossary",
   "/this-week",
   "/late-night-diary",
@@ -82,6 +79,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...staticRoutes,
     ...slugRoutes(getLessonSlugs, "/learn"),
     ...slugRoutes(getPlaySlugs, "/learn/plays"),
+    ...slugRoutes(getMiniGameSlugs, "/mini-games"),
     ...slugRoutes(getTeamSlugs, "/teams"),
   ];
 
