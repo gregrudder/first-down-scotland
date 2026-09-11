@@ -37,35 +37,64 @@ export function detectFlip(before: TownLead, after: TownLead): FlipChange | null
   };
 }
 
-const TAKEOVERS = [
-  "SHOUT:{to} have taken {town} from the {from}",
-  "{to} took over {town}. {from} are on the run.",
-  "{from} take an L. {to} scheme taken over {town}.",
-  "Scheme battle: {to} have {town}. {from} on the run.",
-  "{to} scheme taken over {town}. {from} can take an L.",
-  "{town} flipped. {to} took over; {from} are on the run.",
-  "{from} just took an L in {town}. {to} scheme is in.",
-  "{to} ran the scheme in {town}. {from} on the run.",
-  "Takeover in {town}: {to} took over. {from} take an L.",
-];
+/** A = new owner, B = previous owner. TikTok-safe scheme banter — no weapons, gangs, or Old Firm. */
+export const TAKEOVER_POOL = [
+  "{A} just took {town} off the {B}. New firm in the scheme.",
+  "{town}’s under new management — {A} run this scheme now. {B}, jog on.",
+  "That’s the {A}’s scheme now. {town} used to be {B} turf.",
+  "{A} moved in on {town}. {B} have been shuffled.",
+  "{town} flipped — {A} walked the {B} out the scheme.",
+  "🚨 {A} TAKE {TOWN} — {B} out the scheme",
+  "SHOUT:{A} have taken {town} from the {B}",
+  "{B} are on the run. {A} have took over {town}.",
+  "The {B} take an L as their {town} scheme has been taken over by the {A}.",
+] as const;
 
-const CLAIMS = [
-  "SHOUT:{to} have claimed {town}",
-  "{to} scheme has claimed {town}.",
-  "{to} planted their scheme in {town}.",
-  "{town} is on the map — {to} took over first.",
-  "New scheme in {town}: {to} have it.",
-];
+export const CLAIM_POOL = [
+  "{A} just put {town} on the map. This scheme’s spoken for.",
+  "{town} claimed — {A} are running it.",
+  "Fresh turf: {A} have {town}.",
+  "SHOUT:{A} have claimed {town}",
+] as const;
 
-const LOSSES = [
-  "{from} scheme lost {town}. Nobody owns it yet.",
-  "{from} take an L — {town} is back up for grabs.",
-  "{from} are on the run out of {town}. Scheme vacant.",
-];
+export const LOSS_POOL = [
+  "{B} scheme lost {town}. Nobody owns it yet.",
+  "{B} take an L — {town} is back up for grabs.",
+  "{B} are on the run out of {town}. Scheme vacant.",
+] as const;
 
 function shortName(abbreviation: string | null): string {
   if (!abbreviation) return "That side";
   return getTeam(abbreviation)?.shortName ?? abbreviation;
+}
+
+function possessive(name: string): string {
+  return name.endsWith("s") ? `${name}’` : `${name}’s`;
+}
+
+/** Fill a Greg-approved template. {A} new owner, {B} previous, {TOWN} shouted. */
+export function fillFlipTemplate(
+  template: string,
+  fromTeam: string | null,
+  toTeam: string | null,
+  townCity: string,
+): string {
+  const from = shortName(fromTeam);
+  const to = shortName(toTeam);
+  const shout = template.startsWith("SHOUT:");
+  const text = template
+    .replace(/^SHOUT:/, "")
+    .replaceAll("{A}’s", possessive(to))
+    .replaceAll("{B}’s", possessive(from))
+    .replaceAll("{to}’s", possessive(to))
+    .replaceAll("{from}’s", possessive(from))
+    .replaceAll("{A}", to)
+    .replaceAll("{B}", from)
+    .replaceAll("{to}", to)
+    .replaceAll("{from}", from)
+    .replaceAll("{TOWN}", townCity.toUpperCase())
+    .replaceAll("{town}", townCity);
+  return shout ? text.toUpperCase() : text;
 }
 
 /** Always-on headline for the territory feed, e.g. PACKERS HAVE TAKEN MOTHERWELL FROM THE 49ERS. */
@@ -82,7 +111,7 @@ export function territoryHeadline(
   return `${to} HAVE TAKEN ${town} FROM THE ${from}`;
 }
 
-function pick<T>(pool: T[], seed: string): T {
+function pick<T>(pool: readonly T[], seed: string): T {
   let hash = 0;
   for (let i = 0; i < seed.length; i += 1) hash = (hash + seed.charCodeAt(i) * (i + 1)) % 997;
   return pool[hash % pool.length]!;
@@ -93,18 +122,10 @@ export function flipBanter(
   toTeam: string | null,
   townCity: string,
 ): string {
-  const from = shortName(fromTeam);
-  const to = shortName(toTeam);
   const template = !fromTeam && toTeam
-    ? pick(CLAIMS, `${townCity}:${toTeam}`)
+    ? pick(CLAIM_POOL, `${townCity}:${toTeam}`)
     : fromTeam && !toTeam
-      ? pick(LOSSES, `${townCity}:${fromTeam}`)
-      : pick(TAKEOVERS, `${townCity}:${fromTeam}:${toTeam}`);
-  const shout = template.startsWith("SHOUT:");
-  const text = template
-    .replace(/^SHOUT:/, "")
-    .replaceAll("{from}", from)
-    .replaceAll("{to}", to)
-    .replaceAll("{town}", townCity);
-  return shout ? text.toUpperCase() : text;
+      ? pick(LOSS_POOL, `${townCity}:${fromTeam}`)
+      : pick(TAKEOVER_POOL, `${townCity}:${fromTeam}:${toTeam}`);
+  return fillFlipTemplate(template, fromTeam, toTeam, townCity);
 }
