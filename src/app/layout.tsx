@@ -90,6 +90,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     <html
       lang="en-GB"
       className={`${figtree.variable} ${fraunces.variable} h-full antialiased`}
+      suppressHydrationWarning
     >
       <head>
         {/* Native head tag so AdSense crawlers see the publisher client in the initial HTML. */}
