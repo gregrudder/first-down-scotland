@@ -48,6 +48,9 @@ describe("buildPublicFanMap", () => {
     assert.equal(map.whoOwnsScotland.towns[0]?.leadingTeam.abbreviation, "PIT");
     assert.equal(map.leaderboards.scotland[0]?.abbreviation, "PIT");
     assert.equal(map.leaderboards.scotland[0]?.count, 2);
+    assert.equal(map.schemeBattles.scotlandTownsOwned[0]?.abbreviation, "PIT");
+    assert.equal(map.schemeBattles.scotlandTownsOwned[0]?.townCount, 1);
+    assert.equal(map.schemeBattles.ukTownsOwned[0]?.abbreviation, "PIT");
   });
 
   it("counts nearby fans from town centres only", () => {

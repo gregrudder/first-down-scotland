@@ -6,7 +6,7 @@ import {
   emptyPublicFanMap,
 } from "@/lib/fan-map/aggregates";
 import { privacyThreshold } from "@/lib/fan-map/constants";
-import { isFanMapDbConfigured, listAggregateRows } from "@/lib/fan-map/db";
+import { isFanMapDbConfigured, listAggregateRows, listFlips } from "@/lib/fan-map/db";
 import type { AdminStats, HotspotResult, PublicFanMap } from "@/lib/fan-map/types";
 
 export const FAN_MAP_CACHE_TAG = "fan-map";
@@ -17,8 +17,10 @@ export async function getPublicFanMap(): Promise<PublicFanMap> {
     return emptyPublicFanMap(false, threshold);
   }
   try {
-    const rows = await listAggregateRows();
-    return buildPublicFanMap(rows, threshold, true);
+    const [rows, flips] = await Promise.all([listAggregateRows(), listFlips(24)]);
+    const map = buildPublicFanMap(rows, threshold, true);
+    map.schemeBattles.flips = flips;
+    return map;
   } catch (error) {
     console.error("[fan-map] public aggregate failed", error);
     return emptyPublicFanMap(true, threshold);

@@ -1,22 +1,12 @@
 -- NFL UK Fan Map. Applied automatically on first DB use (CREATE IF NOT EXISTS).
--- Never store names, postcodes, GPS traces, or free-text addresses.
+-- Never store names, emails, postcodes, GPS traces, or free-text addresses.
+-- Identity is a signed browser cookie (fan id), not an account.
 
 CREATE TABLE IF NOT EXISTS fan_map_users (
   id TEXT PRIMARY KEY,
-  email TEXT NOT NULL UNIQUE,
-  email_verified_at TIMESTAMPTZ NOT NULL DEFAULT now(),
+  email TEXT UNIQUE,
   created_at TIMESTAMPTZ NOT NULL DEFAULT now()
 );
-
-CREATE TABLE IF NOT EXISTS fan_map_magic_links (
-  token_hash TEXT PRIMARY KEY,
-  email TEXT NOT NULL,
-  expires_at TIMESTAMPTZ NOT NULL,
-  consumed_at TIMESTAMPTZ
-);
-
-CREATE INDEX IF NOT EXISTS fan_map_magic_links_email_idx
-  ON fan_map_magic_links (email);
 
 CREATE TABLE IF NOT EXISTS fan_map_registrations (
   id TEXT PRIMARY KEY,
@@ -44,3 +34,17 @@ CREATE INDEX IF NOT EXISTS fan_map_reg_team_idx
   ON fan_map_registrations (team_abbreviation);
 CREATE INDEX IF NOT EXISTS fan_map_reg_created_idx
   ON fan_map_registrations (created_at);
+
+CREATE TABLE IF NOT EXISTS fan_map_flips (
+  id TEXT PRIMARY KEY,
+  place_id TEXT NOT NULL,
+  town_city TEXT NOT NULL,
+  nation TEXT NOT NULL,
+  from_team TEXT,
+  to_team TEXT,
+  message TEXT NOT NULL,
+  created_at TIMESTAMPTZ NOT NULL DEFAULT now()
+);
+
+CREATE INDEX IF NOT EXISTS fan_map_flips_created_idx
+  ON fan_map_flips (created_at DESC);

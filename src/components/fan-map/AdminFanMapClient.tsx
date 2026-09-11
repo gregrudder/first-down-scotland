@@ -19,8 +19,6 @@ export function AdminFanMapClient({ adminConfigured }: { adminConfigured: boolea
   useEffect(() => {
     if (!adminConfigured) return;
     void loadStats();
-    // Check an existing admin cookie once on mount.
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [adminConfigured]);
 
   async function login(event: React.FormEvent) {

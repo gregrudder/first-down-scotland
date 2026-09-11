@@ -19,8 +19,9 @@ export async function FanMapHomeSection() {
           Who owns Scotland?
         </h2>
         <p className="mt-3 max-w-2xl text-base leading-7 text-cream-dim">
-          Put your team on the map. Choose a club, pick your town, and help us
-          find out which NFL side actually owns Scotland — then the rest of the UK.
+          Put your team on the map. No sign-up. Choose a club, pick your town,
+          and fight NFL Scheme Battles for who actually owns Scotland — then
+          the rest of the UK.
         </p>
         {showCounts ? (
           <dl className="mt-6 grid gap-3 sm:grid-cols-3">

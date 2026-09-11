@@ -127,11 +127,26 @@ export type PublicFanMap = {
     townCount: number;
     teams: TeamCount[] | null;
   }>;
+  schemeBattles: {
+    scotlandTownsOwned: Array<TeamCount & { townCount: number }>;
+    ukTownsOwned: Array<TeamCount & { townCount: number }>;
+    flips: SchemeFlip[];
+  };
+};
+
+export type SchemeFlip = {
+  id: string;
+  placeId: string;
+  townCity: string;
+  nation: UkNation;
+  fromTeam: string | null;
+  toTeam: string | null;
+  message: string;
+  createdAt: string;
 };
 
 export type FanMapSession = {
-  userId: string;
-  email: string;
+  fanId: string;
 };
 
 export type FanMapMe = {

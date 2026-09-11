@@ -3,26 +3,18 @@ import { cookies } from "next/headers";
 import {
   ADMIN_COOKIE,
   ADMIN_SESSION_TTL_SECONDS,
-  MAGIC_LINK_TTL_MS,
   SESSION_COOKIE,
   SESSION_TTL_SECONDS,
 } from "@/lib/fan-map/constants";
-import { normaliseEmail, randomToken, sha256Hex, signPayload, verifyPayload } from "@/lib/fan-map/crypto";
-import {
-  consumeMagicLink,
-  findOrCreateUser,
-  getRegistrationForUser,
-  getUserById,
-  insertMagicLink,
-  isFanMapDbConfigured,
-} from "@/lib/fan-map/db";
-import { sendMagicLinkEmail } from "@/lib/fan-map/email";
-import { siteOrigin } from "@/lib/site";
+import { newId, signPayload, verifyPayload } from "@/lib/fan-map/crypto";
+import { getRegistrationForUser, isFanMapDbConfigured } from "@/lib/fan-map/db";
 import type { FanMapMe, FanMapSession } from "@/lib/fan-map/types";
 
 export function getAuthSecret(): string | null {
   const configured =
-    process.env.FAN_MAP_AUTH_SECRET?.trim() || process.env.AUTH_SECRET?.trim();
+    process.env.FAN_MAP_COOKIE_SECRET?.trim() ||
+    process.env.FAN_MAP_AUTH_SECRET?.trim() ||
+    process.env.AUTH_SECRET?.trim();
   if (configured) return configured;
   if (process.env.NODE_ENV === "production") return null;
   return "fds-fan-map-dev-secret-not-for-production";
@@ -42,95 +34,53 @@ function cookieOptions(maxAge: number) {
   };
 }
 
-export async function readSession(): Promise<FanMapSession | null> {
+export async function readFanId(): Promise<string | null> {
   const secret = getAuthSecret();
   if (!secret) return null;
   const store = await cookies();
   const token = store.get(SESSION_COOKIE)?.value;
   if (!token) return null;
-  const payload = verifyPayload<{ sub: string; email: string; exp?: number }>(token, secret);
-  if (!payload?.sub || !payload.email) return null;
-  return { userId: payload.sub, email: payload.email };
+  const payload = verifyPayload<{ sub: string }>(token, secret);
+  return payload?.sub ?? null;
 }
 
-export async function writeSession(session: FanMapSession): Promise<void> {
-  const secret = getAuthSecret();
-  if (!secret) throw new Error("Fan map auth secret is not configured");
-  const token = signPayload(
+export function fanCookieValue(fanId: string, secret: string): string {
+  return signPayload(
     {
-      sub: session.userId,
-      email: session.email,
+      sub: fanId,
       exp: Math.floor(Date.now() / 1000) + SESSION_TTL_SECONDS,
     },
     secret,
   );
-  const store = await cookies();
-  store.set(SESSION_COOKIE, token, cookieOptions(SESSION_TTL_SECONDS));
 }
 
-export async function clearSession(): Promise<void> {
-  const store = await cookies();
-  store.delete(SESSION_COOKIE);
-}
-
-export async function requestMagicLink(rawEmail: string): Promise<
-  { ok: true; devLink?: string } | { ok: false; error: string; status: number }
-> {
-  if (!isFanMapDbConfigured()) {
-    return {
-      ok: false,
-      error: "The fan map database is not wired up yet, so we cannot send a sign-in link.",
-      status: 503,
-    };
-  }
+export async function writeFanCookie(fanId: string): Promise<void> {
   const secret = getAuthSecret();
-  if (!secret) {
-    return {
-      ok: false,
-      error: "Fan map sign-in is not configured on this deployment.",
-      status: 503,
-    };
-  }
-  const email = normaliseEmail(rawEmail);
-  if (!email) {
-    return { ok: false, error: "That does not look like an email address.", status: 400 };
-  }
-
-  const token = randomToken();
-  const expires = new Date(Date.now() + MAGIC_LINK_TTL_MS);
-  await insertMagicLink(sha256Hex(token), email, expires);
-  const verifyUrl = new URL("/api/fan-map/auth/verify", `${siteOrigin()}/`);
-  verifyUrl.searchParams.set("token", token);
-
-  const sent = await sendMagicLinkEmail(email, verifyUrl.toString());
-  if (!sent.ok) {
-    return { ok: false, error: sent.error, status: sent.status };
-  }
-  return {
-    ok: true,
-    devLink: sent.devLink,
-  };
+  if (!secret) throw new Error("Fan map cookie secret is not configured");
+  const store = await cookies();
+  store.set(SESSION_COOKIE, fanCookieValue(fanId, secret), cookieOptions(SESSION_TTL_SECONDS));
 }
 
-export async function verifyMagicLinkToken(token: string): Promise<FanMapSession | null> {
-  if (!isFanMapDbConfigured()) return null;
-  const email = await consumeMagicLink(sha256Hex(token));
-  if (!email) return null;
-  const user = await findOrCreateUser(email);
-  return { userId: user.id, email: user.email };
+export async function ensureFanId(): Promise<string | null> {
+  const existing = await readFanId();
+  if (existing) return existing;
+  const secret = getAuthSecret();
+  if (!secret) return null;
+  const fanId = newId();
+  await writeFanCookie(fanId);
+  return fanId;
 }
 
 export async function getMe(): Promise<FanMapMe> {
   const configured = isFanMapDbConfigured();
-  const session = await readSession();
-  if (!session) return { configured, session: null, registration: null };
-  if (!configured) return { configured, session, registration: null };
-
+  const fanId = await readFanId();
+  const session: FanMapSession | null = fanId ? { fanId } : null;
+  if (!fanId || !configured) {
+    return { configured, session, registration: null };
+  }
   try {
-    const user = await getUserById(session.userId);
-    if (!user) return { configured, session: null, registration: null };
-    const registration = await getRegistrationForUser(user.id);
-    return { configured, session: { userId: user.id, email: user.email }, registration };
+    const registration = await getRegistrationForUser(fanId);
+    return { configured, session, registration };
   } catch (error) {
     console.error("[fan-map] getMe failed", error);
     return { configured, session, registration: null };
@@ -156,11 +106,6 @@ export async function writeAdminSession(): Promise<void> {
   );
   const store = await cookies();
   store.set(ADMIN_COOKIE, token, cookieOptions(ADMIN_SESSION_TTL_SECONDS));
-}
-
-export async function clearAdminSession(): Promise<void> {
-  const store = await cookies();
-  store.delete(ADMIN_COOKIE);
 }
 
 export function adminPasswordMatches(password: string): boolean {

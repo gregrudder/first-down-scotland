@@ -53,6 +53,7 @@ function emptyPublic(configured: boolean, threshold: number, generatedAt = new D
     whoOwnsScotland: { owner: null, townsLed: [], towns: [] },
     towns: [],
     councils: [],
+    schemeBattles: { scotlandTownsOwned: [], ukTownsOwned: [], flips: [] },
   };
 }
 
@@ -211,6 +212,29 @@ export function buildPublicFanMap(
     .filter((row): row is TeamCount & { townCount: number } => Boolean(row))
     .sort((a, b) => b.townCount - a.townCount || b.count - a.count || a.name.localeCompare(b.name, "en-GB"));
 
+  const ukOwnedTowns = publicTowns.filter((town) => town.leadingTeam);
+  const ukLedCounts = new Map<string, { fans: number; towns: number }>();
+  for (const town of ukOwnedTowns) {
+    const abbr = town.leadingTeam!.abbreviation;
+    const current = ukLedCounts.get(abbr) ?? { fans: 0, towns: 0 };
+    current.towns += 1;
+    current.fans += town.fanCount;
+    ukLedCounts.set(abbr, current);
+  }
+  const ukTownsLed = [...ukLedCounts.entries()]
+    .map(([abbreviation, value]) => {
+      const meta = teamMeta(abbreviation);
+      if (!meta) return null;
+      return {
+        ...meta,
+        count: value.fans,
+        percent: ukOwnedTowns.length > 0 ? Math.round((value.towns / ukOwnedTowns.length) * 1000) / 10 : 0,
+        townCount: value.towns,
+      };
+    })
+    .filter((row): row is TeamCount & { townCount: number } => Boolean(row))
+    .sort((a, b) => b.townCount - a.townCount || b.count - a.count || a.name.localeCompare(b.name, "en-GB"));
+
   const councilMap = new Map<
     string,
     { regionOrCouncilArea: string; nation: UkNation; fans: FanMapAggregateRow[]; towns: Set<string> }
@@ -271,6 +295,11 @@ export function buildPublicFanMap(
     },
     towns: publicTowns,
     councils,
+    schemeBattles: {
+      scotlandTownsOwned: townsLed,
+      ukTownsOwned: ukTownsLed,
+      flips: [],
+    },
   };
 }
 
