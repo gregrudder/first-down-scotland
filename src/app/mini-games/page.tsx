@@ -68,7 +68,7 @@ export default function MiniGamesHubPage() {
           Fun quizzes
         </p>
         <h2 className="mt-2 font-display text-2xl text-cream">
-          For fans who already like the NFL
+          Just for fun
         </h2>
         <p className="mt-2 max-w-2xl text-sm leading-6 text-cream-dim">
           Famous moments, silly names, late-night survival. Not a rules lesson. Banter

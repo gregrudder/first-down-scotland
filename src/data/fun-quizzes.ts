@@ -1,7 +1,7 @@
 import type { MiniGame } from "@/data/mini-game-types";
 
 /**
- * Entertainment quizzes for fans who already like the NFL.
+ * Entertainment quizzes, just for fun.
  * Not a rules lesson: famous moments, banter, and pub-table recall.
  */
 export const funQuizzes: MiniGame[] = [
