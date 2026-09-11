@@ -1,25 +1,8 @@
+import { funQuizzes } from "@/data/fun-quizzes";
 import { learnQuizQuestions, type LearnQuizQuestion } from "@/data/learn-quiz";
+import type { MiniGame, MiniGameKind, MiniGameQuestion, MiniGameSlug } from "@/data/mini-game-types";
 
-export type MiniGameQuestion = {
-  id: string;
-  prompt: string;
-  clues?: string[];
-  options: string[];
-  correctIndex: number;
-  explain: string;
-};
-
-export type MiniGameSlug = "rules" | "who-am-i" | "downs" | "rivalries";
-
-export type MiniGame = {
-  slug: MiniGameSlug;
-  title: string;
-  summary: string;
-  minutes: number;
-  learnHref: string;
-  learnLabel: string;
-  questions: MiniGameQuestion[];
-};
+export type { MiniGame, MiniGameKind, MiniGameQuestion, MiniGameSlug };
 
 const RULE_IDS = [
   "first-and-ten",
@@ -342,16 +325,17 @@ export const miniGamesIntro = {
   eyebrow: "Have a go",
   title: "Mini Games",
   lead:
-    "Short, tap-the-answer games. No downloads, no accounts, no heavy graphics. Use them after a lesson, or when you have five minutes on the bus. Your score stays on this page until you have another go.",
+    "Short, tap-the-answer games. No downloads, no accounts, no heavy graphics. Some help you learn the sport. The fun quizzes are for fans who already like the NFL: famous moments, silly names, late-night survival. Your score stays on this page until you have another go.",
 };
 
-export const miniGames: MiniGame[] = [
+const learnMiniGames: MiniGame[] = [
   {
     slug: "rules",
     title: "Rules quiz",
     summary:
       "Ten questions from the learning path: downs, scoring, the yellow line, turnovers, and flags.",
     minutes: 4,
+    kind: "learn",
     learnHref: "/learn",
     learnLabel: "Back to the lessons",
     questions: rulesQuestions,
@@ -361,6 +345,7 @@ export const miniGames: MiniGame[] = [
     title: "Who am I?",
     summary: "Three clues, four names. Famous players from the learning section.",
     minutes: 4,
+    kind: "learn",
     learnHref: "/learn/famous-players",
     learnLabel: "Read the player bios",
     questions: whoAmIQuestions,
@@ -370,6 +355,7 @@ export const miniGames: MiniGame[] = [
     title: "Down & distance",
     summary: "You have the ball. Read the down, the yards, and the field. Pick the usual call.",
     minutes: 5,
+    kind: "learn",
     learnHref: "/learn/downs-and-distance",
     learnLabel: "Read Downs and distance",
     questions: downsQuestions,
@@ -379,11 +365,18 @@ export const miniGames: MiniGame[] = [
     title: "Rivalry match-up",
     summary: "Who plays whom, and which famous moment belongs to which fixture.",
     minutes: 4,
+    kind: "learn",
     learnHref: "/learn/rivalries",
     learnLabel: "Read NFL rivalries",
     questions: rivalryQuestions,
   },
 ];
+
+export const miniGames: MiniGame[] = [...learnMiniGames, ...funQuizzes];
+
+export function getMiniGamesByKind(kind: MiniGameKind): MiniGame[] {
+  return miniGames.filter((game) => game.kind === kind);
+}
 
 export function getMiniGame(slug: string): MiniGame | undefined {
   return miniGames.find((game) => game.slug === slug);

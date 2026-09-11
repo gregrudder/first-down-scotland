@@ -52,8 +52,8 @@ export default async function LearnIndexPage() {
           </p>
           <h2 className="mt-2 font-display text-xl text-cream">Mini Games</h2>
           <p className="mt-2 text-sm leading-6 text-cream-dim">
-            Rules quiz, Who am I?, down-and-distance calls, and a rivalry match-up.
-            Separate from the lessons.
+            Rules and downs if you are new. Fun trivia if you already stay up for
+            Sunday Night Football. Separate from the lessons.
           </p>
         </Link>
         <Link
