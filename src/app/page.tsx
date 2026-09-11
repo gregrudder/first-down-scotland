@@ -48,7 +48,7 @@ const pillars = [
     href: "/learn",
     kicker: "1. Learn the game",
     title: "From first down to Super Bowl, in plain English",
-    body: "Short lessons, a glossary, quizzes, diagrams, rivalries and famous players. Mini Games sit next door if you want a score — rules for beginners, and fun trivia just for a laugh. Built for UK beginners who keep hearing yards, downs and flags and want them explained without the jargon first.",
+    body: "Short lessons, a glossary, quizzes, diagrams, rivalries and famous players. Mini Games sit next door if you want a score — rules for beginners, and fun trivia just for fun. Built for UK beginners who keep hearing yards, downs and flags and want them explained without the jargon first.",
     cta: "Open Learn",
   },
   {
