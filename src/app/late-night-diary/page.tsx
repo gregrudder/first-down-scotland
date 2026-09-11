@@ -5,9 +5,9 @@ import { LeagueTabs } from "@/components/LeagueTabs";
 import { PageIntro } from "@/components/PageIntro";
 import { UkKickoffHelper } from "@/components/UkKickoffHelper";
 import { getNflFixturesAroundCurrent } from "@/lib/espn";
-import { collectLateNightGames } from "@/lib/late-night-diary";
+import { collectLateNightGames, fromCheckDayOnward } from "@/lib/late-night-diary";
 import { absoluteUrl } from "@/lib/site";
-import { formatFetchedAt } from "@/lib/time";
+import { formatFetchedAt, formatUkDate } from "@/lib/time";
 
 export const revalidate = 300;
 
@@ -22,11 +22,13 @@ export const metadata: Metadata = {
 
 export default async function LateNightDiaryPage() {
   const { current, slates } = await getNflFixturesAroundCurrent({
-    behind: 1,
-    ahead: 2,
+    behind: 0,
+    remainder: true,
   });
-  const { games, error } = collectLateNightGames(slates);
+  const { games: collected, error } = collectLateNightGames(slates);
   const fetchedAt = current.fetchedAt;
+  const games = fromCheckDayOnward(collected, fetchedAt);
+  const checkDayLabel = formatUkDate(fetchedAt);
   const weekLine = current.ok
     ? [current.seasonTypeName, current.weekLabel].filter(Boolean).join(" · ")
     : null;
@@ -42,7 +44,8 @@ export default async function LateNightDiaryPage() {
           </Link>
           . Here you get the 9pm-and-after window and the overnight primetime
           games, already converted to Europe/London, so you can decide whether to
-          nap, finish early, or book the day off.
+          nap, finish early, or book the day off. The list is the full late slate
+          as of today — All teams or your side only — and it is subject to change.
         </p>
       </PageIntro>
       <LeagueTabs active="late-nights" />
@@ -53,7 +56,9 @@ export default async function LateNightDiaryPage() {
 
       <div className="mt-6 flex flex-wrap items-end justify-between gap-3">
         <p className="text-sm text-cream-dim">
-          {weekLine ? `${weekLine} · last week, this week, and the next two` : "NFL late slate"}
+          {weekLine
+            ? `${weekLine} · full late slate from ${checkDayLabel} forward`
+            : `NFL late slate from ${checkDayLabel} forward`}
         </p>
         <p className="text-xs text-cream-dim">
           Refreshed {formatFetchedAt(fetchedAt)} · times in Europe/London
@@ -62,6 +67,7 @@ export default async function LateNightDiaryPage() {
 
       <LateNightDiary
         games={games}
+        checkDayLabel={checkDayLabel}
         feedError={!current.ok ? current.error : error?.error}
       />
 

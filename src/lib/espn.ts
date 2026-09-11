@@ -467,6 +467,7 @@ function neighbourWeekRefs(
   current: FixturesSuccess,
   behind: number,
   ahead: number,
+  remainder: boolean,
 ): ScoreboardWeekRef[] {
   const year = current.seasonYear;
   const type = current.seasonType;
@@ -487,7 +488,9 @@ function neighbourWeekRefs(
 
   if (index >= 0) {
     const start = Math.max(0, index - behind);
-    const end = Math.min(calendar.length, index + 1 + ahead);
+    const end = remainder
+      ? calendar.length
+      : Math.min(calendar.length, index + 1 + ahead);
     return calendar
       .slice(start, end)
       .filter((entry) => type === 1 || entry.seasonType !== 1)
@@ -506,6 +509,17 @@ function neighbourWeekRefs(
       weekNumber: week - 1,
       label: `Week ${week - 1}`,
     });
+  }
+  if (remainder && type === 2) {
+    for (let next = week + 1; next <= 18; next += 1) {
+      refs.push({
+        seasonYear: year,
+        seasonType: type,
+        weekNumber: next,
+        label: `Week ${next}`,
+      });
+    }
+    return refs;
   }
   if (ahead > 0) {
     refs.push({
@@ -545,9 +559,12 @@ function slateRelation(
 export async function getNflFixturesAroundCurrent(options?: {
   behind?: number;
   ahead?: number;
+  /** From the current week through the rest of ESPN’s published calendar. */
+  remainder?: boolean;
 }): Promise<{ current: FixturesResult; slates: FixtureSlate[] }> {
   const behind = options?.behind ?? 1;
   const ahead = options?.ahead ?? 2;
+  const remainder = options?.remainder === true;
   const current = await getNflFixtures();
   if (!current.ok) return { current, slates: [] };
 
@@ -578,7 +595,7 @@ export async function getNflFixturesAroundCurrent(options?: {
     weekNumber: week,
     label: current.weekLabel,
   };
-  const refs = neighbourWeekRefs(current, behind, ahead);
+  const refs = neighbourWeekRefs(current, behind, ahead, remainder);
   const cache: ScoreboardCache = {
     revalidate: FIXTURES_REVALIDATE_SECONDS,
     tags: [FIXTURES_CACHE_TAG],
