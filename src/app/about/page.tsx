@@ -96,6 +96,11 @@ export default function AboutPage() {
           </Link>
         </li>
         <li>
+          <Link href="/late-night-diary" className="text-gold">
+            Late Night Diary →
+          </Link>
+        </li>
+        <li>
           <Link href="/scores" className="text-gold">
             Live scores →
           </Link>

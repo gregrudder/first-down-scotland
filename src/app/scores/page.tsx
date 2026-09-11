@@ -66,6 +66,10 @@ export default async function ScoresPage() {
         <Link href="/this-week" className="text-gold">
           This week’s games
         </Link>
+        . Late UK kick-offs are on the{" "}
+        <Link href="/late-night-diary" className="text-gold">
+          Late Night Diary
+        </Link>
         . For the table, open{" "}
         <Link href="/standings" className="text-gold">
           Standings

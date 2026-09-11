@@ -35,6 +35,27 @@ const ukHour = new Intl.DateTimeFormat("en-GB", {
   hour12: false,
 });
 
+const ukWeekdayLong = new Intl.DateTimeFormat("en-GB", {
+  timeZone: site.timeZone,
+  weekday: "long",
+});
+
+const usEastern = new Intl.DateTimeFormat("en-GB", {
+  timeZone: "America/New_York",
+  weekday: "short",
+  hour: "numeric",
+  minute: "2-digit",
+  hour12: true,
+});
+
+const ukCalendarDay = new Intl.DateTimeFormat("en-GB", {
+  timeZone: site.timeZone,
+  year: "numeric",
+  month: "2-digit",
+  day: "2-digit",
+  weekday: "long",
+});
+
 function partsMap(date: Date, formatter: Intl.DateTimeFormat) {
   return Object.fromEntries(
     formatter.formatToParts(date).map((part) => [part.type, part.value]),
@@ -89,7 +110,80 @@ export function ukHourNumber(iso: string): number | null {
   const date = parseUtc(iso);
   if (!date) return null;
   const hour = Number(ukHour.format(date));
-  return Number.isNaN(hour) ? null : hour;
+  if (Number.isNaN(hour)) return null;
+  // Some engines emit 24 for midnight; treat that as 0.
+  return hour === 24 ? 0 : hour;
+}
+
+export function ukWeekdayLongName(iso: string): string {
+  const date = parseUtc(iso);
+  return date ? ukWeekdayLong.format(date) : "";
+}
+
+/** US Eastern clock, the one American graphics usually show. */
+export function formatUsEastern(iso: string): string {
+  const date = parseUtc(iso);
+  if (!date) return "US time TBC";
+  const parts = partsMap(date, usEastern);
+  const hour = parts.hour ?? "";
+  const minute = parts.minute ?? "00";
+  const dayPeriod = (parts.dayPeriod ?? "").replace(/\s+/g, "").toLowerCase();
+  const weekday = parts.weekday ?? "";
+  return `${weekday} ${hour}:${minute}${dayPeriod ? ` ${dayPeriod}` : ""} ET`;
+}
+
+export function ukCalendarParts(iso: string): {
+  year: string;
+  month: string;
+  day: string;
+  weekday: string;
+  dateKey: string;
+} | null {
+  const date = parseUtc(iso);
+  if (!date) return null;
+  const parts = partsMap(date, ukCalendarDay);
+  if (!parts.year || !parts.month || !parts.day) return null;
+  return {
+    year: parts.year,
+    month: parts.month,
+    day: parts.day,
+    weekday: parts.weekday ?? "",
+    dateKey: `${parts.year}-${parts.month}-${parts.day}`,
+  };
+}
+
+/** Shift a UK calendar date by whole days. Used for “night into next morning” labels. */
+export function shiftUkCalendarDay(
+  iso: string,
+  deltaDays: number,
+): { weekday: string; dateKey: string } | null {
+  const current = ukCalendarParts(iso);
+  if (!current) return null;
+  const noonUtc = Date.UTC(
+    Number(current.year),
+    Number(current.month) - 1,
+    Number(current.day),
+    12,
+    0,
+    0,
+  );
+  if (!Number.isFinite(noonUtc)) return null;
+  const shifted = new Date(noonUtc + deltaDays * 24 * 60 * 60 * 1000);
+  const parts = partsMap(
+    shifted,
+    new Intl.DateTimeFormat("en-GB", {
+      timeZone: "UTC",
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit",
+      weekday: "long",
+    }),
+  );
+  if (!parts.year || !parts.month || !parts.day) return null;
+  return {
+    weekday: parts.weekday ?? "",
+    dateKey: `${parts.year}-${parts.month}-${parts.day}`,
+  };
 }
 
 export function formatFetchedAt(iso: string): string {

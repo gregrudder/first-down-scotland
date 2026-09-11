@@ -5,6 +5,7 @@ import { GameCard } from "@/components/GameCard";
 import { LeagueTabs } from "@/components/LeagueTabs";
 import { SpoilerFreeToggle } from "@/components/SpoilerFreeToggle";
 import { PageIntro } from "@/components/PageIntro";
+import { LateNightTeaser } from "@/components/LateNightTeaser";
 import { UkKickoffHelper } from "@/components/UkKickoffHelper";
 import { UnusualFinals } from "@/components/UnusualFinals";
 import { getNflFixtures, groupGamesByUkDate, weekHeading } from "@/lib/espn";
@@ -44,14 +45,20 @@ export default async function ThisWeekPage() {
           instead of a stale spreadsheet.
           If you have picked a team, your Sunday card sits at the top: what to look
           for, depth, and where fans of that club might meet. The full list stays
-          open for everyone.
+          open for everyone. Late UK kick-offs — 9pm or overnight — also have their
+          own{" "}
+          <Link href="/late-night-diary" className="text-gold">
+            Late Night Diary
+          </Link>{" "}
+          if you need to plan a nap or a day off.
         </p>
       </PageIntro>
       <LeagueTabs active="games" />
       <SpoilerFreeToggle />
 
-      <div className="mt-8">
+      <div className="mt-8 grid gap-4 lg:grid-cols-2">
         <UkKickoffHelper />
+        <LateNightTeaser games={fixtures.ok ? fixtures.games : []} />
       </div>
 
       <div className="mt-8">
@@ -139,6 +146,10 @@ export default async function ThisWeekPage() {
         . Finished scorelines can be looked up on{" "}
         <Link href="/score-history" className="text-gold">
           score history
+        </Link>
+        . For the late UK window only, open the{" "}
+        <Link href="/late-night-diary" className="text-gold">
+          Late Night Diary
         </Link>
         .
       </p>

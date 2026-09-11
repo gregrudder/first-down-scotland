@@ -53,6 +53,13 @@ export type NflGame = {
   elapsedMinutes?: number;
 };
 
+export type ScoreboardWeekRef = {
+  seasonYear: number;
+  seasonType: number;
+  weekNumber: number;
+  label: string;
+};
+
 export type FixturesSuccess = {
   ok: true;
   fetchedAt: string;
@@ -62,6 +69,7 @@ export type FixturesSuccess = {
   weekNumber: number | null;
   weekLabel: string;
   games: NflGame[];
+  calendar: ScoreboardWeekRef[];
 };
 
 export type FixturesFailure = {
@@ -262,6 +270,35 @@ function seasonTypeName(type: number | null, fallback?: string): string {
   }
 }
 
+function parseCalendarWeeks(root: UnknownRecord, seasonYear: number | null): ScoreboardWeekRef[] {
+  if (seasonYear == null) return [];
+  const leagues = Array.isArray(root.leagues) ? root.leagues : [];
+  const league = leagues.find(isRecord);
+  const calendar = league && Array.isArray(league.calendar) ? league.calendar : [];
+  const weeks: ScoreboardWeekRef[] = [];
+
+  for (const block of calendar) {
+    if (!isRecord(block)) continue;
+    const seasonType = asNumber(block.value);
+    if (seasonType == null) continue;
+    const entries = Array.isArray(block.entries) ? block.entries : [];
+    for (const entry of entries) {
+      if (!isRecord(entry)) continue;
+      const weekNumber = asNumber(entry.value);
+      const label = asString(entry.label) ?? asString(entry.alternateLabel);
+      if (weekNumber == null || !label) continue;
+      weeks.push({
+        seasonYear,
+        seasonType,
+        weekNumber,
+        label,
+      });
+    }
+  }
+
+  return weeks;
+}
+
 function parseScoreboard(data: unknown, fetchedAt: string): FixturesSuccess {
   const root = isRecord(data) ? data : {};
   const season = isRecord(root.season) ? root.season : {};
@@ -282,15 +319,18 @@ function parseScoreboard(data: unknown, fetchedAt: string): FixturesSuccess {
     .filter((game): game is NflGame => game !== null)
     .sort((a, b) => a.kickoffUtc.localeCompare(b.kickoffUtc));
 
+  const resolvedYear = seasonYear ?? null;
+
   return {
     ok: true,
     fetchedAt,
-    seasonYear: seasonYear ?? null,
+    seasonYear: resolvedYear,
     seasonType: seasonType ?? null,
     seasonTypeName: seasonTypeName(seasonType ?? null, asString(leagueSeasonType.name)),
     weekNumber: weekNumber ?? null,
     weekLabel: weekNumber ? `Week ${weekNumber}` : "This week",
     games,
+    calendar: parseCalendarWeeks(root, resolvedYear),
   };
 }
 
@@ -378,6 +418,185 @@ export async function getNflFixtures(): Promise<FixturesResult> {
     revalidate: FIXTURES_REVALIDATE_SECONDS,
     tags: [FIXTURES_CACHE_TAG],
   });
+}
+
+async function loadScoreboardAt(
+  ref: ScoreboardWeekRef,
+  cache?: ScoreboardCache,
+): Promise<FixturesResult> {
+  const fetchedAt = new Date().toISOString();
+
+  try {
+    const data = await fetchScoreboard(
+      withParams({
+        dates: ref.seasonYear,
+        year: ref.seasonYear,
+        seasontype: ref.seasonType,
+        week: ref.weekNumber,
+      }),
+      cache,
+    );
+    const parsed = parseScoreboard(data, fetchedAt);
+    return {
+      ...parsed,
+      weekLabel: ref.label || parsed.weekLabel,
+    };
+  } catch (error) {
+    const message =
+      error instanceof Error && error.name === "AbortError"
+        ? "The fixture feed timed out. Try again in a minute."
+        : "We could not reach the live fixture feed just now.";
+
+    return {
+      ok: false,
+      fetchedAt,
+      error: message,
+    };
+  }
+}
+
+export type FixtureSlateRelation = "recent" | "this-week" | "next-week" | "later";
+
+export type FixtureSlate = {
+  ref: ScoreboardWeekRef;
+  relation: FixtureSlateRelation;
+  fixtures: FixturesResult;
+};
+
+function neighbourWeekRefs(
+  current: FixturesSuccess,
+  behind: number,
+  ahead: number,
+): ScoreboardWeekRef[] {
+  const year = current.seasonYear;
+  const type = current.seasonType;
+  const week = current.weekNumber;
+  if (year == null || type == null || week == null) return [];
+
+  const here: ScoreboardWeekRef = {
+    seasonYear: year,
+    seasonType: type,
+    weekNumber: week,
+    label: current.weekLabel,
+  };
+
+  const calendar = current.calendar;
+  const index = calendar.findIndex(
+    (entry) => entry.seasonType === type && entry.weekNumber === week,
+  );
+
+  if (index >= 0) {
+    const start = Math.max(0, index - behind);
+    const end = Math.min(calendar.length, index + 1 + ahead);
+    return calendar
+      .slice(start, end)
+      .filter((entry) => type === 1 || entry.seasonType !== 1)
+      .map((entry) =>
+        entry.seasonType === type && entry.weekNumber === week
+          ? { ...entry, label: here.label }
+          : entry,
+      );
+  }
+
+  const refs: ScoreboardWeekRef[] = [here];
+  if (behind > 0 && week > 1) {
+    refs.unshift({
+      seasonYear: year,
+      seasonType: type,
+      weekNumber: week - 1,
+      label: `Week ${week - 1}`,
+    });
+  }
+  if (ahead > 0) {
+    refs.push({
+      seasonYear: year,
+      seasonType: type,
+      weekNumber: week + 1,
+      label: `Week ${week + 1}`,
+    });
+  }
+  return refs;
+}
+
+function slateRelation(
+  ref: ScoreboardWeekRef,
+  current: ScoreboardWeekRef,
+  ordered: ScoreboardWeekRef[],
+): FixtureSlateRelation {
+  if (ref.seasonType === current.seasonType && ref.weekNumber === current.weekNumber) {
+    return "this-week";
+  }
+
+  const currentIndex = ordered.findIndex(
+    (entry) =>
+      entry.seasonType === current.seasonType && entry.weekNumber === current.weekNumber,
+  );
+  const refIndex = ordered.findIndex(
+    (entry) => entry.seasonType === ref.seasonType && entry.weekNumber === ref.weekNumber,
+  );
+
+  if (currentIndex >= 0 && refIndex >= 0 && refIndex < currentIndex) return "recent";
+  if (currentIndex >= 0 && refIndex === currentIndex + 1) return "next-week";
+  if (currentIndex >= 0 && refIndex > currentIndex + 1) return "later";
+  return refIndex < currentIndex ? "recent" : "later";
+}
+
+/** Current ESPN week plus neighbours, so a planner can see last / next slates. */
+export async function getNflFixturesAroundCurrent(options?: {
+  behind?: number;
+  ahead?: number;
+}): Promise<{ current: FixturesResult; slates: FixtureSlate[] }> {
+  const behind = options?.behind ?? 1;
+  const ahead = options?.ahead ?? 2;
+  const current = await getNflFixtures();
+  if (!current.ok) return { current, slates: [] };
+
+  const year = current.seasonYear;
+  const type = current.seasonType;
+  const week = current.weekNumber;
+  if (year == null || type == null || week == null) {
+    return {
+      current,
+      slates: [
+        {
+          ref: {
+            seasonYear: year ?? 0,
+            seasonType: type ?? 0,
+            weekNumber: week ?? 0,
+            label: current.weekLabel,
+          },
+          relation: "this-week",
+          fixtures: current,
+        },
+      ],
+    };
+  }
+
+  const here: ScoreboardWeekRef = {
+    seasonYear: year,
+    seasonType: type,
+    weekNumber: week,
+    label: current.weekLabel,
+  };
+  const refs = neighbourWeekRefs(current, behind, ahead);
+  const cache: ScoreboardCache = {
+    revalidate: FIXTURES_REVALIDATE_SECONDS,
+    tags: [FIXTURES_CACHE_TAG],
+  };
+
+  const slates = await Promise.all(
+    refs.map(async (ref) => {
+      const isCurrent =
+        ref.seasonType === here.seasonType && ref.weekNumber === here.weekNumber;
+      return {
+        ref,
+        relation: slateRelation(ref, here, refs),
+        fixtures: isCurrent ? current : await loadScoreboardAt(ref, cache),
+      };
+    }),
+  );
+
+  return { current, slates };
 }
 
 /** Near-live scoreboard: not shared with the 5-minute fixtures cache. */

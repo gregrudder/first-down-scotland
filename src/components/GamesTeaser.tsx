@@ -32,6 +32,9 @@ export function GamesTeaser({ fixtures }: { fixtures: FixturesResult }) {
           <Link href="/this-week" className="text-gold">
             Full slate →
           </Link>
+          <Link href="/late-night-diary" className="text-gold">
+            Late nights →
+          </Link>
           <Link href="/scores" className="text-gold">
             Live scores →
           </Link>

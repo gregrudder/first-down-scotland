@@ -58,7 +58,11 @@ export default function WatchPage() {
           <Link href="/this-week" className="text-gold">
             This week’s games
           </Link>{" "}
-          are automatic. Looking for a pub in Scotland to meet fans of your team?{" "}
+          are automatic. Planning a nap around Sunday night or Monday night? The{" "}
+          <Link href="/late-night-diary" className="text-gold">
+            Late Night Diary
+          </Link>{" "}
+          lists only the late UK kick-offs. Looking for a pub in Scotland to meet fans of your team?{" "}
           <Link href="/watch-near-you" className="text-gold">
             Watch near you
           </Link>
