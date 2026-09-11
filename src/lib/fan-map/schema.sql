@@ -22,6 +22,7 @@ CREATE TABLE IF NOT EXISTS fan_map_registrations (
   approx_longitude DOUBLE PRECISION NOT NULL,
   years_following TEXT,
   watch_party_interest TEXT,
+  hidden_at TIMESTAMPTZ,
   created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
   updated_at TIMESTAMPTZ NOT NULL DEFAULT now()
 );

@@ -51,6 +51,33 @@ describe("buildPublicFanMap", () => {
     assert.equal(map.schemeBattles.scotlandTownsOwned[0]?.abbreviation, "PIT");
     assert.equal(map.schemeBattles.scotlandTownsOwned[0]?.townCount, 1);
     assert.equal(map.schemeBattles.ukTownsOwned[0]?.abbreviation, "PIT");
+    assert.deepEqual(map.whoOwnsScotland.flips, []);
+  });
+
+  it("ranks Who Owns Scotland by towns owned, not raw fan count", () => {
+    const map = buildPublicFanMap(
+      [
+        row({ placeId: "wishaw", townCity: "Wishaw", teamAbbreviation: "PIT" }),
+        row({ placeId: "wishaw", townCity: "Wishaw", teamAbbreviation: "PIT" }),
+        row({ placeId: "wishaw", townCity: "Wishaw", teamAbbreviation: "PIT" }),
+        row({ placeId: "motherwell", townCity: "Motherwell", teamAbbreviation: "PIT" }),
+        row({ placeId: "motherwell", townCity: "Motherwell", teamAbbreviation: "PIT" }),
+        row({ placeId: "motherwell", townCity: "Motherwell", teamAbbreviation: "PIT" }),
+        row({ placeId: "glasgow", townCity: "Glasgow", teamAbbreviation: "SEA", regionOrCouncilArea: "Glasgow" }),
+        row({ placeId: "glasgow", townCity: "Glasgow", teamAbbreviation: "SEA", regionOrCouncilArea: "Glasgow" }),
+        row({ placeId: "glasgow", townCity: "Glasgow", teamAbbreviation: "SEA", regionOrCouncilArea: "Glasgow" }),
+        row({ placeId: "glasgow", townCity: "Glasgow", teamAbbreviation: "SEA", regionOrCouncilArea: "Glasgow" }),
+        row({ placeId: "glasgow", townCity: "Glasgow", teamAbbreviation: "SEA", regionOrCouncilArea: "Glasgow" }),
+        row({ placeId: "glasgow", townCity: "Glasgow", teamAbbreviation: "SEA", regionOrCouncilArea: "Glasgow" }),
+        row({ placeId: "glasgow", townCity: "Glasgow", teamAbbreviation: "SEA", regionOrCouncilArea: "Glasgow" }),
+      ],
+      3,
+    );
+    assert.equal(map.whoOwnsScotland.townsLed[0]?.abbreviation, "PIT");
+    assert.equal(map.whoOwnsScotland.townsLed[0]?.townCount, 2);
+    assert.equal(map.whoOwnsScotland.townsLed[1]?.abbreviation, "SEA");
+    assert.equal(map.whoOwnsScotland.townsLed[1]?.townCount, 1);
+    assert.ok((map.whoOwnsScotland.townsLed[1]?.count ?? 0) > (map.whoOwnsScotland.townsLed[0]?.count ?? 0));
   });
 
   it("counts nearby fans from town centres only", () => {

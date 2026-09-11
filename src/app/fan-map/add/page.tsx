@@ -20,9 +20,9 @@ export default async function AddFanPage() {
     <div className="mx-auto max-w-3xl px-4 py-12 sm:px-6 sm:py-16">
       <PageIntro eyebrow="Put your team on the map" title="Add yourself">
         <p>
-          Pick a club, pick a UK town from the list, and we drop a pin on that
-          town centre. No email, no password. One pin per browser. Update it
-          whenever you move or switch sides.
+          Pick a club, pick a UK town from the list, then optional questions
+          and a captcha. No email, no account. First submit creates the pin;
+          later submits from this browser update the same row.
         </p>
         <p>
           <Link href="/fan-map" className="text-gold">

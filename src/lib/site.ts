@@ -73,8 +73,8 @@ export const navGroups: readonly NavGroup[] = [
       },
       {
         href: "/fan-map",
-        label: "Fan Map",
-        description: "Which NFL team owns Scotland?",
+        label: "Scheme Battles",
+        description: "Who owns Scotland?",
         primary: true,
       },
       {

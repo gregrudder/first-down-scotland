@@ -118,6 +118,7 @@ export type PublicFanMap = {
       latitude: number;
       longitude: number;
     }>;
+    flips: SchemeFlip[];
   };
   towns: PublicTown[];
   councils: Array<{
@@ -155,6 +156,18 @@ export type FanMapMe = {
   registration: FanMapRegistrationRow | null;
 };
 
+export type AdminPin = {
+  id: string;
+  teamAbbreviation: string;
+  nation: UkNation;
+  regionOrCouncilArea: string;
+  townCity: string;
+  placeId: string;
+  createdAt: string;
+  updatedAt: string;
+  hidden: boolean;
+};
+
 export type AdminStats = {
   configured: boolean;
   privacyThreshold: number;
@@ -163,11 +176,13 @@ export type AdminStats = {
     towns: number;
     teams: number;
     councils: number;
+    hidden: number;
     watchPartyYes: number;
     watchPartyMaybe: number;
     watchPartyNo: number;
     watchPartyUnset: number;
   };
+  pins: AdminPin[];
   growth: {
     today: number;
     week: number;

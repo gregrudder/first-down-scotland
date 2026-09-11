@@ -5,23 +5,25 @@ export async function FanMapHomeSection() {
   const data = await getPublicFanMap();
   const showCounts = data.configured && data.counters.fans > 0;
   const owner = data.whoOwnsScotland.owner;
+  const latestFlip = data.whoOwnsScotland.flips[0];
+  const townsLeader = data.whoOwnsScotland.townsLed[0];
 
   return (
     <section
-      aria-label="NFL UK fan map"
+      aria-label="NFL Scheme Battles"
       className="border-y border-line bg-navy-2"
     >
       <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6 sm:py-14">
         <p className="text-xs font-semibold tracking-[0.16em] text-gold uppercase">
-          Fan map · Scotland first
+          NFL Scheme Battles
         </p>
         <h2 className="mt-2 max-w-3xl font-display text-3xl text-cream sm:text-4xl">
           Who owns Scotland?
         </h2>
         <p className="mt-3 max-w-2xl text-base leading-7 text-cream-dim">
-          Put your team on the map. No sign-up. Choose a club, pick your town,
-          and fight NFL Scheme Battles for who actually owns Scotland — then
-          the rest of the UK.
+          Put your team on the map. No sign-up. Pick a club, pick your town,
+          and fight NFL Scheme Battles — local areas, not postcodes. Towns
+          flip when the leading scheme changes. Scotland first, then the UK.
         </p>
         {showCounts ? (
           <dl className="mt-6 grid gap-3 sm:grid-cols-3">
@@ -42,7 +44,11 @@ export async function FanMapHomeSection() {
                 Scotland leader
               </dt>
               <dd className="mt-1 font-display text-2xl text-cream">
-                {owner ? owner.shortName : "Too early"}
+                {townsLeader
+                  ? `${townsLeader.shortName} · ${townsLeader.townCount} towns`
+                  : owner
+                    ? owner.shortName
+                    : "Too early"}
               </dd>
             </div>
           </dl>
@@ -52,6 +58,11 @@ export async function FanMapHomeSection() {
             real people put a town on it.
           </p>
         )}
+        {latestFlip ? (
+          <p className="mt-4 text-sm leading-6 text-cream">
+            Latest flip: {latestFlip.message}
+          </p>
+        ) : null}
         <div className="mt-6 flex flex-col gap-3 sm:flex-row">
           <Link
             href="/fan-map/add"
@@ -60,10 +71,10 @@ export async function FanMapHomeSection() {
             Put your team on the map
           </Link>
           <Link
-            href="/fan-map"
+            href="/fan-map#scheme-battles"
             className="inline-flex items-center justify-center rounded-full border border-line px-6 py-3 text-sm font-semibold text-cream hover:border-gold/50"
           >
-            Open the fan map
+            Open Scheme Battles
           </Link>
         </div>
       </div>

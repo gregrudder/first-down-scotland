@@ -1,6 +1,14 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
-import { detectFlip, flipBanter, leadingTeamForTown } from "./battles";
+import {
+  CLAIM_POOL,
+  TAKEOVER_POOL,
+  detectFlip,
+  fillFlipTemplate,
+  flipBanter,
+  leadingTeamForTown,
+  territoryHeadline,
+} from "./battles";
 import type { FanMapAggregateRow } from "./types";
 
 function row(team: string, placeId = "wishaw"): FanMapAggregateRow {
@@ -63,15 +71,68 @@ describe("leadingTeamForTown", () => {
   });
 });
 
+describe("territoryHeadline", () => {
+  it("shouts a takeover and a first claim", () => {
+    assert.equal(
+      territoryHeadline("SF", "GB", "Motherwell"),
+      "PACKERS HAVE TAKEN MOTHERWELL FROM THE 49ERS",
+    );
+    assert.equal(territoryHeadline(null, "GB", "Motherwell"), "PACKERS HAVE CLAIMED MOTHERWELL");
+  });
+});
+
 describe("flipBanter", () => {
-  it("uses takeover, on-the-run and take-an-L language", () => {
-    const text = flipBanter("PIT", "SEA", "Wishaw");
-    assert.match(text, /Wishaw/);
-    assert.match(text, /Seahawks|Steelers|took over|on the run|take an L|scheme taken over|scheme/i);
+  it("fills Greg’s takeover lines with FDS short names", () => {
+    assert.equal(
+      fillFlipTemplate("{A} just took {town} off the {B}. New firm in the scheme.", "SF", "GB", "Motherwell"),
+      "Packers just took Motherwell off the 49ers. New firm in the scheme.",
+    );
+    assert.equal(
+      fillFlipTemplate("That’s the {A}’s scheme now. {town} used to be {B} turf.", "SEA", "GB", "Wishaw"),
+      "That’s the Packers’ scheme now. Wishaw used to be Seahawks turf.",
+    );
+    assert.equal(
+      fillFlipTemplate("🚨 {A} TAKE {TOWN} — {B} out the scheme", "SF", "GB", "Motherwell"),
+      "🚨 Packers TAKE MOTHERWELL — 49ers out the scheme",
+    );
+    assert.equal(
+      fillFlipTemplate("{B} are on the run — the {A} have took over {town}.", "SF", "GB", "Motherwell"),
+      "49ers are on the run — the Packers have took over Motherwell.",
+    );
+    assert.equal(
+      fillFlipTemplate("{B} on the run — {A} just took over {town}.", "SF", "GB", "Wishaw"),
+      "49ers on the run — Packers just took over Wishaw.",
+    );
+    assert.equal(
+      fillFlipTemplate("The {B} take an L as their scheme has been taken over by the {A}.", "SF", "GB", "Motherwell"),
+      "The 49ers take an L as their scheme has been taken over by the Packers.",
+    );
+    assert.equal(
+      fillFlipTemplate("The {B} take an L as their {town} scheme has been taken over by the {A}.", "SF", "GB", "Motherwell"),
+      "The 49ers take an L as their Motherwell scheme has been taken over by the Packers.",
+    );
   });
 
-  it("covers a first claim and a vacant town", () => {
-    assert.match(flipBanter(null, "GB", "Motherwell"), /Packers|Motherwell|scheme|claimed|planted|took over/);
+  it("fills first-claim lines", () => {
+    assert.equal(
+      fillFlipTemplate("{A} just put {town} on the map. This scheme’s spoken for.", null, "MIA", "Wishaw"),
+      "Dolphins just put Wishaw on the map. This scheme’s spoken for.",
+    );
+    assert.equal(
+      fillFlipTemplate("{town} claimed — {A} are running it.", null, "MIA", "Wishaw"),
+      "Wishaw claimed — Dolphins are running it.",
+    );
+  });
+
+  it("rotates a stored line from the approved pools", () => {
+    const takeover = flipBanter("PIT", "SEA", "Wishaw");
+    const filledTakeovers = TAKEOVER_POOL.map((line) => fillFlipTemplate(line, "PIT", "SEA", "Wishaw"));
+    assert.ok(filledTakeovers.includes(takeover), takeover);
+
+    const claim = flipBanter(null, "GB", "Motherwell");
+    const filledClaims = CLAIM_POOL.map((line) => fillFlipTemplate(line, null, "GB", "Motherwell"));
+    assert.ok(filledClaims.includes(claim), claim);
+
     assert.match(flipBanter("KC", null, "Wishaw"), /Chiefs|Wishaw|L|vacant|on the run|grabs/);
   });
 });
