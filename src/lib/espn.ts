@@ -579,10 +579,10 @@ export async function getNflFixturesAroundCurrent(options?: {
     label: current.weekLabel,
   };
   const refs = neighbourWeekRefs(current, behind, ahead);
-  const cache = {
+  const cache: ScoreboardCache = {
     revalidate: FIXTURES_REVALIDATE_SECONDS,
     tags: [FIXTURES_CACHE_TAG],
-  } as const;
+  };
 
   const slates = await Promise.all(
     refs.map(async (ref) => {
