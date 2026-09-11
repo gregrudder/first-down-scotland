@@ -12,6 +12,7 @@ import {
   parseUtc,
   shiftUkCalendarDay,
   ukCalendarParts,
+  ukDateKey,
   ukHourNumber,
 } from "@/lib/time";
 import { watchHintForGame } from "@/lib/watch-hints";
@@ -25,6 +26,9 @@ export const OVERNIGHT_UNTIL_HOUR = 5;
 export const LATE_THRESHOLD_COPY =
   "Late means a UK kick-off at 9pm or later, or overnight before 5am. That is the Sunday 4pm ET window, plus Thursday, Sunday and Monday night in the US — the ones that wreck a work morning if you stay up.";
 
+export const SCHEDULE_CHANGE_COPY =
+  "Schedule subject to change. NFL kick-off times, flex games and TV windows move. This is the late slate as listed today — use it to plan a nap or a day off, then check again before you book anything.";
+
 export type LateNightTeam = {
   name: string;
   shortName: string;
@@ -37,6 +41,9 @@ export type LateNightGame = {
   kickoffUtc: string;
   status: NflGame["status"];
   weekLabel: string;
+  weekNumber: number;
+  seasonType: number;
+  weekKey: string;
   slateKey: FixtureSlateRelation;
   slateHeading: string;
   away: LateNightTeam;
@@ -58,9 +65,16 @@ export type LateNightGame = {
 const SLATE_HEADINGS: Record<FixtureSlateRelation, string> = {
   "this-week": "This week",
   "next-week": "Next week",
-  later: "The week after",
+  later: "Later weeks",
   recent: "Already kicked off",
 };
+
+function weekHeadingFor(game: Pick<LateNightGame, "slateKey" | "weekLabel">): string {
+  if (game.slateKey === "this-week" || game.slateKey === "next-week") {
+    return `${SLATE_HEADINGS[game.slateKey]} · ${game.weekLabel}`;
+  }
+  return game.weekLabel || SLATE_HEADINGS[game.slateKey];
+}
 
 function stripTeam(team: NflGame["home"]): LateNightTeam {
   return {
@@ -152,8 +166,14 @@ export function toLateNightGame(
     kickoffUtc: game.kickoffUtc,
     status: game.status,
     weekLabel,
+    weekNumber: slate.ref.weekNumber,
+    seasonType: slate.ref.seasonType,
+    weekKey: `${slate.ref.seasonType}-${String(slate.ref.weekNumber).padStart(2, "0")}`,
     slateKey: slate.relation,
-    slateHeading: SLATE_HEADINGS[slate.relation],
+    slateHeading: weekHeadingFor({
+      slateKey: slate.relation,
+      weekLabel,
+    }),
     away: stripTeam(game.away),
     home: stripTeam(game.home),
     broadcasts: game.broadcasts,
@@ -194,56 +214,67 @@ export type LateNightNightGroup = {
 };
 
 export type LateNightSlateGroup = {
-  key: FixtureSlateRelation;
+  key: string;
   heading: string;
   weekLabel: string;
   nights: LateNightNightGroup[];
 };
 
-const SLATE_ORDER: FixtureSlateRelation[] = [
-  "this-week",
-  "next-week",
-  "later",
-  "recent",
-];
-
-export function groupLateGames(games: LateNightGame[]): LateNightSlateGroup[] {
-  const bySlate = new Map<FixtureSlateRelation, LateNightGame[]>();
+function nightGroups(games: LateNightGame[]): LateNightNightGroup[] {
+  const byNight = new Map<string, LateNightGame[]>();
   for (const game of games) {
-    const list = bySlate.get(game.slateKey) ?? [];
+    const list = byNight.get(game.nightKey) ?? [];
     list.push(game);
-    bySlate.set(game.slateKey, list);
+    byNight.set(game.nightKey, list);
   }
 
-  return SLATE_ORDER.flatMap((key) => {
-    const slateGames = bySlate.get(key);
-    if (!slateGames?.length) return [];
+  return [...byNight.entries()]
+    .sort(([a], [b]) => a.localeCompare(b))
+    .map(([nightKey, grouped]) => ({
+      nightKey,
+      nightLabel: grouped[0]?.nightLabel ?? nightKey,
+      games: [...grouped].sort((left, right) =>
+        left.kickoffUtc.localeCompare(right.kickoffUtc),
+      ),
+    }));
+}
 
-    const byNight = new Map<string, LateNightGame[]>();
-    for (const game of slateGames) {
-      const list = byNight.get(game.nightKey) ?? [];
-      list.push(game);
-      byNight.set(game.nightKey, list);
-    }
+/** One section per NFL week, so later slates are not collapsed into a stub. */
+export function groupLateGames(games: LateNightGame[]): LateNightSlateGroup[] {
+  const byWeek = new Map<string, LateNightGame[]>();
+  for (const game of games) {
+    const list = byWeek.get(game.weekKey) ?? [];
+    list.push(game);
+    byWeek.set(game.weekKey, list);
+  }
 
-    const nights = [...byNight.entries()]
-      .sort(([a], [b]) => a.localeCompare(b))
-      .map(([nightKey, grouped]) => ({
-        nightKey,
-        nightLabel: grouped[0]?.nightLabel ?? nightKey,
-        games: [...grouped].sort((left, right) =>
-          left.kickoffUtc.localeCompare(right.kickoffUtc),
-        ),
-      }));
+  return [...byWeek.entries()]
+    .sort(([left], [right]) => left.localeCompare(right))
+    .flatMap(([weekKey, slateGames]) => {
+      if (!slateGames.length) return [];
+      const first = slateGames[0]!;
+      return [
+        {
+          key: weekKey,
+          heading: first.slateHeading,
+          weekLabel: first.weekLabel,
+          nights: nightGroups(slateGames),
+        },
+      ];
+    });
+}
 
-    return [
-      {
-        key,
-        heading: SLATE_HEADINGS[key],
-        weekLabel: slateGames[0]?.weekLabel ?? "",
-        nights,
-      },
-    ];
+/** Keep games on or after the UK calendar day the user is checking. */
+export function fromCheckDayOnward(
+  games: LateNightGame[],
+  nowIso: string,
+): LateNightGame[] {
+  const today = ukDateKey(nowIso);
+  return games.filter((game) => {
+    if (game.status === "in-progress") return true;
+    const day = ukDateKey(game.kickoffUtc);
+    if (day === "unknown") return game.status === "scheduled";
+    return day >= today;
   });
 }
 

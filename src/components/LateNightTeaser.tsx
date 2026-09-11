@@ -4,7 +4,7 @@ import { isLateUkGame } from "@/lib/late-night-diary";
 import { formatUkTime, ukWeekdayShort } from "@/lib/time";
 
 export function LateNightTeaser({ games }: { games: NflGame[] }) {
-  const late = games.filter(isLateUkGame).slice(0, 4);
+  const late = games.filter(isLateUkGame);
 
   return (
     <aside className="rounded-2xl border border-gold/30 bg-navy-3 px-5 py-4">
@@ -32,8 +32,12 @@ export function LateNightTeaser({ games }: { games: NflGame[] }) {
           ))}
         </ul>
       )}
-      <Link href="/late-night-diary" className="mt-3 inline-block text-sm font-semibold text-gold">
-        Open the Late Night Diary →
+      <p className="mt-3 text-xs leading-5 text-cream-dim">
+        This week’s late ones only. The diary has the full slate from today —
+        schedule subject to change.
+      </p>
+      <Link href="/late-night-diary" className="mt-2 inline-block text-sm font-semibold text-gold">
+        Open the full Late Night Diary →
       </Link>
     </aside>
   );
