@@ -49,6 +49,7 @@ export const TAKEOVER_POOL = [
   "{B} are on the run — the {A} have took over {town}.",
   "{B} are on the run. {A} have took over {town}.",
   "{B} on the run — {A} just took over {town}.",
+  "The {B} take an L as their scheme has been taken over by the {A}.",
   "The {B} take an L as their {town} scheme has been taken over by the {A}.",
 ] as const;
 

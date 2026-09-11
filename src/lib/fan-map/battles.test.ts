@@ -103,6 +103,14 @@ describe("flipBanter", () => {
       fillFlipTemplate("{B} on the run — {A} just took over {town}.", "SF", "GB", "Wishaw"),
       "49ers on the run — Packers just took over Wishaw.",
     );
+    assert.equal(
+      fillFlipTemplate("The {B} take an L as their scheme has been taken over by the {A}.", "SF", "GB", "Motherwell"),
+      "The 49ers take an L as their scheme has been taken over by the Packers.",
+    );
+    assert.equal(
+      fillFlipTemplate("The {B} take an L as their {town} scheme has been taken over by the {A}.", "SF", "GB", "Motherwell"),
+      "The 49ers take an L as their Motherwell scheme has been taken over by the Packers.",
+    );
   });
 
   it("fills first-claim lines", () => {
