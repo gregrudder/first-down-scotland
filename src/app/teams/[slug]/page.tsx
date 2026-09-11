@@ -159,7 +159,7 @@ export default async function TeamProfilePage({
           Highlights and club-made shows live on that channel. For a daily chat show,
           use the pods below, or the{" "}
           <Link href="/podcasts" className="text-gold">
-            league list
+            podcasts list
           </Link>
           .
         </p>
@@ -181,7 +181,7 @@ export default async function TeamProfilePage({
           <p className="mt-3 text-sm leading-6 text-cream-dim">
             No dedicated team pod listed. Try the{" "}
             <Link href="/podcasts" className="text-gold">
-              general NFL shows
+              UK and league shows
             </Link>
             {youtube ? " and the official YouTube above." : "."}
           </p>
