@@ -12,10 +12,38 @@ const FANS_LAYERS = ["clusters", "cluster-count", "town-halos", "town-points", "
 const LABEL_FONT = ["Noto Sans Regular"] as [string];
 const DOT_HALO = "#e8b84a";
 const DOT_STROKE = "#f4efe4";
+const STYLE_OVERRIDE = process.env.NEXT_PUBLIC_FAN_MAP_STYLE?.trim();
 
-const STYLE_URL =
-  process.env.NEXT_PUBLIC_FAN_MAP_STYLE?.trim() ||
-  "https://tiles.openfreemap.org/styles/dark";
+/** Dark raster tiles — no OpenFreeMap vector sprites (`circle-11`) or `Regular.pbf` 404s. */
+function darkRasterStyle(): maplibregl.StyleSpecification {
+  return {
+    version: 8,
+    name: "fds-dark-raster",
+    glyphs: "https://tiles.openfreemap.org/fonts/{fontstack}/{range}.pbf",
+    sources: {
+      carto: {
+        type: "raster",
+        tiles: [
+          "https://a.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}@2x.png",
+          "https://b.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}@2x.png",
+          "https://c.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}@2x.png",
+        ],
+        tileSize: 256,
+        maxzoom: 19,
+        attribution:
+          '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions">CARTO</a>',
+      },
+    },
+    layers: [
+      { id: "background", type: "background", paint: { "background-color": "#0b1220" } },
+      { id: "carto", type: "raster", source: "carto" },
+    ],
+  };
+}
+
+function initialStyle(): string | maplibregl.StyleSpecification {
+  return STYLE_OVERRIDE || darkRasterStyle();
+}
 
 type FanMapCanvasProps = {
   towns: PublicTown[];
@@ -78,18 +106,20 @@ function addFansSource(map: maplibregl.Map, towns: PublicTown[], teamColor?: str
     },
   });
 
-  map.addLayer({
-    id: "cluster-count",
-    type: "symbol",
-    source: FANS_SOURCE,
-    filter: ["has", "point_count"],
-    layout: {
-      "text-field": ["get", "point_count_abbreviated"],
-      "text-font": LABEL_FONT,
-      "text-size": 12,
-    },
-    paint: { "text-color": "#0b1220" },
-  });
+  if (map.getStyle().glyphs) {
+    map.addLayer({
+      id: "cluster-count",
+      type: "symbol",
+      source: FANS_SOURCE,
+      filter: ["has", "point_count"],
+      layout: {
+        "text-field": ["get", "point_count_abbreviated"],
+        "text-font": LABEL_FONT,
+        "text-size": 12,
+      },
+      paint: { "text-color": "#0b1220" },
+    });
+  }
 
   map.addLayer({
     id: "town-halos",
@@ -117,24 +147,26 @@ function addFansSource(map: maplibregl.Map, towns: PublicTown[], teamColor?: str
     },
   });
 
-  map.addLayer({
-    id: "town-labels",
-    type: "symbol",
-    source: FANS_SOURCE,
-    filter: ["!", ["has", "point_count"]],
-    minzoom: 6.2,
-    layout: {
-      "text-field": ["get", "townCity"],
-      "text-font": LABEL_FONT,
-      "text-size": 11,
-      "text-offset": [0, 1.2],
-    },
-    paint: {
-      "text-color": "#f4efe4",
-      "text-halo-color": "#0b1220",
-      "text-halo-width": 1.2,
-    },
-  });
+  if (map.getStyle().glyphs) {
+    map.addLayer({
+      id: "town-labels",
+      type: "symbol",
+      source: FANS_SOURCE,
+      filter: ["!", ["has", "point_count"]],
+      minzoom: 6.2,
+      layout: {
+        "text-field": ["get", "townCity"],
+        "text-font": LABEL_FONT,
+        "text-size": 11,
+        "text-offset": [0, 1.2],
+      },
+      paint: {
+        "text-color": "#f4efe4",
+        "text-halo-color": "#0b1220",
+        "text-halo-width": 1.2,
+      },
+    });
+  }
 }
 
 function applyFansData(
@@ -182,7 +214,7 @@ export function FanMapCanvas({
 
     const map = new maplibregl.Map({
       container: containerRef.current,
-      style: STYLE_URL,
+      style: initialStyle(),
       center: [SCOTLAND_VIEW.longitude, SCOTLAND_VIEW.latitude],
       zoom: SCOTLAND_VIEW.zoom,
       attributionControl: { compact: true },
@@ -194,10 +226,19 @@ export function FanMapCanvas({
     map.addControl(new maplibregl.NavigationControl({ showCompass: false }), "top-right");
 
     const syncLayers = () => {
-      if (!map.isStyleLoaded() || !map.getStyle().glyphs) return;
+      if (!map.isStyleLoaded()) return;
       applyFansData(map, townsRef.current, teamColorRef.current, clusteredRef);
     };
 
+    let usedRasterFallback = !STYLE_OVERRIDE;
+    map.on("error", (event) => {
+      if (usedRasterFallback) return;
+      const message = event.error?.message ?? "";
+      if (!/style|fetch|JSON|AJAX/i.test(message)) return;
+      usedRasterFallback = true;
+      clusteredRef.current = null;
+      map.setStyle(darkRasterStyle());
+    });
     map.on("styleimagemissing", (event) => {
       if (map.hasImage(event.id)) return;
       const size = 16;
@@ -205,7 +246,7 @@ export function FanMapCanvas({
     });
     map.on("load", syncLayers);
     map.on("styledata", () => {
-      if (map.isStyleLoaded() && map.getStyle().glyphs && !map.getSource(FANS_SOURCE)) {
+      if (map.isStyleLoaded() && !map.getSource(FANS_SOURCE)) {
         clusteredRef.current = null;
         syncLayers();
       }
@@ -253,7 +294,7 @@ export function FanMapCanvas({
     const map = mapRef.current;
     if (!map) return;
     const apply = () => {
-      if (!map.isStyleLoaded() || !map.getStyle().glyphs) {
+      if (!map.isStyleLoaded()) {
         map.once("load", apply);
         return;
       }
