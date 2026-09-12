@@ -140,12 +140,7 @@ export function AddYourselfForm({
           This browser already has a pin. Submit again to move it or switch sides.
           One pin per browser — no account.
         </p>
-      ) : (
-        <p className="rounded-xl border border-line bg-navy-2 px-4 py-3 text-sm leading-6 text-cream-dim">
-          No sign-up. We keep one pin on this browser with a signed cookie, plus a
-          captcha and a rate limit so the map cannot be stuffed.
-        </p>
-      )}
+      ) : null}
 
       <label className="absolute -left-[9999px] h-px w-px overflow-hidden">
         Website
