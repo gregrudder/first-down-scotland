@@ -21,22 +21,20 @@ function darkRasterStyle(): maplibregl.StyleSpecification {
     name: "fds-dark-raster",
     glyphs: "https://tiles.openfreemap.org/fonts/{fontstack}/{range}.pbf",
     sources: {
-      carto: {
+      esri: {
         type: "raster",
         tiles: [
-          "https://a.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}@2x.png",
-          "https://b.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}@2x.png",
-          "https://c.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}@2x.png",
+          "https://services.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Dark_Gray_Base/MapServer/tile/{z}/{y}/{x}",
         ],
         tileSize: 256,
-        maxzoom: 19,
+        maxzoom: 16,
         attribution:
-          '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions">CARTO</a>',
+          'Tiles &copy; <a href="https://www.esri.com/">Esri</a> — Esri, HERE, Garmin, FAO, NOAA, USGS',
       },
     },
     layers: [
       { id: "background", type: "background", paint: { "background-color": "#0b1220" } },
-      { id: "carto", type: "raster", source: "carto" },
+      { id: "esri", type: "raster", source: "esri" },
     ],
   };
 }
