@@ -4,11 +4,44 @@ import { useEffect, useRef } from "react";
 import maplibregl from "maplibre-gl";
 import "maplibre-gl/dist/maplibre-gl.css";
 import { SCOTLAND_VIEW, UK_MAP_BOUNDS, UK_VIEW } from "@/lib/fan-map/constants";
+import { fanGeoJsonClusterOptions } from "@/lib/fan-map/map-clustering";
 import type { PublicTown } from "@/lib/fan-map/types";
 
-const STYLE_URL =
-  process.env.NEXT_PUBLIC_FAN_MAP_STYLE?.trim() ||
-  "https://tiles.openfreemap.org/styles/dark";
+const FANS_SOURCE = "fans";
+const FANS_LAYERS = ["clusters", "cluster-count", "town-halos", "town-points", "town-labels"] as const;
+const LABEL_FONT = ["Noto Sans Regular"] as [string];
+const DOT_HALO = "#e8b84a";
+const DOT_STROKE = "#f4efe4";
+const STYLE_OVERRIDE = process.env.NEXT_PUBLIC_FAN_MAP_STYLE?.trim();
+
+/** Dark raster tiles — no OpenFreeMap vector sprites (`circle-11`) or `Regular.pbf` 404s. */
+function darkRasterStyle(): maplibregl.StyleSpecification {
+  return {
+    version: 8,
+    name: "fds-dark-raster",
+    glyphs: "https://tiles.openfreemap.org/fonts/{fontstack}/{range}.pbf",
+    sources: {
+      esri: {
+        type: "raster",
+        tiles: [
+          "https://services.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Dark_Gray_Base/MapServer/tile/{z}/{y}/{x}",
+        ],
+        tileSize: 256,
+        maxzoom: 16,
+        attribution:
+          'Tiles &copy; <a href="https://www.esri.com/">Esri</a> — Esri, HERE, Garmin, FAO, NOAA, USGS',
+      },
+    },
+    layers: [
+      { id: "background", type: "background", paint: { "background-color": "#0b1220" } },
+      { id: "esri", type: "raster", source: "esri" },
+    ],
+  };
+}
+
+function initialStyle(): string | maplibregl.StyleSpecification {
+  return STYLE_OVERRIDE || darkRasterStyle();
+}
 
 type FanMapCanvasProps = {
   towns: PublicTown[];
@@ -42,6 +75,118 @@ function toCollection(towns: PublicTown[], teamColor?: string): GeoJSON.FeatureC
   };
 }
 
+function removeFansLayers(map: maplibregl.Map) {
+  for (const id of [...FANS_LAYERS].reverse()) {
+    if (map.getLayer(id)) map.removeLayer(id);
+  }
+  if (map.getSource(FANS_SOURCE)) map.removeSource(FANS_SOURCE);
+}
+
+function addFansSource(map: maplibregl.Map, towns: PublicTown[], teamColor?: string) {
+  removeFansLayers(map);
+  map.addSource(FANS_SOURCE, {
+    type: "geojson",
+    data: toCollection(towns, teamColor),
+    ...fanGeoJsonClusterOptions(towns.length),
+  });
+
+  map.addLayer({
+    id: "clusters",
+    type: "circle",
+    source: FANS_SOURCE,
+    filter: ["has", "point_count"],
+    paint: {
+      "circle-color": teamColor || "#e8b84a",
+      "circle-radius": ["step", ["get", "point_count"], 16, 8, 20, 20, 26],
+      "circle-stroke-width": 2,
+      "circle-stroke-color": DOT_STROKE,
+      "circle-opacity": 1,
+    },
+  });
+
+  if (map.getStyle().glyphs) {
+    map.addLayer({
+      id: "cluster-count",
+      type: "symbol",
+      source: FANS_SOURCE,
+      filter: ["has", "point_count"],
+      layout: {
+        "text-field": ["get", "point_count_abbreviated"],
+        "text-font": LABEL_FONT,
+        "text-size": 12,
+      },
+      paint: { "text-color": "#0b1220" },
+    });
+  }
+
+  map.addLayer({
+    id: "town-halos",
+    type: "circle",
+    source: FANS_SOURCE,
+    filter: ["!", ["has", "point_count"]],
+    paint: {
+      "circle-color": DOT_HALO,
+      "circle-radius": ["interpolate", ["linear"], ["get", "fanCount"], 1, 11, 8, 16, 24, 20],
+      "circle-opacity": 0.9,
+    },
+  });
+
+  map.addLayer({
+    id: "town-points",
+    type: "circle",
+    source: FANS_SOURCE,
+    filter: ["!", ["has", "point_count"]],
+    paint: {
+      "circle-color": ["get", "color"],
+      "circle-radius": ["interpolate", ["linear"], ["get", "fanCount"], 1, 8, 8, 13, 24, 17],
+      "circle-stroke-width": 2,
+      "circle-stroke-color": DOT_STROKE,
+      "circle-opacity": 1,
+    },
+  });
+
+  if (map.getStyle().glyphs) {
+    map.addLayer({
+      id: "town-labels",
+      type: "symbol",
+      source: FANS_SOURCE,
+      filter: ["!", ["has", "point_count"]],
+      minzoom: 6.2,
+      layout: {
+        "text-field": ["get", "townCity"],
+        "text-font": LABEL_FONT,
+        "text-size": 11,
+        "text-offset": [0, 1.2],
+      },
+      paint: {
+        "text-color": "#f4efe4",
+        "text-halo-color": "#0b1220",
+        "text-halo-width": 1.2,
+      },
+    });
+  }
+}
+
+function applyFansData(
+  map: maplibregl.Map,
+  towns: PublicTown[],
+  teamColor: string | undefined,
+  clusteredRef: { current: boolean | null },
+) {
+  const nextCluster = fanGeoJsonClusterOptions(towns.length).cluster;
+  if (!map.getSource(FANS_SOURCE) || clusteredRef.current !== nextCluster) {
+    addFansSource(map, towns, teamColor);
+    clusteredRef.current = nextCluster;
+    return;
+  }
+
+  const source = map.getSource(FANS_SOURCE) as maplibregl.GeoJSONSource;
+  source.setData(toCollection(towns, teamColor));
+  if (map.getLayer("clusters")) {
+    map.setPaintProperty("clusters", "circle-color", teamColor || "#e8b84a");
+  }
+}
+
 export function FanMapCanvas({
   towns,
   selectedPlaceId,
@@ -51,18 +196,23 @@ export function FanMapCanvas({
 }: FanMapCanvasProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const mapRef = useRef<maplibregl.Map | null>(null);
+  const clusteredRef = useRef<boolean | null>(null);
+  const townsRef = useRef(towns);
+  const teamColorRef = useRef(teamColor);
   const onSelectRef = useRef(onSelect);
 
   useEffect(() => {
+    townsRef.current = towns;
+    teamColorRef.current = teamColor;
     onSelectRef.current = onSelect;
-  }, [onSelect]);
+  }, [towns, teamColor, onSelect]);
 
   useEffect(() => {
     if (!containerRef.current || mapRef.current) return;
 
     const map = new maplibregl.Map({
       container: containerRef.current,
-      style: STYLE_URL,
+      style: initialStyle(),
       center: [SCOTLAND_VIEW.longitude, SCOTLAND_VIEW.latitude],
       zoom: SCOTLAND_VIEW.zoom,
       attributionControl: { compact: true },
@@ -73,77 +223,36 @@ export function FanMapCanvas({
     });
     map.addControl(new maplibregl.NavigationControl({ showCompass: false }), "top-right");
 
-    map.on("load", () => {
-      map.addSource("fans", {
-        type: "geojson",
-        data: toCollection(towns, teamColor),
-        cluster: true,
-        clusterMaxZoom: 8,
-        clusterRadius: 46,
-      });
+    const syncLayers = () => {
+      if (!map.isStyleLoaded()) return;
+      applyFansData(map, townsRef.current, teamColorRef.current, clusteredRef);
+    };
 
-      map.addLayer({
-        id: "clusters",
-        type: "circle",
-        source: "fans",
-        filter: ["has", "point_count"],
-        paint: {
-          "circle-color": teamColor || "#e8b84a",
-          "circle-radius": ["step", ["get", "point_count"], 16, 8, 20, 20, 26],
-          "circle-stroke-width": 2,
-          "circle-stroke-color": "#0b1220",
-          "circle-opacity": 0.92,
-        },
-      });
-
-      map.addLayer({
-        id: "cluster-count",
-        type: "symbol",
-        source: "fans",
-        filter: ["has", "point_count"],
-        layout: {
-          "text-field": ["get", "point_count_abbreviated"],
-          "text-size": 12,
-        },
-        paint: { "text-color": "#0b1220" },
-      });
-
-      map.addLayer({
-        id: "town-points",
-        type: "circle",
-        source: "fans",
-        filter: ["!", ["has", "point_count"]],
-        paint: {
-          "circle-color": ["get", "color"],
-          "circle-radius": ["interpolate", ["linear"], ["get", "fanCount"], 1, 7, 8, 12, 24, 16],
-          "circle-stroke-width": 2,
-          "circle-stroke-color": "#0b1220",
-          "circle-opacity": 0.95,
-        },
-      });
-
-      map.addLayer({
-        id: "town-labels",
-        type: "symbol",
-        source: "fans",
-        filter: ["!", ["has", "point_count"]],
-        minzoom: 6.2,
-        layout: {
-          "text-field": ["get", "townCity"],
-          "text-size": 11,
-          "text-offset": [0, 1.2],
-        },
-        paint: {
-          "text-color": "#f4efe4",
-          "text-halo-color": "#0b1220",
-          "text-halo-width": 1.2,
-        },
-      });
+    let usedRasterFallback = !STYLE_OVERRIDE;
+    map.on("error", (event) => {
+      if (usedRasterFallback) return;
+      const message = event.error?.message ?? "";
+      if (!/style|fetch|JSON|AJAX/i.test(message)) return;
+      usedRasterFallback = true;
+      clusteredRef.current = null;
+      map.setStyle(darkRasterStyle());
+    });
+    map.on("styleimagemissing", (event) => {
+      if (map.hasImage(event.id)) return;
+      const size = 16;
+      map.addImage(event.id, { width: size, height: size, data: new Uint8Array(size * size * 4) });
+    });
+    map.on("load", syncLayers);
+    map.on("styledata", () => {
+      if (map.isStyleLoaded() && !map.getSource(FANS_SOURCE)) {
+        clusteredRef.current = null;
+        syncLayers();
+      }
     });
 
     map.on("click", "clusters", (event) => {
       const feature = event.features?.[0];
-      const source = map.getSource("fans") as maplibregl.GeoJSONSource | undefined;
+      const source = map.getSource(FANS_SOURCE) as maplibregl.GeoJSONSource | undefined;
       if (!feature || !source) return;
       const clusterId = feature.properties?.cluster_id;
       if (typeof clusterId !== "number") return;
@@ -175,25 +284,21 @@ export function FanMapCanvas({
     return () => {
       map.remove();
       mapRef.current = null;
+      clusteredRef.current = null;
     };
-    // Mount once; data updates happen in the next effect.
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
     const map = mapRef.current;
     if (!map) return;
     const apply = () => {
-      const source = map.getSource("fans") as maplibregl.GeoJSONSource | undefined;
-      source?.setData(toCollection(towns, teamColor));
-      if (map.getLayer("clusters") && teamColor) {
-        map.setPaintProperty("clusters", "circle-color", teamColor);
-      } else if (map.getLayer("clusters")) {
-        map.setPaintProperty("clusters", "circle-color", "#e8b84a");
+      if (!map.isStyleLoaded()) {
+        map.once("load", apply);
+        return;
       }
+      applyFansData(map, towns, teamColor, clusteredRef);
     };
-    if (map.isStyleLoaded()) apply();
-    else map.once("load", apply);
+    apply();
   }, [towns, teamColor]);
 
   useEffect(() => {
