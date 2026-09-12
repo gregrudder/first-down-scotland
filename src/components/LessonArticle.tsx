@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { DownsMotionGraphic } from "@/components/DownsMotionGraphic";
 import { DraftBoard } from "@/components/DraftBoard";
 import { FantasyLineup, SnakeDraft } from "@/components/FantasyDiagrams";
 import { FieldDiagram, FieldLegend } from "@/components/FieldDiagram";
@@ -49,6 +50,8 @@ function Block({ block }: { block: LessonBlock }) {
       if (!diagram) return null;
       return <FieldDiagram diagram={diagram} />;
     }
+    case "downs-explainer":
+      return <DownsMotionGraphic />;
     case "draft-board":
       return <DraftBoard />;
     case "fantasy-lineup":
@@ -68,11 +71,15 @@ export function LessonArticle({ lesson }: { lesson: Lesson }) {
   const showPositions = diagrams.some((diagram) =>
     diagram.markers.some((marker) => Boolean(marker.label)),
   );
+  const lead = lesson.blocks[0];
+  const explainerFirst = lead?.type === "downs-explainer";
+  const bodyBlocks = explainerFirst ? lesson.blocks.slice(1) : lesson.blocks;
 
   return (
     <article className="space-y-6">
+      {explainerFirst ? <DownsMotionGraphic /> : null}
       {hasDiagram ? <FieldLegend showPositions={showPositions} /> : null}
-      {lesson.blocks.map((block, index) => (
+      {bodyBlocks.map((block, index) => (
         <Block key={`${lesson.slug}-${index}`} block={block} />
       ))}
     </article>

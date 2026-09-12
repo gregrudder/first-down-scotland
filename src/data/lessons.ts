@@ -5,6 +5,7 @@ export type LessonBlock =
   | { type: "callout"; title: string; text: string; href?: string; linkLabel?: string }
   | { type: "terms"; items: { term: string; def: string }[] }
   | { type: "diagram"; id: string }
+  | { type: "downs-explainer" }
   | { type: "draft-board" }
   | { type: "fantasy-lineup" }
   | { type: "snake-draft" };
@@ -105,6 +106,7 @@ export const lessons: Lesson[] = [
       "Four chances to gain 10 yards. This is the rule that makes the NFL make sense.",
     minutes: 7,
     blocks: [
+      { type: "downs-explainer" },
       {
         type: "p",
         text: "This is the idea that unlocks everything else. The offence does not get unlimited time with the ball. They get four attempts (called downs) to gain 10 yards. Manage that, and they get a fresh set of four. Fail, and the other lot usually get the ball.",
