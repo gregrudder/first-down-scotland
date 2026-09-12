@@ -210,12 +210,12 @@ export function rarityLabel(count: number): string {
 
 export function countPhrase(count: number, seasonFrom: number, seasonTo: number): string {
   if (count === 0) {
-    return `This exact final is not in our table (${seasonFrom}–${seasonTo}). It may have happened earlier. We do not fill gaps from memory.`;
+    return `This exact final is not in our table (${seasonFrom}-${seasonTo}). It may have happened earlier. We do not fill gaps from memory.`;
   }
   if (count === 1) {
-    return `This exact final appears once in our table (${seasonFrom}–${seasonTo}).`;
+    return `This exact final appears once in our table (${seasonFrom}-${seasonTo}).`;
   }
-  return `This exact final appears ${count.toLocaleString("en-GB")} times in our table (${seasonFrom}–${seasonTo}).`;
+  return `This exact final appears ${count.toLocaleString("en-GB")} times in our table (${seasonFrom}-${seasonTo}).`;
 }
 
 export type UnusualFinal = {

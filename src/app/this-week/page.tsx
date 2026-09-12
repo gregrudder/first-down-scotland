@@ -45,7 +45,7 @@ export default async function ThisWeekPage() {
           instead of a stale spreadsheet.
           If you have picked a team, your Sunday card sits at the top: what to look
           for, depth, and where fans of that club might meet. The full list stays
-          open for everyone. Late UK kick-offs — 9pm or overnight — also have their
+          open for everyone. Late UK kick-offs (9pm or overnight) also have their
           own{" "}
           <Link href="/late-night-diary" className="text-gold">
             Late Night Diary

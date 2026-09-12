@@ -32,7 +32,7 @@ export function UnusualFinals({
       <p className="mt-2 text-sm leading-6 text-cream-dim">
         {unusual.length > 0
           ? `Compared with completed regular-season and play-off games from ${scoreHistoryMeta.seasonFrom} to ${scoreHistoryMeta.seasonTo}. Rare here means rare in that snapshot, not “never in NFL history”.`
-          : `No first-time or once-in-a-blue-moon finals in this slate, against our ${scoreHistoryMeta.seasonFrom}–${scoreHistoryMeta.seasonTo} table. Common scorelines still have a history if you want to look them up.`}
+          : `No first-time or once-in-a-blue-moon finals in this slate, against our ${scoreHistoryMeta.seasonFrom}-${scoreHistoryMeta.seasonTo} table. Common scorelines still have a history if you want to look them up.`}
       </p>
       <ul className="mt-4 divide-y divide-line">
         {shown.map((row) => (
@@ -46,7 +46,7 @@ export function UnusualFinals({
                 {row.homeScore}
               </p>
               <p className="mt-1 text-sm text-cream-dim">
-                {row.lookup.high}–{row.lookup.low} · {rarityLabel(row.lookup.count)}
+                {row.lookup.high}-{row.lookup.low} · {rarityLabel(row.lookup.count)}
                 {row.lookup.count > 0 ? ` · ${row.lookup.count.toLocaleString("en-GB")} times` : ""}
               </p>
             </Link>

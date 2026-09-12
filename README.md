@@ -31,7 +31,7 @@ Three jobs: learn the game, meet fans of your team, keep that club in one place.
 - **`/history`** : short NFL history for UK beginners (timeline, not a thesis)
 - **`/teams`** and **`/teams/[slug]`** : all 32 club profiles (2026-season snapshot), ESPN depth chart, official YouTube, and the relevant pods
 - **`/pick-your-team`** : quiz or spinning-ball surprise to pick a team (so you can find other fans of that club); saved in the browser as `fds-team`
-- **`/fan-map`** : **NFL Scheme Battles** (hook: Who owns Scotland?) — Scotland first, then the UK. Town-centre aggregates only. CTA at `/fan-map/add`. Private analytics at `/admin/fan-map`.
+- **`/fan-map`** : **NFL Scheme Battles** (hook: Which team runs the scheme?) — Scotland first, then the UK. Town-centre aggregates only. CTA at `/fan-map/add`. Private analytics at `/admin/fan-map`.
 - PWA basics: web manifest, icons, mobile-first layout, `theme-color`
 
 Out of scope: live fantasy scoring / league apps, live play-by-play UI, betting, site-wide accounts, push notifications, App Store builds, perfect per-game UK rights. The live scoreboard is scores, clock, and touchdown scorers when ESPN lists them — not a drive chart. The fan map uses a **signed browser cookie** (one pin per browser), not an account.
@@ -231,7 +231,7 @@ curl -H "Authorization: Bearer $CRON_SECRET" https://www.firstdownscotland.com/a
 2. **No sign-up / no Auth.js accounts.** `/fan-map/add` is team → town autocomplete → optional questions → captcha. First submit from a browser creates one row; later submits with the same signed httpOnly cookie **update** that row. Anti-spam: IP rate limit (**3 creates / hour**, **20 updates / hour**), Cloudflare Turnstile in production (`NEXT_PUBLIC_TURNSTILE_SITE_KEY` + `TURNSTILE_SECRET_KEY`), honeypot, and a 3-second minimum form fill time.
 3. **Town search.** The user must pick a UK autocomplete result. We store town / council / nation and the **town-centre** coordinates from the geocoder — never GPS, postcode, or a typed address. Geoapify if `GEOAPIFY_API_KEY` is set; otherwise Photon, then Nominatim.
 4. **Public map.** MapLibre GL 4 + OpenFreeMap dark tiles (no Mapbox token). Clusters by zoom. Scotland is the default nation filter. Live counters come from the database only. Empty state is honest; there are no demo fans.
-5. **NFL Scheme Battles** (hook: “Who owns Scotland?”). A town — a scheme, as in a local area — is owned by the leading NFL team only after it hits `FAN_MAP_PRIVACY_THRESHOLD` (default 3). Below that it stays uncoloured and does not count. A create/update that changes the leader writes a `fan_map_flips` row with a rotating scheme-banter line (survives reloads). `/fan-map#scheme-battles` has recent territory changes plus towns-owned boards for Scotland and the UK.
+5. **NFL Scheme Battles** (hook: “Which team runs the scheme?”). A town (a scheme, as in a local area) is owned by the leading NFL team only after it hits `FAN_MAP_PRIVACY_THRESHOLD` (default 3). Below that it stays uncoloured and does not count. A create/update that changes the leader writes a `fan_map_flips` row with a rotating scheme-banter line (survives reloads). `/fan-map#scheme-battles` has recent territory changes plus towns-owned boards for Scotland and the UK.
 6. **Privacy.** Names and emails stay off the public map. Towns below the threshold show totals only — no per-team split and no ownership.
 7. **Admin.** `/admin/fan-map` is env-gated with `FAN_MAP_ADMIN_SECRET`. Aggregates, growth, CSV export, a 5/10/15/20/25-mile hotspot, and hide / unhide / delete for abusive pins (hidden rows leave the public map).
 
@@ -275,7 +275,7 @@ curl -H "Authorization: Bearer $CRON_SECRET" https://www.firstdownscotland.com/a
 | `/teams` | All 32 teams by conference / division |
 | `/teams/[slug]` | Club profile (stadium, colours, Super Bowls, live depth chart) |
 | `/pick-your-team` | Quiz or spin to pick a team (saved as `fds-team`) |
-| `/fan-map` | NFL Scheme Battles — Who owns Scotland? |
+| `/fan-map` | NFL Scheme Battles: which team runs the scheme? |
 | `/fan-map/add` | Put your team on the map (no account) |
 | `/about` | Project purpose |
 

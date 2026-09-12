@@ -190,12 +190,12 @@ export const lessons: Lesson[] = [
     number: 3,
     title: "How you score",
     summary:
-      "Touchdowns, kicks, and the rare safety. Why 24–17 is a perfectly normal Saturday night.",
+      "Touchdowns, kicks, and the rare safety. Why 24-17 is a perfectly normal Saturday night.",
     minutes: 6,
     blocks: [
       {
         type: "p",
-        text: "Scoring looks odd if you expect rugby’s five or football’s one. NFL scores pile up in sixes and threes, then get a little extra tacked on. A 27–24 game is a thriller, not a basketball match that escaped.",
+        text: "Scoring looks odd if you expect rugby’s five or football’s one. NFL scores pile up in sixes and threes, then get a little extra tacked on. A 27-24 game is a thriller, not a basketball match that escaped.",
       },
       {
         type: "h2",
@@ -241,7 +241,7 @@ export const lessons: Lesson[] = [
       },
       {
         type: "p",
-        text: "If you see 17–10 at half-time, you do not need to reverse-engineer it live. A 7 usually means a touchdown plus the extra-point kick. A 3 is a field goal. So 17 is often two scores and a kick (7 + 3 + 7), and 10 is a touchdown plus a field goal.",
+        text: "If you see 17-10 at half-time, you do not need to reverse-engineer it live. A 7 usually means a touchdown plus the extra-point kick. A 3 is a field goal. So 17 is often two scores and a kick (7 + 3 + 7), and 10 is a touchdown plus a field goal.",
       },
       {
         type: "callout",
@@ -439,7 +439,7 @@ export const lessons: Lesson[] = [
         items: [
           "Timeouts: each team gets three per half. They freeze the clock and let coaches talk.",
           "Two-minute warning: an automatic timeout when two minutes remain in the second and fourth quarters.",
-          "Half-time: about 12–13 minutes. Long enough to put the kettle on.",
+          "Half-time: about 12-13 minutes. Long enough to put the kettle on.",
           "Overtime: if it is tied after four quarters, they play extra time with its own rules. Regular-season overtime is shorter than the play-offs.",
         ],
       },
@@ -744,7 +744,7 @@ export const lessons: Lesson[] = [
         items: [
           "Seven rounds, spread over three days.",
           "Each club has one pick per round to start with: 32 picks, plus extras.",
-          "Round 1 is the television event. Rounds 2–7 are where most rosters are actually built.",
+          "Round 1 is the television event. Rounds 2-7 are where most rosters are actually built.",
           "A “first-rounder” is a player taken in that opening round. People will say it like a medal.",
         ],
       },
@@ -754,7 +754,7 @@ export const lessons: Lesson[] = [
       },
       {
         type: "p",
-        text: "The order is mostly the reverse of last season’s table. Win fewer games, pick earlier. Win the Super Bowl, pick last. That is the league’s way of giving struggling clubs a chance to get better, and giving you a reason to care in December when your lot are 4–10.",
+        text: "The order is mostly the reverse of last season’s table. Win fewer games, pick earlier. Win the Super Bowl, pick last. That is the league’s way of giving struggling clubs a chance to get better, and giving you a reason to care in December when your lot are 4-10.",
       },
       { type: "draft-board" },
       {
@@ -801,7 +801,7 @@ export const lessons: Lesson[] = [
       },
       {
         type: "p",
-        text: "Round 1 is the awkward one: it starts Thursday evening in the US, which is the small hours on Friday in Britain. Rounds 2–3 run Friday night US time. Rounds 4–7 on the Saturday often land at a civilised UK tea-time, because they start around midday in New York.",
+        text: "Round 1 is the awkward one: it starts Thursday evening in the US, which is the small hours on Friday in Britain. Rounds 2-3 run Friday night US time. Rounds 4-7 on the Saturday often land at a civilised UK tea-time, because they start around midday in New York.",
       },
       {
         type: "list",

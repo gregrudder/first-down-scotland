@@ -186,7 +186,7 @@ export function pubHintForGame(game: NflGame | null): string {
 
   if (!live.length) {
     if (sundayWindow) {
-      return "This is the pub-friendly window. Watch near you is still finding a Glasgow and Edinburgh home bar — use Discord to see who else is watching, then meet once those partners are confirmed.";
+      return "This is the pub-friendly window. Watch near you is still finding a Glasgow and Edinburgh home bar. Use Discord to see who else is watching, then meet once those partners are confirmed.";
     }
     return "Overnight and midweek games are harder in a pub. Game Pass or Sky at home is the usual UK move. For Sundays, Watch near you is looking for a Glasgow and Edinburgh home bar. Discord is the chat home.";
   }

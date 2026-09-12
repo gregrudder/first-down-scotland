@@ -59,7 +59,7 @@ function scoreLine(game: NflGame): string {
   if (typeof game.home.score !== "number" || typeof game.away.score !== "number") {
     return "";
   }
-  return ` It finished ${game.away.score}–${game.home.score}.`;
+  return ` It finished ${game.away.score}-${game.home.score}.`;
 }
 
 function fdsPreview(game: NflGame): { headline: string; snippet: string } {

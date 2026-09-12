@@ -10,7 +10,7 @@ export type LearnBadge = {
 
 /**
  * Locked ladder. Do not reorder or rename.
- * Practice Squad (0–7) → Rookie (8–12) → Starter (13–17) → Hall of Famer (18–20).
+ * Practice Squad (0-7) → Rookie (8-12) → Starter (13-17) → Hall of Famer (18-20).
  */
 export const learnBadges: LearnBadge[] = [
   {

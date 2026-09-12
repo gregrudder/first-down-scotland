@@ -127,6 +127,6 @@ export const fallbackSources = [
 ] as const;
 
 export const fallbackSource = {
-  label: "The Athletic, Yahoo Sports and Sporting News (late Aug–early Sept 2026)",
+  label: "The Athletic, Yahoo Sports and Sporting News (late Aug-early Sept 2026)",
   href: fallbackSources[0].href,
 };

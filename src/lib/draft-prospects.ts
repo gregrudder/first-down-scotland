@@ -136,8 +136,8 @@ async function loadEspnProspects(): Promise<DraftProspect[] | null> {
       const name = asString(data.displayName) ?? asString(data.fullName);
       if (!name) return null;
       const position = isRecord(data.position)
-        ? (asString(data.position.abbreviation) ?? asString(data.position.displayName) ?? "—")
-        : "—";
+        ? (asString(data.position.abbreviation) ?? asString(data.position.displayName) ?? "-")
+        : "-";
       const college = isRecord(data.college) ? await collegeName(asString(data.college.$ref)) : "College TBC";
       const rank =
         (typeof data.overallRanking === "number" && data.overallRanking) ||

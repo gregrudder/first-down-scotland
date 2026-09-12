@@ -87,7 +87,7 @@ export default function AboutPage() {
         </li>
         <li>
           <Link href="/fan-map" className="text-gold">
-            NFL Scheme Battles: who owns Scotland? →
+            NFL Scheme Battles: which team runs the scheme? →
           </Link>
         </li>
         <li>

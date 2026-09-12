@@ -134,7 +134,8 @@ export function FanMapExplorer({ data }: { data: PublicFanMap }) {
           <h2 className="mt-2 font-display text-2xl text-cream">Help us build the map</h2>
           <p className="mt-3 text-sm leading-6 text-cream-dim">
             There are no fake demo users here. The first real registrations will light up
-            Scottish towns — Wishaw, Motherwell, and everywhere else — then the rest of the UK.
+            Scottish towns (Wishaw, Motherwell, East Kilbride, Paisley, Dundee), then the
+            rest of the UK.
           </p>
           <Link
             href="/fan-map/add"
@@ -220,7 +221,7 @@ export function FanMapExplorer({ data }: { data: PublicFanMap }) {
         <Leaderboard
           title="Scotland’s most supported"
           rows={data.leaderboards.scotland}
-          empty="No Scottish registrations yet. Help us find out who owns it."
+          empty="No Scottish registrations yet. Help us find out which team runs the scheme."
         />
         <Leaderboard
           title="UK’s most supported"
@@ -231,7 +232,8 @@ export function FanMapExplorer({ data }: { data: PublicFanMap }) {
 
       <p className="mt-8 text-sm leading-6 text-cream-dim">
         Privacy: we never publish names, emails, addresses, postcodes or GPS. The map
-        uses town-centre points only. A town needs at least {data.privacyThreshold} fans
+        uses town-centre points only. A town needs at least{" "}
+        {data.privacyThreshold === 1 ? "1 fan" : `${data.privacyThreshold} fans`}{" "}
         before we show which teams they support. Smaller places still count in the totals,
         or roll up to the council area list used in admin.
       </p>
@@ -248,7 +250,7 @@ function Counter({ label, value }: { label: string; value: number | null }) {
     <div className="rounded-2xl border border-line bg-navy-2 px-4 py-4">
       <dt className="text-xs font-semibold tracking-[0.16em] text-gold uppercase">{label}</dt>
       <dd className="mt-2 font-display text-3xl text-cream">
-        {value === null ? "—" : value}
+        {value === null ? "-" : value}
       </dd>
     </div>
   );

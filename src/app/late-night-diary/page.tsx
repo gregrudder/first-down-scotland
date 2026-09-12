@@ -14,7 +14,7 @@ export const revalidate = 300;
 export const metadata: Metadata = {
   title: "Late Night Diary",
   description:
-    "Upcoming NFL games that kick off late for UK fans, in Europe/London time — so you can plan a nap, an early finish, or a day off.",
+    "Upcoming NFL games that kick off late for UK fans, in Europe/London time, so you can plan a nap, an early finish, or a day off.",
   alternates: {
     canonical: absoluteUrl("/late-night-diary"),
   },
@@ -45,7 +45,7 @@ export default async function LateNightDiaryPage() {
           . Here you get the 9pm-and-after window and the overnight primetime
           games, already converted to Europe/London, so you can decide whether to
           nap, finish early, or book the day off. The list is the full late slate
-          as of today — All teams or your side only — and it is subject to change.
+          as of today (All teams or your side only), and it is subject to change.
         </p>
       </PageIntro>
       <LeagueTabs active="late-nights" />
@@ -81,8 +81,8 @@ export default async function LateNightDiaryPage() {
         browser preference as the Sunday card. For scores, use{" "}
         <Link href="/scores" className="text-gold">
           live scores
-        </Link>{" "}
-        — this diary will not leak them.
+        </Link>
+        . This diary will not leak them.
       </p>
     </div>
   );

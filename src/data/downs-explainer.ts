@@ -23,7 +23,7 @@ export const downsExplainerSteps: DownsExplainerStep[] = [
     scene: "convert",
     title: "Four downs to gain 10 yards",
     caption:
-      "The offence get four attempts — downs — to gain 10 yards. Almost every drive starts 1st & 10: first attempt, 10 yards still needed.",
+      "The offence get four attempts (downs) to gain 10 yards. Almost every drive starts 1st & 10: first attempt, 10 yards still needed.",
     call: "1st & 10",
     plain: "First attempt · 10 yards to go",
     ballYard: 25,
@@ -34,7 +34,7 @@ export const downsExplainerSteps: DownsExplainerStep[] = [
   {
     id: "short-gain",
     scene: "convert",
-    title: "A short gain — still short",
+    title: "A short gain, still short",
     caption:
       "They pick up 4 yards. That is not enough to reset the count, so it becomes 2nd & 6: second attempt, 6 yards still to go.",
     call: "2nd & 6",
@@ -47,7 +47,7 @@ export const downsExplainerSteps: DownsExplainerStep[] = [
   {
     id: "first-down",
     scene: "convert",
-    title: "Cross the marker — first down",
+    title: "Cross the marker: first down",
     caption:
       "They get the remaining yards and cross the first-down marker. The referee signals a first down. The four-down count is about to reset.",
     call: "FIRST DOWN",
@@ -75,7 +75,7 @@ export const downsExplainerSteps: DownsExplainerStep[] = [
     scene: "short",
     title: "If you do not make it: usually punt",
     caption:
-      "Different example. Four downs were not enough, so it is 4th & 4. Most of the time they punt — kick the ball away — so the other team start further back.",
+      "Different example. Four downs were not enough, so it is 4th & 4. Most of the time they punt (kick the ball away) so the other team start further back.",
     call: "4th & 4",
     plain: "Last attempt · still 4 yards short",
     ballYard: 31,

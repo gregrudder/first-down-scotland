@@ -24,10 +24,10 @@ export const LATE_UK_HOUR = 21;
 export const OVERNIGHT_UNTIL_HOUR = 5;
 
 export const LATE_THRESHOLD_COPY =
-  "Late means a UK kick-off at 9pm or later, or overnight before 5am. That is the Sunday 4pm ET window, plus Thursday, Sunday and Monday night in the US — the ones that wreck a work morning if you stay up.";
+  "Late means a UK kick-off at 9pm or later, or overnight before 5am. That is the Sunday 4pm ET window, plus Thursday, Sunday and Monday night in the US: the ones that wreck a work morning if you stay up.";
 
 export const SCHEDULE_CHANGE_COPY =
-  "Schedule subject to change. NFL kick-off times, flex games and TV windows move. This is the late slate as listed today — use it to plan a nap or a day off, then check again before you book anything.";
+  "Schedule subject to change. NFL kick-off times, flex games and TV windows move. This is the late slate as listed today: use it to plan a nap or a day off, then check again before you book anything.";
 
 export type LateNightTeam = {
   name: string;
@@ -133,7 +133,7 @@ export function planningHintForKickoff(iso: string, status: NflGame["status"]): 
     return "It is on now. If you are watching, the morning after is the one to protect.";
   }
   if (status === "final") {
-    return "This kick-off has already gone. Times only here — scores live on This week and Scores.";
+    return "This kick-off has already gone. Times only here. Scores live on This week and Scores.";
   }
 
   const hour = ukHourNumber(iso);
@@ -152,7 +152,7 @@ export function planningHintForKickoff(iso: string, status: NflGame["status"]): 
     return `Late evening UK kick-off. Fine if ${nextDay} is quiet; book the morning off if work will not wait.`;
   }
 
-  return "A civilised UK slot — this diary only lists the late ones.";
+  return "A civilised UK slot. This diary only lists the late ones.";
 }
 
 export function toLateNightGame(

@@ -30,7 +30,7 @@ export const scoringSteps: ScoringStep[] = [
     scene: "touchdown",
     title: "Cross the goal line",
     caption:
-      "The goal line is the front of that paint. If the ball breaks the plane — even a sliver — it counts. You do not have to stand fully in the end zone.",
+      "The goal line is the front of that paint. If the ball breaks the plane (even a sliver) it counts. You do not have to stand fully in the end zone.",
     call: "Goal line",
     plain: "Ball reaching the paint",
     ballYard: 100,
@@ -39,7 +39,7 @@ export const scoringSteps: ScoringStep[] = [
   {
     id: "td-score",
     scene: "touchdown",
-    title: "Touchdown — 6 points",
+    title: "Touchdown: 6 points",
     caption:
       "The ball is in the end zone. That is six. After this they try a short kick for one more, or a play from the 2 for two, then kick off to the other lot.",
     call: "TOUCHDOWN",
@@ -75,9 +75,9 @@ export const scoringSteps: ScoringStep[] = [
   {
     id: "fg-score",
     scene: "field-goal",
-    title: "Field goal — 3 points",
+    title: "Field goal: 3 points",
     caption:
-      "Through, and the scoreboard adds three. The same kick, from closer, is the extra point after a touchdown — usually one.",
+      "Through, and the scoreboard adds three. The same kick, from closer, is the extra point after a touchdown, usually one.",
     call: "FIELD GOAL",
     plain: "3 points",
     ballYard: 110,

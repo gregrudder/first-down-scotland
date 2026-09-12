@@ -8,7 +8,7 @@ import { contactEmail, listingMailto } from "@/lib/contact";
 export const metadata: Metadata = {
   title: "Watch near you",
   description:
-    "First Down Scotland is looking for one meetup partner in Glasgow and one in Edinburgh — a city home for Scottish NFL fans. Get in touch if you run a pub.",
+    "First Down Scotland is looking for one meetup partner in Glasgow and one in Edinburgh: a city home for Scottish NFL fans. Get in touch if you run a pub.",
 };
 
 export default function WatchNearYouPage() {
@@ -16,7 +16,7 @@ export default function WatchNearYouPage() {
     <div className="mx-auto max-w-3xl px-4 py-12 sm:px-6 sm:py-16">
       <PageIntro eyebrow="Meet your team" title="Watch near you">
         <p>
-          First Down Scotland is looking for one meetup partner — a home bar —
+          First Down Scotland is looking for one meetup partner (a home bar)
           in Glasgow, and one in Edinburgh. This is about a city home for
           Scottish NFL fans: a regular room where people who picked the same
           side can actually turn up. It is not a directory of every screen in

@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { getPublicFanMap } from "@/lib/fan-map/data";
+import { schemeBattlesHook } from "@/lib/site";
 
 export async function FanMapHomeSection() {
   const data = await getPublicFanMap();
@@ -18,12 +19,12 @@ export async function FanMapHomeSection() {
           NFL Scheme Battles
         </p>
         <h2 className="mt-2 max-w-3xl font-display text-3xl text-cream sm:text-4xl">
-          Who owns Scotland?
+          {schemeBattlesHook}
         </h2>
         <p className="mt-3 max-w-2xl text-base leading-7 text-cream-dim">
-          Put your team on the map. No sign-up. Pick a club, pick your town,
-          and fight NFL Scheme Battles — local areas, not postcodes. Towns
-          flip when the leading scheme changes. Scotland first, then the UK.
+          Choose your team. Put your town on the map. Find your NFL community.
+          Scotland first, then the rest of the UK: Wishaw, Motherwell, East
+          Kilbride, Paisley and Dundee, not just the big cities. No sign-up.
         </p>
         {showCounts ? (
           <dl className="mt-6 grid gap-3 sm:grid-cols-3">
@@ -45,7 +46,7 @@ export async function FanMapHomeSection() {
               </dt>
               <dd className="mt-1 font-display text-2xl text-cream">
                 {townsLeader
-                  ? `${townsLeader.shortName} · ${townsLeader.townCount} towns`
+                  ? `${townsLeader.shortName} · ${townsLeader.townCount === 1 ? "1 town" : `${townsLeader.townCount} towns`}`
                   : owner
                     ? owner.shortName
                     : "Too early"}

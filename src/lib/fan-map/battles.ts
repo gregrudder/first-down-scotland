@@ -37,32 +37,32 @@ export function detectFlip(before: TownLead, after: TownLead): FlipChange | null
   };
 }
 
-/** A = new owner, B = previous owner. TikTok-safe scheme banter — no weapons, gangs, or Old Firm. */
+/** A = new owner, B = previous owner. TikTok-safe scheme banter: no weapons, gangs, or Old Firm. */
 export const TAKEOVER_POOL = [
   "{A} just took {town} off the {B}. New firm in the scheme.",
-  "{town}’s under new management — {A} run this scheme now. {B}, jog on.",
+  "{town}’s under new management. {A} run this scheme now. {B}, jog on.",
   "That’s the {A}’s scheme now. {town} used to be {B} turf.",
   "{A} moved in on {town}. {B} have been shuffled.",
-  "{town} flipped — {A} walked the {B} out the scheme.",
-  "🚨 {A} TAKE {TOWN} — {B} out the scheme",
+  "{town} flipped. {A} walked the {B} out the scheme.",
+  "🚨 {A} TAKE {TOWN}: {B} out the scheme",
   "SHOUT:{A} have taken {town} from the {B}",
-  "{B} are on the run — the {A} have took over {town}.",
+  "{B} are on the run. The {A} have took over {town}.",
   "{B} are on the run. {A} have took over {town}.",
-  "{B} on the run — {A} just took over {town}.",
+  "{B} on the run. {A} just took over {town}.",
   "The {B} take an L as their scheme has been taken over by the {A}.",
   "The {B} take an L as their {town} scheme has been taken over by the {A}.",
 ] as const;
 
 export const CLAIM_POOL = [
   "{A} just put {town} on the map. This scheme’s spoken for.",
-  "{town} claimed — {A} are running it.",
+  "{town} claimed. {A} are running it.",
   "Fresh turf: {A} have {town}.",
   "SHOUT:{A} have claimed {town}",
 ] as const;
 
 export const LOSS_POOL = [
   "{B} scheme lost {town}. Nobody owns it yet.",
-  "{B} take an L — {town} is back up for grabs.",
+  "{B} take an L. {town} is back up for grabs.",
   "{B} are on the run out of {town}. Scheme vacant.",
 ] as const;
 
