@@ -17,6 +17,18 @@ const STYLE_URL =
   process.env.NEXT_PUBLIC_FAN_MAP_STYLE?.trim() ||
   "https://tiles.openfreemap.org/styles/dark";
 
+const EMPTY_STYLE: maplibregl.StyleSpecification = {
+  version: 8,
+  sources: {},
+  layers: [
+    {
+      id: "background",
+      type: "background",
+      paint: { "background-color": "#0b1220" },
+    },
+  ],
+};
+
 type FanMapCanvasProps = {
   towns: PublicTown[];
   selectedPlaceId: string | null;
@@ -182,7 +194,7 @@ export function FanMapCanvas({
 
     const map = new maplibregl.Map({
       container: containerRef.current,
-      style: STYLE_URL,
+      style: EMPTY_STYLE,
       center: [SCOTLAND_VIEW.longitude, SCOTLAND_VIEW.latitude],
       zoom: SCOTLAND_VIEW.zoom,
       attributionControl: { compact: true },
@@ -198,6 +210,11 @@ export function FanMapCanvas({
       applyFansData(map, townsRef.current, teamColorRef.current, clusteredRef);
     };
 
+    map.on("styleimagemissing", (event) => {
+      if (map.hasImage(event.id)) return;
+      const size = 16;
+      map.addImage(event.id, { width: size, height: size, data: new Uint8Array(size * size * 4) });
+    });
     map.on("load", syncLayers);
     map.on("styledata", () => {
       if (map.isStyleLoaded() && !map.getSource(FANS_SOURCE)) {
@@ -205,11 +222,7 @@ export function FanMapCanvas({
         syncLayers();
       }
     });
-    map.on("styleimagemissing", (event) => {
-      if (map.hasImage(event.id)) return;
-      const size = 16;
-      map.addImage(event.id, { width: size, height: size, data: new Uint8Array(size * size * 4) });
-    });
+    map.setStyle(STYLE_URL);
 
     map.on("click", "clusters", (event) => {
       const feature = event.features?.[0];
