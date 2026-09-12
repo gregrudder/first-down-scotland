@@ -8,7 +8,7 @@
     "start": "next start",
     "lint": "eslint",
     "test:fan-map": "tsx --test src/lib/fan-map/*.test.ts",
-    "test:learn": "tsx --test src/data/downs-explainer.test.ts",
+    "test:learn": "tsx --test src/data/downs-explainer.test.ts src/data/learn-motion/learn-motion.test.ts",
     "build:score-history": "node scripts/build-score-history.mjs"
   },
   "dependencies": {

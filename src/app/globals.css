@@ -196,6 +196,7 @@ body {
   color: var(--gold);
 }
 
+.fds-learn-move,
 .fds-downs-move {
   transform-box: view-box;
   transform-origin: 0 0;
@@ -212,6 +213,7 @@ body {
     transition: none;
   }
 
+  .fds-learn-move,
   .fds-downs-move {
     transition: none;
   }

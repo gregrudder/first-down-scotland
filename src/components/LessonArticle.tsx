@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { DownsMotionGraphic } from "@/components/DownsMotionGraphic";
+import { LearnMotionById } from "@/components/learn-motion";
 import { DraftBoard } from "@/components/DraftBoard";
 import { FantasyLineup, SnakeDraft } from "@/components/FantasyDiagrams";
 import { FieldDiagram, FieldLegend } from "@/components/FieldDiagram";
@@ -52,6 +53,8 @@ function Block({ block }: { block: LessonBlock }) {
     }
     case "downs-explainer":
       return <DownsMotionGraphic />;
+    case "learn-motion":
+      return <LearnMotionById id={block.id} />;
     case "draft-board":
       return <DraftBoard />;
     case "fantasy-lineup":
