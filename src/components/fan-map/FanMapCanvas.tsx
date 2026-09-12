@@ -8,7 +8,10 @@ import { fanGeoJsonClusterOptions } from "@/lib/fan-map/map-clustering";
 import type { PublicTown } from "@/lib/fan-map/types";
 
 const FANS_SOURCE = "fans";
-const FANS_LAYERS = ["clusters", "cluster-count", "town-points", "town-labels"] as const;
+const FANS_LAYERS = ["clusters", "cluster-count", "town-halos", "town-points", "town-labels"] as const;
+const LABEL_FONT = ["Noto Sans Regular"] as [string];
+const DOT_HALO = "#e8b84a";
+const DOT_STROKE = "#f4efe4";
 
 const STYLE_URL =
   process.env.NEXT_PUBLIC_FAN_MAP_STYLE?.trim() ||
@@ -70,8 +73,8 @@ function addFansSource(map: maplibregl.Map, towns: PublicTown[], teamColor?: str
       "circle-color": teamColor || "#e8b84a",
       "circle-radius": ["step", ["get", "point_count"], 16, 8, 20, 20, 26],
       "circle-stroke-width": 2,
-      "circle-stroke-color": "#0b1220",
-      "circle-opacity": 0.92,
+      "circle-stroke-color": DOT_STROKE,
+      "circle-opacity": 1,
     },
   });
 
@@ -82,9 +85,22 @@ function addFansSource(map: maplibregl.Map, towns: PublicTown[], teamColor?: str
     filter: ["has", "point_count"],
     layout: {
       "text-field": ["get", "point_count_abbreviated"],
+      "text-font": LABEL_FONT,
       "text-size": 12,
     },
     paint: { "text-color": "#0b1220" },
+  });
+
+  map.addLayer({
+    id: "town-halos",
+    type: "circle",
+    source: FANS_SOURCE,
+    filter: ["!", ["has", "point_count"]],
+    paint: {
+      "circle-color": DOT_HALO,
+      "circle-radius": ["interpolate", ["linear"], ["get", "fanCount"], 1, 11, 8, 16, 24, 20],
+      "circle-opacity": 0.9,
+    },
   });
 
   map.addLayer({
@@ -94,10 +110,10 @@ function addFansSource(map: maplibregl.Map, towns: PublicTown[], teamColor?: str
     filter: ["!", ["has", "point_count"]],
     paint: {
       "circle-color": ["get", "color"],
-      "circle-radius": ["interpolate", ["linear"], ["get", "fanCount"], 1, 7, 8, 12, 24, 16],
+      "circle-radius": ["interpolate", ["linear"], ["get", "fanCount"], 1, 8, 8, 13, 24, 17],
       "circle-stroke-width": 2,
-      "circle-stroke-color": "#0b1220",
-      "circle-opacity": 0.95,
+      "circle-stroke-color": DOT_STROKE,
+      "circle-opacity": 1,
     },
   });
 
@@ -109,6 +125,7 @@ function addFansSource(map: maplibregl.Map, towns: PublicTown[], teamColor?: str
     minzoom: 6.2,
     layout: {
       "text-field": ["get", "townCity"],
+      "text-font": LABEL_FONT,
       "text-size": 11,
       "text-offset": [0, 1.2],
     },
@@ -150,11 +167,15 @@ export function FanMapCanvas({
   const containerRef = useRef<HTMLDivElement>(null);
   const mapRef = useRef<maplibregl.Map | null>(null);
   const clusteredRef = useRef<boolean | null>(null);
+  const townsRef = useRef(towns);
+  const teamColorRef = useRef(teamColor);
   const onSelectRef = useRef(onSelect);
 
   useEffect(() => {
+    townsRef.current = towns;
+    teamColorRef.current = teamColor;
     onSelectRef.current = onSelect;
-  }, [onSelect]);
+  }, [towns, teamColor, onSelect]);
 
   useEffect(() => {
     if (!containerRef.current || mapRef.current) return;
@@ -172,9 +193,22 @@ export function FanMapCanvas({
     });
     map.addControl(new maplibregl.NavigationControl({ showCompass: false }), "top-right");
 
-    map.on("load", () => {
-      addFansSource(map, towns, teamColor);
-      clusteredRef.current = fanGeoJsonClusterOptions(towns.length).cluster;
+    const syncLayers = () => {
+      if (!map.isStyleLoaded()) return;
+      applyFansData(map, townsRef.current, teamColorRef.current, clusteredRef);
+    };
+
+    map.on("load", syncLayers);
+    map.on("styledata", () => {
+      if (map.isStyleLoaded() && !map.getSource(FANS_SOURCE)) {
+        clusteredRef.current = null;
+        syncLayers();
+      }
+    });
+    map.on("styleimagemissing", (event) => {
+      if (map.hasImage(event.id)) return;
+      const size = 16;
+      map.addImage(event.id, { width: size, height: size, data: new Uint8Array(size * size * 4) });
     });
 
     map.on("click", "clusters", (event) => {
@@ -213,8 +247,6 @@ export function FanMapCanvas({
       mapRef.current = null;
       clusteredRef.current = null;
     };
-    // Mount once; data updates happen in the next effect.
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
