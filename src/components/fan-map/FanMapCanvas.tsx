@@ -17,18 +17,6 @@ const STYLE_URL =
   process.env.NEXT_PUBLIC_FAN_MAP_STYLE?.trim() ||
   "https://tiles.openfreemap.org/styles/dark";
 
-const EMPTY_STYLE: maplibregl.StyleSpecification = {
-  version: 8,
-  sources: {},
-  layers: [
-    {
-      id: "background",
-      type: "background",
-      paint: { "background-color": "#0b1220" },
-    },
-  ],
-};
-
 type FanMapCanvasProps = {
   towns: PublicTown[];
   selectedPlaceId: string | null;
@@ -194,7 +182,7 @@ export function FanMapCanvas({
 
     const map = new maplibregl.Map({
       container: containerRef.current,
-      style: EMPTY_STYLE,
+      style: STYLE_URL,
       center: [SCOTLAND_VIEW.longitude, SCOTLAND_VIEW.latitude],
       zoom: SCOTLAND_VIEW.zoom,
       attributionControl: { compact: true },
@@ -206,7 +194,7 @@ export function FanMapCanvas({
     map.addControl(new maplibregl.NavigationControl({ showCompass: false }), "top-right");
 
     const syncLayers = () => {
-      if (!map.isStyleLoaded()) return;
+      if (!map.isStyleLoaded() || !map.getStyle().glyphs) return;
       applyFansData(map, townsRef.current, teamColorRef.current, clusteredRef);
     };
 
@@ -217,12 +205,11 @@ export function FanMapCanvas({
     });
     map.on("load", syncLayers);
     map.on("styledata", () => {
-      if (map.isStyleLoaded() && !map.getSource(FANS_SOURCE)) {
+      if (map.isStyleLoaded() && map.getStyle().glyphs && !map.getSource(FANS_SOURCE)) {
         clusteredRef.current = null;
         syncLayers();
       }
     });
-    map.setStyle(STYLE_URL);
 
     map.on("click", "clusters", (event) => {
       const feature = event.features?.[0];
@@ -265,9 +252,14 @@ export function FanMapCanvas({
   useEffect(() => {
     const map = mapRef.current;
     if (!map) return;
-    const apply = () => applyFansData(map, towns, teamColor, clusteredRef);
-    if (map.isStyleLoaded()) apply();
-    else map.once("load", apply);
+    const apply = () => {
+      if (!map.isStyleLoaded() || !map.getStyle().glyphs) {
+        map.once("load", apply);
+        return;
+      }
+      applyFansData(map, towns, teamColor, clusteredRef);
+    };
+    apply();
   }, [towns, teamColor]);
 
   useEffect(() => {
