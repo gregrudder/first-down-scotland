@@ -71,7 +71,7 @@ export default function MiniGamesHubPage() {
           Just for fun
         </h2>
         <p className="mt-2 max-w-2xl text-sm leading-6 text-cream-dim">
-          Famous moments, silly names, late-night survival. Not a rules lesson. Banter
+          Famous moments, rivalries, late-night survival. Not a rules lesson. Banter
           first, homework never.
         </p>
         <GameGrid games={funGames} label="Quiz" />

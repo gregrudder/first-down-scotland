@@ -17,7 +17,6 @@ export type MiniGameSlug =
   | "super-bowl-that"
   | "nfl-or-nonsense"
   | "name-the-catch"
-  | "qb-or-appliance"
   | "rivalry-radar"
   | "jersey-legends"
   | "draft-day-chaos"
