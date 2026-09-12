@@ -6,6 +6,7 @@ export type LessonBlock =
   | { type: "terms"; items: { term: string; def: string }[] }
   | { type: "diagram"; id: string }
   | { type: "downs-explainer" }
+  | { type: "learn-motion"; id: "scoring" | "pocket" | "turnovers" | "kick-off" | "plays" }
   | { type: "draft-board" }
   | { type: "fantasy-lineup" }
   | { type: "snake-draft" };
@@ -200,6 +201,7 @@ export const lessons: Lesson[] = [
         type: "h2",
         text: "The ways to put points on the board",
       },
+      { type: "learn-motion", id: "scoring" },
       {
         type: "list",
         items: [
@@ -312,6 +314,7 @@ export const lessons: Lesson[] = [
         title: "The pocket",
         text: "The little protected space the offensive line tries to keep around the quarterback. When it collapses, the QB either gets sacked, throws it away, or scrambles into the open. A lot of the game is just: does the pocket hold?",
       },
+      { type: "learn-motion", id: "pocket" },
       { type: "diagram", id: "the-pocket" },
       {
         type: "h2",
@@ -370,6 +373,7 @@ export const lessons: Lesson[] = [
         type: "h2",
         text: "The two you will hear every week",
       },
+      { type: "learn-motion", id: "turnovers" },
       {
         type: "list",
         items: [
@@ -483,6 +487,7 @@ export const lessons: Lesson[] = [
         type: "h2",
         text: "Kick-off",
       },
+      { type: "learn-motion", id: "kick-off" },
       {
         type: "p",
         text: "The game starts with a kick-off, and so does the second half. After most scores, the team that just scored also kicks off. The other side either catches it and runs, or takes a touchback and starts at a set yard line. Modern kick-off rules keep changing to make returns a bit safer; the idea stays the same: restart, then play.",

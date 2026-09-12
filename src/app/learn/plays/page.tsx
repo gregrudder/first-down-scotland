@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { CompactLessonProgress } from "@/components/LearnProgress";
+import { PlaysMotionGraphic } from "@/components/learn-motion";
 import { MarkLessonDone } from "@/components/MarkLessonDone";
 import { PlayDiagram, PlayLegend } from "@/components/PlayDiagram";
 import { PageIntro } from "@/components/PageIntro";
@@ -31,6 +32,16 @@ export default function PlaysIndexPage() {
         </p>
       </PageIntro>
       <CompactLessonProgress slug="plays" />
+
+      <div className="mt-10 space-y-4">
+        <h2 className="font-display text-2xl text-cream sm:text-3xl">Three shapes in motion</h2>
+        <p className="text-base leading-7 text-cream-dim">
+          You do not need the whole catalogue animated. These three cover a quick
+          throw, a trap for the rush, and a run around the edge. The still board
+          below has the rest.
+        </p>
+        <PlaysMotionGraphic />
+      </div>
 
       <div className="mt-8">
         <PlayLegend />

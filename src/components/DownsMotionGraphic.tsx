@@ -1,11 +1,12 @@
 "use client";
 
-import { useEffect, useId, useState, type ReactNode } from "react";
 import {
   downsExplainerStepMs,
   downsExplainerSteps,
   type DownsExplainerStep,
 } from "@/data/downs-explainer";
+import { LearnMotionGraphic } from "@/components/learn-motion/LearnMotionGraphic";
+import { ArrowDefs, Football, Moving } from "@/components/learn-motion/primitives";
 
 const FIELD_X = 36;
 const FIELD_Y = 70;
@@ -18,70 +19,6 @@ const BALL_Y = FIELD_Y + FIELD_H / 2;
 
 function xAt(yard: number) {
   return FIELD_X + (yard - YARD_MIN) * PX_PER_YARD;
-}
-
-function usePrefersReducedMotion() {
-  const [preference, setPreference] = useState<"unknown" | "reduce" | "ok">("unknown");
-
-  useEffect(() => {
-    const media = window.matchMedia("(prefers-reduced-motion: reduce)");
-    const sync = () => setPreference(media.matches ? "reduce" : "ok");
-    sync();
-    media.addEventListener("change", sync);
-    return () => media.removeEventListener("change", sync);
-  }, []);
-
-  return preference;
-}
-
-function Moving({
-  x,
-  y = 0,
-  animate,
-  children,
-}: {
-  x: number;
-  y?: number;
-  animate: boolean;
-  children: ReactNode;
-}) {
-  return (
-    <g
-      className={animate ? "fds-downs-move" : undefined}
-      style={{ transform: `translate(${x}px, ${y}px)` }}
-    >
-      {children}
-    </g>
-  );
-}
-
-function Football() {
-  return (
-    <g>
-      <ellipse rx="11" ry="7.2" fill="#c47a2c" stroke="#e8b84a" strokeWidth="1.6" />
-      <path d="M-5 0 H5" stroke="#f4efe4" strokeWidth="1.4" strokeLinecap="round" />
-      {[-3, 0, 3].map((tick) => (
-        <path
-          key={tick}
-          d={`M${tick} -3.2 V3.2`}
-          stroke="#f4efe4"
-          strokeWidth="1.1"
-          strokeLinecap="round"
-        />
-      ))}
-      <text
-        x="0"
-        y="22"
-        textAnchor="middle"
-        fill="#f4efe4"
-        fontSize="10"
-        fontWeight="700"
-        fontFamily="ui-sans-serif, system-ui, sans-serif"
-      >
-        Ball
-      </text>
-    </g>
-  );
 }
 
 function FieldBackdrop() {
@@ -313,182 +250,33 @@ function SceneArt({
 }
 
 export function DownsMotionGraphic() {
-  const titleId = useId();
-  const descId = useId();
-  const markerPrefix = useId().replace(/:/g, "");
-  const motion = usePrefersReducedMotion();
-  const reduced = motion === "reduce";
-  const animate = motion === "ok";
-  const [index, setIndex] = useState(0);
-  const [paused, setPaused] = useState(false);
-
-  const step = downsExplainerSteps[index] ?? downsExplainerSteps[0]!;
-  const lastIndex = downsExplainerSteps.length - 1;
-  const atEnd = index >= lastIndex;
-  const playing = animate && !paused && !atEnd;
-
-  useEffect(() => {
-    if (!playing) return;
-    const timer = window.setTimeout(() => {
-      setIndex((current) => Math.min(current + 1, lastIndex));
-    }, downsExplainerStepMs);
-    return () => window.clearTimeout(timer);
-  }, [playing, index, lastIndex]);
-
-  function play() {
-    if (reduced) {
-      setIndex((current) => (current >= lastIndex ? 0 : current + 1));
-      return;
-    }
-    if (atEnd) setIndex(0);
-    setPaused(false);
-  }
-
-  function replay() {
-    setIndex(0);
-    setPaused(reduced);
-  }
-
-  function goTo(next: number) {
-    setPaused(true);
-    setIndex(next);
-  }
-
-  const sceneLabel =
-    step.scene === "convert" ? "Example 1 · making a first down" : "Example 2 · coming up short";
-
   return (
-    <figure className="overflow-hidden rounded-2xl border border-line bg-navy">
-      <div className="flex flex-col gap-3 border-b border-line px-4 py-4 sm:flex-row sm:items-start sm:justify-between">
-        <div>
-          <p className="text-xs font-semibold uppercase tracking-[0.16em] text-gold">
-            Motion graphic
-          </p>
-          <h2 id={titleId} className="mt-1 font-display text-2xl text-cream">
-            How downs work
-          </h2>
-          <p className="mt-1 text-sm text-cream-dim">{sceneLabel}</p>
-        </div>
-        <div className="flex flex-wrap gap-2">
-          <button
-            type="button"
-            onClick={playing ? () => setPaused(true) : play}
-            className="inline-flex items-center justify-center rounded-full bg-gold px-4 py-2 text-sm font-semibold text-gold-ink hover:bg-gold-soft"
-          >
-            {reduced ? (atEnd ? "Start again" : "Next step") : playing ? "Pause" : atEnd ? "Play again" : "Play"}
-          </button>
-          <button
-            type="button"
-            onClick={replay}
-            className="inline-flex items-center justify-center rounded-full border border-line px-4 py-2 text-sm font-semibold text-cream hover:border-gold/50"
-          >
-            Replay
-          </button>
-        </div>
-      </div>
-
-      {reduced ? (
-        <p className="border-b border-line px-4 py-3 text-sm leading-6 text-cream-dim">
-          Motion is off because your system asked for less animation. Use Next
-          step or pick a labelled step below. Each frame is written in words, not
-          only colour.
-        </p>
-      ) : null}
-
-      <svg
-        viewBox="0 0 720 250"
-        role="img"
-        aria-labelledby={`${titleId} ${descId}`}
-        className="w-full max-h-[22rem]"
-      >
-        <title>How NFL downs work</title>
-        <desc id={descId}>
-          {step.title}. {step.caption} On the field, a solid gold line marked LOS is
-          where the play starts. A dashed line with a triangle is the first-down
-          marker, 10 yards on. The oval is the ball.
-        </desc>
-        <defs>
-          <marker
-            id={`${markerPrefix}-arrow-cream`}
-            viewBox="0 0 10 10"
-            refX="8"
-            refY="5"
-            markerWidth="7"
-            markerHeight="7"
-            orient="auto"
-          >
-            <path d="M0 0 L10 5 L0 10 Z" fill="#f4efe4" />
-          </marker>
-          <marker
-            id={`${markerPrefix}-arrow-live`}
-            viewBox="0 0 10 10"
-            refX="8"
-            refY="5"
-            markerWidth="7"
-            markerHeight="7"
-            orient="auto"
-          >
-            <path d="M0 0 L10 5 L0 10 Z" fill="#ff6b4a" />
-          </marker>
-        </defs>
-        <FieldBackdrop />
-        <SceneArt
-          key={step.scene}
-          step={step}
-          animate={animate}
-          creamArrow={`url(#${markerPrefix}-arrow-cream)`}
-          liveArrow={`url(#${markerPrefix}-arrow-live)`}
-        />
-      </svg>
-
-      <div className="space-y-4 border-t border-line px-4 py-4">
-        <div className="flex flex-wrap gap-2" aria-hidden={false}>
-          <p className="rounded-full border border-gold/40 bg-navy-3 px-3 py-1 text-sm font-semibold text-gold">
-            {step.call}
-          </p>
-          <p className="rounded-full border border-line bg-navy-2 px-3 py-1 text-sm text-cream">
-            {step.plain}
-          </p>
-        </div>
-
-        <div aria-live="polite" aria-atomic="true">
-          <p className="font-display text-xl text-cream">{step.title}</p>
-          <p className="mt-2 text-sm leading-6 text-cream-dim">{step.caption}</p>
-        </div>
-
-        <ol className="grid gap-2 sm:grid-cols-2">
-          {downsExplainerSteps.map((entry, entryIndex) => {
-            const current = entryIndex === index;
-            return (
-              <li key={entry.id}>
-                <button
-                  type="button"
-                  onClick={() => goTo(entryIndex)}
-                  aria-current={current ? "step" : undefined}
-                  className={`w-full rounded-xl border px-3 py-2 text-left text-sm leading-6 transition ${
-                    current
-                      ? "border-gold bg-navy-3 text-cream"
-                      : "border-line bg-navy-2 text-cream-dim hover:border-gold/40 hover:text-cream"
-                  }`}
-                >
-                  <span className="font-semibold text-gold">
-                    Step {entryIndex + 1}
-                    {current ? " · now" : ""}
-                  </span>
-                  <span className="mt-0.5 block">{entry.title}</span>
-                </button>
-              </li>
-            );
-          })}
-        </ol>
-      </div>
-
-      <figcaption className="border-t border-line px-4 py-3 text-sm leading-6 text-cream-dim">
-        Solid gold line with a square is the line of scrimmage (where the play
-        starts). Dashed line with a triangle is the first-down marker, 10 yards
-        on. The oval is the ball. Four downs to make that marker; manage it and
-        you reset to 1st & 10. Fall short and you punt, or the other lot take over.
-      </figcaption>
-    </figure>
+    <LearnMotionGraphic
+      title="How downs work"
+      svgTitle="How NFL downs work"
+      steps={downsExplainerSteps}
+      stepMs={downsExplainerStepMs}
+      sceneLabel={(step) =>
+        step.scene === "convert" ? "Example 1 · making a first down" : "Example 2 · coming up short"
+      }
+      describe={(step) =>
+        `${step.title}. ${step.caption} On the field, a solid gold line marked LOS is where the play starts. A dashed line with a triangle is the first-down marker, 10 yards on. The oval is the ball.`
+      }
+      figcaption="Solid gold line with a square is the line of scrimmage (where the play starts). Dashed line with a triangle is the first-down marker, 10 yards on. The oval is the ball. Four downs to make that marker; manage it and you reset to 1st & 10. Fall short and you punt, or the other lot take over."
+      defs={(prefix) => <ArrowDefs prefix={prefix} />}
+    >
+      {({ step, animate, markerPrefix }) => (
+        <>
+          <FieldBackdrop />
+          <SceneArt
+            key={step.scene}
+            step={step}
+            animate={animate}
+            creamArrow={`url(#${markerPrefix}-cream)`}
+            liveArrow={`url(#${markerPrefix}-live)`}
+          />
+        </>
+      )}
+    </LearnMotionGraphic>
   );
 }
