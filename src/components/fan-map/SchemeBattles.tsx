@@ -1,6 +1,7 @@
 import { TeamLogo } from "@/components/TeamLogo";
 import { getTeam } from "@/data/teams";
 import type { PublicFanMap, SchemeFlip, TeamCount } from "@/lib/fan-map/types";
+import { schemeBattlesHook } from "@/lib/site";
 
 function FlipSide({ abbreviation }: { abbreviation: string | null }) {
   if (!abbreviation) {
@@ -78,17 +79,17 @@ export function SchemeBattles({ data }: { data: PublicFanMap }) {
   return (
     <section id="scheme-battles" className="mt-12 rounded-2xl border border-gold/35 bg-navy-2 p-6">
       <p id="who-owns-scotland" className="text-xs font-semibold tracking-[0.16em] text-gold uppercase">
-        Who owns Scotland?
+        NFL Scheme Battles
       </p>
-      <h2 className="mt-2 font-display text-3xl text-cream">NFL Scheme Battles</h2>
+      <h2 className="mt-2 font-display text-3xl text-cream">{schemeBattlesHook}</h2>
       <p className="mt-3 text-sm leading-6 text-cream-dim">
         {owner
-          ? `${owner.name} lead Scotland for now — ${owner.count} fans on the map.`
+          ? `${owner.name} lead Scotland for now. ${owner.count === 1 ? "1 fan" : `${owner.count} fans`} on the map.`
           : "Nobody owns Scotland yet."}{" "}
         A town (a scheme, if you are from here) is owned by the leading NFL
-        club once it hits {threshold} pins. Below that it stays uncoloured and
-        does not score. When the lead flips, it hits the feed. No fake
-        takeovers.
+        club once it hits {threshold} {threshold === 1 ? "pin" : "pins"}. Below
+        that it stays uncoloured and does not score. When the lead flips, it
+        hits the feed. No fake takeovers.
       </p>
 
       <div className="mt-6 grid gap-6 lg:grid-cols-2">
@@ -99,7 +100,7 @@ export function SchemeBattles({ data }: { data: PublicFanMap }) {
           </p>
           <TownsOwnedBoard
             rows={scotlandTownsOwned}
-            empty={`No Scottish town is owned yet. ${threshold} fans in one place starts a scheme.`}
+            empty={`No Scottish town is owned yet. ${threshold === 1 ? "1 fan" : `${threshold} fans`} in one place starts a scheme.`}
           />
         </div>
         <div>
@@ -117,11 +118,11 @@ export function SchemeBattles({ data }: { data: PublicFanMap }) {
       <div className="mt-8">
         <h3 className="font-display text-xl text-cream">Recent territory changes</h3>
         <p className="mt-1 text-xs leading-5 text-cream-dim">
-          Newest first. Stored from real pins — nothing is made up.
+          Newest first. Stored from real pins, nothing is made up.
         </p>
         <TerritoryFeed
           flips={flips}
-          empty="No scheme has taken a town yet. The first flip will land here — PACKERS HAVE CLAIMED WISHAW, or the Dolphins have claimed Wishaw. Your call."
+          empty="No scheme has taken a town yet. The first flip will land here: PACKERS HAVE CLAIMED WISHAW, or the Dolphins have claimed Wishaw. Your call."
         />
       </div>
 
@@ -138,7 +139,7 @@ export function SchemeBattles({ data }: { data: PublicFanMap }) {
                 <span className="min-w-0">
                   <span className="block text-sm font-medium text-cream">{town.townCity}</span>
                   <span className="block text-xs text-cream-dim">
-                    {town.leadingTeam.shortName} · {town.fanCount} fans
+                    {town.leadingTeam.shortName} · {town.fanCount === 1 ? "1 fan" : `${town.fanCount} fans`}
                   </span>
                 </span>
               </li>

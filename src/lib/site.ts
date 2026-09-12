@@ -31,6 +31,9 @@ export type NavGroup = {
   items: readonly NavItem[];
 };
 
+/** Primary Fan Map / Scheme Battles hook. Keep nav, homepage and `/fan-map` in sync. */
+export const schemeBattlesHook = "Which team runs the scheme?";
+
 export const navHome: NavItem = { href: "/", label: "Home" };
 
 export const navGroups: readonly NavGroup[] = [
@@ -74,7 +77,7 @@ export const navGroups: readonly NavGroup[] = [
       {
         href: "/fan-map",
         label: "Scheme Battles",
-        description: "Who owns Scotland?",
+        description: schemeBattlesHook,
         primary: true,
       },
       {

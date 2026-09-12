@@ -29,8 +29,8 @@ function scoreHeading(lookup: ScoreLookup): string {
   if (lookup.mode === "home-away") {
     return `Home ${lookup.homeScore}, away ${lookup.awayScore}`;
   }
-  if (lookup.tie) return `${lookup.high}–${lookup.low} (a draw)`;
-  return `${lookup.high}–${lookup.low}`;
+  if (lookup.tie) return `${lookup.high}-${lookup.low} (a draw)`;
+  return `${lookup.high}-${lookup.low}`;
 }
 
 export function ScoreHistoryExplorer() {
@@ -100,7 +100,7 @@ export function ScoreHistoryExplorer() {
               commit(scoreA, scoreB, "winner-loser");
             }}
           >
-            Winner–loser
+            Winner-loser
           </button>
           <button
             type="button"
@@ -121,7 +121,7 @@ export function ScoreHistoryExplorer() {
         <p className="mt-3 text-sm leading-6 text-cream-dim">
           {mode === "home-away"
             ? "Home is the club listed as the host, including London and other neutral-site “home” sides in the table."
-            : "Order does not matter. 24–17 is the same as 17–24: the winner scored 24 and the loser scored 17."}
+            : "Order does not matter. 24-17 is the same as 17-24: the winner scored 24 and the loser scored 17."}
         </p>
         <div className="mt-5 grid gap-4 sm:grid-cols-2">
           <label className="block">
@@ -186,7 +186,7 @@ export function ScoreHistoryExplorer() {
         </p>
         <h2 className="mt-2 font-display text-2xl text-cream">Most common finals in our table</h2>
         <p className="mt-2 max-w-2xl text-sm leading-6 text-cream-dim">
-          These are the winner–loser scorelines that show up most often from{" "}
+          These are the winner-loser scorelines that show up most often from{" "}
           {scoreHistoryMeta.seasonFrom} to {scoreHistoryMeta.seasonTo}. Tap one to look it up.
         </p>
         <div className="mt-4 flex flex-wrap gap-2">
@@ -197,7 +197,7 @@ export function ScoreHistoryExplorer() {
               onClick={() => onPreset(entry.key)}
               className="rounded-full border border-line bg-navy-2 px-3 py-1.5 text-sm text-cream hover:border-gold/50"
             >
-              {entry.high}–{entry.low}
+              {entry.high}-{entry.low}
               <span className="ml-2 text-cream-dim">{entry.count}</span>
             </button>
           ))}
@@ -210,7 +210,7 @@ export function ScoreHistoryExplorer() {
         </p>
         <h2 className="mt-2 font-display text-2xl text-cream">Recent one-offs</h2>
         <p className="mt-2 max-w-2xl text-sm leading-6 text-cream-dim">
-          Each of these winner–loser finals appears once in our table. That means it is rare
+          Each of these winner-loser finals appears once in our table. That means it is rare
           since {scoreHistoryMeta.seasonFrom}, not that it can never happen again.
         </p>
         <div className="mt-4 grid gap-3 sm:grid-cols-2">
@@ -222,7 +222,7 @@ export function ScoreHistoryExplorer() {
               className="rounded-2xl border border-line bg-navy-2 p-4 transition hover:border-gold/50 hover:bg-navy-3"
             >
               <p className="font-display text-2xl text-cream">
-                {entry.high}–{entry.low}
+                {entry.high}-{entry.low}
               </p>
               <p className="mt-1 text-sm text-cream-dim">Once in our table</p>
               {entry.last ? (

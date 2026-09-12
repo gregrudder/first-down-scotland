@@ -98,7 +98,7 @@ export function AddYourselfForm({
       return;
     }
     if (!place) {
-      setSubmitError("Pick a town from the search results — not a typed address.");
+      setSubmitError("Pick a town from the search results, not a typed address.");
       return;
     }
     const turnstileToken =
@@ -138,7 +138,7 @@ export function AddYourselfForm({
       {me.registration ? (
         <p className="rounded-xl border border-good/40 bg-navy-2 px-4 py-3 text-sm text-cream">
           This browser already has a pin. Submit again to move it or switch sides.
-          One pin per browser — no account.
+          One pin per browser, no account.
         </p>
       ) : null}
 
@@ -205,7 +205,7 @@ export function AddYourselfForm({
         </p>
         <h2 className="mt-2 font-display text-2xl text-cream">Search a UK town or city</h2>
         <p className="mt-2 text-sm leading-6 text-cream-dim">
-          Pick a result. We store the town centre only — no postcode, no GPS, no street.
+          Pick a result. We store the town centre only: no postcode, no GPS, no street.
         </p>
         <label className="mt-4 block">
           <span className="text-sm font-medium text-cream">Town or city</span>
@@ -216,7 +216,7 @@ export function AddYourselfForm({
               setTownQuery(event.target.value);
               setPlace(null);
             }}
-            placeholder="Wishaw, Motherwell, Dundee…"
+            placeholder="Wishaw, Motherwell, East Kilbride, Paisley, Dundee…"
             autoComplete="off"
             className="mt-2 w-full rounded-xl border border-line bg-navy-2 px-4 py-3 text-base text-cream placeholder:text-cream-dim/70"
           />

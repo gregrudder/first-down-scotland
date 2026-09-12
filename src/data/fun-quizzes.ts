@@ -26,11 +26,11 @@ export const funQuizzes: MiniGame[] = [
         ],
         correctIndex: 0,
         explain:
-          "February 2008. Eli Manning escaped the rush, Tyree trapped it on his helmet, and New York ruined New England’s 19–0 season. Super Bowl XLII, Giants 17–14.",
+          "February 2008. Eli Manning escaped the rush, Tyree trapped it on his helmet, and New York ruined New England’s 19-0 season. Super Bowl XLII, Giants 17-14.",
       },
       {
         id: "twenty-eight-three",
-        prompt: "A side led 28–3 in a Super Bowl and still lost. Which one?",
+        prompt: "A side led 28-3 in a Super Bowl and still lost. Which one?",
         options: [
           "Super Bowl XLVIII, Broncos v Seahawks",
           "Super Bowl LI, Falcons v Patriots",
@@ -39,7 +39,7 @@ export const funQuizzes: MiniGame[] = [
         ],
         correctIndex: 1,
         explain:
-          "Atlanta 28–3 in Super Bowl LI. New England tied it, then won 34–28 in the first Super Bowl overtime. Brady took the MVP. Falcons supporters still feel it in their teeth.",
+          "Atlanta 28-3 in Super Bowl LI. New England tied it, then won 34-28 in the first Super Bowl overtime. Brady took the MVP. Falcons supporters still feel it in their teeth.",
       },
       {
         id: "philly-special",
@@ -52,7 +52,7 @@ export const funQuizzes: MiniGame[] = [
         ],
         correctIndex: 0,
         explain:
-          "Super Bowl LII, February 2018. Direct snap, pitch, Trey Burton to Nick Foles. Philadelphia 41–33 New England, and Foles was MVP. They got the Chiefs later, in Super Bowl LIX. Different night.",
+          "Super Bowl LII, February 2018. Direct snap, pitch, Trey Burton to Nick Foles. Philadelphia 41-33 New England, and Foles was MVP. They got the Chiefs later, in Super Bowl LIX. Different night.",
       },
       {
         id: "butler-pick",
@@ -65,7 +65,7 @@ export const funQuizzes: MiniGame[] = [
         ],
         correctIndex: 1,
         explain:
-          "February 2015, Super Bowl XLIX. Seattle, second and goal, late. Russell Wilson’s slant for Ricardo Lockette was picked by Butler. Patriots 28–24. Marshawn Lynch was on the field. The internet never left.",
+          "February 2015, Super Bowl XLIX. Seattle, second and goal, late. Russell Wilson’s slant for Ricardo Lockette was picked by Butler. Patriots 28-24. Marshawn Lynch was on the field. The internet never left.",
       },
       {
         id: "the-tackle",
@@ -78,7 +78,7 @@ export const funQuizzes: MiniGame[] = [
         ],
         correctIndex: 0,
         explain:
-          "January 2000. Kurt Warner’s Rams, 23–16 Tennessee. Last play, Dyson stretched for the line and Jones wrapped him up. They still call it The Tackle.",
+          "January 2000. Kurt Warner’s Rams, 23-16 Tennessee. Last play, Dyson stretched for the line and Jones wrapped him up. They still call it The Tackle.",
       },
       {
         id: "wide-right",
@@ -91,11 +91,11 @@ export const funQuizzes: MiniGame[] = [
         ],
         correctIndex: 0,
         explain:
-          "January 1991, Super Bowl XXV. Giants 20–19. Norwood’s 47-yarder missed right. Buffalo then lost the next three Super Bowls as well. This is the miss people still mime.",
+          "January 1991, Super Bowl XXV. Giants 20-19. Norwood’s 47-yarder missed right. Buffalo then lost the next three Super Bowls as well. This is the miss people still mime.",
       },
       {
         id: "seattle-blowout",
-        prompt: "Which Super Bowl was the 43–8 hammering, Seahawks defence over a record-breaking Broncos attack?",
+        prompt: "Which Super Bowl was the 43-8 hammering, Seahawks defence over a record-breaking Broncos attack?",
         options: [
           "Super Bowl XLVIII",
           "Super Bowl XLIX",
@@ -104,7 +104,7 @@ export const funQuizzes: MiniGame[] = [
         ],
         correctIndex: 0,
         explain:
-          "February 2014. Peyton Manning’s Broncos had just set scoring records. Seattle’s Legion of Boom won 43–8. Linebacker Malcolm Smith was MVP. Super Bowl XLIX, a year later, was the Butler game.",
+          "February 2014. Peyton Manning’s Broncos had just set scoring records. Seattle’s Legion of Boom won 43-8. Linebacker Malcolm Smith was MVP. Super Bowl XLIX, a year later, was the Butler game.",
       },
       {
         id: "brady-first",
@@ -117,7 +117,7 @@ export const funQuizzes: MiniGame[] = [
         ],
         correctIndex: 0,
         explain:
-          "February 2002, Super Bowl XXXVI. New England 20–17 over “The Greatest Show on Turf”. Brady was Super Bowl MVP. The dynasty starts here, not with the later comeback nights.",
+          "February 2002, Super Bowl XXXVI. New England 20-17 over “The Greatest Show on Turf”. Brady was Super Bowl MVP. The dynasty starts here, not with the later comeback nights.",
       },
     ],
   },
@@ -125,7 +125,7 @@ export const funQuizzes: MiniGame[] = [
     slug: "nfl-or-nonsense",
     title: "NFL or nonsense?",
     summary:
-      "Real league lore versus things we invented in the kitchen. If it sounds too daft, check twice — some of the real ones are dafter.",
+      "Real league lore versus things we invented in the kitchen. If it sounds too daft, check twice: some of the real ones are dafter.",
     minutes: 4,
     kind: "fun",
     learnHref: "/mini-games",
@@ -223,7 +223,7 @@ export const funQuizzes: MiniGame[] = [
         options: ["The Catch", "The Helmet Catch", "The Catch II", "The Immaculate Reception"],
         correctIndex: 0,
         explain:
-          "Just “The Catch”. 49ers 28–27 Cowboys. Every later “Catch II” or “Catch III” is admitting this one got there first.",
+          "Just “The Catch”. 49ers 28-27 Cowboys. Every later “Catch II” or “Catch III” is admitting this one got there first.",
       },
       {
         id: "helmet",
@@ -249,7 +249,7 @@ export const funQuizzes: MiniGame[] = [
         options: ["The Immaculate Reception", "The Helmet Catch", "The Music City Miracle", "The Minneapolis Miracle"],
         correctIndex: 0,
         explain:
-          "The Immaculate Reception. Steelers 13–7 Raiders. Oakland still argues whether it touched a Steeler first. Pittsburgh framed the argument and hung it in a museum.",
+          "The Immaculate Reception. Steelers 13-7 Raiders. Oakland still argues whether it touched a Steeler first. Pittsburgh framed the argument and hung it in a museum.",
       },
       {
         id: "obj",
@@ -275,7 +275,7 @@ export const funQuizzes: MiniGame[] = [
         clues: [
           "Super Bowl XLIII, Steelers v Cardinals.",
           "Last minute, back corner of the end zone.",
-          "Santonio Holmes gets both toes down. Pittsburgh 27–23.",
+          "Santonio Holmes gets both toes down. Pittsburgh 27-23.",
         ],
         options: [
           "Holmes’ Super Bowl toe-tap",
@@ -298,7 +298,7 @@ export const funQuizzes: MiniGame[] = [
         options: ["The Minneapolis Miracle", "The Music City Miracle", "The Catch II", "The Immaculate Reception"],
         correctIndex: 0,
         explain:
-          "Minneapolis Miracle. Vikings 29–24 Saints. The next week Philadelphia ended the fairy tale 38–7. The clip still slaps.",
+          "Minneapolis Miracle. Vikings 29-24 Saints. The next week Philadelphia ended the fairy tale 38-7. The clip still slaps.",
       },
       {
         id: "catch-two",
@@ -306,7 +306,7 @@ export const funQuizzes: MiniGame[] = [
         clues: [
           "Wild-card game, January 1999, 49ers v Packers.",
           "Steve Young, last play.",
-          "Terrell Owens, leaping in the end zone. San Francisco 30–27.",
+          "Terrell Owens, leaping in the end zone. San Francisco 30-27.",
         ],
         options: ["The Catch II", "The Catch", "The Helmet Catch", "The Minneapolis Miracle"],
         correctIndex: 0,
@@ -337,7 +337,7 @@ export const funQuizzes: MiniGame[] = [
     slug: "rivalry-radar",
     title: "Rivalry radar",
     summary:
-      "Match the grudge, the nickname, and the other lot. Not a lesson on why they hate each other — just who belongs with whom.",
+      "Match the grudge, the nickname, and the other lot. Not a lesson on why they hate each other, just who belongs with whom.",
     minutes: 4,
     kind: "fun",
     learnHref: "/learn/rivalries",
@@ -407,7 +407,7 @@ export const funQuizzes: MiniGame[] = [
         ],
         correctIndex: 0,
         explain:
-          "February 2013. John Harbaugh’s Ravens beat Jim Harbaugh’s 49ers 34–31. Super Bowl 50 was Denver over Carolina, no brothers required.",
+          "February 2013. John Harbaugh’s Ravens beat Jim Harbaugh’s 49ers 34-31. Super Bowl 50 was Denver over Carolina, no brothers required.",
       },
       {
         id: "saints-falcons",
@@ -423,7 +423,7 @@ export const funQuizzes: MiniGame[] = [
     slug: "jersey-legends",
     title: "Jersey number legends",
     summary:
-      "Famous numbers, famous backs. Who do people mean when they say 12, 80, or 56 — not a kit-history exam.",
+      "Famous numbers, famous backs. Who do people mean when they say 12, 80, or 56? Not a kit-history exam.",
     minutes: 4,
     kind: "fun",
     learnHref: "/learn/famous-players",
@@ -447,7 +447,7 @@ export const funQuizzes: MiniGame[] = [
       },
       {
         id: "lt-56",
-        prompt: "Lawrence Taylor’s Giants number — the one still used as a warning to left tackles?",
+        prompt: "Lawrence Taylor’s Giants number: the one still used as a warning to left tackles?",
         options: ["56", "52", "55", "92"],
         correctIndex: 0,
         explain:
@@ -471,7 +471,7 @@ export const funQuizzes: MiniGame[] = [
       },
       {
         id: "payton-34",
-        prompt: "Sweetness — Walter Payton — wore which number for the Bears?",
+        prompt: "Sweetness (Walter Payton) wore which number for the Bears?",
         options: ["34", "20", "40", "9"],
         correctIndex: 0,
         explain:
@@ -499,7 +499,7 @@ export const funQuizzes: MiniGame[] = [
     slug: "draft-day-chaos",
     title: "Draft day chaos",
     summary:
-      "Memorable picks, trades, and “wait, they took him where?” nights. Fair trivia — not a pile-on.",
+      "Memorable picks, trades, and “wait, they took him where?” nights. Fair trivia, not a pile-on.",
     minutes: 4,
     kind: "fun",
     learnHref: "/learn/the-draft",
@@ -520,7 +520,7 @@ export const funQuizzes: MiniGame[] = [
       },
       {
         id: "eli-trade",
-        prompt: "In 2004 Eli Manning was drafted first overall by which club — then traded to the Giants?",
+        prompt: "In 2004 Eli Manning was drafted first overall by which club, then traded to the Giants?",
         options: ["San Diego Chargers", "New York Giants", "Indianapolis Colts", "Oakland Raiders"],
         correctIndex: 0,
         explain:
@@ -574,7 +574,7 @@ export const funQuizzes: MiniGame[] = [
         ],
         correctIndex: 0,
         explain:
-          "Last pick, full stop. It comes with a parade in Newport Beach and a nickname that is funnier when the player then starts in the NFC Championship — see Brock Purdy, 2022.",
+          "Last pick, full stop. It comes with a parade in Newport Beach and a nickname that is funnier when the player then starts in the NFC Championship (see Brock Purdy, 2022).",
       },
       {
         id: "leaf-1998",
@@ -621,7 +621,7 @@ export const funQuizzes: MiniGame[] = [
         id: "four-twenty-five",
         prompt: "The 4:25pm ET Sunday window is usually what in Britain?",
         options: [
-          "About 9:25pm — Channel 5’s comfort zone",
+          "About 9:25pm: Channel 5’s comfort zone",
           "Breakfast, with toast",
           "Lunchtime in Aberdeen",
           "Tuesday, somehow",
@@ -641,7 +641,7 @@ export const funQuizzes: MiniGame[] = [
         ],
         correctIndex: 0,
         explain:
-          "An 8:15pm ET kick-off is 1:15am UK and a three-hour game lands you near 4:30–5am. Overtime is how people end up texting “I’m fine” to their manager.",
+          "An 8:15pm ET kick-off is 1:15am UK and a three-hour game lands you near 4:30-5am. Overtime is how people end up texting “I’m fine” to their manager.",
       },
       {
         id: "super-bowl-uk",
@@ -660,7 +660,7 @@ export const funQuizzes: MiniGame[] = [
         id: "london-time",
         prompt: "A regular-season London game at Wembley or Tottenham is usually kick-off at…",
         options: [
-          "A civilised afternoon — often about 2:30pm UK",
+          "A civilised afternoon, often about 2:30pm UK",
           "1:20am, to match Sunday Night Football",
           "6am, for the West Coast feed",
           "Whenever the referee’s flight lands",
@@ -701,7 +701,7 @@ export const funQuizzes: MiniGame[] = [
     slug: "logo-colour-call",
     title: "Logo & colour call",
     summary:
-      "Name the club from the kit, the badge, or the helmet habit. Text clues only — no clip art required.",
+      "Name the club from the kit, the badge, or the helmet habit. Text clues only, no clip art required.",
     minutes: 4,
     kind: "fun",
     learnHref: "/teams",
@@ -777,7 +777,7 @@ export const funQuizzes: MiniGame[] = [
     slug: "one-season-wonders",
     title: "One-season wonders & storylines",
     summary:
-      "The years people still bring up: 16–0, 28–3, Mr Irrelevant, Fail Mary. Storylines, not a film-room exam.",
+      "The years people still bring up: 16-0, 28-3, Mr Irrelevant, Fail Mary. Storylines, not a film-room exam.",
     minutes: 4,
     kind: "fun",
     learnHref: "/history",
@@ -785,24 +785,24 @@ export const funQuizzes: MiniGame[] = [
     questions: [
       {
         id: "sixteen-oh",
-        prompt: "The 2007 Patriots went 16–0 in the regular season, then lost the Super Bowl. Who beat them?",
+        prompt: "The 2007 Patriots went 16-0 in the regular season, then lost the Super Bowl. Who beat them?",
         options: ["New York Giants", "Philadelphia Eagles", "New York Jets", "Indianapolis Colts"],
         correctIndex: 0,
         explain:
-          "Giants, Super Bowl XLII, 17–14. The helmet catch lived here. 19–0 died here. New England still won a pile of other Super Bowls. This is the one that got away.",
+          "Giants, Super Bowl XLII, 17-14. The helmet catch lived here. 19-0 died here. New England still won a pile of other Super Bowls. This is the one that got away.",
       },
       {
         id: "falcons-collapse",
-        prompt: "2016 Falcons: 28–3 up in Super Bowl LI. How did the storyline end?",
+        prompt: "2016 Falcons: 28-3 up in Super Bowl LI. How did the storyline end?",
         options: [
           "They lost to the Patriots in overtime",
-          "They hung on 28–24",
+          "They hung on 28-24",
           "The game was voided because of a power cut",
           "They won in overtime on a Matt Ryan run",
         ],
         correctIndex: 0,
         explain:
-          "Lost 34–28 in OT. It is the collapse other collapses are compared to. Atlanta have not been allowed to forget the lead, or the play-calling jokes.",
+          "Lost 34-28 in OT. It is the collapse other collapses are compared to. Atlanta have not been allowed to forget the lead, or the play-calling jokes.",
       },
       {
         id: "foles-2017",
@@ -820,14 +820,14 @@ export const funQuizzes: MiniGame[] = [
       {
         id: "manning-55",
         prompt: "2013: Peyton Manning’s Broncos set scoring records, then met the Seahawks in Super Bowl XLVIII. Scoreline?",
-        options: ["Seahawks 43–8", "Broncos 43–8", "Seahawks 24–21", "Broncos 35–31"],
+        options: ["Seahawks 43-8", "Broncos 43-8", "Seahawks 24-21", "Broncos 35-31"],
         correctIndex: 0,
         explain:
-          "43–8 Seattle. Manning threw 55 regular-season touchdowns, then ran into the Legion of Boom. The storyline was “unstoppable offence”. The film was a defensive highlight reel.",
+          "43-8 Seattle. Manning threw 55 regular-season touchdowns, then ran into the Legion of Boom. The storyline was “unstoppable offence”. The film was a defensive highlight reel.",
       },
       {
         id: "fail-mary",
-        prompt: "The 2012 “Fail Mary” — replacement refs, last play, simultaneous-catch chaos — was which two clubs?",
+        prompt: "The 2012 “Fail Mary” (replacement refs, last play, simultaneous-catch chaos) was which two clubs?",
         options: [
           "Seahawks and Packers",
           "49ers and Saints",
@@ -882,7 +882,7 @@ function assertFunQuizzes(quizzes: MiniGame[]) {
   for (const quiz of quizzes) {
     const count = quiz.questions.length;
     if (count < 6 || count > 10) {
-      throw new Error(`${quiz.slug} should have 6–10 questions, got ${count}`);
+      throw new Error(`${quiz.slug} should have 6-10 questions, got ${count}`);
     }
     if (quiz.kind !== "fun") {
       throw new Error(`${quiz.slug} must be kind: fun`);

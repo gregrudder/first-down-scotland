@@ -14,7 +14,7 @@ const DOT_HALO = "#e8b84a";
 const DOT_STROKE = "#f4efe4";
 const STYLE_OVERRIDE = process.env.NEXT_PUBLIC_FAN_MAP_STYLE?.trim();
 
-/** Dark raster tiles — no OpenFreeMap vector sprites (`circle-11`) or `Regular.pbf` 404s. */
+/** Dark raster tiles. No OpenFreeMap vector sprites (`circle-11`) or `Regular.pbf` 404s. */
 function darkRasterStyle(): maplibregl.StyleSpecification {
   return {
     version: 8,
@@ -29,7 +29,7 @@ function darkRasterStyle(): maplibregl.StyleSpecification {
         tileSize: 256,
         maxzoom: 16,
         attribution:
-          'Tiles &copy; <a href="https://www.esri.com/">Esri</a> — Esri, HERE, Garmin, FAO, NOAA, USGS',
+          'Tiles &copy; <a href="https://www.esri.com/">Esri</a>, Esri, HERE, Garmin, FAO, NOAA, USGS',
       },
     },
     layers: [

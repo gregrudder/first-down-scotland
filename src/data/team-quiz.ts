@@ -111,7 +111,7 @@ export const quizQuestions: QuizQuestion[] = [
     prompt: "How should they play?",
     options: [
       {
-        label: "Score loads. I want highlights, not a 9–6 slog.",
+        label: "Score loads. I want highlights, not a 9-6 slog.",
         weights: { offence: 3 },
       },
       {

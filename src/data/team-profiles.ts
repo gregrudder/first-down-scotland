@@ -49,7 +49,7 @@ export const teamProfiles: TeamProfile[] = [
       "Oldest continuously run pro football club in the US: roots in 1898 Chicago. Charter NFL member in 1920. Moved to St. Louis in 1960, Arizona in 1988.",
     notablePlayers: ["Larry Fitzgerald", "Kurt Warner", "Pat Tillman", "Anquan Boldin"],
     achievements: [
-      "NFL championships in 1925 and 1947 (pre–Super Bowl).",
+      "NFL championships in 1925 and 1947 (pre-Super Bowl).",
       "One Super Bowl appearance: lost XLIII in February 2009.",
     ],
     scotlandHook:
@@ -78,7 +78,7 @@ export const teamProfiles: TeamProfile[] = [
     notablePlayers: ["Julio Jones", "Matt Ryan", "Deion Sanders", "Michael Vick"],
     achievements: [
       "Two Super Bowl appearances: lost XXXIII (1999) and LI (2017).",
-      "Super Bowl LI is the 28–3 collapse: still the first fact many UK viewers learn about them.",
+      "Super Bowl LI is the 28-3 collapse: still the first fact many UK viewers learn about them.",
     ],
     scotlandHook:
       "A big southern city, a falcon on the helmet, and a stadium that looks like a spaceship. Easy to explain in the pub.",
@@ -134,7 +134,7 @@ export const teamProfiles: TeamProfile[] = [
     notablePlayers: ["Jim Kelly", "Thurman Thomas", "Bruce Smith", "Andre Reed"],
     achievements: [
       "Two AFL titles in the mid-1960s.",
-      "Four straight Super Bowl appearances (XXV–XXVIII): all losses. Still waiting on a Lombardi Trophy.",
+      "Four straight Super Bowl appearances (XXV-XXVIII): all losses. Still waiting on a Lombardi Trophy.",
     ],
     scotlandHook:
       "Snow, tea-time kick-offs, and a new 2026 stadium. The most British kind of sporting heartbreak, with better snacks.",
@@ -217,7 +217,7 @@ export const teamProfiles: TeamProfile[] = [
     notablePlayers: ["Anthony Muñoz", "Ken Anderson", "Joe Burrow", "Ja'Marr Chase"],
     achievements: [
       "Three Super Bowl appearances: lost XVI, XXIII, and LVI (February 2022).",
-      "No Super Bowl title yet. The 2020s Burrow–Chase sides brought them back into the conversation.",
+      "No Super Bowl title yet. The 2020s Burrow-Chase sides brought them back into the conversation.",
     ],
     scotlandHook:
       "Tiger stripes you will never lose in a crowd. A midwestern club with late-game drama and a chant you can learn in ten seconds.",
@@ -301,7 +301,7 @@ export const teamProfiles: TeamProfile[] = [
     founded: "AFL original, 1960. NFL from 1970. AFC West.",
     notablePlayers: ["John Elway", "Peyton Manning", "Terrell Davis", "Champ Bailey"],
     achievements: [
-      "Three Super Bowl titles: XXXII and XXXIII (1998–99) plus 50 (February 2016).",
+      "Three Super Bowl titles: XXXII and XXXIII (1998-99) plus 50 (February 2016).",
       "Elway’s late-career titles and Manning’s last season are the two eras beginners meet first.",
     ],
     scotlandHook:
@@ -413,7 +413,7 @@ export const teamProfiles: TeamProfile[] = [
     notablePlayers: ["Peyton Manning", "Johnny Unitas", "Marvin Harrison", "Reggie Wayne"],
     achievements: [
       "Two Super Bowl titles: V (January 1971, as Baltimore) and XLI (February 2007, as Indianapolis).",
-      "The Manning–Dungy years are the modern peak.",
+      "The Manning-Dungy years are the modern peak.",
     ],
     scotlandHook:
       "Royal blue horseshoes. Clean, tidy, and usually on at a human hour for UK viewers.",
@@ -494,10 +494,10 @@ export const teamProfiles: TeamProfile[] = [
       note: "Fixed roof with a skylight; just off the Las Vegas Strip.",
     },
     founded:
-      "1960 AFL in Oakland. Los Angeles 1982–94, Oakland again 1995–2019, Las Vegas from 2020. Same franchise throughout.",
+      "1960 AFL in Oakland. Los Angeles 1982-94, Oakland again 1995-2019, Las Vegas from 2020. Same franchise throughout.",
     notablePlayers: ["Howie Long", "Marcus Allen", "Tim Brown", "Charles Woodson"],
     achievements: [
-      "Three Super Bowl titles: XI, XV and XVIII (1970s–80s).",
+      "Three Super Bowl titles: XI, XV and XVIII (1970s-80s).",
       "Last Super Bowl appearance: XXXVII (lost, 2003).",
     ],
     scotlandHook:
@@ -522,7 +522,7 @@ export const teamProfiles: TeamProfile[] = [
       opened: 2020,
       note: "Shared with the Rams. Listed capacity 70,000; can expand toward 100,000 for huge events.",
     },
-    founded: "1960 AFL in Los Angeles, San Diego 1961–2016, back to Los Angeles in 2017.",
+    founded: "1960 AFL in Los Angeles, San Diego 1961-2016, back to Los Angeles in 2017.",
     notablePlayers: ["Dan Fouts", "LaDainian Tomlinson", "Junior Seau", "Philip Rivers"],
     achievements: [
       "AFL title in 1963. No Super Bowl wins.",
@@ -551,7 +551,7 @@ export const teamProfiles: TeamProfile[] = [
       note: "Shared with the Chargers.",
     },
     founded:
-      "1936 in Cleveland; NFL in 1937. Los Angeles 1946–94, St. Louis 1995–2015, Los Angeles again from 2016.",
+      "1936 in Cleveland; NFL in 1937. Los Angeles 1946-94, St. Louis 1995-2015, Los Angeles again from 2016.",
     notablePlayers: ["Merlin Olsen", "Eric Dickerson", "Marshall Faulk", "Aaron Donald"],
     achievements: [
       "Two Super Bowl titles: XXXIV (January 2000, as St. Louis) and LVI (February 2022, as Los Angeles).",
@@ -626,7 +626,7 @@ export const teamProfiles: TeamProfile[] = [
     primary: "#002244",
     secondary: "#C60C30",
     nicknames:
-      "Officially the Patriots. Often the Pats. Flying Elvis is a nickname for the old helmet logo. The Brady–Belichick years are an era, not a second name.",
+      "Officially the Patriots. Often the Pats. Flying Elvis is a nickname for the old helmet logo. The Brady-Belichick years are an era, not a second name.",
     stadium: {
       name: "Gillette Stadium",
       location: "Foxborough, Massachusetts",
@@ -637,7 +637,7 @@ export const teamProfiles: TeamProfile[] = [
     notablePlayers: ["Tom Brady", "Rob Gronkowski", "John Hannah", "Andre Tippett"],
     achievements: [
       "Six Super Bowl titles: XXXVI, XXXVIII, XXXIX, XLIX, LI and LIII: tied with Pittsburgh for the most.",
-      "Lost Super Bowl LX in February 2026 (29–13 to Seattle), falling short of a record seventh.",
+      "Lost Super Bowl LX in February 2026 (29-13 to Seattle), falling short of a record seventh.",
     ],
     scotlandHook:
       "Navy, a flying Elvis, and two decades of winning that still annoys people. If you started watching in the 2000s, you already know them.",
@@ -693,7 +693,7 @@ export const teamProfiles: TeamProfile[] = [
     notablePlayers: ["Lawrence Taylor", "Eli Manning", "Michael Strahan", "Phil Simms"],
     achievements: [
       "Four Super Bowl titles: XXI, XXV, XLII and XLVI.",
-      "XLII and XLVI were the two giant-killings of the Brady Patriots. Also several pre–Super Bowl NFL titles.",
+      "XLII and XLVI were the two giant-killings of the Brady Patriots. Also several pre-Super Bowl NFL titles.",
     ],
     scotlandHook:
       "Big-city classic. The royal blue from the old Super Bowl clips, and they played in the first regular-season NFL game in London (Wembley, 2007).",
@@ -748,7 +748,7 @@ export const teamProfiles: TeamProfile[] = [
     notablePlayers: ["Reggie White", "Brian Dawkins", "Chuck Bednarik", "Jason Kelce"],
     achievements: [
       "Two Super Bowl titles: LII (February 2018) and LIX (February 2025).",
-      "LIX was 40–22 over the Chiefs in New Orleans, stopping a Kansas City three-peat.",
+      "LIX was 40-22 over the Chiefs in New Orleans, stopping a Kansas City three-peat.",
     ],
     scotlandHook:
       "Midnight green and a famously loyal crowd. They will adopt you if you adopt them: the loud-end, scarf-up option.",
@@ -832,7 +832,7 @@ export const teamProfiles: TeamProfile[] = [
     notablePlayers: ["Steve Largent", "Walter Jones", "Richard Sherman", "Russell Wilson"],
     achievements: [
       "Two Super Bowl titles: XLVIII (February 2014) and LX (February 2026).",
-      "LX was 29–13 over New England at Levi’s Stadium; Kenneth Walker III was named MVP. Lost XLIX on the famous goal-line interception.",
+      "LX was 29-13 over New England at Levi’s Stadium; Kenneth Walker III was named MVP. Lost XLIX on the famous goal-line interception.",
     ],
     scotlandHook:
       "Rain, navy, and that wild neon green. The most Pacific-Northwest, almost-Scottish pick, and the reigning champions as the 2026 season opened.",
@@ -915,7 +915,7 @@ export const teamProfiles: TeamProfile[] = [
     founded: "1932 in Boston; Washington from 1937. Commanders name from 2022.",
     notablePlayers: ["Joe Gibbs (coach)", "John Riggins", "Darrell Green", "Art Monk"],
     achievements: [
-      "Three Super Bowl titles: XVII, XXII and XXVI (1980s–early 90s), all under Joe Gibbs.",
+      "Three Super Bowl titles: XVII, XXII and XXVI (1980s-early 90s), all under Joe Gibbs.",
       "No Super Bowl appearances in the 2000s or 2010s.",
     ],
     scotlandHook:

@@ -65,7 +65,7 @@ function SearchFallback({
       <p className="text-sm leading-6 text-cream-dim">
         {loading
           ? "Looking for an official NFL clip to play here."
-          : "No official clip pinned yet. NFL YouTube search for this match-up — titles and thumbnails there often name the winner or the score."}
+          : "No official clip pinned yet. NFL YouTube search for this match-up: titles and thumbnails there often name the winner or the score."}
       </p>
       <p className="mt-2 text-sm">
         <a
@@ -154,13 +154,13 @@ function SpoilerSafePoster({
         className="block w-full text-left"
         aria-haspopup="dialog"
         aria-expanded={confirming}
-        aria-label="Highlights ready. Tap after watching — this may reveal the result."
+        aria-label="Highlights ready. Tap after watching. This may reveal the result."
       >
-        {/* Static branded asset only — never a YouTube thumbnail. */}
+        {/* Static branded asset only: never a YouTube thumbnail. */}
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src={SPOILER_FREE_POSTER}
-          alt="Highlights — tap after watching"
+          alt="Highlights: tap after watching"
           width={1280}
           height={720}
           className="aspect-video w-full object-cover"

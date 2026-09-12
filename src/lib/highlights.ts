@@ -65,7 +65,7 @@ export function isYoutubeVideoId(value: string): boolean {
   return YOUTUBE_VIDEO_ID_RE.test(value);
 }
 
-/** Privacy-enhanced embed. No autoplay — the poster frame is still YouTube chrome. */
+/** Privacy-enhanced embed. No autoplay. The poster frame is still YouTube chrome. */
 export function youtubeEmbedSrc(videoId: string): string {
   const params = new URLSearchParams({
     rel: "0",
@@ -226,7 +226,7 @@ function publishedAfterParam(kickoffUtc: string | undefined): string | undefined
 }
 
 /**
- * Resolve an embeddable official clip. Never returns titles or thumbnails —
+ * Resolve an embeddable official clip. Never returns titles or thumbnails:
  * those nearly always name the winner or the score.
  *
  * No `YOUTUBE_API_KEY`: skip the Data API and return the NFL search URL only.

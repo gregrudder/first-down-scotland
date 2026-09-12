@@ -6,7 +6,7 @@ import { getMiniGamesByKind, miniGamesIntro, type MiniGame } from "@/data/mini-g
 export const metadata: Metadata = {
   title: "Mini Games",
   description:
-    "Short browser games for UK NFL fans: beginner quizzes plus fun trivia — Super Bowls, catches, rivalries, jersey numbers, and late-night kick-off survival.",
+    "Short browser games for UK NFL fans: beginner quizzes plus fun trivia. Super Bowls, catches, rivalries, jersey numbers, and late-night kick-off survival.",
 };
 
 function GameGrid({

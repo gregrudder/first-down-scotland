@@ -56,7 +56,7 @@ export default async function ScoreHistoryPage() {
         <h2 className="mt-2 font-display text-2xl text-cream">A stored table, not a guess</h2>
         <p className="mt-3 text-sm leading-6 text-cream-dim">
           {scoreHistoryMeta.gameCount.toLocaleString("en-GB")} completed games,{" "}
-          {scoreHistoryMeta.seasonFrom}–{scoreHistoryMeta.seasonTo}, from the public{" "}
+          {scoreHistoryMeta.seasonFrom}-{scoreHistoryMeta.seasonTo}, from the public{" "}
           <a href={scoreHistoryMeta.sourceRepo} className="text-gold">
             nflverse / nfldata
           </a>{" "}

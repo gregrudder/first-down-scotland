@@ -22,7 +22,10 @@ export function TownPanel({
           : "No watch-party interest logged yet."}
       </p>
       <p className="mt-2 text-sm text-cream-dim">
-        {town.fansWithin15Miles} fans within about 15 miles (town centres, not home addresses).
+        {town.fansWithin15Miles === 1
+          ? "1 fan within about 15 miles"
+          : `${town.fansWithin15Miles} fans within about 15 miles`}{" "}
+        (town centres, not home addresses).
       </p>
 
       {town.teams && town.leadingTeam ? (
@@ -46,7 +49,8 @@ export function TownPanel({
         </div>
       ) : (
         <p className="mt-4 rounded-xl border border-dashed border-line bg-navy px-3 py-3 text-sm leading-6 text-cream-dim">
-          Per-team split stays hidden until this town has at least {privacyThreshold} fans.
+          Per-team split stays hidden until this town has at least{" "}
+          {privacyThreshold === 1 ? "1 fan" : `${privacyThreshold} fans`}.
           Totals still count.
         </p>
       )}

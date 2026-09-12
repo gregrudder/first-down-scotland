@@ -23,7 +23,7 @@ export function ScoreGameRow({ game }: { game: ScoreGame }) {
         {game.homeScore}
       </p>
       <p className="mt-1 text-xs text-cream-dim">
-        {game.away} {game.awayScore}–{game.home} {game.homeScore}
+        {game.away} {game.awayScore}-{game.home} {game.homeScore}
       </p>
     </article>
   );

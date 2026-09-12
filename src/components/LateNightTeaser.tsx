@@ -10,7 +10,7 @@ export function LateNightTeaser({ games }: { games: NflGame[] }) {
     <aside className="rounded-2xl border border-gold/30 bg-navy-3 px-5 py-4">
       <p className="text-sm font-semibold text-gold">Late Night Diary</p>
       <p className="mt-2 text-sm leading-6 text-cream">
-        Games that kick off at 9pm UK or later, or in the small hours — so you can
+        Games that kick off at 9pm UK or later, or in the small hours, so you can
         plan a nap or a day off.
       </p>
       {late.length === 0 ? (
@@ -33,8 +33,8 @@ export function LateNightTeaser({ games }: { games: NflGame[] }) {
         </ul>
       )}
       <p className="mt-3 text-xs leading-5 text-cream-dim">
-        This week’s late ones only. The diary has the full slate from today —
-        schedule subject to change.
+        This week’s late ones only. The diary has the full slate from today.
+        Schedule subject to change.
       </p>
       <Link href="/late-night-diary" className="mt-2 inline-block text-sm font-semibold text-gold">
         Open the full Late Night Diary →

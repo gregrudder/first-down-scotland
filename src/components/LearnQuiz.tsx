@@ -68,7 +68,7 @@ export function LearnQuiz() {
             >
               <p className="font-semibold text-cream">{entry.name}</p>
               <p className="mt-1 text-xs uppercase tracking-[0.12em] text-gold">
-                {entry.min}–{entry.max} / {LEARN_QUIZ_TOTAL}
+                {entry.min}-{entry.max} / {LEARN_QUIZ_TOTAL}
               </p>
             </li>
           ))}
@@ -136,7 +136,7 @@ export function LearnQuiz() {
             <li key={entry.id} className="rounded-2xl border border-line bg-navy-2 px-4 py-3">
               <p className="font-semibold text-cream">{entry.name}</p>
               <p className="mt-1 text-xs uppercase tracking-[0.12em] text-gold">
-                {entry.min}–{entry.max} / {LEARN_QUIZ_TOTAL}
+                {entry.min}-{entry.max} / {LEARN_QUIZ_TOTAL}
               </p>
             </li>
           ))}

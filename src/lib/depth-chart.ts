@@ -50,7 +50,7 @@ function asNumber(value: unknown): number | undefined {
 
 function nflSeasonYear(now = new Date()): number {
   const year = now.getUTCFullYear();
-  // Jan–Feb is still the previous NFL season.
+  // Jan-Feb is still the previous NFL season.
   return now.getUTCMonth() < 2 ? year - 1 : year;
 }
 

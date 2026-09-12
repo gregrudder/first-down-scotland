@@ -32,9 +32,9 @@ export type NationFilterId = (typeof NATION_FILTERS)[number]["id"];
 
 export const YEARS_FOLLOWING = [
   { id: "new", label: "New this season" },
-  { id: "1-2", label: "1–2 years" },
-  { id: "3-5", label: "3–5 years" },
-  { id: "6-10", label: "6–10 years" },
+  { id: "1-2", label: "1-2 years" },
+  { id: "3-5", label: "3-5 years" },
+  { id: "6-10", label: "6-10 years" },
   { id: "10+", label: "10+ years" },
 ] as const;
 

@@ -237,7 +237,7 @@ const downsQuestions: MiniGameQuestion[] = [
     ],
     correctIndex: 0,
     explain:
-      "Around the opponent’s 35–40, a field goal is 50-plus yards and a punt might be a squib. That is why you see more “go for it” calls here than on your own 20.",
+      "Around the opponent’s 35-40, a field goal is 50-plus yards and a punt might be a squib. That is why you see more “go for it” calls here than on your own 20.",
   },
 ];
 
@@ -260,7 +260,7 @@ const rivalryQuestions: MiniGameQuestion[] = [
     ],
     correctIndex: 1,
     explain:
-      "31 December 1967 at Lambeau Field, about −25°C. Bart Starr sneaked over. Green Bay 21–17 Dallas.",
+      "31 December 1967 at Lambeau Field, about −25°C. Bart Starr sneaked over. Green Bay 21-17 Dallas.",
   },
   {
     id: "immaculate",
@@ -273,7 +273,7 @@ const rivalryQuestions: MiniGameQuestion[] = [
     ],
     correctIndex: 0,
     explain:
-      "Franco Harris scooped a deflected pass. Pittsburgh 13–7 Oakland. Raiders supporters still argue it.",
+      "Franco Harris scooped a deflected pass. Pittsburgh 13-7 Oakland. Raiders supporters still argue it.",
   },
   {
     id: "the-catch",
@@ -285,7 +285,7 @@ const rivalryQuestions: MiniGameQuestion[] = [
       "The 2013 NFC Championship",
     ],
     correctIndex: 1,
-    explain: "January 1982. San Francisco 28–27 Dallas. The 49ers then won Super Bowl XVI.",
+    explain: "January 1982. San Francisco 28-27 Dallas. The 49ers then won Super Bowl XVI.",
   },
   {
     id: "sherman",
@@ -293,7 +293,7 @@ const rivalryQuestions: MiniGameQuestion[] = [
     options: ["Seahawks", "49ers", "Rams", "Packers"],
     correctIndex: 1,
     explain:
-      "January 2014 in Seattle. Sherman tipped Kaepernick’s throw for Crabtree. Seattle 23–17 San Francisco, then Super Bowl XLVIII.",
+      "January 2014 in Seattle. Sherman tipped Kaepernick’s throw for Crabtree. Seattle 23-17 San Francisco, then Super Bowl XLVIII.",
   },
   {
     id: "bounty",
@@ -301,7 +301,7 @@ const rivalryQuestions: MiniGameQuestion[] = [
     options: ["Eagles and Cowboys", "Giants and Eagles", "Chiefs and Raiders", "Browns and Steelers"],
     correctIndex: 0,
     explain:
-      "Philadelphia won 27–0 in Dallas. Buddy Ryan was accused of putting money on hurting Cowboys players.",
+      "Philadelphia won 27-0 in Dallas. Buddy Ryan was accused of putting money on hurting Cowboys players.",
   },
   {
     id: "meadowlands",
@@ -309,7 +309,7 @@ const rivalryQuestions: MiniGameQuestion[] = [
     options: ["Giants", "Eagles", "Cowboys", "Jets"],
     correctIndex: 1,
     explain:
-      "DeSean Jackson ran a punt back as the clock hit zero. Philadelphia 38–31 New York, after trailing 31–10.",
+      "DeSean Jackson ran a punt back as the clock hit zero. Philadelphia 38-31 New York, after trailing 31-10.",
   },
   {
     id: "afc-west-afl",

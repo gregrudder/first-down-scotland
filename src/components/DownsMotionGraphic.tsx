@@ -190,7 +190,7 @@ function SceneArt({
             fontWeight="800"
             fontFamily="ui-sans-serif, system-ui, sans-serif"
           >
-            PUNT — kick it away
+            PUNT: kick it away
           </text>
         </g>
       ) : null}

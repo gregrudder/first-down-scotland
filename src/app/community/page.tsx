@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { DiscordCta } from "@/components/DiscordCta";
 import { PageIntro } from "@/components/PageIntro";
+import { schemeBattlesHook } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Community",
@@ -44,11 +45,13 @@ export default function CommunityPage() {
         <p className="text-xs font-semibold tracking-[0.16em] text-gold uppercase">
           NFL Scheme Battles
         </p>
-        <h2 className="mt-2 font-display text-2xl text-cream">Who owns Scotland?</h2>
+        <h2 className="mt-2 font-display text-2xl text-cream">{schemeBattlesHook}</h2>
         <p className="mt-3 text-base leading-7 text-cream-dim">
-          Discord is the chat. The fan map is the live fight: Scottish towns
-          first, then the rest of the UK, so you can see which NFL club
-          actually owns the scheme — the local area — where you live.
+          Discord is the chat. The fan map is the live fight: choose your team,
+          put your town on the map, and find your NFL community. Scotland first
+          (Wishaw, Motherwell, East Kilbride, Paisley, Dundee), then the rest of
+          the UK, so you can see which NFL club actually runs the scheme (the
+          local area) where you live.
         </p>
         <p className="mt-4 text-sm">
           <Link href="/fan-map" className="font-semibold text-gold">

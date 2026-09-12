@@ -9,7 +9,7 @@ export function contactEmail(): string {
 export function listingMailto(): string {
   const subject = encodeURIComponent("Meetup partner: First Down Scotland");
   const body = encodeURIComponent(
-    "Hi Greg: we would like to be the Glasgow / Edinburgh meetup partner for First Down Scotland — a city home for Scottish NFL fans, not a free-tab pitch.\n\nPub name:\nCity (Glasgow or Edinburgh):\nWhat you already show (e.g. RedZone Sundays):\n",
+    "Hi Greg: we would like to be the Glasgow / Edinburgh meetup partner for First Down Scotland: a city home for Scottish NFL fans, not a free-tab pitch.\n\nPub name:\nCity (Glasgow or Edinburgh):\nWhat you already show (e.g. RedZone Sundays):\n",
   );
   return `mailto:${contactEmail()}?subject=${subject}&body=${body}`;
 }

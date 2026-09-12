@@ -92,16 +92,16 @@ describe("flipBanter", () => {
       "That’s the Packers’ scheme now. Wishaw used to be Seahawks turf.",
     );
     assert.equal(
-      fillFlipTemplate("🚨 {A} TAKE {TOWN} — {B} out the scheme", "SF", "GB", "Motherwell"),
-      "🚨 Packers TAKE MOTHERWELL — 49ers out the scheme",
+      fillFlipTemplate("🚨 {A} TAKE {TOWN}: {B} out the scheme", "SF", "GB", "Motherwell"),
+      "🚨 Packers TAKE MOTHERWELL: 49ers out the scheme",
     );
     assert.equal(
-      fillFlipTemplate("{B} are on the run — the {A} have took over {town}.", "SF", "GB", "Motherwell"),
-      "49ers are on the run — the Packers have took over Motherwell.",
+      fillFlipTemplate("{B} are on the run. The {A} have took over {town}.", "SF", "GB", "Motherwell"),
+      "49ers are on the run. The Packers have took over Motherwell.",
     );
     assert.equal(
-      fillFlipTemplate("{B} on the run — {A} just took over {town}.", "SF", "GB", "Wishaw"),
-      "49ers on the run — Packers just took over Wishaw.",
+      fillFlipTemplate("{B} on the run. {A} just took over {town}.", "SF", "GB", "Wishaw"),
+      "49ers on the run. Packers just took over Wishaw.",
     );
     assert.equal(
       fillFlipTemplate("The {B} take an L as their scheme has been taken over by the {A}.", "SF", "GB", "Motherwell"),
@@ -119,8 +119,8 @@ describe("flipBanter", () => {
       "Dolphins just put Wishaw on the map. This scheme’s spoken for.",
     );
     assert.equal(
-      fillFlipTemplate("{town} claimed — {A} are running it.", null, "MIA", "Wishaw"),
-      "Wishaw claimed — Dolphins are running it.",
+      fillFlipTemplate("{town} claimed. {A} are running it.", null, "MIA", "Wishaw"),
+      "Wishaw claimed. Dolphins are running it.",
     );
   });
 

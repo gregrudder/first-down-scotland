@@ -26,11 +26,11 @@ export const pubs: PubListing[] = [];
 export const meetupPartnerCities = [
   {
     city: "Glasgow",
-    note: "One meetup partner — a city home for Scottish NFL fans. The listing will land here once it is confirmed.",
+    note: "One meetup partner: a city home for Scottish NFL fans. The listing will land here once it is confirmed.",
   },
   {
     city: "Edinburgh",
-    note: "One meetup partner — a city home for Scottish NFL fans. The listing will land here once it is confirmed.",
+    note: "One meetup partner: a city home for Scottish NFL fans. The listing will land here once it is confirmed.",
   },
 ] as const;
 

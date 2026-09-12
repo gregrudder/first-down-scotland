@@ -127,7 +127,7 @@ export default function PrivacyPage() {
               following the NFL and watch-party interest. We do not store your
               name, email, postcode, street, phone GPS or a free-text address.
               One pin per browser cookie; you can update it. The public map
-              never shows individual pins — only town-level totals. A town
+              never shows individual pins, only town-level totals. A town
               needs at least three registrations (unless we raise that
               threshold) before we show which teams those fans support.
             </li>
@@ -169,7 +169,7 @@ export default function PrivacyPage() {
           </p>
           <ul className="mt-4 list-disc space-y-3 pl-5">
             <li>
-              <strong className="text-cream">Legitimate interests</strong> — to
+              <strong className="text-cream">Legitimate interests</strong>: to
               operate an independent fan site, keep the feedback inbox usable,
               and understand aggregated use through Vercel’s privacy-minded
               analytics. We do not think those interests override your rights:
@@ -177,7 +177,7 @@ export default function PrivacyPage() {
               you ourselves.
             </li>
             <li>
-              <strong className="text-cream">Consent</strong> — for
+              <strong className="text-cream">Consent</strong>: for
               non-essential cookies and similar tech used for advertising,
               including Google AdSense and any Google consent / CMP tools,{" "}
               <em>when those are enabled</em>. You can withdraw that consent
@@ -230,7 +230,7 @@ export default function PrivacyPage() {
             <li>
               <strong className="text-cream">Advertising (when
               enabled).</strong> Google AdSense may set cookies to show ads,
-              measure them, and — if you consent — personalise them. A Google
+              measure them, and (if you consent) personalise them. A Google
               consent / CMP banner will be the place to manage that once ads
               are live. The AdSense publisher script is on the site so Google can
               verify the property. Auto ads and a consent banner are not on yet.
@@ -267,43 +267,43 @@ export default function PrivacyPage() {
           </p>
           <ul className="mt-4 list-disc space-y-3 pl-5">
             <li>
-              <strong className="text-cream">Vercel</strong> — hosting, Web
+              <strong className="text-cream">Vercel</strong>: hosting, Web
               Analytics and Speed Insights.
             </li>
             <li>
-              <strong className="text-cream">Formspree and/or Resend</strong> —
+              <strong className="text-cream">Formspree and/or Resend</strong>:
               deliver the feedback form to Greg. Which one runs depends
               on server settings.
             </li>
             <li>
-              <strong className="text-cream">Neon / Vercel Postgres</strong> —
+              <strong className="text-cream">Neon / Vercel Postgres</strong>:
               stores anonymous fan-map pins and town-ownership flips when the
               map is wired up.
             </li>
             <li>
-              <strong className="text-cream">Town search</strong> — Geoapify,
+              <strong className="text-cream">Town search</strong>: Geoapify,
               Photon (Komoot) or Nominatim, depending on settings. They see the
               town name you typed so we can offer UK autocomplete. We do not
               send them your email.
             </li>
             <li>
-              <strong className="text-cream">Cloudflare Turnstile</strong> —
+              <strong className="text-cream">Cloudflare Turnstile</strong>:
               captcha on the fan-map add form when those keys are set. Cloudflare
               sees the captcha token, not your town choice.
             </li>
             <li>
-              <strong className="text-cream">Google</strong> — YouTube embeds
+              <strong className="text-cream">Google</strong>: YouTube embeds
               and search links today; AdSense and a consent / CMP{" "}
               <em>when enabled</em>.
             </li>
             <li>
-              <strong className="text-cream">Discord</strong> — the community
+              <strong className="text-cream">Discord</strong>: the community
               chat is off-site. Joining uses Discord’s own terms and privacy
               notice. We do not run in-app chat.
             </li>
             <li>
               <strong className="text-cream">ESPN, Sleeper, RSS
-              publishers, nflverse</strong> — public scores, standings,
+              publishers, nflverse</strong>: public scores, standings,
               rookies, news headlines and historical finals. Those calls are
               made by our servers for the page you asked for. They are not a
               way we send them your name.
@@ -383,7 +383,7 @@ export default function PrivacyPage() {
           <p className="mt-4">
             Vercel, Formspree, Resend and Google are organisations that may
             process data in the United States and other countries. Where that
-            happens, those providers typically rely on the UK–US data bridge,
+            happens, those providers typically rely on the UK-US data bridge,
             Standard Contractual Clauses, or another lawful transfer tool. We
             do not run our own servers outside the host’s platform.
           </p>
@@ -392,8 +392,8 @@ export default function PrivacyPage() {
         <section>
           <h2 className="font-display text-3xl text-cream">Changes to this policy</h2>
           <p className="mt-4">
-            If we change how we collect or use information — including turning
-            on AdSense or a consent banner — we will update this page and the
+            If we change how we collect or use information, including turning
+            on AdSense or a consent banner, we will update this page and the
             date at the top. Material changes will be described here in plain
             English.
           </p>

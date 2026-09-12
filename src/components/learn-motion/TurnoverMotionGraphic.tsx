@@ -153,7 +153,7 @@ export function TurnoverMotionGraphic() {
       describe={(step) =>
         `${step.title}. ${step.caption} Cream circles are offence. Dark circles with gold letters are defence. The oval is the ball.`
       }
-      figcaption="An interception is a catch by the defence. A fumble is a dropped or stripped ball — whoever falls on it, owns it. Either way, possession flips without a kick."
+      figcaption="An interception is a catch by the defence. A fumble is a dropped or stripped ball: whoever falls on it, owns it. Either way, possession flips without a kick."
       defs={(prefix) => <ArrowDefs prefix={prefix} />}
     >
       {(ctx) => <Scene {...ctx} />}

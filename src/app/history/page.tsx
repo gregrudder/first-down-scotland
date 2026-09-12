@@ -7,7 +7,7 @@ import { historyBeats, historyIntro, historySourcesNote } from "@/data/nfl-histo
 export const metadata: Metadata = {
   title: "NFL history",
   description:
-    "A short NFL history for UK beginners: origins, the AFL–NFL merger, the Super Bowl era, expansion, and London games.",
+    "A short NFL history for UK beginners: origins, the AFL-NFL merger, the Super Bowl era, expansion, and London games.",
 };
 
 export default function HistoryPage() {

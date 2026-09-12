@@ -36,7 +36,7 @@ export const turnoverSteps: TurnoverStep[] = [
   {
     id: "interception",
     scene: "interception",
-    title: "Interception — they have the ball",
+    title: "Interception: they have the ball",
     caption:
       "Caught by the defence. Possession has flipped in one play. The player who caught it can run the other way until they are tackled.",
     call: "INTERCEPTION",

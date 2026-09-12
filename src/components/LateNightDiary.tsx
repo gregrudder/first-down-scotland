@@ -84,7 +84,7 @@ export function LateNightDiary({
         <p className="text-sm font-semibold text-gold">What counts as late</p>
         <p className="mt-2 text-sm leading-6 text-cream">{LATE_THRESHOLD_COPY}</p>
         <p className="mt-2 text-sm leading-6 text-cream-dim">
-          Times are Europe/London (BST or GMT). This page is kick-off times only —
+          Times are Europe/London (BST or GMT). This page is kick-off times only:
           no scores, even if spoiler-free is off. For the full Sunday card see{" "}
           <Link href="/this-week" className="text-gold">
             This week
@@ -227,7 +227,7 @@ export function LateNightDiary({
           </h2>
           <p className="mt-3 max-w-xl text-sm leading-6 text-cream-dim">
             {filter === "mine" && team
-              ? `Nothing late remains for ${team.shortName} on the slate as of ${checkDayLabel}. Their next game might be the early Sunday window — around 6pm UK — which this diary skips.`
+              ? `Nothing late remains for ${team.shortName} on the slate as of ${checkDayLabel}. Their next game might be the early Sunday window (around 6pm UK), which this diary skips.`
               : `The live scoreboard has nothing late from ${checkDayLabel} forward. That is usually an off-week, a London afternoon, or a gap while the next slate is published.`}
           </p>
           {filter === "mine" && team ? (

@@ -148,7 +148,7 @@ export async function POST(request: Request) {
       {
         error: updating
           ? "A few updates at a time is plenty. Try again later."
-          : "Easy — one new pin per fan is plenty. Try again later.",
+          : "Easy: one new pin per fan is plenty. Try again later.",
       },
       { status: 429, headers: { "Retry-After": String(slot.retryAfterSec) } },
     );
