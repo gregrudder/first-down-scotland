@@ -37,7 +37,7 @@ export function Moving({
   );
 }
 
-export function Football({ label = "Ball" }: { label?: string }) {
+export function Football({ label = "Ball" }: { label?: string | null }) {
   return (
     <g>
       <ellipse rx="11" ry="7.2" fill="#c47a2c" stroke="#e8b84a" strokeWidth="1.6" />
@@ -51,17 +51,19 @@ export function Football({ label = "Ball" }: { label?: string }) {
           strokeLinecap="round"
         />
       ))}
-      <text
-        x="0"
-        y="22"
-        textAnchor="middle"
-        fill="#f4efe4"
-        fontSize="10"
-        fontWeight="700"
-        fontFamily="ui-sans-serif, system-ui, sans-serif"
-      >
-        {label}
-      </text>
+      {label ? (
+        <text
+          x="0"
+          y="22"
+          textAnchor="middle"
+          fill="#f4efe4"
+          fontSize="10"
+          fontWeight="700"
+          fontFamily="ui-sans-serif, system-ui, sans-serif"
+        >
+          {label}
+        </text>
+      ) : null}
     </g>
   );
 }

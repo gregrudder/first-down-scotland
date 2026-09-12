@@ -8,13 +8,13 @@ import { ArrowDefs, Football, Moving, PlayBoard, ScoreBadge } from "./primitives
 
 const spots = {
   qb: { x: 156, y: 196 },
-  wr: { x: 280, y: 70 },
+  wr: { x: 292, y: 64 },
   cbStart: { x: 268, y: 96 },
-  cbPick: { x: 248, y: 86 },
+  cbPick: { x: 236, y: 92 },
   cbReturn: { x: 200, y: 150 },
   carrier: { x: 176, y: 196 },
-  loose: { x: 196, y: 168 },
-  recover: { x: 204, y: 168 },
+  loose: { x: 196, y: 150 },
+  recover: { x: 220, y: 96 },
   defender: { x: 220, y: 118 },
 };
 
@@ -108,10 +108,8 @@ function Scene({ step, animate, markerPrefix }: { step: TurnoverStep; animate: b
         />
       </Moving>
 
-      <Moving x={ball.x} y={ball.y} animate={animate}>
-        <g transform="translate(0 -16)">
-          <Football label={step.possession === "loose" ? "Loose" : "Ball"} />
-        </g>
+      <Moving x={ball.x} y={ball.y - 20} animate={animate}>
+        <Football label={step.possession === "loose" ? "Loose" : null} />
       </Moving>
 
       {step.call === "INTERCEPTION" ? <ScoreBadge x={180} y={24} text="PICK" width={100} /> : null}

@@ -7,23 +7,24 @@ import { LearnMotionGraphic } from "./LearnMotionGraphic";
 import { ArrowDefs, Moving, PlayBoard, ScoreBadge, lerp } from "./primitives";
 
 const rushers = [
-  { id: "de-l", label: "DE", from: { x: 96, y: 118 }, to: { x: 128, y: 184 } },
-  { id: "dt-l", label: "DT", from: { x: 132, y: 118 }, to: { x: 148, y: 184 } },
-  { id: "dt-r", label: "DT", from: { x: 180, y: 118 }, to: { x: 168, y: 184 } },
-  { id: "de-r", label: "DE", from: { x: 216, y: 118 }, to: { x: 186, y: 184 } },
+  { id: "de-l", label: "DE", from: { x: 96, y: 118 }, to: { x: 118, y: 150 } },
+  { id: "dt-l", label: "DT", from: { x: 132, y: 118 }, to: { x: 142, y: 150 } },
+  { id: "dt-r", label: "DT", from: { x: 180, y: 118 }, to: { x: 170, y: 150 } },
+  { id: "de-r", label: "DE", from: { x: 216, y: 118 }, to: { x: 194, y: 150 } },
 ] as const;
 
 function Scene({ step, animate, markerPrefix }: { step: PocketStep; animate: boolean; markerPrefix: string }) {
   const qb = { x: 156, y: step.sack ? 214 : 204 };
-  const rx = lerp(58, 28, step.rush);
-  const ry = lerp(40, 20, step.rush);
+  const rx = lerp(58, 32, step.rush);
+  const ry = lerp(40, 22, step.rush);
+  const pocketY = lerp(200, 208, step.rush);
 
   return (
     <>
       <PlayBoard />
       <ellipse
         cx={156}
-        cy={200}
+        cy={pocketY}
         rx={rx}
         ry={ry}
         fill="rgba(232,184,74,0.12)"
@@ -33,7 +34,7 @@ function Scene({ step, animate, markerPrefix }: { step: PocketStep; animate: boo
       />
       <text
         x={156}
-        y={200 + ry + 16}
+        y={pocketY + ry + 16}
         textAnchor="middle"
         fill="#e8b84a"
         fontSize="11"

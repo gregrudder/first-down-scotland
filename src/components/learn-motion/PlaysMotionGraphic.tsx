@@ -200,10 +200,8 @@ function Scene({ step, animate, markerPrefix }: { step: PlaysStep; animate: bool
         return <PlayerMark key={marker.id} marker={marker} />;
       })}
 
-      <Moving x={ball.x} y={ball.y} animate={animate}>
-        <g transform="translate(0 -14)">
-          <Football />
-        </g>
+      <Moving x={ball.x} y={ball.y - 20} animate={animate}>
+        <Football label={null} />
       </Moving>
     </>
   );

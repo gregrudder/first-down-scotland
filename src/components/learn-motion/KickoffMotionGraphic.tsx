@@ -27,9 +27,9 @@ function ballPos(step: KickoffStep) {
     case "flight":
       return { x: xAt(70), y: FIELD_Y + 10 };
     case "catch":
-      return { x: xAt(100), y: BALL_Y };
+      return { x: xAt(100), y: BALL_Y - 26 };
     case "return":
-      return { x: xAt(78), y: BALL_Y };
+      return { x: xAt(78), y: BALL_Y - 26 };
   }
 }
 

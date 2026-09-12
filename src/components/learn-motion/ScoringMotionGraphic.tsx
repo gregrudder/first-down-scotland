@@ -36,6 +36,18 @@ function Scene({ step, animate, markerPrefix }: { step: ScoringStep; animate: bo
         footer="Attacking the end zone → · posts at the back of the paint"
       />
       <GoalPosts x={xAt(110)} />
+      <text
+        x={(xAt(100) + xAt(110)) / 2}
+        y={FIELD_Y + FIELD_H / 2 + 4}
+        textAnchor="middle"
+        fill="#e8b84a"
+        fontSize="13"
+        fontWeight="800"
+        fontFamily="ui-sans-serif, system-ui, sans-serif"
+        opacity="0.85"
+      >
+        END ZONE
+      </text>
 
       {step.showKicker ? (
         <g>
