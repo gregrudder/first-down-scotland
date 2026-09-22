@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { EditorialNote } from "@/components/EditorialNote";
+import { GuideTeaser } from "@/components/GuideTeaser";
 import { PageIntro } from "@/components/PageIntro";
 import { UkKickoffHelper } from "@/components/UkKickoffHelper";
 import { watchDisclaimer, watchOptions, watchTips } from "@/data/watch";
@@ -24,7 +26,18 @@ export default function WatchPage() {
           </Link>
           .
         </p>
+        <p>
+          The cards below are the short map for the 2026 season: which homes
+          exist, and what they are usually for. They are not a promise that
+          your team is on a given channel this Sunday. The longer explanation,
+          including how a US kick-off becomes a UK bedtime, is the watch guide.
+        </p>
+        <EditorialNote />
       </PageIntro>
+
+      <div className="mt-10 max-w-3xl">
+        <GuideTeaser slug="how-to-watch-the-nfl-in-the-uk" />
+      </div>
 
       <div className="mt-10">
         <UkKickoffHelper showFixturesLink />

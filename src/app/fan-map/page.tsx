@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { FanMapExplorer } from "@/components/fan-map/FanMapExplorer";
+import { EditorialNote } from "@/components/EditorialNote";
+import { GuideTeaser } from "@/components/GuideTeaser";
 import { PageIntro } from "@/components/PageIntro";
 import { getPublicFanMap } from "@/lib/fan-map/data";
 import { absoluteUrl, schemeBattlesHook } from "@/lib/site";
@@ -31,9 +33,19 @@ export default async function FanMapPage() {
           {thresholdFans} is owned by the leading club. Flips hit the territory
           feed. No sign-up.
         </p>
+        <p>
+          The public map shows towns, not people. By default we wait until a
+          few fans from the same town have registered before we show which
+          clubs they follow. The guide explains the rules, and what we never
+          store.
+        </p>
+        <EditorialNote />
       </PageIntro>
       <div className="mt-10">
         <FanMapExplorer data={data} />
+      </div>
+      <div className="mt-10 max-w-3xl">
+        <GuideTeaser slug="what-is-scheme-battles" />
       </div>
     </div>
   );

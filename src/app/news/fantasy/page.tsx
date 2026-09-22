@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { GuideTeaser } from "@/components/GuideTeaser";
 import { NewsFeedList } from "@/components/NewsFeedList";
 import { NewsTabs } from "@/components/NewsTabs";
 import { PageIntro } from "@/components/PageIntro";
@@ -33,6 +34,9 @@ export default async function FantasyNewsPage() {
           </Link>
         </p>
       </PageIntro>
+      <div className="mt-8">
+        <GuideTeaser slug="fantasy-football-uk-beginners" kicker="Not FPL" />
+      </div>
       <NewsTabs active="fantasy" />
       <NewsFeedList
         news={news}

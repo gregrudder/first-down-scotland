@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { DiscordCta } from "@/components/DiscordCta";
+import { EditorialNote } from "@/components/EditorialNote";
+import { GuideTeaser } from "@/components/GuideTeaser";
 import { PageIntro } from "@/components/PageIntro";
 import { schemeBattlesHook } from "@/lib/site";
 
@@ -33,8 +35,12 @@ export default function CommunityPage() {
     <div className="mx-auto max-w-3xl px-4 py-12 sm:px-6 sm:py-16">
       <PageIntro eyebrow="Meet your team" title="Community">
         <p>
-          This is the chat home. The First Down Scotland Discord is where Scottish and UK fans of the same NFL team can actually talk, instead of hoping a Facebook group still exists. Pair it with the pub list when you want to meet in person and watch the games together with like-minded fans.
+          This is the chat home. The First Down Scotland Discord is where Scottish and UK fans of the same NFL team can actually talk, instead of hoping a Facebook group still exists. Pair it with the pub search when you want to meet in person and watch the games together with like-minded fans.
         </p>
+        <p>
+          It is a small UK room, built in Scotland, for people who share a kick-off time as well as a club. You do not need to sound like a podcast. You need a team channel, a way to ask what a flag meant, and someone who will not post the score while you are still at work.
+        </p>
+        <EditorialNote />
       </PageIntro>
 
       <div className="mt-8">
@@ -69,8 +75,18 @@ export default function CommunityPage() {
         <p>
           We are not building in-app chat. Discord already does rooms; we would
           only make a worse version. Fixtures, news and where to watch stay
-          here as helpers. Lessons stay free.
+          here as helpers. The lessons stay on this site, in order, for as long
+          as you need them.
         </p>
+        <p>
+          The longer version of finding people (what we will not invent about
+          pubs, and how the town map fits next to the chat) is a guide. Read it
+          before you trek across a city on the strength of an old blog post.
+        </p>
+      </div>
+
+      <div className="mt-8">
+        <GuideTeaser slug="nfl-pubs-and-discord-scotland" kicker="Guide" />
       </div>
 
       <section className="mt-12 rounded-2xl border border-line bg-navy-2 p-6">
@@ -79,9 +95,10 @@ export default function CommunityPage() {
         </p>
         <h2 className="mt-2 font-display text-2xl text-cream">Meet in the real world</h2>
         <p className="mt-3 text-base leading-7 text-cream-dim">
-          The Discord is for chat. The pub list is for turning up. Find a
-          Scottish spot that shows the NFL, then use your team channel to see
-          who else is going. You do not have to watch on your own.
+          The Discord is for chat. Watch near you is the search for a real
+          room: one Glasgow home and one Edinburgh home, once they are
+          confirmed. Until then, use your team channel to see who else is
+          watching. You do not have to do it on your own.
         </p>
         <p className="mt-4 text-sm">
           <Link href="/watch-near-you" className="font-semibold text-gold">

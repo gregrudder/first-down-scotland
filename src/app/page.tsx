@@ -6,6 +6,7 @@ import { JsonLd } from "@/components/JsonLd";
 import { LeagueFollow } from "@/components/LeagueFollow";
 import { LessonCard } from "@/components/LessonCard";
 import { SundayCard } from "@/components/SundayCard";
+import { guideHref, guideReadingMinutes, guideSeasonNote, guides } from "@/data/guides";
 import { lessons } from "@/data/lessons";
 import { getGameReports } from "@/lib/game-report";
 import { getNflFixtures } from "@/lib/espn";
@@ -218,7 +219,47 @@ export default async function HomePage() {
         </div>
       </section>
 
-      <section className="mx-auto grid max-w-6xl gap-10 px-4 pb-14 sm:px-6 lg:grid-cols-[minmax(0,1fr)_20rem]">
+      <section
+        aria-label="Latest guides"
+        className="mx-auto max-w-6xl px-4 pb-4 sm:px-6"
+      >
+        <div className="flex items-end justify-between gap-4">
+          <div>
+            <p className="text-xs font-semibold uppercase tracking-[0.16em] text-gold">
+              Latest guides
+            </p>
+            <h2 className="mt-2 font-display text-3xl text-cream">Read before you stay up</h2>
+          </div>
+          <Link href="/guides" className="hidden text-sm text-gold sm:inline">
+            All guides →
+          </Link>
+        </div>
+        <p className="mt-3 max-w-2xl text-sm leading-6 text-cream-dim">
+          Original guides for Scottish and UK fans, not a copy of an American
+          magazine. {guideSeasonNote}.
+        </p>
+        <div className="mt-6 grid gap-4 md:grid-cols-2">
+          {guides.slice(0, 4).map((guide) => (
+            <Link
+              key={guide.slug}
+              href={guideHref(guide.slug)}
+              className="flex h-full flex-col rounded-2xl border border-line bg-navy-2 p-5 transition hover:border-gold/50 hover:bg-navy-3"
+            >
+              <p className="text-xs font-semibold uppercase tracking-[0.16em] text-gold">
+                About {guideReadingMinutes(guide)} min
+              </p>
+              <h3 className="mt-2 font-display text-xl text-cream">{guide.title}</h3>
+              <p className="mt-2 flex-1 text-sm leading-6 text-cream-dim">{guide.blurb}</p>
+              <span className="mt-4 text-sm font-medium text-gold">Read the guide →</span>
+            </Link>
+          ))}
+        </div>
+        <Link href="/guides" className="mt-4 inline-block text-sm text-gold sm:hidden">
+          All guides →
+        </Link>
+      </section>
+
+      <section className="mx-auto grid max-w-6xl gap-10 px-4 py-14 sm:px-6 lg:grid-cols-[minmax(0,1fr)_20rem]">
         <div className="space-y-6">
           {firstLesson ? (
             <div>

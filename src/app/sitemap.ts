@@ -1,4 +1,5 @@
 import type { MetadataRoute } from "next";
+import { getGuideSlugs } from "@/data/guides";
 import { getLessonSlugs } from "@/data/lessons";
 import { getMiniGameSlugs } from "@/data/mini-games";
 import { getPlaySlugs } from "@/data/plays";
@@ -7,6 +8,7 @@ import { absoluteUrl } from "@/lib/site";
 
 const staticRoutes = [
   "/",
+  "/guides",
   "/learn",
   "/learn/quiz",
   "/learn/draft-prospects",
@@ -79,6 +81,7 @@ function sitemapEntry(path: string): MetadataRoute.Sitemap[number] | null {
 export default function sitemap(): MetadataRoute.Sitemap {
   const paths = [
     ...staticRoutes,
+    ...slugRoutes(getGuideSlugs, "/guides"),
     ...slugRoutes(getLessonSlugs, "/learn"),
     ...slugRoutes(getPlaySlugs, "/learn/plays"),
     ...slugRoutes(getMiniGameSlugs, "/mini-games"),

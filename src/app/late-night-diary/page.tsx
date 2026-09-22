@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { EditorialNote } from "@/components/EditorialNote";
+import { GuideTeaser } from "@/components/GuideTeaser";
 import { LateNightDiary } from "@/components/LateNightDiary";
 import { LeagueTabs } from "@/components/LeagueTabs";
 import { PageIntro } from "@/components/PageIntro";
@@ -47,6 +49,13 @@ export default async function LateNightDiaryPage() {
           nap, finish early, or book the day off. The list is the full late slate
           as of today (All teams or your side only), and it is subject to change.
         </p>
+        <p>
+          Staying up is a choice, not a test of whether you support the club.
+          One live game, a first half, or a Monday replay are all legitimate.
+          The guide walks through that decision, including spoilers and why the
+          two-minute warning lies to you.
+        </p>
+        <EditorialNote />
       </PageIntro>
       <LeagueTabs active="late-nights" />
 
@@ -70,6 +79,10 @@ export default async function LateNightDiaryPage() {
         checkDayLabel={checkDayLabel}
         feedError={!current.ok ? current.error : error?.error}
       />
+
+      <div className="mt-10 max-w-3xl">
+        <GuideTeaser slug="late-kickoffs-uk-fans" />
+      </div>
 
       <p className="mt-10 max-w-2xl text-sm leading-6 text-cream-dim">
         Watch hints are guesses from the kick-off window and the US broadcast
