@@ -1,4 +1,5 @@
 import { favouriteOptions, foundOptions, payOptions, recommendOptions, type FeedbackPayload } from "@/data/feedback";
+import { parseFormspreeFormId, postToFormspree } from "@/lib/formspree";
 
 const SUBJECT_PREFIX = "[FDS feedback]";
 
@@ -31,18 +32,6 @@ export function feedbackBody(payload: FeedbackPayload): string {
     `Recommend to a mate new to the NFL: ${labelOf(recommendOptions, payload.recommend)}`,
   ];
   return lines.join("\n");
-}
-
-/** Accepts a bare Formspree hash or a full `https://formspree.io/f/xxxx` URL. */
-export function parseFormspreeFormId(raw: string | undefined): string | undefined {
-  if (!raw) return undefined;
-  const trimmed = raw.trim();
-  if (!trimmed) return undefined;
-  const fromUrl = trimmed.match(/formspree\.io\/(?:f\/)?([A-Za-z0-9]+)/i);
-  if (fromUrl) return fromUrl[1];
-  const bare = trimmed.replace(/^\/+|\/+$/g, "");
-  if (/^[A-Za-z0-9]+$/.test(bare)) return bare;
-  return undefined;
 }
 
 function resendConfigured(): boolean {
@@ -94,26 +83,17 @@ async function sendWithFormspree(
     return { ok: false, reason: "unconfigured", error: "Formspree is not configured" };
   }
 
-  const response = await fetch(`https://formspree.io/f/${encodeURIComponent(id)}`, {
-    method: "POST",
-    headers: {
-      Accept: "application/json",
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      _subject: subject,
-      message: text,
-      name: payload.name || undefined,
-      found: payload.found,
-      favourite: payload.favourite,
-      pay: payload.pay,
-      suggest: payload.suggest,
-    }),
+  const posted = await postToFormspree(id, {
+    _subject: subject,
+    message: text,
+    name: payload.name || undefined,
+    found: payload.found,
+    favourite: payload.favourite,
+    pay: payload.pay,
+    suggest: payload.suggest,
   });
-
-  if (!response.ok) {
-    const detail = await response.text();
-    return { ok: false, reason: "provider", error: detail.slice(0, 300) || `Formspree ${response.status}` };
+  if (!posted.ok) {
+    return { ok: false, reason: "provider", error: posted.error };
   }
   return { ok: true };
 }
