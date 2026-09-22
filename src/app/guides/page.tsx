@@ -13,20 +13,19 @@ import { absoluteUrl } from "@/lib/site";
 export const metadata: Metadata = {
   title: "Guides",
   description:
-    "Original NFL guides for Scottish and UK fans: how to watch, the jargon, late kick-offs, picking a team, fantasy, pubs, Scheme Battles and London games.",
+    "The Learn lessons stay short on purpose. These go further: where to watch in Britain, how the jargon lands if you grew up with football or rugby, how to handle a 1am kick-off, and how to find people in Scotland who care about your team.",
   alternates: { canonical: absoluteUrl("/guides") },
 };
 
 export default function GuidesIndexPage() {
   return (
     <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6 sm:py-16">
-      <PageIntro eyebrow="Guides" title="Long reads for UK fans">
+      <PageIntro eyebrow="Guides" title="Longer reads for Scottish and UK NFL fans">
         <p>
-          The lessons are short on purpose. These guides are the longer version:
-          where the games are in Britain, how the jargon works if you grew up
-          with football or rugby, how to survive a 1am kick-off, and how to find
-          other people in Scotland who care. Written in UK English, dated, and
-          meant to be corrected when a rights deal or a fixture moves.
+          The Learn lessons stay short on purpose. These go further: where to
+          watch in Britain, how the jargon lands if you grew up with football or
+          rugby, how to handle a 1am kick-off, and how to find people in Scotland
+          who care about your team.
         </p>
         <EditorialNote updatedLabel={guideUpdatedLabel} />
       </PageIntro>
