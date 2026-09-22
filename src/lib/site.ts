@@ -44,6 +44,12 @@ export const navGroups: readonly NavGroup[] = [
     items: [
       { href: "/learn", label: "Learn the NFL", primary: true },
       {
+        href: "/guides",
+        label: "Guides",
+        description: "Long reads for Scottish and UK fans.",
+        primary: true,
+      },
+      {
         href: "/learn/rivalries",
         label: "Rivalries",
         description: "Who plays whom, and why some Sundays feel personal.",

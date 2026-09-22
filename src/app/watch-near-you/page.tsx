@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { DiscordCta } from "@/components/DiscordCta";
+import { EditorialNote } from "@/components/EditorialNote";
+import { GuideTeaser } from "@/components/GuideTeaser";
 import { PageIntro } from "@/components/PageIntro";
 import { meetupPartnerCities } from "@/data/pubs";
 import { contactEmail, listingMailto } from "@/lib/contact";
@@ -27,6 +29,13 @@ export default function WatchNearYouPage() {
           are confirmed. Until then, Discord is the easiest way to find other
           fans this Sunday.
         </p>
+        <p>
+          Until those homes exist, the useful move is specific: ask a bar which
+          NFL window they actually show, and use Discord to see who else is
+          going. A blog list of venues we have not checked will not be copied
+          onto this page. Empty, here, means we have not agreed a partner yet.
+        </p>
+        <EditorialNote />
       </PageIntro>
 
       <section className="mt-10">
@@ -80,6 +89,28 @@ export default function WatchNearYouPage() {
         </div>
         <p className="mt-3 text-xs text-cream-dim">{contactEmail()}</p>
       </section>
+
+      <section className="mt-12 space-y-4 text-base leading-7 text-cream-dim">
+        <h2 className="font-display text-2xl text-cream">While the list is empty</h2>
+        <p>
+          Phone the bar, or walk in, and ask a narrow question. Which Sunday
+          window, on which service, and is that the plan this week. A Super
+          Bowl once a year is not the same as a 6pm or 9pm habit. The 1am
+          kick-offs are a different problem again: most rooms are shut, and
+          that is fine. Watch those from the house, or not at all.
+        </p>
+        <p>
+          If you find a room that works, say so in your team channel rather
+          than waiting for us to bless it. If you run a pub in Glasgow or
+          Edinburgh and you want to be the home we point people to, use
+          Feedback or the email above. Other cities: tell us when a weekly habit is real. We
+          will not paint a maybe onto the site to make the page look busy.
+        </p>
+      </section>
+
+      <div className="mt-8">
+        <GuideTeaser slug="nfl-pubs-and-discord-scotland" />
+      </div>
 
       <div className="mt-12">
         <DiscordCta />

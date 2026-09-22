@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { GuideTeaser } from "@/components/GuideTeaser";
 import { PageIntro } from "@/components/PageIntro";
 import { HubSavedTeam } from "@/components/TeamMark";
 import { TrademarkNote } from "@/components/TeamResultCard";
@@ -103,6 +104,9 @@ export default function PickYourTeamPage() {
         </Link>{" "}
         are how you meet people who picked the same club.
       </p>
+      <div className="mt-8">
+        <GuideTeaser slug="picking-an-nfl-team" kicker="No local club" />
+      </div>
       <div className="mt-8">
         <TrademarkNote />
       </div>

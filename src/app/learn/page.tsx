@@ -3,6 +3,7 @@ import Link from "next/link";
 import { DraftProspectsTeaser } from "@/components/DraftProspectsTeaser";
 import { LearnPathProgress } from "@/components/LearnProgress";
 import { LessonCard } from "@/components/LessonCard";
+import { GuideTeaser } from "@/components/GuideTeaser";
 import { PageIntro } from "@/components/PageIntro";
 import { lessons } from "@/data/lessons";
 import { getDraftProspects } from "@/lib/draft-prospects";
@@ -116,8 +117,12 @@ export default async function LearnIndexPage() {
         <Link href="/watch-near-you" className="text-gold">
           pubs near you
         </Link>{" "}
-        for meeting in person.
+        for meeting in person. If the broadcast still feels like a private
+        language, the beginner guide is the longer version of lesson one.
       </p>
+      <div className="mt-8 max-w-3xl">
+        <GuideTeaser slug="learning-american-football-uk" />
+      </div>
     </div>
   );
 }

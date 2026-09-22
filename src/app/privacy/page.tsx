@@ -10,7 +10,7 @@ export const metadata: Metadata = {
     "How First Down Scotland collects, uses and stores information: analytics, cookies, feedback, browser preferences, ads and your UK GDPR rights.",
 };
 
-const LAST_UPDATED = "11 September 2026";
+const LAST_UPDATED = "22 September 2026";
 
 export default function PrivacyPage() {
   const email = contactEmail();
@@ -59,7 +59,7 @@ export default function PrivacyPage() {
         <section>
           <h2 className="font-display text-3xl text-cream">What this policy covers</h2>
           <p className="mt-4">
-            It covers the website: lessons, fixtures, scores, news headlines,
+            It covers the website: lessons, guides, fixtures, scores, news headlines,
             team pages, the feedback form, the NFL UK Fan Map, and the links out
             to Discord, YouTube and other sites. It does not cover Discord
             itself, YouTube, ESPN, publishers we link to, geocoder providers we

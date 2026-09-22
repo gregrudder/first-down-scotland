@@ -28,8 +28,16 @@ export function Footer() {
               {navHome.label}
             </Link>
             <span className="text-cream-dim"> · </span>
+            <Link href="/about" className="text-gold hover:text-gold-soft">
+              About
+            </Link>
+            <span className="text-cream-dim"> · </span>
             <Link href="/privacy" className="text-gold hover:text-gold-soft">
-              Privacy Policy
+              Privacy
+            </Link>
+            <span className="text-cream-dim"> · </span>
+            <Link href="/feedback" className="text-gold hover:text-gold-soft">
+              Feedback
             </Link>
           </p>
         </div>
