@@ -11,6 +11,7 @@ import { UnusualFinals } from "@/components/UnusualFinals";
 import { getNflFixtures, groupGamesByUkDate, weekHeading } from "@/lib/espn";
 import { getGameReports, type GameReport } from "@/lib/game-report";
 import { withTouchdownScorers } from "@/lib/touchdowns";
+import { thinPageRobots } from "@/lib/indexing";
 import { formatFetchedAt } from "@/lib/time";
 
 export const revalidate = 300;
@@ -19,6 +20,7 @@ export const metadata: Metadata = {
   title: "This week’s games",
   description:
     "This week’s NFL kick-offs in UK time, with a short preview or post-match report on each game, plus a Sunday card if you have picked a team: what to watch for, depth, and where fans of that side might meet.",
+  robots: thinPageRobots,
 };
 
 export default async function ThisWeekPage() {

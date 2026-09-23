@@ -179,8 +179,9 @@ export const navGroups: readonly NavGroup[] = [
     priority: "low",
     items: [
       { href: "/about", label: "About" },
-      { href: "/feedback", label: "Feedback" },
+      { href: "/contact", label: "Contact" },
       { href: "/privacy", label: "Privacy Policy" },
+      { href: "/terms", label: "Terms of use" },
     ],
   },
 ];

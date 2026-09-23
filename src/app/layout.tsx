@@ -4,6 +4,7 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Figtree, Fraunces } from "next/font/google";
 import Script from "next/script";
 import { SiteShell } from "@/components/SiteShell";
+import { adsenseScriptSrc, isAdsenseEnabled } from "@/lib/adsense";
 import { absoluteUrl, site } from "@/lib/site";
 import { teamThemeBootScript } from "@/lib/team-theme";
 import { spoilerFreeBootScript } from "@/lib/spoiler-storage";
@@ -86,19 +87,20 @@ export const viewport: Viewport = {
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
+  // Publisher script only. No ad units. Off unless NEXT_PUBLIC_ADSENSE_ENABLED=true.
+  const loadAdsense = isAdsenseEnabled();
+
   return (
     <html
       lang="en-GB"
       className={`${figtree.variable} ${fraunces.variable} h-full antialiased`}
     >
-      <head>
-        {/* Native head tag so AdSense crawlers see the publisher client in the initial HTML. */}
-        <script
-          async
-          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1747465358377243"
-          crossOrigin="anonymous"
-        />
-      </head>
+      {loadAdsense ? (
+        <head>
+          {/* Native head tag so an approved AdSense crawl sees the client in the initial HTML. */}
+          <script async src={adsenseScriptSrc()} crossOrigin="anonymous" />
+        </head>
+      ) : null}
       <body className="min-h-full font-sans">
         <Script id="fds-team-theme" strategy="beforeInteractive">
           {teamThemeBootScript()}

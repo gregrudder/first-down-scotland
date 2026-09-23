@@ -57,7 +57,7 @@ export default function GuidesIndexPage() {
           About
         </Link>
         . If a sentence is wrong,{" "}
-        <Link href="/feedback" className="text-gold">
+        <Link href="/contact" className="text-gold">
           tell us
         </Link>
         .

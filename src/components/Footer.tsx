@@ -36,8 +36,12 @@ export function Footer() {
               Privacy
             </Link>
             <span className="text-cream-dim"> · </span>
-            <Link href="/feedback" className="text-gold hover:text-gold-soft">
-              Feedback
+            <Link href="/terms" className="text-gold hover:text-gold-soft">
+              Terms
+            </Link>
+            <span className="text-cream-dim"> · </span>
+            <Link href="/contact" className="text-gold hover:text-gold-soft">
+              Contact
             </Link>
           </p>
         </div>

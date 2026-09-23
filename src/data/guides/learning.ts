@@ -137,7 +137,7 @@ export const learningGuide = {
     },
     {
       type: "p",
-      text: "Come back to this page in a month. The words that felt like a code will have turned into the graphic in the corner, which is all they ever were. If a section is wrong, or a lesson fights with what you saw on Sky, tell us on [Feedback](/feedback). The guides are dated, and we would rather correct a sentence than leave a confident mistake up.",
+      text: "Come back to this page in a month. The words that felt like a code will have turned into the graphic in the corner, which is all they ever were. If a section is wrong, or a lesson fights with what you saw on Sky, tell us on [Contact](/contact). The guides are dated, and we would rather correct a sentence than leave a confident mistake up.",
     },
   ],
 } satisfies Guide;

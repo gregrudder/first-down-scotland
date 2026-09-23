@@ -8,6 +8,7 @@ import { PageIntro } from "@/components/PageIntro";
 import { UkKickoffHelper } from "@/components/UkKickoffHelper";
 import { getNflFixturesAroundCurrent } from "@/lib/espn";
 import { collectLateNightGames, fromCheckDayOnward } from "@/lib/late-night-diary";
+import { thinPageRobots } from "@/lib/indexing";
 import { absoluteUrl } from "@/lib/site";
 import { formatFetchedAt, formatUkDate } from "@/lib/time";
 
@@ -20,6 +21,7 @@ export const metadata: Metadata = {
   alternates: {
     canonical: absoluteUrl("/late-night-diary"),
   },
+  robots: thinPageRobots,
 };
 
 export default async function LateNightDiaryPage() {

@@ -45,14 +45,18 @@ export default function AboutPage() {
           broadcast will say them differently.
         </p>
         <p>
-          How the site uses your browser, analytics and the feedback form is on
+          How the site uses your browser, analytics and the contact form is on
           the{" "}
           <Link href="/privacy" className="text-gold">
             Privacy Policy
           </Link>
+          . How you may use the site is on the{" "}
+          <Link href="/terms" className="text-gold">
+            Terms of use
+          </Link>
           . The contact path is the{" "}
-          <Link href="/feedback" className="text-gold">
-            feedback form
+          <Link href="/contact" className="text-gold">
+            contact page
           </Link>
           .
         </p>
@@ -117,8 +121,8 @@ export default function AboutPage() {
             </li>
             <li>
               If something is wrong, use{" "}
-              <Link href="/feedback" className="text-gold">
-                Feedback
+              <Link href="/contact" className="text-gold">
+                Contact
               </Link>
               . We would rather correct a dated sentence than leave it up.
             </li>
@@ -254,13 +258,18 @@ export default function AboutPage() {
           </Link>
         </li>
         <li>
-          <Link href="/feedback" className="text-gold">
-            Feedback →
+          <Link href="/contact" className="text-gold">
+            Contact →
           </Link>
         </li>
         <li>
           <Link href="/privacy" className="text-gold">
             Privacy Policy →
+          </Link>
+        </li>
+        <li>
+          <Link href="/terms" className="text-gold">
+            Terms of use →
           </Link>
         </li>
       </ul>
