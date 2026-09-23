@@ -3,9 +3,14 @@ import { getGuideSlugs } from "@/data/guides";
 import { getLessonSlugs } from "@/data/lessons";
 import { getMiniGameSlugs } from "@/data/mini-games";
 import { getPlaySlugs } from "@/data/plays";
-import { getTeamSlugs } from "@/data/team-profiles";
+import { thinSitemapPathSet } from "@/lib/indexing";
 import { absoluteUrl } from "@/lib/site";
 
+/**
+ * Club templates (/teams/[slug]) and the live-data shells in thinSitemapPaths
+ * stay in the app for fans. They are noindex and omitted here so crawl focuses
+ * on lessons, guides, the fan map, and About / Privacy / Terms / Contact.
+ */
 const staticRoutes = [
   "/",
   "/guides",
@@ -14,14 +19,10 @@ const staticRoutes = [
   "/learn/draft-prospects",
   "/mini-games",
   "/glossary",
-  "/this-week",
-  "/late-night-diary",
-  "/scores",
   "/score-history",
   "/standings",
   "/rookies",
   "/news",
-  "/news/fantasy",
   "/podcasts",
   "/watch",
   "/film-room",
@@ -29,23 +30,20 @@ const staticRoutes = [
   "/community",
   "/fan-map",
   "/fan-map/add",
-  "/feedback",
+  "/contact",
   "/privacy",
+  "/terms",
   "/history",
   "/teams",
   "/pick-your-team",
   "/pick-your-team/choose",
   "/about",
-] as const;
+].filter((path) => !thinSitemapPathSet.has(path));
 
 const hourlyPaths = new Set<string>([
-  "/this-week",
-  "/late-night-diary",
-  "/scores",
   "/standings",
   "/rookies",
   "/news",
-  "/news/fantasy",
   "/learn/draft-prospects",
 ]);
 
@@ -85,7 +83,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...slugRoutes(getLessonSlugs, "/learn"),
     ...slugRoutes(getPlaySlugs, "/learn/plays"),
     ...slugRoutes(getMiniGameSlugs, "/mini-games"),
-    ...slugRoutes(getTeamSlugs, "/teams"),
   ];
 
   const entries = paths

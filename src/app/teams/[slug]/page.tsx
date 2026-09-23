@@ -11,6 +11,7 @@ import { getTeamYoutube } from "@/data/team-youtube";
 import { DivisionStandingsCard } from "@/components/StandingsBoard";
 import { getTeamDepthChart } from "@/lib/depth-chart";
 import { divisionForTeam, getNflStandings } from "@/lib/standings";
+import { thinPageRobots } from "@/lib/indexing";
 import { espnTeamLogo } from "@/lib/team-logo";
 import {
   getTeamProfile,
@@ -32,10 +33,11 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { slug } = await params;
   const team = getTeamProfile(slug);
-  if (!team) return { title: "Team" };
+  if (!team) return { title: "Team", robots: thinPageRobots };
   return {
     title: team.name,
     description: `${team.name} in one place for UK fans: stadium, colours, Super Bowls, this week’s depth chart, YouTube and pods.`,
+    robots: thinPageRobots,
   };
 }
 

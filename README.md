@@ -26,10 +26,10 @@ Three jobs: learn the game, meet fans of your team, keep that club in one place.
 - **`/film-room`** : curated watch-to-learn films (America’s Game, Hard Knocks, All or Nothing, Quarterback, Wide Receiver). Official where-to-look hints only; no streams.
 - **`/watch-near-you`** : Partner search for one Glasgow and one Edinburgh home bar for Scottish NFL meetups. No venue directory until those partners are confirmed. Discord in the meantime.
 - **`/about`** : what the site is for (learn + meet your team)
+- **`/privacy`**, **`/terms`**, **`/contact`** : privacy policy, terms of use, and the public contact page (email plus the note form). `/feedback` redirects to `/contact`.
 - **`/community`** : Discord as the chat home for Scottish / UK fans of the team you picked (Join the Discord CTA; default invite in the repo; override with `NEXT_PUBLIC_DISCORD_INVITE`; no in-app chat)
-- **`/feedback`** : short tester form (posts to `/api/feedback`; Resend or Formspree). Inbox address is an env var, not in the repo.
 - **`/history`** : short NFL history for UK beginners (timeline, not a thesis)
-- **`/teams`** and **`/teams/[slug]`** : all 32 club profiles (2026-season snapshot), ESPN depth chart, official YouTube, and the relevant pods
+- **`/teams`** and **`/teams/[slug]`** : all 32 club profiles (2026-season snapshot), ESPN depth chart, official YouTube, and the relevant pods. The index stays indexable. Each club URL is `noindex` and left out of the sitemap until it is a substantial page.
 - **`/pick-your-team`** : quiz or spinning-ball surprise to pick a team (so you can find other fans of that club); saved in the browser as `fds-team`
 - **`/fan-map`** : **NFL Scheme Battles** (hook: Which team runs the scheme?) — Scotland first, then the UK. Town-centre aggregates only. CTA at `/fan-map/add`. Private analytics at `/admin/fan-map`.
 - PWA basics: web manifest, icons, mobile-first layout, `theme-color`
@@ -70,7 +70,8 @@ Copy `.env.example` if you want a local file. Nothing is required for day-to-day
 | `CRON_SECRET` | Recommended in production | Protects `GET`/`POST` `/api/revalidate`. Vercel Cron sends `Authorization: Bearer <CRON_SECRET>`. You can also pass `?secret=...`. |
 | `NEXT_PUBLIC_SITE_URL` | Optional | Canonical / Open Graph / sitemap base URL. If unset, we use `VERCEL_PROJECT_PRODUCTION_URL` or `https://www.firstdownscotland.com` — never a preview `*.vercel.app` host (those hit SSO). |
 | `NEXT_PUBLIC_DISCORD_INVITE` | Optional | Override the Community join link. If unset or invalid, the app uses the public First Down Scotland invite (`https://discord.gg/dVuNUT4Cgf`). |
-| `NEXT_PUBLIC_CONTACT_EMAIL` | Optional | Overrides the Watch near you “get in touch” mailto (defaults to `info@g4-marketing.net`). |
+| `NEXT_PUBLIC_CONTACT_EMAIL` | Optional | Overrides the public contact mailto (defaults to `info@g4-marketing.net`). |
+| `NEXT_PUBLIC_ADSENSE_ENABLED` | Off by default | Set to exactly `true` to load the AdSense publisher script (`adsbygoogle.js`). Leave unset until the site is approved. `public/ads.txt` stays either way. This flag does not render ad units. |
 | `FORMSPREE_FORM_ID` | For `/feedback` on Hobby | Server-only Formspree form hash, or the full `https://formspree.io/f/…` URL. Inbox is set in the Formspree dashboard, not in this repo. |
 | `RESEND_API_KEY` | For `/feedback` (option B) | Server-only. Sends via [Resend](https://resend.com). Needs a verified sending domain to reach an arbitrary inbox. |
 | `FEEDBACK_TO_EMAIL` | With Resend | Server-only inbox. Never `NEXT_PUBLIC_*`. |
@@ -270,7 +271,10 @@ curl -H "Authorization: Bearer $CRON_SECRET" https://www.firstdownscotland.com/a
 | `/film-room` | Watch-to-learn films and series |
 | `/watch-near-you` | Glasgow + Edinburgh meetup-partner search (no venue directory yet) |
 | `/community` | Discord community (invite CTA) |
-| `/feedback` | TikTok-test feedback form |
+| `/contact` | Contact: email plus the note form |
+| `/feedback` | Redirects to `/contact` |
+| `/privacy` | Privacy policy |
+| `/terms` | Terms of use |
 | `/history` | Short NFL history timeline |
 | `/teams` | All 32 teams by conference / division |
 | `/teams/[slug]` | Club profile (stadium, colours, Super Bowls, live depth chart) |
@@ -285,4 +289,16 @@ Independent fan project. Not affiliated with the NFL, Sky, Channel 5, DAZN, Netf
 
 Team profiles use ESPN’s public logo CDN (`https://a.espncdn.com/i/teamlogos/nfl/500/{abbr}.png`) with an abbreviation-circle fallback. Stadium names and listed capacities follow Wikipedia’s current NFL stadiums list for the **2026 season** (cited there to club media guides and reporting). Super Bowl counts are after Super Bowl LX (Seattle 29–13 New England, 8 February 2026; AP / NFL.com). Franchise origins follow the league’s published history and standard reference summaries. Stadium names, capacities and trophy counts can change.
 
-`/watch-near-you` is a partner search, not a venue directory. Confirmed Glasgow and Edinburgh home bars will live in `src/data/pubs.ts` (`livePubs()`). That list is empty until partners are agreed. Bar owners can use `/feedback` or the public contact email.
+`/watch-near-you` is a partner search, not a venue directory. Confirmed Glasgow and Edinburgh home bars will live in `src/data/pubs.ts` (`livePubs()`). That list is empty until partners are agreed. Bar owners can use `/contact` or the public contact email.
+
+## Search indexing
+
+Lessons, guides, the homepage, the fan map, and About, Privacy, Terms and Contact are indexable and listed in `sitemap.xml`.
+
+These stay in the app for fans. They are `noindex, follow`, and they are omitted from the sitemap, because they are templated club pages or live-data shells:
+
+- `/teams/[slug]` (the `/teams` index stays)
+- `/scores`
+- `/this-week`
+- `/late-night-diary`
+- `/news/fantasy`

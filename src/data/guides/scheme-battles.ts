@@ -87,7 +87,7 @@ export const schemeBattlesGuide = {
     },
     {
       type: "p",
-      text: "It will not message strangers for you. Watch-party interest is a flag on the registration, not a dating app and not a public list of addresses. If you want to talk to people, you do that in the [Discord](/community), where there are house rules and a name you chose, not through a pin. If you want your pin deleted, ask via [Feedback](/feedback). The privacy page says the same thing in the formal version, and it is the page that governs.",
+      text: "It will not message strangers for you. Watch-party interest is a flag on the registration, not a dating app and not a public list of addresses. If you want to talk to people, you do that in the [Discord](/community), where there are house rules and a name you chose, not through a pin. If you want your pin deleted, ask via [Contact](/contact). The privacy page says the same thing in the formal version, and it is the page that governs.",
     },
     {
       type: "h2",

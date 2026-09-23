@@ -10,7 +10,7 @@ export const metadata: Metadata = {
     "How First Down Scotland collects, uses and stores information: analytics, cookies, feedback, browser preferences, ads and your UK GDPR rights.",
 };
 
-const LAST_UPDATED = "22 September 2026";
+const LAST_UPDATED = "23 September 2026";
 
 export default function PrivacyPage() {
   const email = contactEmail();
@@ -44,8 +44,8 @@ export default function PrivacyPage() {
               www.firstdownscotland.com
             </a>
             . For privacy questions, use the{" "}
-            <Link href="/feedback" className="text-gold">
-              feedback form
+            <Link href="/contact" className="text-gold">
+              contact page
             </Link>{" "}
             or email{" "}
             <a href={`mailto:${email}`} className="text-gold">
@@ -232,8 +232,9 @@ export default function PrivacyPage() {
               enabled).</strong> Google AdSense may set cookies to show ads,
               measure them, and (if you consent) personalise them. A Google
               consent / CMP banner will be the place to manage that once ads
-              are live. The AdSense publisher script is on the site so Google can
-              verify the property. Auto ads and a consent banner are not on yet.
+              are live. The AdSense publisher script loads only when advertising
+              is switched on. It is off by default. Auto ads and a consent
+              banner are not on yet.
             </li>
           </ul>
           <p className="mt-4">
@@ -349,9 +350,9 @@ export default function PrivacyPage() {
             already done.
           </p>
           <p className="mt-3">
-            Write via{" "}
-            <Link href="/feedback" className="text-gold">
-              Feedback
+            Write via the{" "}
+            <Link href="/contact" className="text-gold">
+              contact page
             </Link>{" "}
             or {email}. Say you are making a privacy request. We may need to
             check it is you before we change or delete a feedback note.
@@ -406,8 +407,8 @@ export default function PrivacyPage() {
           </p>
           <ul className="mt-4 list-disc space-y-2 pl-5">
             <li>
-              <Link href="/feedback" className="text-gold">
-                Feedback form
+              <Link href="/contact" className="text-gold">
+                Contact page
               </Link>
             </li>
             <li>

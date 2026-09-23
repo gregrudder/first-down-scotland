@@ -7,6 +7,7 @@ import { SpoilerFreeToggle } from "@/components/SpoilerFreeToggle";
 import { UkKickoffHelper } from "@/components/UkKickoffHelper";
 import { UnusualFinals } from "@/components/UnusualFinals";
 import { getNflLiveScoreboard, teamsOnBye } from "@/lib/espn";
+import { thinPageRobots } from "@/lib/indexing";
 import { withTouchdownScorers } from "@/lib/touchdowns";
 
 export const revalidate = 20;
@@ -15,6 +16,7 @@ export const metadata: Metadata = {
   title: "Live scores",
   description:
     "Near-live NFL scores for the current week, with UK kick-off times, quarter and clock when a game is on, touchdown scorers when listed, plus byes.",
+  robots: thinPageRobots,
 };
 
 export default async function ScoresPage() {

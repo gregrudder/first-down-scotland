@@ -69,13 +69,13 @@ export default function WatchNearYouPage() {
         </h2>
         <p className="mt-3 text-sm leading-6 text-cream-dim">
           If you already put the NFL on, or you would like a weekly room for
-          Scottish fans, we would like to hear from you. Use the Feedback page,
+          Scottish fans, we would like to hear from you. Use the Contact page,
           or send a short email. Tell us the pub, the city, and what you already
           show. We will take it from there.
         </p>
         <div className="mt-5 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
           <Link
-            href="/feedback"
+            href="/contact"
             className="inline-flex items-center justify-center rounded-full bg-gold px-5 py-2.5 text-sm font-semibold text-gold-ink hover:bg-gold-soft"
           >
             Get in touch
@@ -102,8 +102,11 @@ export default function WatchNearYouPage() {
         <p>
           If you find a room that works, say so in your team channel rather
           than waiting for us to bless it. If you run a pub in Glasgow or
-          Edinburgh and you want to be the home we point people to, use
-          Feedback or the email above. Other cities: tell us when a weekly habit is real. We
+          Edinburgh and you want to be the home we point people to, use{" "}
+          <Link href="/contact" className="text-gold">
+            Contact
+          </Link>{" "}
+          or the email above. Other cities: tell us when a weekly habit is real. We
           will not paint a maybe onto the site to make the page look busy.
         </p>
       </section>

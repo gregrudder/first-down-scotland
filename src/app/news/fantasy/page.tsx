@@ -5,6 +5,7 @@ import { NewsFeedList } from "@/components/NewsFeedList";
 import { NewsTabs } from "@/components/NewsTabs";
 import { PageIntro } from "@/components/PageIntro";
 import { fantasyNewsFeeds } from "@/data/news-feeds";
+import { thinPageRobots } from "@/lib/indexing";
 import { getFantasyNews } from "@/lib/news";
 
 export const revalidate = 600;
@@ -13,6 +14,7 @@ export const metadata: Metadata = {
   title: "NFL fantasy news",
   description:
     "NFL fantasy football tips and news (not Scottish football), in one place with the rest of your team follow. Headlines from ESPN Fantasy, Fantasy Footballers and RotoWire, with links out.",
+  robots: thinPageRobots,
 };
 
 export default async function FantasyNewsPage() {

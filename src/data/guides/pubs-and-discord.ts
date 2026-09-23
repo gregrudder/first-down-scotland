@@ -62,7 +62,7 @@ export const pubsDiscordGuide = {
         "Ask what they show, and on which Sunday. A one-word “yes” is not a listing.",
         "Go to the early window before you commit to a late one. See if anyone else there cares.",
         "If you find a room that works, tell the team channel. That is how a meetup starts without a logo.",
-        "If you run the bar and you want to be the Glasgow or Edinburgh home, use [Feedback](/feedback) or the email on Watch near you. Say the pub, the city, and what you already show.",
+        "If you run the bar and you want to be the Glasgow or Edinburgh home, use [Contact](/contact) or the email on Watch near you. Say the pub, the city, and what you already show.",
         "Do not expect us to call a venue a partner because it was busy once. Partner means we have agreed it, and the page will say so.",
       ],
     },
@@ -96,7 +96,7 @@ export const pubsDiscordGuide = {
     },
     {
       type: "p",
-      text: "We are looking for one partner in Glasgow and one in Edinburgh: a regular room for Scottish NFL fans, not a request for drinks on the house, and not a promise of a crowd we cannot prove. If that is you, write to us. Tell us what you already show (a Sunday window, RedZone, the Super Bowl only) and which city. The form is [Feedback](/feedback). Watch near you also has an email for a bar enquiry. We would rather have two real homes than a long list of maybes.",
+      text: "We are looking for one partner in Glasgow and one in Edinburgh: a regular room for Scottish NFL fans, not a request for drinks on the house, and not a promise of a crowd we cannot prove. If that is you, write to us. Tell us what you already show (a Sunday window, RedZone, the Super Bowl only) and which city. The form is on [Contact](/contact). Watch near you also has an email for a bar enquiry. We would rather have two real homes than a long list of maybes.",
     },
     {
       type: "p",
