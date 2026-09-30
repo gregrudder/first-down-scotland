@@ -48,5 +48,6 @@ describe("sitemap", () => {
     for (const slug of getLessonSlugs()) {
       assert.equal(paths.has(`/learn/${slug}`), true, `/learn/${slug}`);
     }
+    assert.equal(paths.has("/mini-games/build-a-quarterback"), true);
   });
 });

@@ -2,11 +2,11 @@
 
 import { useId, useMemo, useState } from "react";
 import Link from "next/link";
-import type { MiniGame, MiniGameKind } from "@/data/mini-games";
+import type { QuizMiniGame } from "@/data/mini-games";
 
 type Answers = Record<string, number>;
 
-function resultBlurb(kind: MiniGameKind | undefined, score: number, total: number): string {
+function resultBlurb(kind: QuizMiniGame["kind"] | undefined, score: number, total: number): string {
   if (score === total) {
     return kind === "fun"
       ? "Clean sheet. Text the group chat. Then be modest about it for at least four minutes."
@@ -22,7 +22,13 @@ function resultBlurb(kind: MiniGameKind | undefined, score: number, total: numbe
     : "Useful miss. The explainers below are the lesson, not a telling-off.";
 }
 
-export function MiniQuiz({ game, embedded = false }: { game: MiniGame; embedded?: boolean }) {
+export function MiniQuiz({
+  game,
+  embedded = false,
+}: {
+  game: QuizMiniGame;
+  embedded?: boolean;
+}) {
   const [started, setStarted] = useState(false);
   const [step, setStep] = useState(0);
   const [answers, setAnswers] = useState<Answers>({});
