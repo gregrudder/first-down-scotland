@@ -139,7 +139,7 @@ export default function AboutPage() {
               <Link href="/watch-near-you" className="text-gold">
                 Watch near you
               </Link>{" "}
-              stays a partner search until a Glasgow home and an Edinburgh home are confirmed.
+              lists a Scottish bar only after we have checked it is showing NFL this season.
             </li>
             <li>A pretence that we are the NFL, a club, or a broadcaster. We are an independent project built in Scotland.</li>
           </ul>

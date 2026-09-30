@@ -22,7 +22,7 @@ function resultBlurb(kind: MiniGameKind | undefined, score: number, total: numbe
     : "Useful miss. The explainers below are the lesson, not a telling-off.";
 }
 
-export function MiniQuiz({ game }: { game: MiniGame }) {
+export function MiniQuiz({ game, embedded = false }: { game: MiniGame; embedded?: boolean }) {
   const [started, setStarted] = useState(false);
   const [step, setStep] = useState(0);
   const [answers, setAnswers] = useState<Answers>({});
@@ -64,9 +64,15 @@ export function MiniQuiz({ game }: { game: MiniGame }) {
     return (
       <div>
         <p className="text-xs font-semibold uppercase tracking-[0.16em] text-gold">Result</p>
-        <h1 className="mt-3 font-display text-4xl leading-tight text-cream sm:text-5xl">
-          {score}/{total}
-        </h1>
+        {embedded ? (
+          <h2 className="mt-3 font-display text-4xl leading-tight text-cream sm:text-5xl">
+            {score}/{total}
+          </h2>
+        ) : (
+          <h1 className="mt-3 font-display text-4xl leading-tight text-cream sm:text-5xl">
+            {score}/{total}
+          </h1>
+        )}
         <p className="mt-4 text-lg leading-8 text-cream-dim">
           {resultBlurb(game.kind, score, total)}
         </p>
@@ -133,13 +139,17 @@ export function MiniQuiz({ game }: { game: MiniGame }) {
   if (!started) {
     return (
       <div>
-        <p className="text-xs font-semibold uppercase tracking-[0.16em] text-gold">
-          {game.kind === "fun" ? "Fun quiz" : "Mini game"} · about {game.minutes} min
-        </p>
-        <h1 className="mt-3 font-display text-4xl leading-tight text-cream sm:text-5xl">
-          {game.title}
-        </h1>
-        <p className="mt-4 text-lg leading-8 text-cream-dim">{game.summary}</p>
+        {embedded ? null : (
+          <>
+            <p className="text-xs font-semibold uppercase tracking-[0.16em] text-gold">
+              {game.kind === "fun" ? "Fun quiz" : "Mini game"} · about {game.minutes} min
+            </p>
+            <h1 className="mt-3 font-display text-4xl leading-tight text-cream sm:text-5xl">
+              {game.title}
+            </h1>
+          </>
+        )}
+        <p className={`text-lg leading-8 text-cream-dim ${embedded ? "" : "mt-4"}`}>{game.summary}</p>
         <p className="mt-4 text-sm leading-6 text-cream-dim">
           {total} questions. Tap an answer, read the note, then go on. Nothing is saved
           to an account.
@@ -179,7 +189,11 @@ export function MiniQuiz({ game }: { game: MiniGame }) {
           style={{ width: `${((step + (locked ? 1 : 0)) / total) * 100}%` }}
         />
       </div>
-      <h1 className="mt-6 font-display text-3xl text-cream sm:text-4xl">{question.prompt}</h1>
+      {embedded ? (
+        <h2 className="mt-6 font-display text-3xl text-cream sm:text-4xl">{question.prompt}</h2>
+      ) : (
+        <h1 className="mt-6 font-display text-3xl text-cream sm:text-4xl">{question.prompt}</h1>
+      )}
       {question.clues?.length ? (
         <ol className="mt-5 list-decimal space-y-2 pl-5 text-base leading-7 text-cream-dim">
           {question.clues.map((clue) => (

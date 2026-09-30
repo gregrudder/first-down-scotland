@@ -6,7 +6,7 @@ export const pubsDiscordGuide = {
   description:
     "How to find other NFL fans in Scotland without a fake pub list: Discord, a honest bar search, and the town map on Scheme Battles.",
   blurb:
-    "The chat is on Discord. A Glasgow and Edinburgh home bar is still being looked for. How to watch with people, without inventing venues.",
+    "The chat is on Discord. Watch near you lists Scottish bars only after we have checked they are showing NFL this season. How to watch with people, without inventing venues.",
   blocks: [
     {
       type: "p",
@@ -14,7 +14,7 @@ export const pubsDiscordGuide = {
     },
     {
       type: "p",
-      text: "Two different tools get mixed up, so they are separated here. [Community](/community) is the Discord: chat, a channel per NFL team, and the place you arrange to meet. [Watch near you](/watch-near-you) is the real-world half: we are looking for one meetup partner in Glasgow and one in Edinburgh, a home bar rather than a directory. [Scheme Battles](/fan-map) is the map of which club people in a town follow. None of these is a promise that a screen is on in your street tonight.",
+      text: "Two different tools get mixed up, so they are separated here. [Community](/community) is the Discord: chat, a channel per NFL team, and the place you arrange to meet. [Watch near you](/watch-near-you) is the real-world half: a directory of Scottish bars checked as showing NFL this season, grouped by town, with the date of the check. [Scheme Battles](/fan-map) is the map of which club people in a town follow. None of these is a promise that a screen is on in your street tonight.",
     },
     {
       type: "h2",
@@ -50,7 +50,7 @@ export const pubsDiscordGuide = {
     },
     {
       type: "p",
-      text: "Until a Glasgow partner and an Edinburgh partner are confirmed, finding a screen is a local question. Phone or walk in and ask a specific thing: which NFL window they show, on which service, and whether Sunday at 6pm or 9pm is actually the plan this week. “Do you show the sport?” is too vague. A lot of bars show the Super Bowl and nothing else. A lot of bars have one screen on a main-event football match and will not move it for a 9pm American game. You want the weekly habit, not the one-off.",
+      text: "The directory is a check, not a booking. Phone or walk in and ask a specific thing: which NFL window they show, on which service, and whether Sunday at 6pm or 9pm is actually the plan this week. “Do you show the sport?” is too vague. A lot of bars show the Super Bowl and nothing else. A lot of bars have one screen on a main-event football match and will not move it for a 9pm American game. You want the weekly habit, not the one-off.",
     },
     {
       type: "p",
@@ -62,7 +62,7 @@ export const pubsDiscordGuide = {
         "Ask what they show, and on which Sunday. A one-word “yes” is not a listing.",
         "Go to the early window before you commit to a late one. See if anyone else there cares.",
         "If you find a room that works, tell the team channel. That is how a meetup starts without a logo.",
-        "If you run the bar and you want to be the Glasgow or Edinburgh home, use [Contact](/contact) or the email on Watch near you. Say the pub, the city, and what you already show.",
+        "If you run a bar that shows the NFL and you want it checked for the directory, use [Contact](/contact) or the email on Watch near you. Say the pub, the town, and what you already show.",
         "Do not expect us to call a venue a partner because it was busy once. Partner means we have agreed it, and the page will say so.",
       ],
     },
@@ -84,7 +84,7 @@ export const pubsDiscordGuide = {
     },
     {
       type: "p",
-      text: "If there is no confirmed home bar in your city, you still have a way to watch with people. Agree a kick-off in the team channel. Watch the same game, on whatever legal feed each person has. Talk in the channel, or in a voice room if that is the mood. Meet in real life when someone has actually checked a screen, not when a website has guessed. This is less romantic than a packed pub with scarves, and it is how most UK NFL groups actually work for years before they have a room.",
+      text: "If your town is not on the directory yet, you still have a way to watch with people. Agree a kick-off in the team channel. Watch the same game, on whatever legal feed each person has. Talk in the channel, or in a voice room if that is the mood. Meet in real life when someone has actually checked a screen, not when a website has guessed. This is less romantic than a packed pub with scarves, and it is how most UK NFL groups actually work for years before they have a room.",
     },
     {
       type: "p",
@@ -96,7 +96,7 @@ export const pubsDiscordGuide = {
     },
     {
       type: "p",
-      text: "We are looking for one partner in Glasgow and one in Edinburgh: a regular room for Scottish NFL fans, not a request for drinks on the house, and not a promise of a crowd we cannot prove. If that is you, write to us. Tell us what you already show (a Sunday window, RedZone, the Super Bowl only) and which city. The form is on [Contact](/contact). Watch near you also has an email for a bar enquiry. We would rather have two real homes than a long list of maybes.",
+      text: "A bar goes on the directory only after we have checked what it shows this season, with a source and a date. That is not a request for drinks on the house, and not a promise of a crowd we cannot prove. If you already put the NFL on, write to us. Tell us what you show (a Sunday window, RedZone, the Super Bowl only) and which town. The form is on [Contact](/contact). Watch near you also has an email for a bar enquiry. We would rather list a room we have checked than a long list of maybes.",
     },
     {
       type: "p",
@@ -110,7 +110,7 @@ export const pubsDiscordGuide = {
       type: "list",
       items: [
         "[Community](/community): join the Discord and pick a team channel.",
-        "[Watch near you](/watch-near-you): the Glasgow and Edinburgh partner search.",
+        "[Watch near you](/watch-near-you): Scottish bars checked as showing NFL this season.",
         "[Scheme Battles](/fan-map): put your town down.",
         "[What Scheme Battles is](/guides/what-is-scheme-battles): why the town is the unit, and what stays private.",
         "[Where to watch](/watch): so you know what to ask a bar to put on.",

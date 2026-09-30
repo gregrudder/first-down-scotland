@@ -79,7 +79,7 @@ export const schemeBattlesGuide = {
     },
     {
       type: "p",
-      text: "It will not find you a pub by itself. Screens and opening hours are a different problem, and [Watch near you](/watch-near-you) is deliberately not a directory until a Glasgow partner and an Edinburgh partner are real. The [pubs and Discord guide](/guides/nfl-pubs-and-discord-scotland) is the practical half: how to ask a bar, and how to use the team channel in the meantime. A town with twelve fans and no agreed venue is still progress. It is not a listing.",
+      text: "It will not find you a pub by itself. Screens and opening hours are a different problem, and [Watch near you](/watch-near-you) lists a Scottish bar only after we have checked it is showing NFL this season. The [pubs and Discord guide](/guides/nfl-pubs-and-discord-scotland) is the practical half: how to ask a bar, and how to use the team channel in the meantime. A town with twelve fans and no agreed venue is still progress. It is not a listing of rooms we have not checked.",
     },
     {
       type: "p",

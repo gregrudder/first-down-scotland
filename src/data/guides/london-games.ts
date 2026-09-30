@@ -128,7 +128,7 @@ export const londonGamesGuide = {
         "[NFL history](/history): 2007 to now, in one timeline.",
         "[This week](/this-week): kick-offs in Europe/London once they are on the feed.",
         "[How to watch in the UK](/guides/how-to-watch-the-nfl-in-the-uk): 5, Sky and Game Pass.",
-        "[Watch near you](/watch-near-you): a home bar in Scotland, separate from the London trip.",
+        "[Watch near you](/watch-near-you): Scottish bars checked as showing NFL, separate from the London trip.",
         "[Community](/community): who else is going, or watching.",
         "[Learn](/learn): so the first live drive makes sense when you are there.",
       ],

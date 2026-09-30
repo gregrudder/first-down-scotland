@@ -9,6 +9,7 @@ import { LateNightTeaser } from "@/components/LateNightTeaser";
 import { UkKickoffHelper } from "@/components/UkKickoffHelper";
 import { UnusualFinals } from "@/components/UnusualFinals";
 import { getNflFixtures, groupGamesByUkDate, weekHeading } from "@/lib/espn";
+import { listedPubNames } from "@/lib/pubs";
 import { getGameReports, type GameReport } from "@/lib/game-report";
 import { withTouchdownScorers } from "@/lib/touchdowns";
 import { thinPageRobots } from "@/lib/indexing";
@@ -64,7 +65,7 @@ export default async function ThisWeekPage() {
       </div>
 
       <div className="mt-8">
-        <SundayCard fixtures={fixtures} reports={reports} />
+        <SundayCard fixtures={fixtures} reports={reports} pubNames={listedPubNames()} />
       </div>
       {fixtures.ok ? (
         <div className="mt-8">

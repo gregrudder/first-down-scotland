@@ -34,6 +34,9 @@ describe("sitemap", () => {
       "/contact",
       "/fan-map",
       "/teams",
+      "/start-sit",
+      "/news",
+      "/watch-near-you",
     ]) {
       assert.equal(paths.has(rich), true, `${rich} should stay in the sitemap`);
     }

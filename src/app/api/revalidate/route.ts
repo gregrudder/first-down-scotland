@@ -8,6 +8,7 @@ import { GAME_REPORTS_CACHE_TAG } from "@/lib/game-report";
 import { FAN_MAP_CACHE_TAG } from "@/lib/fan-map/data";
 import { HIGHLIGHTS_CACHE_TAG } from "@/lib/highlights";
 import { ROOKIES_CACHE_TAG } from "@/lib/rookies";
+import { START_SIT_CACHE_TAG } from "@/lib/start-sit";
 import { STANDINGS_CACHE_TAG } from "@/lib/standings";
 
 function isAuthorised(request: NextRequest): boolean {
@@ -32,6 +33,7 @@ async function revalidateFixtures() {
   revalidateTag(DRAFT_PROSPECTS_CACHE_TAG, "max");
   revalidateTag(GAME_REPORTS_CACHE_TAG, "max");
   revalidateTag(HIGHLIGHTS_CACHE_TAG, "max");
+  revalidateTag(START_SIT_CACHE_TAG, "max");
   revalidateTag(FAN_MAP_CACHE_TAG, "max");
   revalidatePath("/");
   revalidatePath("/this-week");
@@ -41,7 +43,9 @@ async function revalidateFixtures() {
   revalidatePath("/standings");
   revalidatePath("/rookies");
   revalidatePath("/news");
+  revalidatePath("/news/headlines");
   revalidatePath("/news/fantasy");
+  revalidatePath("/start-sit");
   revalidatePath("/teams");
   revalidatePath("/learn");
   revalidatePath("/learn/draft-prospects");
@@ -60,6 +64,7 @@ async function revalidateFixtures() {
       DRAFT_PROSPECTS_CACHE_TAG,
       GAME_REPORTS_CACHE_TAG,
       HIGHLIGHTS_CACHE_TAG,
+      START_SIT_CACHE_TAG,
       FAN_MAP_CACHE_TAG,
     ],
     at: new Date().toISOString(),

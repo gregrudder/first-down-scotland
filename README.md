@@ -19,12 +19,13 @@ Three jobs: learn the game, meet fans of your team, keep that club in one place.
 - **`/score-history`** : “Has this score happened before?” Scoreography lookup against a **stored** nflverse schedule snapshot (1999–2025 completed regular-season and play-off games). Winner–loser or home-and-away. Honest empty states if a final is not in the table. Unusual-final notes also appear on Scores and This week when the slate has finished games.
 - **`/standings`** : AFC / NFC by division, with wins-losses-ties, points for/against, and division rank. ESPN public standings (`type=0&level=3`), cached **300 seconds**.
 - **`/rookies`** : Rookie Watch for **this season’s drafted class** (the live scoreboard year; in 2026 that is the 2026 draft, not the 2025 class and not the 2027 college board). ESPN draft list plus Sleeper regular-season stats when any counting numbers exist. Cached **600 seconds**. Filter by team, position, or round.
-- **`/news`** : NFL headlines pulled automatically from public RSS (ESPN, BBC Sport, the Guardian). Helper, not the product.
+- **`/news`** : **Our take**, short editorial notes (date, headline, take, author, named sources). Add a day by editing `src/data/our-take.ts` only. Newest first. Optional `expires_at` (ISO datetime, Europe/London offset) hides a note once that moment has passed.
+- **`/news/headlines`** : NFL headlines pulled from public RSS (ESPN, BBC Sport, the Guardian). `noindex`, omitted from the sitemap.
 - **`/news/fantasy`** : NFL fantasy football tips & news (not Scottish football)
 - **`/podcasts`** : recommended NFL and per-team shows to follow (external links; official vs independent labelled)
 - **`/watch`** : high-level UK viewing map (Sky / Channel 5 / 5Action / My5 / DAZN Game Pass / Netflix)
 - **`/film-room`** : curated watch-to-learn films (America’s Game, Hard Knocks, All or Nothing, Quarterback, Wide Receiver). Official where-to-look hints only; no streams.
-- **`/watch-near-you`** : Partner search for one Glasgow and one Edinburgh home bar for Scottish NFL meetups. No venue directory until those partners are confirmed. Discord in the meantime.
+- **`/watch-near-you`** : directory of Scottish bars checked as showing NFL this season, grouped by town. Data is `src/data/pubs.csv` (name, town, address, shows, booking_or_contact, source_url, checked_date, notes). The notes column is internal and is not rendered. A town written as `Dundee (Broughty Ferry)` groups under Dundee and is labelled Broughty Ferry. Check with the bar before you go.
 - **`/about`** : what the site is for (learn + meet your team)
 - **`/privacy`**, **`/terms`**, **`/contact`** : privacy policy, terms of use, and the public contact page (email plus the note form). `/feedback` redirects to `/contact`.
 - **`/community`** : Discord as the chat home for Scottish / UK fans of the team you picked (Join the Discord CTA; default invite in the repo; override with `NEXT_PUBLIC_DISCORD_INVITE`; no in-app chat)
@@ -71,7 +72,7 @@ Copy `.env.example` if you want a local file. Nothing is required for day-to-day
 | `NEXT_PUBLIC_SITE_URL` | Optional | Canonical / Open Graph / sitemap base URL. If unset, we use `VERCEL_PROJECT_PRODUCTION_URL` or `https://www.firstdownscotland.com` — never a preview `*.vercel.app` host (those hit SSO). |
 | `NEXT_PUBLIC_DISCORD_INVITE` | Optional | Override the Community join link. If unset or invalid, the app uses the public First Down Scotland invite (`https://discord.gg/dVuNUT4Cgf`). |
 | `NEXT_PUBLIC_CONTACT_EMAIL` | Optional | Overrides the public contact mailto (defaults to `info@g4-marketing.net`). |
-| `NEXT_PUBLIC_ADSENSE_ENABLED` | Off by default | Set to exactly `true` to load the AdSense publisher script (`adsbygoogle.js`). Leave unset until the site is approved. `public/ads.txt` stays either way. This flag does not render ad units. |
+| `NEXT_PUBLIC_ADSENSE_ENABLED` | Ignored | The publisher meta tag (`google-adsense-account`) and `adsbygoogle.js` for `ca-pub-1747465358377243` are always in the root layout. `public/ads.txt` stays either way. No ad units are rendered. |
 | `FORMSPREE_FORM_ID` | For `/feedback` on Hobby | Server-only Formspree form hash, or the full `https://formspree.io/f/…` URL. Inbox is set in the Formspree dashboard, not in this repo. |
 | `RESEND_API_KEY` | For `/feedback` (option B) | Server-only. Sends via [Resend](https://resend.com). Needs a verified sending domain to reach an arbitrary inbox. |
 | `FEEDBACK_TO_EMAIL` | With Resend | Server-only inbox. Never `NEXT_PUBLIC_*`. |
@@ -174,7 +175,9 @@ On Vercel, `vercel.json` schedules a **daily** Cron at `0 6 * * *` (06:00 UTC) t
 - `revalidatePath('/standings')`
 - `revalidatePath('/rookies')`
 - `revalidatePath('/news')`
+- `revalidatePath('/news/headlines')`
 - `revalidatePath('/news/fantasy')`
+- `revalidatePath('/start-sit')`
 - `revalidatePath('/teams')`
 - `revalidatePath('/learn')`
 - `revalidatePath('/learn/draft-prospects')`
@@ -197,15 +200,28 @@ Rankings move. The page says so. This is not a betting slip.
 
 ## How NFL news refreshes
 
-Headlines are **not** pasted in by hand.
+`/news` is **Our take**. It does not fetch RSS.
 
-1. `/news` fetches three public RSS feeds in parallel:
+To add a day, edit **only** `src/data/our-take.ts`. Append an object:
+
+- `date`: `YYYY-MM-DD`
+- `headline`
+- `take`: the 2-3 line note, verbatim
+- `author`: optional. Defaults to `Blitz, First Down Scotland`
+- `sources`: `{ name, url? }[]`. Leave `url` off when we are naming a source without a link
+- `expires_at`: optional ISO datetime with a Europe/London offset (`+00:00` or `+01:00`). The note is hidden once that moment has passed. `/news` revalidates every 10 minutes, so a note drops off on the next refresh after it expires
+
+Newest date is shown first. Same-day notes keep the order they appear in the file.
+
+`/news/headlines` is the pulled list. It is `noindex` and left out of the sitemap.
+
+1. `/news/headlines` fetches three public RSS feeds in parallel:
    - ESPN NFL — `https://www.espn.com/espn/rss/nfl/news`
    - BBC Sport American football — `https://feeds.bbci.co.uk/sport/american-football/rss.xml`
    - The Guardian NFL — `https://www.theguardian.com/sport/nfl/rss`
 2. We show headline, source, Europe/London time, and a short snippet from the feed, then **link out**. Full articles stay on the publisher’s site.
 3. Items are deduped by normalised URL (tracking query params stripped) and by title.
-4. Next.js caches each feed fetch for **600 seconds** (10 minutes) and tags it `news`. `/news` also sets `export const revalidate = 600`.
+4. Next.js caches each feed fetch for **600 seconds** (10 minutes) and tags it `news`. `/news/headlines` also sets `export const revalidate = 600`.
 5. The daily Hobby Cron also busts the `news` tag. Do **not** add an hourly Cron on Hobby — ISR is the ongoing refresh.
 
 If a feed fails, the others still show. If all fail, the page says so instead of inventing headlines.
@@ -217,6 +233,10 @@ If a feed fails, the others still show. If all fail, the page says so instead of
 - RotoWire NFL player news — `https://www.rotowire.com/rss/news.php?sport=NFL`
 
 The News nav stays one item; NFL and Fantasy are tabs on the news pages. This is **NFL fantasy**, not Scottish football.
+
+Mini-game intros live in `src/data/mini-game-intros.ts`, keyed by slug. Each entry is three paragraphs plus a `sourceUrl`, rendered as a Source link. Empty paragraphs hide that intro.
+
+`/start-sit` compares two players from Sleeper’s public API (players list cached server-side for a day; weekly projections, weekly stats, NFL state and the regular-season schedule cached more briefly). Editorial calls are `src/data/start-sit-verdicts.csv` with the header `week,player_a,player_b,verdict,confidence,reason,source_url,checked_date`. `verdict` is the player to start. `confidence` is `lean` or `strong`. Pairs match in either order, for the current Sleeper week, and names ignore case, punctuation and suffixes such as Jr. No matching row means the numbers only, labelled as Sleeper projections, not a verdict. The written call is labelled Waiver Wire's verdict. Ask in Discord #start-sit.
 
 Set `CRON_SECRET` in the Vercel project so the Cron request is accepted. You can also hit the route yourself:
 
@@ -265,11 +285,13 @@ curl -H "Authorization: Bearer $CRON_SECRET" https://www.firstdownscotland.com/a
 | `/score-history` | Has this final happened before? (stored nflverse table) |
 | `/standings` | AFC / NFC by division |
 | `/rookies` | This season’s drafted rookies + stats |
-| `/news` | Auto NFL headlines (RSS, link out) |
+| `/news` | Our take (editorial notes) |
+| `/news/headlines` | Auto NFL headlines (RSS, link out, noindex) |
+| `/start-sit` | Compare two fantasy players (Sleeper data; Waiver Wire's verdict when the CSV has one) |
 | `/news/fantasy` | Auto NFL fantasy headlines (RSS, link out) |
 | `/watch` | UK viewing explainer |
 | `/film-room` | Watch-to-learn films and series |
-| `/watch-near-you` | Glasgow + Edinburgh meetup-partner search (no venue directory yet) |
+| `/watch-near-you` | Scottish bars checked as showing NFL, grouped by town |
 | `/community` | Discord community (invite CTA) |
 | `/contact` | Contact: email plus the note form |
 | `/feedback` | Redirects to `/contact` |
@@ -289,7 +311,7 @@ Independent fan project. Not affiliated with the NFL, Sky, Channel 5, DAZN, Netf
 
 Team profiles use ESPN’s public logo CDN (`https://a.espncdn.com/i/teamlogos/nfl/500/{abbr}.png`) with an abbreviation-circle fallback. Stadium names and listed capacities follow Wikipedia’s current NFL stadiums list for the **2026 season** (cited there to club media guides and reporting). Super Bowl counts are after Super Bowl LX (Seattle 29–13 New England, 8 February 2026; AP / NFL.com). Franchise origins follow the league’s published history and standard reference summaries. Stadium names, capacities and trophy counts can change.
 
-`/watch-near-you` is a partner search, not a venue directory. Confirmed Glasgow and Edinburgh home bars will live in `src/data/pubs.ts` (`livePubs()`). That list is empty until partners are agreed. Bar owners can use `/contact` or the public contact email.
+`/watch-near-you` reads `src/data/pubs.csv`. Replace that file to update the directory (keep the header row). Notes stay in the file for editors and are not shown on the page. Bar owners can use `/contact` or the public contact email.
 
 ## Search indexing
 
@@ -302,3 +324,4 @@ These stay in the app for fans. They are `noindex, follow`, and they are omitted
 - `/this-week`
 - `/late-night-diary`
 - `/news/fantasy`
+- `/news/headlines`

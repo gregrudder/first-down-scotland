@@ -89,7 +89,7 @@ export const navGroups: readonly NavGroup[] = [
       {
         href: "/watch-near-you",
         label: "Pubs",
-        description: "Find places showing NFL games.",
+        description: "Scottish bars checked as showing NFL.",
       },
     ],
   },
@@ -135,7 +135,12 @@ export const navGroups: readonly NavGroup[] = [
       {
         href: "/news",
         label: "News",
-        description: "Latest NFL news.",
+        description: "Our take on the NFL week.",
+      },
+      {
+        href: "/start-sit",
+        label: "Start/Sit",
+        description: "Compare two players. Waiver Wire's verdict when we have one.",
       },
       {
         href: "/rookies",
