@@ -62,8 +62,6 @@ export function paintBuildCard(ctx: CanvasRenderingContext2D, model: BuildCardMo
   ctx.fillStyle = CREAM_DIM;
   ctx.font = "600 24px ui-sans-serif, system-ui, sans-serif";
   ctx.fillText("OVERALL", pad + overallWidth + 20, 248);
-  ctx.font = "500 22px ui-sans-serif, system-ui, sans-serif";
-  ctx.fillText("Game rating. Our opinion, not an official grade.", pad + overallWidth + 20, 280);
 
   ctx.strokeStyle = GOLD;
   ctx.lineWidth = 2;

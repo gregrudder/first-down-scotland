@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 import {
-  RATING_DISCLAIMER,
+  buildAQuarterbackGame,
   TRAIT_IDS,
   quarterbacks,
   type TraitRatings,
@@ -40,10 +40,6 @@ const eighties = {
   leadership: 80,
 } satisfies TraitRatings;
 
-function words(text: string): number {
-  return text.trim().split(/\s+/).filter(Boolean).length;
-}
-
 describe("build a quarterback pool", () => {
   it("keeps a mid-sized pool of distinct quarterbacks", () => {
     assert.ok(quarterbacks.length >= 30 && quarterbacks.length <= 40);
@@ -51,9 +47,7 @@ describe("build a quarterback pool", () => {
     assert.equal(new Set(quarterbacks.map((qb) => qb.name)).size, quarterbacks.length);
   });
 
-  it("labels ratings as opinion and leaves invented stat lines out", () => {
-    assert.match(RATING_DISCLAIMER, /opinion/i);
-    assert.match(RATING_DISCLAIMER, /not official/i);
+  it("leaves invented stat lines out of the career notes", () => {
     for (const qb of quarterbacks) {
       const text = `${qb.knownFor} ${qb.fact ?? ""}`;
       assert.doesNotMatch(text, /yards|touchdowns|completion percentage|passer rating/i);
@@ -63,19 +57,14 @@ describe("build a quarterback pool", () => {
   it("writes a UK-English intro in the same shape as the other mini-games", () => {
     const intro = getMiniGameIntro("build-a-quarterback");
     assert.ok(intro);
-    assert.equal(intro.paragraphs.length, 3);
+    assert.equal(intro.paragraphs.length, 2);
     assert.match(intro.sourceUrl, /^https:\/\/en\.wikipedia\.org\/wiki\/Sammy_Baugh$/);
     const text = intro.paragraphs.join(" ");
-    const count = words(text);
-    assert.ok(count >= 150 && count <= 250, `intro is ${count} words`);
     assert.match(text, /offence/);
     assert.match(text, /defence/);
-    assert.match(text, /opinion/i);
-    assert.match(text, /not official/i);
-    assert.match(text, new RegExp(`\\b${SALARY_CAP}\\b`));
-    assert.match(text, /eight slots/i);
     assert.match(text, /Sammy Baugh/);
     assert.match(text, /1943/);
+    assert.doesNotMatch(text, /short draft|salary cap|not official|Nothing is saved/i);
     assert.doesNotMatch(text, /\boffense\b|\bdefense\b|\bfavorite\b|\blorem\b|\bplaceholder\b|\btbd\b/i);
   });
 
@@ -83,7 +72,7 @@ describe("build a quarterback pool", () => {
     for (const slug of getMiniGameSlugs()) {
       const intro = getMiniGameIntro(slug);
       assert.ok(intro, `${slug} should keep its intro`);
-      assert.equal(intro.paragraphs.length, 3, slug);
+      assert.equal(intro.paragraphs.length, slug === "build-a-quarterback" ? 2 : 3, slug);
       assert.match(intro.sourceUrl, /^https:\/\//, slug);
     }
   });
@@ -93,7 +82,12 @@ describe("build a quarterback pool", () => {
     const game = getMiniGame("build-a-quarterback");
     assert.equal(game?.kind, "build");
     assert.equal(game?.title, "Build a Quarterback");
-    assert.match(game?.summary ?? "", /opinion/i);
+    assert.equal(
+      game?.summary,
+      "One trait from a different quarterback, under a salary cap.",
+    );
+    assert.equal(game?.summary, buildAQuarterbackGame.summary);
+    assert.doesNotMatch(game?.summary ?? "", /opinion|not official|Draft a dream/i);
   });
 });
 
@@ -316,7 +310,8 @@ describe("scored card", () => {
       pageUrl: "https://www.firstdownscotland.com/mini-games/build-a-quarterback",
     });
     assert.match(summary, new RegExp(scored.archetypeLabel));
-    assert.match(summary, /game rating, not an official grade/i);
+    assert.match(summary, new RegExp(`${scored.overall} overall`));
+    assert.doesNotMatch(summary, /opinion|not an official/i);
     assert.match(summary, /Patrick Mahomes/);
     assert.match(summary, /build-a-quarterback/);
   });

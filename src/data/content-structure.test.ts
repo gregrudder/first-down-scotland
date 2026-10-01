@@ -66,7 +66,7 @@ describe("mini-game intros", () => {
     for (const slug of getMiniGameSlugs()) {
       const intro = getMiniGameIntro(slug);
       assert.ok(intro, slug);
-      assert.equal(intro.paragraphs.length, 3);
+      assert.equal(intro.paragraphs.length, slug === "build-a-quarterback" ? 2 : 3);
       assert.match(intro.sourceUrl, /^https:\/\//);
       for (const paragraph of intro.paragraphs) {
         assert.equal(paragraph.includes("Word count"), false);

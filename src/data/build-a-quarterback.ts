@@ -344,14 +344,10 @@ export const quarterbacks: readonly Quarterback[] = [
   },
 ];
 
-export const RATING_DISCLAIMER =
-  "Game ratings are our opinion for this mini-game. They are not official grades or stats.";
-
 export const buildAQuarterbackGame: BuildMiniGame = {
   slug: "build-a-quarterback",
   title: "Build a Quarterback",
-  summary:
-    "Draft a dream quarterback, one real player per trait, under a salary cap. Ratings are our opinion, not official stats.",
+  summary: "One trait from a different quarterback, under a salary cap.",
   minutes: 5,
   kind: "build",
 };
