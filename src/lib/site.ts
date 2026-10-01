@@ -81,6 +81,12 @@ export const navGroups: readonly NavGroup[] = [
         primary: true,
       },
       {
+        href: "/pickem",
+        label: "Pick'em",
+        description: "Weekly Discord picks and the season table.",
+        primary: true,
+      },
+      {
         href: "/fan-map",
         label: "Scheme Battles",
         description: schemeBattlesHook,
@@ -108,6 +114,12 @@ export const navGroups: readonly NavGroup[] = [
         href: "/this-week",
         label: "This Week",
         description: "Games, fixtures and what is coming up.",
+        primary: true,
+      },
+      {
+        href: "/kick-off-planner",
+        label: "Kick-off planner",
+        description: "Any club’s 2026 season in UK time.",
         primary: true,
       },
       {

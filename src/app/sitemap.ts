@@ -24,6 +24,8 @@ const staticRoutes = [
   "/rookies",
   "/news",
   "/start-sit",
+  "/kick-off-planner",
+  "/pickem",
   "/podcasts",
   "/watch",
   "/film-room",
