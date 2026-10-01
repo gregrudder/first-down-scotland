@@ -136,9 +136,16 @@ describe("start/sit verdicts", () => {
     );
   });
 
-  it("keeps the committed verdict file to the header until a week is filled", () => {
+  it("loads the committed Week 4 verdict rows", () => {
     const csv = readFileSync(path.join(process.cwd(), "src/data/start-sit-verdicts.csv"), "utf8");
     const records = rowsToRecords(parseCsv(csv), VERDICT_COLUMNS);
-    assert.equal(records.length, 0);
+    assert.equal(records.length, 21);
+    const rows = parseVerdictRows(records);
+    assert.equal(rows.length, 21);
+    assert.ok(rows.every((row) => row.week === 4));
+    assert.equal(
+      matchVerdict(rows, 4, "Drake Maye", "Marcus Mariota")?.verdict,
+      "Marcus Mariota",
+    );
   });
 });
