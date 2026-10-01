@@ -3,7 +3,6 @@
 import { useEffect, useId, useMemo, useRef, useState, type KeyboardEvent } from "react";
 import Link from "next/link";
 import {
-  RATING_DISCLAIMER,
   TRAITS,
   buildAQuarterbackGame,
   quarterbacks,
@@ -61,7 +60,7 @@ export function BuildAQuarterback({ embedded = false }: { embedded?: boolean }) 
   const [fallback, setFallback] = useState("");
   const headingRef = useRef<HTMLHeadingElement>(null);
   const boardLabelId = useId();
-  const disclaimerId = useId();
+  const onceId = useId();
 
   const slotIndex = picks.length;
   const trait = TRAITS[slotIndex];
@@ -184,13 +183,7 @@ export function BuildAQuarterback({ embedded = false }: { embedded?: boolean }) 
             </h1>
           </>
         )}
-        <p className={`text-lg leading-8 text-cream-dim ${embedded ? "" : "mt-4"}`}>
-          {buildAQuarterbackGame.summary}
-        </p>
-        <p className="mt-4 text-sm leading-6 text-cream-dim">
-          Nothing is saved to an account. {RATING_DISCLAIMER}
-        </p>
-        <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+        <div className={`${embedded ? "mt-0" : "mt-8"} flex flex-col gap-3 sm:flex-row`}>
           <button
             type="button"
             onClick={start}
@@ -249,7 +242,6 @@ export function BuildAQuarterback({ embedded = false }: { embedded?: boolean }) 
         <p className="text-sm font-semibold uppercase tracking-[0.16em] text-gold">
           Overall game rating
         </p>
-        <p className="mt-2 text-sm leading-6 text-cream-dim">{RATING_DISCLAIMER}</p>
         <p className="mt-4 text-lg leading-8 text-cream">{scored.verdict}</p>
         <p className="mt-2 text-sm leading-6 text-cream-dim">{capNote(scored.spent)}</p>
 
@@ -276,8 +268,7 @@ export function BuildAQuarterback({ embedded = false }: { embedded?: boolean }) 
           </summary>
           <p className="mt-2 text-sm leading-6 text-cream-dim">
             It is a weighted average of the eight game ratings. Accuracy, football IQ, pocket
-            presence and clutch count for more than mobility, leadership or durability. It is
-            still our opinion.
+            presence and clutch count for more than mobility, leadership or durability.
           </p>
         </details>
 
@@ -387,8 +378,8 @@ export function BuildAQuarterback({ embedded = false }: { embedded?: boolean }) 
         </h1>
       )}
       <p className="mt-2 text-base leading-7 text-cream-dim">{trait?.blurb}</p>
-      <p id={disclaimerId} className="mt-2 text-sm leading-6 text-cream-dim">
-        {RATING_DISCLAIMER} Each name can be used once.
+      <p id={onceId} className="mt-2 text-sm leading-6 text-cream-dim">
+        Each name can be used once.
       </p>
       <p className="sr-only">
         Use Tab or the arrow keys to move between quarterbacks. Enter or Space drafts the one in
@@ -421,7 +412,7 @@ export function BuildAQuarterback({ embedded = false }: { embedded?: boolean }) 
             key={qb.id}
             qb={qb}
             traitId={trait?.id ?? "arm"}
-            describedBy={disclaimerId}
+            describedBy={onceId}
             onChoose={() => choose(qb)}
           />
         ))}

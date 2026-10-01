@@ -384,7 +384,7 @@ export function shareSummary(input: {
   const rows = input.lines.map((line) => `${line.trait}: ${line.name} (${line.rating})`);
   return [
     "Build a Quarterback · First Down Scotland",
-    `${input.archetypeLabel} · ${input.overall} overall (our game rating, not an official grade)`,
+    `${input.archetypeLabel} · ${input.overall} overall`,
     "",
     ...rows,
     "",
