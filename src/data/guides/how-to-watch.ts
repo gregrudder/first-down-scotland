@@ -137,7 +137,7 @@ export const howToWatchGuide = {
         "[Where to watch](/watch): the short channel map, next to the kick-off helper.",
         "[This week](/this-week): fixtures in Europe/London, with a spoiler-free switch.",
         "[Late Night Diary](/late-night-diary): only the kick-offs that threaten your morning.",
-        "[Watch near you](/watch-near-you): the search for a Glasgow and an Edinburgh home, not a fake pub directory.",
+        "[Watch near you](/watch-near-you): Scottish bars checked as showing NFL, not a fake pub directory.",
         "[Community](/community): Discord, if you want to know who else is watching.",
         "[NFL Scheme Battles](/fan-map): which club people near you actually follow.",
       ],

@@ -23,6 +23,7 @@ const staticRoutes = [
   "/standings",
   "/rookies",
   "/news",
+  "/start-sit",
   "/podcasts",
   "/watch",
   "/film-room",
@@ -44,6 +45,7 @@ const hourlyPaths = new Set<string>([
   "/standings",
   "/rookies",
   "/news",
+  "/start-sit",
   "/learn/draft-prospects",
 ]);
 

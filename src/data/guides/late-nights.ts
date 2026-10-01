@@ -100,7 +100,7 @@ export const lateNightsGuide = {
     },
     {
       type: "p",
-      text: "Pubs are a different bargain. A 6pm or 9pm kick-off can be social. A 1am kick-off usually cannot, unless you have found a room that is genuinely staying open, and even then you are asking a Monday of yourself. [Watch near you](/watch-near-you) is our search for a Glasgow home and an Edinburgh home. It is not a list of bars we are pretending stay open all night. If you want company for the late one, the realistic version is a voice channel or a group chat with people who also chose to be awake, not a trek across the city.",
+      text: "Pubs are a different bargain. A 6pm or 9pm kick-off can be social. A 1am kick-off usually cannot, unless you have found a room that is genuinely staying open, and even then you are asking a Monday of yourself. [Watch near you](/watch-near-you) lists Scottish bars we have checked as showing NFL, and it is not a list of rooms we are pretending stay open all night. If you want company for the late one, the realistic version is a voice channel or a group chat with people who also chose to be awake, not a trek across the city.",
     },
     {
       type: "h2",

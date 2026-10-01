@@ -95,10 +95,10 @@ export default function CommunityPage() {
         </p>
         <h2 className="mt-2 font-display text-2xl text-cream">Meet in the real world</h2>
         <p className="mt-3 text-base leading-7 text-cream-dim">
-          The Discord is for chat. Watch near you is the search for a real
-          room: one Glasgow home and one Edinburgh home, once they are
-          confirmed. Until then, use your team channel to see who else is
-          watching. You do not have to do it on your own.
+          The Discord is for chat. Watch near you is the directory of Scottish
+          bars checked as showing NFL this season. If your town is not on it
+          yet, use your team channel to see who else is watching. You do not
+          have to do it on your own.
         </p>
         <p className="mt-4 text-sm">
           <Link href="/watch-near-you" className="font-semibold text-gold">

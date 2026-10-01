@@ -1,13 +1,9 @@
 /**
- * Google AdSense publisher script.
- *
- * Off unless NEXT_PUBLIC_ADSENSE_ENABLED is exactly "true".
- * Leave it unset until the site is approved. public/ads.txt stays either way.
- * This flag only loads the publisher script. It does not render ad units.
+ * Google AdSense publisher id.
+ * The root layout always emits the google-adsense-account meta tag and
+ * adsbygoogle.js. public/ads.txt stays in place. No ad units are rendered.
  */
-export function isAdsenseEnabled(): boolean {
-  return process.env.NEXT_PUBLIC_ADSENSE_ENABLED === "true";
-}
+export const ADSENSE_META_NAME = "google-adsense-account";
 
 export const ADSENSE_CLIENT = "ca-pub-1747465358377243";
 

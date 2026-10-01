@@ -4,7 +4,7 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Figtree, Fraunces } from "next/font/google";
 import Script from "next/script";
 import { SiteShell } from "@/components/SiteShell";
-import { adsenseScriptSrc, isAdsenseEnabled } from "@/lib/adsense";
+import { ADSENSE_CLIENT, adsenseScriptSrc } from "@/lib/adsense";
 import { absoluteUrl, site } from "@/lib/site";
 import { teamThemeBootScript } from "@/lib/team-theme";
 import { spoilerFreeBootScript } from "@/lib/spoiler-storage";
@@ -87,20 +87,16 @@ export const viewport: Viewport = {
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
-  // Publisher script only. No ad units. Off unless NEXT_PUBLIC_ADSENSE_ENABLED=true.
-  const loadAdsense = isAdsenseEnabled();
-
   return (
     <html
       lang="en-GB"
       className={`${figtree.variable} ${fraunces.variable} h-full antialiased`}
     >
-      {loadAdsense ? (
-        <head>
-          {/* Native head tag so an approved AdSense crawl sees the client in the initial HTML. */}
-          <script async src={adsenseScriptSrc()} crossOrigin="anonymous" />
-        </head>
-      ) : null}
+      <head>
+        {/* Native head tags so an AdSense crawl sees the account in the initial HTML. No ad units. */}
+        <meta name="google-adsense-account" content={ADSENSE_CLIENT} />
+        <script async src={adsenseScriptSrc()} crossOrigin="anonymous" />
+      </head>
       <body className="min-h-full font-sans">
         <Script id="fds-team-theme" strategy="beforeInteractive">
           {teamThemeBootScript()}

@@ -133,10 +133,12 @@ export function SundayCard({
   fixtures,
   reports = {},
   compact = false,
+  pubNames = [],
 }: {
   fixtures: FixturesResult;
   reports?: Record<string, GameReport>;
   compact?: boolean;
+  pubNames?: readonly string[];
 }) {
   const { record, ready } = useSavedTeam();
   const games: NflGame[] = fixtures.ok ? fixtures.games : [];
@@ -152,9 +154,9 @@ export function SundayCard({
   const explainer = useMemo(() => {
     if (!record) return null;
     const weekNumber = fixtures.ok ? fixtures.weekNumber : null;
-    if (!match) return byeWeekExplainer(record.team, weekNumber);
-    return buildSundayExplainer(record.team, match, weekNumber);
-  }, [fixtures, match, record]);
+    if (!match) return byeWeekExplainer(record.team, weekNumber, pubNames);
+    return buildSundayExplainer(record.team, match, weekNumber, pubNames);
+  }, [fixtures, match, pubNames, record]);
 
   if (!ready) {
     return (

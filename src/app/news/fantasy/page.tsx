@@ -34,6 +34,10 @@ export default async function FantasyNewsPage() {
           <Link href="/learn/fantasy-football" className="text-gold">
             Fantasy football lesson →
           </Link>
+          <span className="text-cream-dim"> · </span>
+          <Link href="/start-sit" className="text-gold">
+            Start/Sit
+          </Link>
         </p>
       </PageIntro>
       <div className="mt-8">

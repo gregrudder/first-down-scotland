@@ -17,6 +17,7 @@ export const thinSitemapPaths = [
   "/late-night-diary",
   "/scores",
   "/news/fantasy",
+  "/news/headlines",
 ] as const;
 
 export const thinSitemapPathSet = new Set<string>(thinSitemapPaths);

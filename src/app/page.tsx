@@ -10,6 +10,7 @@ import { guideHref, guideReadingMinutes, guideSeasonNote, guides } from "@/data/
 import { lessons } from "@/data/lessons";
 import { getGameReports } from "@/lib/game-report";
 import { getNflFixtures } from "@/lib/espn";
+import { listedPubNames } from "@/lib/pubs";
 import { absoluteUrl, homeSeo, site } from "@/lib/site";
 
 export const revalidate = 300;
@@ -312,7 +313,7 @@ export default async function HomePage() {
         </div>
 
         <aside className="space-y-4 lg:pt-2">
-          <SundayCard fixtures={fixtures} reports={reports} compact />
+          <SundayCard fixtures={fixtures} reports={reports} compact pubNames={listedPubNames()} />
           <GamesTeaser fixtures={fixtures} />
         </aside>
       </section>

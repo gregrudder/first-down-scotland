@@ -1,4 +1,3 @@
-import { livePubs } from "@/data/pubs";
 import { plays } from "@/data/plays";
 import type { NflTeam } from "@/data/teams";
 import type { NflGame, TeamSide } from "@/lib/espn";
@@ -52,25 +51,27 @@ export function buildSundayExplainer(
   team: NflTeam,
   match: SundayMatch,
   weekNumber: number | null,
+  pubNames: readonly string[] = [],
 ): SundayExplainer {
   return {
     watchFor: watchForCopy(team, match),
     learn: learnTieIn(team, match.game, weekNumber),
     watchHint: watchHintForGame(match.game),
-    pubHint: pubHintForGame(match.game),
+    pubHint: pubHintForGame(match.game, pubNames),
   };
 }
 
-export function byeWeekExplainer(team: NflTeam, weekNumber: number | null): SundayExplainer {
+export function byeWeekExplainer(
+  team: NflTeam,
+  weekNumber: number | null,
+  pubNames: readonly string[] = [],
+): SundayExplainer {
   const learn = learnTieIn(team, null, weekNumber);
   return {
     watchFor: `${team.shortName} are not on this week’s ESPN slate. That is usually a bye, a gap between slates, or a week the feed has not published yet. Use the quiet: one lesson, or the Film room. Everyone else’s games are still listed below.`,
     learn,
     watchHint: "No kick-off to map until they are back on the board.",
-    pubHint:
-      livePubs().length > 0
-        ? "Scottish pubs that already list NFL Sundays are on Watch near you. A bye week is a good time to call ahead for the next one."
-        : "Watch near you is looking for a Glasgow and an Edinburgh home bar. Until those partners are confirmed, Discord is the place to find fans of your team.",
+    pubHint: pubHintForGame(null, pubNames),
   };
 }
 
@@ -164,19 +165,15 @@ function isLateUkKickoff(game: NflGame): boolean {
   return (day === "Mon" || day === "Tue" || day === "Fri") && hour <= 3;
 }
 
-export function pubHintForGame(game: NflGame | null): string {
-  const live = livePubs();
-  const names = live
-    .slice(0, 3)
-    .map((pub) => pub.name)
-    .join(", ");
-  const where = names ? ` ${names} already advertise NFL Sundays.` : "";
+export function pubHintForGame(game: NflGame | null, pubNames: readonly string[] = []): string {
+  const names = pubNames.slice(0, 3).join(", ");
+  const where = names ? ` ${names} are on the checked list.` : "";
 
   if (!game) {
-    if (!live.length) {
-      return "Watch near you is looking for a Glasgow and an Edinburgh home bar for Scottish NFL meetups. Until those partners are confirmed, Discord is the place to find fans of your team.";
+    if (!pubNames.length) {
+      return "Watch near you lists Scottish bars checked as showing NFL this season. Until a bar is on that list, Discord is the place to find fans of your team.";
     }
-    return `A handful of Scottish pubs list the NFL.${where} Good places to meet fans of your team: always call ahead, and use Discord to see who else is going.`.trim();
+    return `Scottish bars checked as showing NFL are on Watch near you.${where} Check with the bar before you go, and use Discord to see who else is going.`.trim();
   }
 
   const hour = ukHourNumber(game.kickoffUtc);
@@ -184,16 +181,16 @@ export function pubHintForGame(game: NflGame | null): string {
   const sundayWindow =
     day === "Sun" || (day === "Mon" && hour !== null && hour < 3);
 
-  if (!live.length) {
+  if (!pubNames.length) {
     if (sundayWindow) {
-      return "This is the pub-friendly window. Watch near you is still finding a Glasgow and Edinburgh home bar. Use Discord to see who else is watching, then meet once those partners are confirmed.";
+      return "This is the pub-friendly window. Watch near you lists Scottish bars only after we have checked they are showing NFL. Use Discord to see who else is watching.";
     }
-    return "Overnight and midweek games are harder in a pub. Game Pass or Sky at home is the usual UK move. For Sundays, Watch near you is looking for a Glasgow and Edinburgh home bar. Discord is the chat home.";
+    return "Overnight and midweek games are harder in a pub. Game Pass or Sky at home is the usual UK move. For Sundays, Watch near you lists bars we have checked. Discord is the chat home.";
   }
 
   if (sundayWindow) {
-    return `This is the pub-friendly window for meeting fans of your team.${where} Check Watch near you, ring them, and use Discord to arrange who is going.`;
+    return `This is the pub-friendly window for meeting fans of your team.${where} Check Watch near you, check with the bar before you go, and use Discord to arrange who is going.`;
   }
 
-  return `Overnight and midweek games are harder in a pub. Game Pass or Sky at home is the usual UK move. For Sundays, Watch near you lists Scottish spots where fans of the same team can meet. Discord is the chat home.`;
+  return `Overnight and midweek games are harder in a pub. Game Pass or Sky at home is the usual UK move. For Sundays, Watch near you lists Scottish bars checked as showing NFL. Discord is the chat home.`;
 }

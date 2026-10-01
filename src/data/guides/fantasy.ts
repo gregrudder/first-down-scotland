@@ -68,7 +68,7 @@ export const fantasyGuide = {
     {
       type: "note",
       title: "Not a tip line",
-      text: "We do not publish start-sit picks, betting angles, or “lock of the week”. The news tab links out to publishers who do analysis. A headline is one person’s opinion. Your league is not obliged to agree.",
+      text: "Weekly start/sit write-ups, when we have checked one, are on [Start/Sit](/start-sit) and labelled Waiver Wire's verdict. A lean on that page that comes from public projections is labelled as such: it is not a guarantee, and PPR, half-PPR or standard scoring changes it. We do not publish betting angles or a “lock of the week”. The news tab links out to publishers who do analysis. A headline is one person’s opinion. Your league is not obliged to agree.",
     },
     {
       type: "h2",
