@@ -1,0 +1,8 @@
+{
+  "activeWeek": 4,
+  "channel": "#weekly-pickem",
+  "pointsPerCorrectPick": 1,
+  "missedWeekPoints": 0,
+  "entriesClose": "first-counting-kickoff",
+  "counts": "Sunday slate plus the Monday and Tuesday UK-overnight games (Sunday night and Monday night in the US). Thursday and other overnight openers do not count."
+}

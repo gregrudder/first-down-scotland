@@ -1,0 +1,20 @@
+{
+  "gamesCounted": 29,
+  "weeksIncluded": [1, 3],
+  "weeksWithoutContest": [2],
+  "weekOneDetailPublished": false,
+  "standings": [
+    { "name": "nate_dogg72", "points": 17 },
+    { "name": "Michael Thain", "points": 16 },
+    { "name": "Ben Smith", "points": 11 },
+    { "name": "Funkyjedi", "points": 11 },
+    { "name": "Fightmilk", "points": 10 },
+    { "name": "Liamt608", "points": 10 },
+    { "name": "slazz72", "points": 10 },
+    { "name": "Dave-DJDingle", "points": 9 },
+    { "name": "MartynB93", "points": 9 },
+    { "name": "Lewis Greig", "points": 8 },
+    { "name": "Nelson207", "points": 7 },
+    { "name": "Saintz", "points": 6 }
+  ]
+}
