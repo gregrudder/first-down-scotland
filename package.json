@@ -12,6 +12,7 @@
     "test:guides": "tsx --test src/data/guides/guides.test.ts",
     "test:kickoff": "tsx --test src/lib/uk-kickoff.test.ts src/lib/pickem.test.ts",
     "build:kickoff-schedule": "node scripts/build-kickoff-schedule.mjs",
+    "test:mini-games": "tsx --test src/lib/build-a-quarterback.test.ts src/app/sitemap.test.ts",
     "build:score-history": "node scripts/build-score-history.mjs"
   },
   "dependencies": {

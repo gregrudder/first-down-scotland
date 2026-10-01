@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import { BuildAQuarterback } from "@/components/BuildAQuarterback";
 import { MiniGameIntro } from "@/components/MiniGameIntro";
 import { MiniQuiz } from "@/components/MiniQuiz";
 import { getMiniGameIntro } from "@/data/mini-game-intros";
@@ -36,7 +37,11 @@ export default async function MiniGamePage({ params }: MiniGamePageProps) {
         {intro ? (
           <MiniGameIntro title={game.title} kind={game.kind} minutes={game.minutes} intro={intro} />
         ) : null}
-        <MiniQuiz game={game} embedded={Boolean(intro)} />
+        {game.kind === "build" ? (
+          <BuildAQuarterback embedded={Boolean(intro)} />
+        ) : (
+          <MiniQuiz game={game} embedded={Boolean(intro)} />
+        )}
       </div>
     </div>
   );

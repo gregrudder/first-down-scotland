@@ -7,7 +7,7 @@ export type MiniGameQuestion = {
   explain: string;
 };
 
-export type MiniGameKind = "learn" | "fun";
+export type MiniGameKind = "learn" | "fun" | "build";
 
 export type MiniGameSlug =
   | "rules"
@@ -22,15 +22,25 @@ export type MiniGameSlug =
   | "draft-day-chaos"
   | "uk-kickoff-survival"
   | "logo-colour-call"
-  | "one-season-wonders";
+  | "one-season-wonders"
+  | "build-a-quarterback";
 
-export type MiniGame = {
+type MiniGameBase = {
   slug: MiniGameSlug;
   title: string;
   summary: string;
   minutes: number;
-  kind: MiniGameKind;
   learnHref?: string;
   learnLabel?: string;
+};
+
+export type QuizMiniGame = MiniGameBase & {
+  kind: "learn" | "fun";
   questions: MiniGameQuestion[];
 };
+
+export type BuildMiniGame = MiniGameBase & {
+  kind: "build";
+};
+
+export type MiniGame = QuizMiniGame | BuildMiniGame;

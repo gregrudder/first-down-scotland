@@ -1,8 +1,15 @@
+import { buildAQuarterbackGame } from "@/data/build-a-quarterback";
 import { funQuizzes } from "@/data/fun-quizzes";
 import { learnQuizQuestions, type LearnQuizQuestion } from "@/data/learn-quiz";
-import type { MiniGame, MiniGameKind, MiniGameQuestion, MiniGameSlug } from "@/data/mini-game-types";
+import type {
+  MiniGame,
+  MiniGameKind,
+  MiniGameQuestion,
+  MiniGameSlug,
+  QuizMiniGame,
+} from "@/data/mini-game-types";
 
-export type { MiniGame, MiniGameKind, MiniGameQuestion, MiniGameSlug };
+export type { MiniGame, MiniGameKind, MiniGameQuestion, MiniGameSlug, QuizMiniGame };
 
 const RULE_IDS = [
   "first-and-ten",
@@ -325,10 +332,10 @@ export const miniGamesIntro = {
   eyebrow: "Have a go",
   title: "Mini Games",
   lead:
-    "Short, tap-the-answer games. No downloads, no accounts, no heavy graphics. Some help you learn the sport. The fun quizzes are just for fun: famous moments, rivalries, late-night survival. Your score stays on this page until you have another go.",
+    "Short, tap-the-answer games, plus one draft. No downloads, no accounts, no heavy graphics. Some help you learn the sport. The fun quizzes are just for fun: famous moments, rivalries, late-night survival. Your score stays on this page until you have another go.",
 };
 
-const learnMiniGames: MiniGame[] = [
+const learnMiniGames: QuizMiniGame[] = [
   {
     slug: "rules",
     title: "Rules quiz",
@@ -372,7 +379,7 @@ const learnMiniGames: MiniGame[] = [
   },
 ];
 
-export const miniGames: MiniGame[] = [...learnMiniGames, ...funQuizzes];
+export const miniGames: MiniGame[] = [...learnMiniGames, ...funQuizzes, buildAQuarterbackGame];
 
 export function getMiniGamesByKind(kind: MiniGameKind): MiniGame[] {
   return miniGames.filter((game) => game.kind === kind);

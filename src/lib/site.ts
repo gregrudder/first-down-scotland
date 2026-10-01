@@ -62,7 +62,7 @@ export const navGroups: readonly NavGroup[] = [
       {
         href: "/mini-games",
         label: "Mini Games",
-        description: "Beginner quizzes and fun fan trivia. Separate from the lessons.",
+        description: "Beginner quizzes, fun trivia, and Build a Quarterback. Separate from the lessons.",
         primary: true,
       },
       { href: "/pick-your-team", label: "Pick My Team", primary: true },

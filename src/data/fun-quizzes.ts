@@ -1,10 +1,10 @@
-import type { MiniGame } from "@/data/mini-game-types";
+import type { QuizMiniGame } from "@/data/mini-game-types";
 
 /**
  * Entertainment quizzes, just for fun.
  * Not a rules lesson: famous moments, banter, and pub-table recall.
  */
-export const funQuizzes: MiniGame[] = [
+export const funQuizzes: QuizMiniGame[] = [
   {
     slug: "super-bowl-that",
     title: "Which Super Bowl was that?",
@@ -878,7 +878,7 @@ export const funQuizzes: MiniGame[] = [
 
 export const funQuizSlugs = funQuizzes.map((quiz) => quiz.slug);
 
-function assertFunQuizzes(quizzes: MiniGame[]) {
+function assertFunQuizzes(quizzes: QuizMiniGame[]) {
   for (const quiz of quizzes) {
     const count = quiz.questions.length;
     if (count < 6 || count > 10) {

@@ -117,6 +117,14 @@ export const miniGameIntros: Record<MiniGameSlug, MiniGameIntro> = {
       "Some storylines refuse to go away. The 1972 Miami Dolphins remain the only NFL team to finish a season with a perfect record, winning all 17 of their games through to their Super Bowl victory."
     ],
     "sourceUrl": "https://www.profootballhof.com/teams/miami-dolphins/team-history"
+  },
+  "build-a-quarterback": {
+    "paragraphs": [
+      "Build a Quarterback is for the argument that starts whenever a broadcast treats one player as the whole offence. You assemble one from real quarterbacks, one trait at a time. What counts as great depends on the down: how far the ball will go, whether it arrives where the hands are, the calm to throw as the rush arrives, a scramble when the picture has gone, and the read of a defence before the snap and again after it. Clutch, durability and leadership are the rest of the job. It suits a beginner who wants that explained, and anyone who already has a strong opinion.",
+      "It plays as a short draft, not a quiz. There are eight slots and a salary cap of 64, and a run takes about five minutes. Each slot offers a handful of real quarterbacks. Spin that board once if the names do not suit, then tap the one you want. The ratings are our opinion for this game, not official grades. Each quarterback can be picked only once, so a name spent on arm strength is gone for clutch. Stay under the cap. Nothing is saved to an account.",
+      "The job has not always been a passer standing in the pocket. In 1943 Sammy Baugh, playing for Washington, led the league in passing, in punting and in interceptions, the last of those while playing defence. One season, both sides of the ball."
+    ],
+    "sourceUrl": "https://en.wikipedia.org/wiki/Sammy_Baugh"
   }
 } as Record<MiniGameSlug, MiniGameIntro>;
 

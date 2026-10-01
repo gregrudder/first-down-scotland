@@ -6,7 +6,7 @@ import { getMiniGamesByKind, miniGamesIntro, type MiniGame } from "@/data/mini-g
 export const metadata: Metadata = {
   title: "Mini Games",
   description:
-    "Short browser games for UK NFL fans: beginner quizzes plus fun trivia. Super Bowls, catches, rivalries, jersey numbers, and late-night kick-off survival.",
+    "Short browser games for UK NFL fans: beginner quizzes, Build a Quarterback, and fun trivia. Super Bowls, catches, rivalries, jersey numbers, and late-night kick-off survival.",
 };
 
 function GameGrid({
@@ -43,6 +43,7 @@ function GameGrid({
 
 export default function MiniGamesHubPage() {
   const learnGames = getMiniGamesByKind("learn");
+  const buildGames = getMiniGamesByKind("build");
   const funGames = getMiniGamesByKind("fun");
 
   return (
@@ -62,6 +63,18 @@ export default function MiniGamesHubPage() {
         </p>
         <GameGrid games={learnGames} label="Game" />
       </section>
+
+      {buildGames.length ? (
+        <section className="mt-14">
+          <p className="text-xs font-semibold uppercase tracking-[0.16em] text-gold">Draft</p>
+          <h2 className="mt-2 font-display text-2xl text-cream">Build a quarterback</h2>
+          <p className="mt-2 max-w-2xl text-sm leading-6 text-cream-dim">
+            Not a quiz. Take one trait from a different quarterback, stay under a salary cap,
+            and leave with a card you can post.
+          </p>
+          <GameGrid games={buildGames} label="Game" />
+        </section>
+      ) : null}
 
       <section className="mt-14">
         <p className="text-xs font-semibold uppercase tracking-[0.16em] text-gold">
