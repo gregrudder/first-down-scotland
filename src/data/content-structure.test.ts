@@ -28,23 +28,51 @@ import {
   projectionLean,
 } from "@/lib/start-sit-logic";
 
-const PORTER =
-  "despite being listed as a full participant on Monday and Tuesday";
-
 describe("Our take", () => {
-  it("keeps the approved Porter line and hides the TNF note after kick-off", () => {
-    const pittsburgh = ourTakes.find((item) => item.headline.includes("Pittsburgh"));
-    assert.ok(pittsburgh);
-    assert.match(pittsburgh.take, new RegExp(PORTER));
-    assert.equal(pittsburgh.expires_at, "2026-10-02T01:15+01:00");
-    assert.equal(ourTakeAuthor(pittsburgh), OUR_TAKE_AUTHOR);
-    assert.equal(isOurTakeCurrent(pittsburgh, new Date("2026-10-02T00:14:00+01:00")), true);
-    assert.equal(isOurTakeCurrent(pittsburgh, new Date("2026-10-02T01:15:00+01:00")), false);
-    const visible = sortedOurTakes().filter((item) =>
-      isOurTakeCurrent(item, new Date("2026-09-30T12:00:00+01:00")),
+  it("leads with the 2 October notes and hides the Carolina item after kick-off", () => {
+    assert.equal(
+      ourTakes.some((item) => item.headline.includes("Tonight's TNF")),
+      false,
     );
-    assert.equal(visible.length, 4);
-    assert.equal(visible[0].headline, "NFL admits the Rams were robbed");
+    assert.equal(ourTakes.length, 7);
+    assert.deepEqual(
+      ourTakes.slice(0, 4).map((item) => item.headline),
+      [
+        "Watson does it again as the Browns go top of the AFC North",
+        "Jerry Jones pays a second-rounder for Joey Porter Jr.",
+        "Jayden Reed's season is over",
+        "Carolina lose both starting corners just before facing the Lions",
+      ],
+    );
+    assert.ok(ourTakes.slice(0, 4).every((item) => item.date === "2026-10-02"));
+    assert.ok(ourTakes.slice(0, 3).every((item) => item.expires_at === undefined));
+    const carolina = ourTakes[3];
+    assert.equal(carolina.expires_at, "2026-10-05T01:20+01:00");
+    assert.equal(
+      new Date(carolina.expires_at ?? "").toISOString(),
+      "2026-10-05T00:20:00.000Z",
+    );
+    assert.equal(ourTakeAuthor(carolina), OUR_TAKE_AUTHOR);
+    assert.equal(isOurTakeCurrent(carolina, new Date("2026-10-05T01:19:00+01:00")), true);
+    assert.equal(isOurTakeCurrent(carolina, new Date("2026-10-05T01:20:00+01:00")), false);
+    const wfae = carolina.sources.find((source) => source.name === "WFAE");
+    assert.equal(
+      wfae?.url,
+      "https://www.wfae.org/sports/2026-10-01/panthers-place-jaycee-horn-mike-jackson-on-injured-reserve",
+    );
+    const beforeKickoff = sortedOurTakes().filter((item) =>
+      isOurTakeCurrent(item, new Date("2026-10-05T01:19:00+01:00")),
+    );
+    assert.equal(beforeKickoff.length, 7);
+    assert.equal(beforeKickoff[0].headline, ourTakes[0].headline);
+    const afterKickoff = sortedOurTakes().filter((item) =>
+      isOurTakeCurrent(item, new Date("2026-10-05T01:20:00+01:00")),
+    );
+    assert.equal(afterKickoff.length, 6);
+    assert.equal(
+      afterKickoff.some((item) => item.headline === carolina.headline),
+      false,
+    );
   });
 
   it("sorts a later date ahead of the seed batch", () => {

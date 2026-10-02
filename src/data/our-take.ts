@@ -24,6 +24,71 @@ export type OurTakeItem = {
 
 export const ourTakes: OurTakeItem[] = [
   {
+    date: "2026-10-02",
+    headline: "Watson does it again as the Browns go top of the AFC North",
+    take: "Andre Szmyt's career-long 56-yarder with 10 seconds left beat the Steelers 27-24, after Rodgers had tied it with a touchdown and a two-point sneak. That's a third straight game-winning drive from Deshaun Watson. The Browns are 3-1 and top of the division on their own for the first time since November 2014. Whatever you think of Watson, the comeback stat is real.",
+    author: OUR_TAKE_AUTHOR,
+    sources: [
+      {
+        name: "ESPN",
+        url: "https://www.espn.com/nfl/story/_/id/50082906/watson-leads-third-straight-winning-drive-puts-browns-atop-north",
+      },
+      {
+        name: "AP via CBS Sports",
+        url: "https://www.cbssports.com/nfl/news/andre-szmyts-late-56-yard-fg-lifts-browns-past-steelers-27-24/",
+      },
+    ],
+  },
+  {
+    date: "2026-10-02",
+    headline: "Jerry Jones pays a second-rounder for Joey Porter Jr.",
+    take: "Dallas sent a 2028 second and a 2027 sixth to Pittsburgh for a corner who hasn't played a snap this season because of a back injury and a contract standoff. With a 1-2 record and a pass defence ranked 31st in opponent QBR, the Cowboys are going all in now. The question is whether he's healthy enough to be worth it, because he's also due a big new contract.",
+    author: OUR_TAKE_AUTHOR,
+    sources: [
+      {
+        name: "ESPN",
+        url: "https://www.espn.com/nfl/story/_/id/50074351/sources-steelers-trade-joey-porter-jr-cowboys",
+      },
+      {
+        name: "CBS Sports",
+        url: "https://www.cbssports.com/nfl/news/why-the-cowboys-traded-for-cb-joey-porter-jr/",
+      },
+    ],
+  },
+  {
+    date: "2026-10-02",
+    headline: "Jayden Reed's season is over",
+    take: "Matt LaFleur has confirmed that Reed needs neck surgery and will miss the rest of 2026. LaFleur says it isn't career-threatening, which is the main thing after he was carted off in Week 2. On the field, it's now Christian Watson and Matthew Golden's offence, and Tucker Kraft should get more of the ball.",
+    author: OUR_TAKE_AUTHOR,
+    sources: [
+      {
+        name: "NFL.com",
+        url: "https://www.nfl.com/news/packers-wr-jayden-reed-to-undergo-neck-surgery-miss-rest-of-2026-season",
+      },
+      {
+        name: "CBS Sports",
+        url: "https://www.cbssports.com/nfl/news/jayden-reed-injury-update-packers-wr-neck-surgery/",
+      },
+    ],
+  },
+  {
+    date: "2026-10-02",
+    headline: "Carolina lose both starting corners just before facing the Lions",
+    take: "Jaycee Horn (quad) and Mike Jackson (groin, after surgery) are on injured reserve. Dave Canales expects them to be out for \"eight-ish weeks\". Rookie Will Lee and Akayleb Evans are expected to start against Detroit on Sunday night, which is 1:20am Monday in the UK. Detroit's offence will fancy that.",
+    author: OUR_TAKE_AUTHOR,
+    sources: [
+      {
+        name: "Panthers.com",
+        url: "https://www.panthers.com/news/panthers-place-jaycee-horn-and-mike-jackson-on-injured-reserve",
+      },
+      {
+        name: "WFAE",
+        url: "https://www.wfae.org/sports/2026-10-01/panthers-place-jaycee-horn-mike-jackson-on-injured-reserve",
+      },
+    ],
+    expires_at: "2026-10-05T01:20+01:00",
+  },
+  {
     date: "2026-09-30",
     headline: "NFL admits the Rams were robbed",
     take: "Sean McVay says the league told him the late pass interference call on Josh Wallace shouldn't have been thrown. That flag wiped out a game-sealing interception and set up Denver's winning touchdown in their 30-26 win. An apology doesn't change the result, though: the Rams are still 1-2, and Broncos fans will be happy to keep the win.",
@@ -43,14 +108,6 @@ export const ourTakes: OurTakeItem[] = [
     take: "Baker Mayfield is out for at least three weeks with a dislocated thumb, so Jalon Daniels starts against Green Bay on Sunday. He'll be the first quarterback other than Mayfield to start for the Bucs since Tom Brady, and the first undrafted rookie ever to start at QB in their 51 seasons. Tampa are 0-3, so there's no easing him in.",
     author: OUR_TAKE_AUTHOR,
     sources: [{ name: "Buccaneers.com" }, { name: "NFL.com" }],
-  },
-  {
-    date: "2026-09-30",
-    headline: "Tonight's TNF injury news is a mess for Pittsburgh",
-    take: "Joey Porter Jr. is ruled out again for the Browns game despite being listed as a full participant on Monday and Tuesday, and his contract row rumbles on. Jalen Ramsey is questionable even though he says he's broken his wrist. Kick-off is 1:15am UK time on Friday, so check the inactives before you stay up for it.",
-    author: OUR_TAKE_AUTHOR,
-    sources: [{ name: "ESPN" }, { name: "NFL.com" }],
-    expires_at: "2026-10-02T01:15+01:00",
   },
 ];
 
