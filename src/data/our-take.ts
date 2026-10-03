@@ -24,6 +24,74 @@ export type OurTakeItem = {
 
 export const ourTakes: OurTakeItem[] = [
   {
+    date: "2026-10-03",
+    headline: "No Jayden Daniels in London, so it's Mariota at Tottenham",
+    take: "Dan Quinn has ruled Daniels out against the Colts. He travelled and was limited in practice all week with his dislocated elbow, and he'll wear a brace when he does come back. Marcus Mariota starts again after last week's 33-31 win over Seattle. Terry McLaurin is questionable with a hamstring injury, so anyone heading to Tottenham could be watching a very thin Commanders attack.",
+    author: OUR_TAKE_AUTHOR,
+    sources: [
+      {
+        name: "Commanders.com",
+        url: "https://www.commanders.com/news/game-status-commanders-colts-2026",
+      },
+      {
+        name: "NFL.com",
+        url: "https://www.nfl.com/news/nfl-week-4-injury-report-player-statuses-for-all-16-games",
+      },
+    ],
+    expires_at: "2026-10-04T14:30:00+01:00",
+  },
+  {
+    date: "2026-10-03",
+    headline: "Justin Jefferson out against Miami",
+    take: "The Vikings have ruled Jefferson out with an ankle injury that kept him off the practice field all week. Jordan Addison becomes the No. 1 receiver against the 0-3 Dolphins, which is a big chance for him to show he's more than a sidekick.",
+    author: OUR_TAKE_AUTHOR,
+    sources: [
+      {
+        name: "CBS Sports",
+        url: "https://www.cbssports.com/nfl/news/nfl-week-4-injury-report-justin-jefferson-aaron-donald-terry-mclaurin/",
+      },
+      {
+        name: "NFL.com",
+        url: "https://www.nfl.com/news/nfl-week-4-injury-report-player-statuses-for-all-16-games",
+      },
+    ],
+    expires_at: "2026-10-04T21:05:00+01:00",
+  },
+  {
+    date: "2026-10-03",
+    headline: "Rams at 1-2, without Aaron Donald but with Puka back",
+    take: "Aaron Donald is out with a sore back, Terrance Ferguson has gone on injured reserve, and Sean McVay has waived returner Xavier Smith because he wasn't happy with the return game. The good news is that Puka Nacua is cleared to play, although his snaps will be watched. They go to Philadelphia, who are missing DeVonta Smith, Dallas Goedert and Zack Baun, so both teams are patched up.",
+    author: OUR_TAKE_AUTHOR,
+    sources: [
+      {
+        name: "Yahoo Sports",
+        url: "https://sports.yahoo.com/articles/rams-rule-aaron-donald-place-233147481.html",
+      },
+      {
+        name: "NFL.com",
+        url: "https://www.nfl.com/news/nfl-week-4-injury-report-player-statuses-for-all-16-games",
+      },
+    ],
+    expires_at: "2026-10-04T18:00:00+01:00",
+  },
+  {
+    date: "2026-10-03",
+    headline: "The 0-3 Chargers go to Seattle",
+    take: "Los Angeles go to Lumen Field to face the 2-1 Seahawks still looking for their first win, while the AFC West's two unbeaten sides, the 3-0 Raiders and 3-0 Chiefs, meet in Las Vegas at the same time. Ladd McConkey and Derwin James are both questionable, as is backup quarterback Trey Lance. The Bolts are already three games off the top, and with one of the Raiders or Chiefs certain to go 4-0, another loss would leave them four games behind before October's a week old. It's the 9:25pm UK late game, so it'll be a nervy Sunday night for Chargers fans in Scotland.",
+    author: OUR_TAKE_AUTHOR,
+    sources: [
+      {
+        name: "NFL.com",
+        url: "https://www.nfl.com/news/nfl-week-4-injury-report-player-statuses-for-all-16-games",
+      },
+      {
+        name: "CBS Sports",
+        url: "https://www.cbssports.com/fantasy/football/news/chargers-trey-lance-officially-questionable-for-week-4/",
+      },
+    ],
+    expires_at: "2026-10-04T21:25:00+01:00",
+  },
+  {
     date: "2026-10-02",
     headline: "Watson does it again as the Browns go top of the AFC North",
     take: "Andre Szmyt's career-long 56-yarder with 10 seconds left beat the Steelers 27-24, after Rodgers had tied it with a touchdown and a two-point sneak. That's a third straight game-winning drive from Deshaun Watson. The Browns are 3-1 and top of the division on their own for the first time since November 2014. Whatever you think of Watson, the comeback stat is real.",

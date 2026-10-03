@@ -29,49 +29,53 @@ import {
 } from "@/lib/start-sit-logic";
 
 describe("Our take", () => {
-  it("leads with the 2 October notes and hides the Carolina item after kick-off", () => {
+  it("leads with the 3 October notes and keeps notes that have not expired", () => {
+    const cutoff = new Date("2026-10-03T18:10:00+01:00");
+    assert.equal(ourTakes.length, 11);
     assert.equal(
       ourTakes.some((item) => item.headline.includes("Tonight's TNF")),
       false,
     );
-    assert.equal(ourTakes.length, 7);
+    assert.ok(
+      ourTakes.every((item) => !item.expires_at || new Date(item.expires_at).getTime() >= cutoff.getTime()),
+    );
     assert.deepEqual(
       ourTakes.slice(0, 4).map((item) => item.headline),
       [
-        "Watson does it again as the Browns go top of the AFC North",
-        "Jerry Jones pays a second-rounder for Joey Porter Jr.",
-        "Jayden Reed's season is over",
-        "Carolina lose both starting corners just before facing the Lions",
+        "No Jayden Daniels in London, so it's Mariota at Tottenham",
+        "Justin Jefferson out against Miami",
+        "Rams at 1-2, without Aaron Donald but with Puka back",
+        "The 0-3 Chargers go to Seattle",
       ],
     );
-    assert.ok(ourTakes.slice(0, 4).every((item) => item.date === "2026-10-02"));
-    assert.ok(ourTakes.slice(0, 3).every((item) => item.expires_at === undefined));
-    const carolina = ourTakes[3];
-    assert.equal(carolina.expires_at, "2026-10-05T01:20+01:00");
-    assert.equal(
-      new Date(carolina.expires_at ?? "").toISOString(),
-      "2026-10-05T00:20:00.000Z",
+    assert.ok(ourTakes.slice(0, 4).every((item) => item.date === "2026-10-03"));
+    assert.deepEqual(
+      ourTakes.slice(0, 4).map((item) => item.expires_at),
+      [
+        "2026-10-04T14:30:00+01:00",
+        "2026-10-04T21:05:00+01:00",
+        "2026-10-04T18:00:00+01:00",
+        "2026-10-04T21:25:00+01:00",
+      ],
     );
+    const carolina = ourTakes.find((item) => item.headline.startsWith("Carolina lose"));
+    assert.ok(carolina);
+    assert.equal(carolina.expires_at, "2026-10-05T01:20+01:00");
     assert.equal(ourTakeAuthor(carolina), OUR_TAKE_AUTHOR);
     assert.equal(isOurTakeCurrent(carolina, new Date("2026-10-05T01:19:00+01:00")), true);
     assert.equal(isOurTakeCurrent(carolina, new Date("2026-10-05T01:20:00+01:00")), false);
-    const wfae = carolina.sources.find((source) => source.name === "WFAE");
+    const beforeSunday = sortedOurTakes().filter((item) =>
+      isOurTakeCurrent(item, new Date("2026-10-04T14:29:00+01:00")),
+    );
+    assert.equal(beforeSunday.length, 11);
+    assert.equal(beforeSunday[0].headline, ourTakes[0].headline);
+    const afterSundayNight = sortedOurTakes().filter((item) =>
+      isOurTakeCurrent(item, new Date("2026-10-04T21:25:00+01:00")),
+    );
+    assert.equal(afterSundayNight.length, 7);
     assert.equal(
-      wfae?.url,
-      "https://www.wfae.org/sports/2026-10-01/panthers-place-jaycee-horn-mike-jackson-on-injured-reserve",
-    );
-    const beforeKickoff = sortedOurTakes().filter((item) =>
-      isOurTakeCurrent(item, new Date("2026-10-05T01:19:00+01:00")),
-    );
-    assert.equal(beforeKickoff.length, 7);
-    assert.equal(beforeKickoff[0].headline, ourTakes[0].headline);
-    const afterKickoff = sortedOurTakes().filter((item) =>
-      isOurTakeCurrent(item, new Date("2026-10-05T01:20:00+01:00")),
-    );
-    assert.equal(afterKickoff.length, 6);
-    assert.equal(
-      afterKickoff.some((item) => item.headline === carolina.headline),
-      false,
+      afterSundayNight.some((item) => item.headline === carolina.headline),
+      true,
     );
   });
 
@@ -79,7 +83,7 @@ describe("Our take", () => {
     const sorted = sortedOurTakes([
       ...ourTakes,
       {
-        date: "2026-10-03",
+        date: "2026-10-06",
         headline: "Later",
         take: "Later note.",
         sources: [],
