@@ -24,6 +24,51 @@ export type OurTakeItem = {
 
 export const ourTakes: OurTakeItem[] = [
   {
+    date: "2026-10-04",
+    headline: "Tony Romo and CBS split for good",
+    take: "CBS has confirmed it is 'mutually parting ways' with Romo after nine years as its lead NFL analyst. He had been on leave since his arrest for operating a vehicle while intoxicated in July, and he pleaded no contest on 1 September. J.J. Watt stays alongside Jim Nantz and Tracy Wolfson for the rest of the 2026 season. Watt has been filling Romo's seat since CBS announced the change at the end of July, so for viewers the main change is that it's now official.",
+    author: OUR_TAKE_AUTHOR,
+    sources: [
+      {
+        name: "CBS Sports",
+        url: "https://www.cbssports.com/nfl/news/cbs-sports-tony-romo-mutually-part-ways-jj-watt-jim-nantz-tracy-wolfson/",
+      },
+      {
+        name: "Reuters",
+        url: "https://www.reuters.com/sports/cbs-sports-broadcaster-tony-romo-mutually-part-ways--flm-2026-10-02/",
+      },
+    ],
+  },
+  {
+    date: "2026-10-04",
+    headline: "The NFL bans 49ers owner Jed York for six games",
+    take: "The league has suspended York for six regular-season games and fined him $500,000 under its personal conduct policy, after he pleaded no contest to misdemeanour charges following an arrest in August. The three games he's already missed count towards the ban, so he can return on 20 October, after the 49ers play Washington. On the field it's made no difference so far, because San Francisco went 3-0 without him before tonight's game against Denver.",
+    author: OUR_TAKE_AUTHOR,
+    sources: [
+      {
+        name: "ESPN",
+        url: "https://www.espn.com/nfl/story/_/id/50085721/49ers-owner-jed-york-suspended-six-games-fined-500k-nfl",
+      },
+      {
+        name: "NFL.com",
+        url: "https://www.nfl.com/news/niners-owner-jed-york-suspended-six-games-fined-500k",
+      },
+    ],
+  },
+  {
+    date: "2026-10-04",
+    headline: "Seattle lose their rookie running back before the Bolts arrive",
+    take: "The Seahawks have put first-round pick Jadarian Price on injured reserve with a chest injury, so Emanuel Wilson, George Holani and Velus Jones Jr. will carry the load today. Zach Charbonnet isn't eligible to play until next week. That's a little bit of help for an 0-3 Chargers side that badly needs it.",
+    author: OUR_TAKE_AUTHOR,
+    sources: [
+      {
+        name: "Spokesman-Review",
+        url: "https://www.spokesman.com/stories/2026/oct/03/seahawks-place-rookie-running-back-jadarian-price-/",
+      },
+    ],
+    expires_at: "2026-10-04T21:25:00+01:00",
+  },
+  {
     date: "2026-10-03",
     headline: "No Jayden Daniels in London, so it's Mariota at Tottenham",
     take: "Dan Quinn has ruled Daniels out against the Colts. He travelled and was limited in practice all week with his dislocated elbow, and he'll wear a brace when he does come back. Marcus Mariota starts again after last week's 33-31 win over Seattle. Terry McLaurin is questionable with a hamstring injury, so anyone heading to Tottenham could be watching a very thin Commanders attack.",
