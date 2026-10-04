@@ -31,7 +31,7 @@ import {
 describe("Our take", () => {
   it("leads with the 3 October notes and keeps notes that have not expired", () => {
     const cutoff = new Date("2026-10-03T18:10:00+01:00");
-    assert.equal(ourTakes.length, 11);
+    assert.equal(ourTakes.length, 14);
     assert.equal(
       ourTakes.some((item) => item.headline.includes("Tonight's TNF")),
       false,
@@ -40,7 +40,22 @@ describe("Our take", () => {
       ourTakes.every((item) => !item.expires_at || new Date(item.expires_at).getTime() >= cutoff.getTime()),
     );
     assert.deepEqual(
-      ourTakes.slice(0, 4).map((item) => item.headline),
+      ourTakes.slice(0, 3).map((item) => item.headline),
+      [
+        "Tony Romo and CBS split for good",
+        "The NFL bans 49ers owner Jed York for six games",
+        "Seattle lose their rookie running back before the Bolts arrive",
+      ],
+    );
+    assert.ok(
+      ourTakes.slice(0, 3).every((item) => item.date === "2026-10-04" && item.author === OUR_TAKE_AUTHOR),
+    );
+    assert.equal(ourTakes[0].expires_at, undefined);
+    assert.equal(ourTakes[1].expires_at, undefined);
+    assert.equal(ourTakes[2].expires_at, "2026-10-04T21:25:00+01:00");
+    const octoberThird = ourTakes.filter((item) => item.date === "2026-10-03");
+    assert.deepEqual(
+      octoberThird.map((item) => item.headline),
       [
         "No Jayden Daniels in London, so it's Mariota at Tottenham",
         "Justin Jefferson out against Miami",
@@ -48,9 +63,9 @@ describe("Our take", () => {
         "The 0-3 Chargers go to Seattle",
       ],
     );
-    assert.ok(ourTakes.slice(0, 4).every((item) => item.date === "2026-10-03"));
+    assert.ok(octoberThird.every((item) => item.date === "2026-10-03"));
     assert.deepEqual(
-      ourTakes.slice(0, 4).map((item) => item.expires_at),
+      octoberThird.map((item) => item.expires_at),
       [
         "2026-10-04T14:30:00+01:00",
         "2026-10-04T21:05:00+01:00",
@@ -67,12 +82,12 @@ describe("Our take", () => {
     const beforeSunday = sortedOurTakes().filter((item) =>
       isOurTakeCurrent(item, new Date("2026-10-04T14:29:00+01:00")),
     );
-    assert.equal(beforeSunday.length, 11);
+    assert.equal(beforeSunday.length, 14);
     assert.equal(beforeSunday[0].headline, ourTakes[0].headline);
     const afterSundayNight = sortedOurTakes().filter((item) =>
       isOurTakeCurrent(item, new Date("2026-10-04T21:25:00+01:00")),
     );
-    assert.equal(afterSundayNight.length, 7);
+    assert.equal(afterSundayNight.length, 9);
     assert.equal(
       afterSundayNight.some((item) => item.headline === carolina.headline),
       true,
