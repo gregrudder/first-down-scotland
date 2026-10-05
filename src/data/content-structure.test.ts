@@ -29,9 +29,9 @@ import {
 } from "@/lib/start-sit-logic";
 
 describe("Our take", () => {
-  it("leads with the 3 October notes and keeps notes that have not expired", () => {
-    const cutoff = new Date("2026-10-03T18:10:00+01:00");
-    assert.equal(ourTakes.length, 14);
+  it("leads with the 5 October notes and drops notes that expired overnight", () => {
+    const cutoff = new Date("2026-10-05T08:55:00+01:00");
+    assert.equal(ourTakes.length, 12);
     assert.equal(
       ourTakes.some((item) => item.headline.includes("Tonight's TNF")),
       false,
@@ -40,58 +40,30 @@ describe("Our take", () => {
       ourTakes.every((item) => !item.expires_at || new Date(item.expires_at).getTime() >= cutoff.getTime()),
     );
     assert.deepEqual(
-      ourTakes.slice(0, 3).map((item) => item.headline),
+      ourTakes.slice(0, 4).map((item) => item.headline),
       [
-        "Tony Romo and CBS split for good",
-        "The NFL bans 49ers owner Jed York for six games",
-        "Seattle lose their rookie running back before the Bolts arrive",
+        "Thornton out indefinitely after his best Chiefs game",
+        "Chiefs already ringing Tyreek Hill's agent",
+        "Chargers are 0-4, and history isn't kind",
+        "London leaves Washington on its third quarterback",
       ],
     );
     assert.ok(
-      ourTakes.slice(0, 3).every((item) => item.date === "2026-10-04" && item.author === OUR_TAKE_AUTHOR),
+      ourTakes
+        .slice(0, 4)
+        .every((item) => item.date === "2026-10-05" && item.author === OUR_TAKE_AUTHOR && !item.expires_at),
     );
-    assert.equal(ourTakes[0].expires_at, undefined);
-    assert.equal(ourTakes[1].expires_at, undefined);
-    assert.equal(ourTakes[2].expires_at, "2026-10-04T21:25:00+01:00");
-    const octoberThird = ourTakes.filter((item) => item.date === "2026-10-03");
-    assert.deepEqual(
-      octoberThird.map((item) => item.headline),
-      [
-        "No Jayden Daniels in London, so it's Mariota at Tottenham",
-        "Justin Jefferson out against Miami",
-        "Rams at 1-2, without Aaron Donald but with Puka back",
-        "The 0-3 Chargers go to Seattle",
-      ],
-    );
-    assert.ok(octoberThird.every((item) => item.date === "2026-10-03"));
-    assert.deepEqual(
-      octoberThird.map((item) => item.expires_at),
-      [
-        "2026-10-04T14:30:00+01:00",
-        "2026-10-04T21:05:00+01:00",
-        "2026-10-04T18:00:00+01:00",
-        "2026-10-04T21:25:00+01:00",
-      ],
-    );
-    const carolina = ourTakes.find((item) => item.headline.startsWith("Carolina lose"));
-    assert.ok(carolina);
-    assert.equal(carolina.expires_at, "2026-10-05T01:20+01:00");
-    assert.equal(ourTakeAuthor(carolina), OUR_TAKE_AUTHOR);
-    assert.equal(isOurTakeCurrent(carolina, new Date("2026-10-05T01:19:00+01:00")), true);
-    assert.equal(isOurTakeCurrent(carolina, new Date("2026-10-05T01:20:00+01:00")), false);
-    const beforeSunday = sortedOurTakes().filter((item) =>
-      isOurTakeCurrent(item, new Date("2026-10-04T14:29:00+01:00")),
-    );
-    assert.equal(beforeSunday.length, 14);
-    assert.equal(beforeSunday[0].headline, ourTakes[0].headline);
-    const afterSundayNight = sortedOurTakes().filter((item) =>
-      isOurTakeCurrent(item, new Date("2026-10-04T21:25:00+01:00")),
-    );
-    assert.equal(afterSundayNight.length, 9);
+    assert.equal(ourTakeAuthor(ourTakes[0]), OUR_TAKE_AUTHOR);
+    assert.equal(sortedOurTakes()[0].headline, ourTakes[0].headline);
     assert.equal(
-      afterSundayNight.some((item) => item.headline === carolina.headline),
-      true,
+      sortedOurTakes().filter((item) => isOurTakeCurrent(item, cutoff)).length,
+      12,
     );
+    assert.equal(ourTakes.some((item) => item.date === "2026-10-03"), false);
+    assert.equal(ourTakes.some((item) => item.headline.startsWith("Carolina lose")), false);
+    assert.equal(ourTakes.some((item) => item.headline.startsWith("Seattle lose their rookie")), false);
+    assert.ok(ourTakes.some((item) => item.headline.startsWith("Tony Romo")));
+    assert.ok(ourTakes.some((item) => item.headline.includes("Jed York")));
   });
 
   it("sorts a later date ahead of the seed batch", () => {
