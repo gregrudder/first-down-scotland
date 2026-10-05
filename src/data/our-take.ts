@@ -24,6 +24,70 @@ export type OurTakeItem = {
 
 export const ourTakes: OurTakeItem[] = [
   {
+    date: "2026-10-05",
+    headline: "Thornton out indefinitely after his best Chiefs game",
+    take: "Kansas City stayed 4-0 with a 30-27 win in Las Vegas, but Tyquan Thornton left on a cart after a dislocated left ankle on a 55-yard catch. NFL Network's Ian Rapoport says doctors put it back in place, he's flying home for more tests and a second opinion, and he's out indefinitely. He'd just put up five catches for 111 yards and two scores.",
+    author: OUR_TAKE_AUTHOR,
+    sources: [
+      {
+        name: "Yahoo Sports",
+        url: "https://sports.yahoo.com/nfl/article/chiefs-receiver-tyquan-thornton-is-out-indefinitely-after-dislocating-ankle-in-win-over-raiders-232452749.html",
+      },
+      {
+        name: "NBC Sports",
+        url: "https://www.nbcsports.com/fantasy/football/player-news/2026-10-04/rap-thornton-dislocates-ankle-out-indefinitely",
+      },
+    ],
+  },
+  {
+    date: "2026-10-05",
+    headline: "Chiefs already ringing Tyreek Hill's agent",
+    take: "With Thornton out indefinitely and Rashee Rice also leaving Sunday's win with a hamstring, The Athletic's Mike Silver says Kansas City has contacted Drew Rosenhaus about a reunion. Hill is still recovering from last year's knee dislocation and torn ligaments, and he's believed to be targeting a November return — not a done deal, just reported interest.",
+    author: OUR_TAKE_AUTHOR,
+    sources: [
+      {
+        name: "CBS Sports",
+        url: "https://www.cbssports.com/nfl/news/chiefs-interested-tyreek-hill-reunion-amid-injuries-at-receiver/",
+      },
+      {
+        name: "Yahoo Sports",
+        url: "https://sports.yahoo.com/nfl/article/chiefs-reportedly-reach-out-to-tyreek-hill-amid-multiple-receiver-injuries-021718892.html",
+      },
+    ],
+  },
+  {
+    date: "2026-10-05",
+    headline: "Chargers are 0-4, and history isn't kind",
+    take: "Los Angeles fell 30-23 in Seattle after Justin Herbert threw two interceptions and lost a late fumble. The only NFL team to make the playoffs after an 0-4 start is the 1992 Chargers — who then beat Seattle on 4 October and went 11-5. Next up is Denver at home.",
+    author: OUR_TAKE_AUTHOR,
+    sources: [
+      {
+        name: "CBS Sports",
+        url: "https://www.cbssports.com/nfl/news/emanuel-wilson-scores-twice-as-seahawks-drop-chargers-to-0-4/",
+      },
+      {
+        name: "Chargers.com",
+        url: "https://www.chargers.com/news/game-recap-seahawks-week-4-2026",
+      },
+    ],
+  },
+  {
+    date: "2026-10-05",
+    headline: "London leaves Washington on its third quarterback",
+    take: "Marcus Mariota started for injured Jayden Daniels at Tottenham, then left in the first quarter with a right knee injury after Laiatu Latu landed on him. Dan Quinn says it's feared to be an aggravated MCL and he'll be scanned; seventh-rounder Athan Kaliakmanis finished a 30-13 loss to the Colts.",
+    author: OUR_TAKE_AUTHOR,
+    sources: [
+      {
+        name: "NFL.com",
+        url: "https://www.nfl.com/news/commanders-qb-marcus-mariota-knee-injury-colts-athan-kaliakmanis",
+      },
+      {
+        name: "Colts.com",
+        url: "https://www.colts.com/news/colts-overcome-sluggish-start-to-thump-commanders-in-london",
+      },
+    ],
+  },
+  {
     date: "2026-10-04",
     headline: "Tony Romo and CBS split for good",
     take: "CBS has confirmed it is 'mutually parting ways' with Romo after nine years as its lead NFL analyst. He had been on leave since his arrest for operating a vehicle while intoxicated in July, and he pleaded no contest on 1 September. J.J. Watt stays alongside Jim Nantz and Tracy Wolfson for the rest of the 2026 season. Watt has been filling Romo's seat since CBS announced the change at the end of July, so for viewers the main change is that it's now official.",
@@ -54,87 +118,6 @@ export const ourTakes: OurTakeItem[] = [
         url: "https://www.nfl.com/news/niners-owner-jed-york-suspended-six-games-fined-500k",
       },
     ],
-  },
-  {
-    date: "2026-10-04",
-    headline: "Seattle lose their rookie running back before the Bolts arrive",
-    take: "The Seahawks have put first-round pick Jadarian Price on injured reserve with a chest injury, so Emanuel Wilson, George Holani and Velus Jones Jr. will carry the load today. Zach Charbonnet isn't eligible to play until next week. That's a little bit of help for an 0-3 Chargers side that badly needs it.",
-    author: OUR_TAKE_AUTHOR,
-    sources: [
-      {
-        name: "Spokesman-Review",
-        url: "https://www.spokesman.com/stories/2026/oct/03/seahawks-place-rookie-running-back-jadarian-price-/",
-      },
-    ],
-    expires_at: "2026-10-04T21:25:00+01:00",
-  },
-  {
-    date: "2026-10-03",
-    headline: "No Jayden Daniels in London, so it's Mariota at Tottenham",
-    take: "Dan Quinn has ruled Daniels out against the Colts. He travelled and was limited in practice all week with his dislocated elbow, and he'll wear a brace when he does come back. Marcus Mariota starts again after last week's 33-31 win over Seattle. Terry McLaurin is questionable with a hamstring injury, so anyone heading to Tottenham could be watching a very thin Commanders attack.",
-    author: OUR_TAKE_AUTHOR,
-    sources: [
-      {
-        name: "Commanders.com",
-        url: "https://www.commanders.com/news/game-status-commanders-colts-2026",
-      },
-      {
-        name: "NFL.com",
-        url: "https://www.nfl.com/news/nfl-week-4-injury-report-player-statuses-for-all-16-games",
-      },
-    ],
-    expires_at: "2026-10-04T14:30:00+01:00",
-  },
-  {
-    date: "2026-10-03",
-    headline: "Justin Jefferson out against Miami",
-    take: "The Vikings have ruled Jefferson out with an ankle injury that kept him off the practice field all week. Jordan Addison becomes the No. 1 receiver against the 0-3 Dolphins, which is a big chance for him to show he's more than a sidekick.",
-    author: OUR_TAKE_AUTHOR,
-    sources: [
-      {
-        name: "CBS Sports",
-        url: "https://www.cbssports.com/nfl/news/nfl-week-4-injury-report-justin-jefferson-aaron-donald-terry-mclaurin/",
-      },
-      {
-        name: "NFL.com",
-        url: "https://www.nfl.com/news/nfl-week-4-injury-report-player-statuses-for-all-16-games",
-      },
-    ],
-    expires_at: "2026-10-04T21:05:00+01:00",
-  },
-  {
-    date: "2026-10-03",
-    headline: "Rams at 1-2, without Aaron Donald but with Puka back",
-    take: "Aaron Donald is out with a sore back, Terrance Ferguson has gone on injured reserve, and Sean McVay has waived returner Xavier Smith because he wasn't happy with the return game. The good news is that Puka Nacua is cleared to play, although his snaps will be watched. They go to Philadelphia, who are missing DeVonta Smith, Dallas Goedert and Zack Baun, so both teams are patched up.",
-    author: OUR_TAKE_AUTHOR,
-    sources: [
-      {
-        name: "Yahoo Sports",
-        url: "https://sports.yahoo.com/articles/rams-rule-aaron-donald-place-233147481.html",
-      },
-      {
-        name: "NFL.com",
-        url: "https://www.nfl.com/news/nfl-week-4-injury-report-player-statuses-for-all-16-games",
-      },
-    ],
-    expires_at: "2026-10-04T18:00:00+01:00",
-  },
-  {
-    date: "2026-10-03",
-    headline: "The 0-3 Chargers go to Seattle",
-    take: "Los Angeles go to Lumen Field to face the 2-1 Seahawks still looking for their first win, while the AFC West's two unbeaten sides, the 3-0 Raiders and 3-0 Chiefs, meet in Las Vegas at the same time. Ladd McConkey and Derwin James are both questionable, as is backup quarterback Trey Lance. The Bolts are already three games off the top, and with one of the Raiders or Chiefs certain to go 4-0, another loss would leave them four games behind before October's a week old. It's the 9:25pm UK late game, so it'll be a nervy Sunday night for Chargers fans in Scotland.",
-    author: OUR_TAKE_AUTHOR,
-    sources: [
-      {
-        name: "NFL.com",
-        url: "https://www.nfl.com/news/nfl-week-4-injury-report-player-statuses-for-all-16-games",
-      },
-      {
-        name: "CBS Sports",
-        url: "https://www.cbssports.com/fantasy/football/news/chargers-trey-lance-officially-questionable-for-week-4/",
-      },
-    ],
-    expires_at: "2026-10-04T21:25:00+01:00",
   },
   {
     date: "2026-10-02",
@@ -183,23 +166,6 @@ export const ourTakes: OurTakeItem[] = [
         url: "https://www.cbssports.com/nfl/news/jayden-reed-injury-update-packers-wr-neck-surgery/",
       },
     ],
-  },
-  {
-    date: "2026-10-02",
-    headline: "Carolina lose both starting corners just before facing the Lions",
-    take: "Jaycee Horn (quad) and Mike Jackson (groin, after surgery) are on injured reserve. Dave Canales expects them to be out for \"eight-ish weeks\". Rookie Will Lee and Akayleb Evans are expected to start against Detroit on Sunday night, which is 1:20am Monday in the UK. Detroit's offence will fancy that.",
-    author: OUR_TAKE_AUTHOR,
-    sources: [
-      {
-        name: "Panthers.com",
-        url: "https://www.panthers.com/news/panthers-place-jaycee-horn-and-mike-jackson-on-injured-reserve",
-      },
-      {
-        name: "WFAE",
-        url: "https://www.wfae.org/sports/2026-10-01/panthers-place-jaycee-horn-mike-jackson-on-injured-reserve",
-      },
-    ],
-    expires_at: "2026-10-05T01:20+01:00",
   },
   {
     date: "2026-09-30",
