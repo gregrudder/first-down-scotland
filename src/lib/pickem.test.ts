@@ -4,16 +4,19 @@ import { entriesCloseAt, loadPickem, rankByScore, sortByScoreThenName } from "@/
 import { formatKickoffUk } from "@/lib/uk-kickoff";
 
 const SEASON = [
-  ["nate_dogg72", 17],
-  ["Michael Thain", 16],
+  ["nate_dogg72", 24],
+  ["Michael Thain", 23],
+  ["Funkyjedi", 20],
+  ["Liamt608", 20],
+  ["Dave-DJDingle", 19],
+  ["slazz72", 18],
   ["Ben Smith", 11],
-  ["Funkyjedi", 11],
   ["Fightmilk", 10],
-  ["Liamt608", 10],
-  ["slazz72", 10],
-  ["Dave-DJDingle", 9],
   ["MartynB93", 9],
   ["Lewis Greig", 8],
+  ["Ted", 8],
+  ["williamm1690", 8],
+  ["Ali", 7],
   ["Nelson207", 7],
   ["Saintz", 6],
 ] as const;
@@ -59,30 +62,33 @@ describe("Pick'em leaderboard", () => {
     assert.deepEqual(
       ranked.map((row) => [row.rank, row.name, row.points]),
       [
-        [1, "nate_dogg72", 17],
-        [2, "Michael Thain", 16],
-        [3, "Ben Smith", 11],
-        [3, "Funkyjedi", 11],
-        [5, "Fightmilk", 10],
-        [5, "Liamt608", 10],
-        [5, "slazz72", 10],
-        [8, "Dave-DJDingle", 9],
-        [8, "MartynB93", 9],
+        [1, "nate_dogg72", 24],
+        [2, "Michael Thain", 23],
+        [3, "Funkyjedi", 20],
+        [3, "Liamt608", 20],
+        [5, "Dave-DJDingle", 19],
+        [6, "slazz72", 18],
+        [7, "Ben Smith", 11],
+        [8, "Fightmilk", 10],
+        [9, "MartynB93", 9],
         [10, "Lewis Greig", 8],
-        [11, "Nelson207", 7],
-        [12, "Saintz", 6],
+        [10, "Ted", 8],
+        [10, "williamm1690", 8],
+        [13, "Ali", 7],
+        [13, "Nelson207", 7],
+        [15, "Saintz", 6],
       ],
     );
   });
 
-  it("loads only the recorded season totals, Week 3 results and Week 4 board", () => {
+  it("loads the recorded season totals, Week 3 and Week 4 results, and the Week 4 board", () => {
     const pickem = loadPickem();
     assert.deepEqual(
       pickem.standings.map((row) => [row.name, row.points]),
       SEASON.map(([name, points]) => [name, points]),
     );
-    assert.equal(pickem.gamesCounted, 29);
-    assert.deepEqual(pickem.weeksIncluded, [1, 3]);
+    assert.equal(pickem.gamesCounted, 44);
+    assert.deepEqual(pickem.weeksIncluded, [1, 3, 4]);
     assert.deepEqual(pickem.weeksWithoutContest, [2]);
     assert.equal(pickem.weekOneDetailPublished, false);
     assert.equal(
@@ -104,9 +110,36 @@ describe("Pick'em leaderboard", () => {
       ],
     );
 
+    const week4 = pickem.results.find((week) => week.week === 4);
+    assert.ok(week4);
+    assert.equal(week4.gamesCounted, 15);
+    assert.equal(
+      week4.caughtFolkOut,
+      "Nobody picked the Patriots or the Panthers; Dave-DJDingle was the only entrant to back Atlanta on Monday night.",
+    );
+    assert.deepEqual(
+      week4.scores.map((row) => [row.name, row.correct]),
+      [
+        ["Dave-DJDingle", 10],
+        ["Liamt608", 10],
+        ["Funkyjedi", 9],
+        ["slazz72", 8],
+        ["Ted", 8],
+        ["williamm1690", 8],
+        ["Ali", 7],
+        ["Michael Thain", 7],
+        ["nate_dogg72", 7],
+      ],
+    );
+    assert.equal(
+      week4.scores.some((row) => row.name === "Nelson207"),
+      false,
+    );
+
     assert.equal(pickem.board.week, 4);
     assert.equal(pickem.board.countingGames.length, 15);
-    assert.equal(pickem.board.scores.length, 0);
+    assert.equal(pickem.board.gamesCounted, 15);
+    assert.equal(pickem.board.scores.length, 9);
     assert.deepEqual(
       pickem.board.excludedGames.map((game) => game.id),
       ["2026_04_PIT_CLE"],

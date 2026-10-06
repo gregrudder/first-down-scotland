@@ -17,5 +17,18 @@
     "2026_04_DET_CAR",
     "2026_04_ATL_NO"
   ],
-  "excludedGameIds": ["2026_04_PIT_CLE"]
+  "excludedGameIds": ["2026_04_PIT_CLE"],
+  "gamesCounted": 15,
+  "scores": [
+    { "name": "Liamt608", "correct": 10 },
+    { "name": "Dave-DJDingle", "correct": 10 },
+    { "name": "Funkyjedi", "correct": 9 },
+    { "name": "Ted", "correct": 8 },
+    { "name": "slazz72", "correct": 8 },
+    { "name": "williamm1690", "correct": 8 },
+    { "name": "nate_dogg72", "correct": 7 },
+    { "name": "Ali", "correct": 7 },
+    { "name": "Michael Thain", "correct": 7 }
+  ],
+  "caughtFolkOut": "Nobody picked the Patriots or the Panthers; Dave-DJDingle was the only entrant to back Atlanta on Monday night."
 }
