@@ -155,16 +155,25 @@ describe("start/sit verdicts", () => {
     );
   });
 
-  it("loads the committed Week 4 verdict rows", () => {
+  it("loads the committed Week 4 and Week 5 verdict rows", () => {
     const csv = readFileSync(path.join(process.cwd(), "src/data/start-sit-verdicts.csv"), "utf8");
     const records = rowsToRecords(parseCsv(csv), VERDICT_COLUMNS);
-    assert.equal(records.length, 21);
+    assert.equal(records.length, 42);
     const rows = parseVerdictRows(records);
-    assert.equal(rows.length, 21);
-    assert.ok(rows.every((row) => row.week === 4));
+    assert.equal(rows.length, 42);
+    const week4 = rows.filter((row) => row.week === 4);
+    const week5 = rows.filter((row) => row.week === 5);
+    assert.equal(week4.length, 21);
+    assert.equal(week5.length, 21);
     assert.equal(
       matchVerdict(rows, 4, "Drake Maye", "Marcus Mariota")?.verdict,
       "Marcus Mariota",
     );
+    assert.equal(matchVerdict(rows, 5, "Drake Maye", "Marcus Mariota"), null);
+    const stafford = matchVerdict(rows, 5, "Jalen Hurts", "Matthew Stafford");
+    assert.equal(stafford?.verdict, "Matthew Stafford");
+    assert.equal(stafford?.confidence, "strong");
+    assert.match(stafford?.reason ?? "", /51\+ pass attempts/);
+    assert.equal(matchVerdict(rows, 4, "Matthew Stafford", "Jalen Hurts"), null);
   });
 });
