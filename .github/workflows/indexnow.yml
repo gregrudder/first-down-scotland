@@ -1,0 +1,31 @@
+# Submit the live sitemap to IndexNow after a production deploy is already live.
+# Vercel reports GitHub deployment statuses with environment "Production" or
+# "Preview" and state "success" once that deployment has completed.
+# This workflow file only runs from main. A failed IndexNow call does not
+# affect the Vercel build: the step is allowed to fail and the job stays green.
+
+name: IndexNow
+
+on:
+  deployment_status:
+
+permissions:
+  contents: read
+
+jobs:
+  submit:
+    if: github.event.deployment_status.state == 'success' && github.event.deployment_status.environment == 'Production'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Submit the live sitemap to IndexNow
+        continue-on-error: true
+        run: npm run indexnow
