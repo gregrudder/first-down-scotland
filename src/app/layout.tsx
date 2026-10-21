@@ -91,6 +91,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     <html
       lang="en-GB"
       className={`${figtree.variable} ${fraunces.variable} h-full antialiased`}
+      suppressHydrationWarning
     >
       <head>
         {/* Native head tags so an AdSense crawl sees the account in the initial HTML. No ad units. */}
