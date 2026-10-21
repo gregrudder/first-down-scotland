@@ -24,7 +24,7 @@ Three jobs: learn the game, meet fans of your team, keep that club in one place.
 - **`/news`** : **Our take**, short editorial notes (date, headline, take, author, named sources). Add a day by editing `src/data/our-take.ts` only. Newest first. Optional `expires_at` (ISO datetime, Europe/London offset) hides a note once that moment has passed.
 - **`/news/headlines`** : NFL headlines pulled from public RSS (ESPN, BBC Sport, the Guardian). `noindex`, omitted from the sitemap.
 - **`/news/fantasy`** : NFL fantasy football tips & news (not Scottish football)
-- **`/podcasts`** : recommended NFL and per-team shows to follow (external links; official vs independent labelled)
+- **`/podcasts`** : UK/Scottish, general league, and per-team shows to follow (external links; official vs independent labelled)
 - **`/watch`** : high-level UK viewing map (Sky / Channel 5 / 5Action / My5 / DAZN Game Pass / Netflix)
 - **`/film-room`** : curated watch-to-learn films (America’s Game, Hard Knocks, All or Nothing, Quarterback, Wide Receiver). Official where-to-look hints only; no streams.
 - **`/watch-near-you`** : directory of Scottish bars checked as showing NFL this season, grouped by town. Data is `src/data/pubs.csv` (name, town, address, shows, booking_or_contact, source_url, checked_date, notes). The notes column is internal and is not rendered. A town written as `Dundee (Broughty Ferry)` groups under Dundee and is labelled Broughty Ferry. Check with the bar before you go.
